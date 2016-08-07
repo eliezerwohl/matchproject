@@ -17,8 +17,7 @@ module.exports = function(app) {
 			maxAge: (4 * 60 * 60 * 1000)
 		}
 	}));
-	app.use(flash());
-	var isValidPassword = function(user, password) {
+var isValidPassword = function(user, password) {
 		return bcrypt.compareSync(password, user.password);
 	}
 	app.use(passport.initialize());
