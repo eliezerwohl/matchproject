@@ -11,7 +11,7 @@
 	<title>Change</title>
 </head>
 <body ng-app="app">
-	<div ng-controller="home">
+<div ng-controller="navbar">
 		<div ng-hide="$state.current.name == 'index' || $state.current.name == 'signUp'">
 			<nav class=" fadeIn navbar navbar-inverse navbar-fixed-top">
 		    <div class="container-fluid">
@@ -28,7 +28,7 @@
 		      
 		        <ul class="nav navbar-nav navbar-left">
 		        <li ng-show="userAccount == 'Match'"><a ui-sref="myStory">Show Matches</a></li>
-		        <li ng-show="userAccount == 'Match'"><a ui-sref="webCoding">My Profiles</a></li>
+		        <li ng-show="userAccount == 'Match'"><a ui-sref="myProfile">My Profiles</a></li>
 		        <li><a ui-sref="personalTraining">Logout</a></li>
 		        <li ng-show="userAccount == 'Maker'"><a ui-sref="music">Find Matches</a></li>
 		        <li ng-show="userAccount == 'Maker'"><a ui-sref="music">Previous Matches</a></li>
@@ -41,7 +41,7 @@
 			<div ng-show="userAccount == 'Maker'"> maker option </div>
 
 	</div>
-
+</div>
 
 
 	<div class="container-fluid"> 
@@ -64,6 +64,8 @@
 <script src="/assets/javascript/app.js"></script>
  <script src="https://code.angularjs.org/1.4.5/angular-cookies.min.js"></script>
 <script src="/assets/javascript/controllers/home.js"></script>
+<script src="/assets/javascript/controllers/navbar.js"></script>
+<script src="/assets/javascript/controllers/myProfile.js"></script>
 
 
 </body>

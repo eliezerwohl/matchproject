@@ -1,9 +1,4 @@
-var flash = require('connect-flash');
 var home = require("../server/controllers/homeController");
-var create = require("../server/controllers/createController");
-var view = require("../server/controllers/viewController");
-var mail = require("../server/controllers/mailController");
-var deleteController = require("../server/controllers/deleteController");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
@@ -67,39 +62,13 @@ module.exports = function(app) {
 	});
 
 	app.get("/userAccount", home.userAccount)
-	app.get("/viewThisUser", view.viewThisUser)
-	app.post("/thisUser", view.thisUser)
-	app.post("/surveySave", view.surveySave)
-	app.get("/deleteSurvey", deleteController.deleteSurvey)
-	app.post("/deleteSurveyData", deleteController.deleteSurveyData)
-	app.get("/viewAllQuestions", view.viewAllQuestions)
-	app.post("/viewInputAnswers", view.viewInputAnswers)
-	app.post("/goTo", view.goTo)
-	app.get("/viewAllSurveys", view.viewAllSurveys)
-	app.post("/createQuestion", create.createQuestion);
-	app.get("/previewSurvey", view.previewSurvey);
-	app.get("/view", view.viewSurvey);
-	app.get("/viewSurvey/:surveyId", function(req, res){
-		req.session.fillSurvey = req.params.surveyId
-			res.redirect("/")
-		// res.send(req.params.surveyId)
-	})
+
 
 	app.get("/", function(req, res) {
 		res.sendFile(process.cwd() + "/public/home.html")
 	});
-	app.get("/userList", view.userList)
 
-
-	app.post("/surveyId", view.surveyId)
-	app.post("/logout", deleteController.logout)
-	app.post("/viewAnswersByQuestion", view.viewAnswersByQuestion)
-	app.get("/location", home.location)
-	app.get("/shareSurvey", create.shareSurvey)
-	app.post("/mail", mail.mail)
 	app.post("/signUp", home.signUp);
-	app.post("/newSurvey", home.newSurvey);
-	app.post("/storeData", create.storeData);
 	app.post('/login', function(req, res, next) {
 		passport.authenticate('login', function(err, user, info) {
 			req.session.user.account = user.account;
