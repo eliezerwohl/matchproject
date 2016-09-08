@@ -2,15 +2,16 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var AnswerSchema = new Schema({
-	randomId:String,
+	_user:{
+		type:Schema.Types.ObjectId,
+		ref: "User"
+	}
 	_question: {
 		type:Schema.Types.ObjectId,
-		ref: "question"
+		ref: "Question"
 	},
 	//the person who answered
-	email:String,
-	//in array in case of mutiple answers
-	answer:[]
+	answer:String
 });
 
 var Answer = mongoose.model("Answer", AnswerSchema);
