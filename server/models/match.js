@@ -16,11 +16,7 @@ var matchSchema = new Schema({
 					},
 					answer:String,
 	}]
-	//if radio or checkbox
 });
 
 var Match = mongoose.model("Match", MatchSchema);
 module.exports=Match;
-
-status booleons
-_user:

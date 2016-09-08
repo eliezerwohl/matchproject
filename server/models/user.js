@@ -17,9 +17,21 @@ var UserSchema= new Schema({
 	account:String,
 	username:String,
 	password:String,
-	_survey: [{
+	match: [{
+		//the other person being match
+		_user:	{
+	   type: Schema.Types.ObjectId,
+	   ref: 'Answer'
+	 	},
+ 		// storing people's votes here
+ 		up:[{_user:{type:Schema.Types.ObjectId,
+		ref: "User"}}],
+ 		down:[{_user:{type:Schema.Types.ObjectId,
+		ref: "User"}}]
+ }]
+	_answer: [{
    type: Schema.Types.ObjectId,
-   ref: 'Survey'
+   ref: 'Answer'
  }],
 });
 

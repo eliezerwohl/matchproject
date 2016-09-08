@@ -1,3 +1,22 @@
+[draggable] {
+    user-select: none;
+}
+
+
+
+li {
+    border: 2px solid #000;
+    list-style-type: none;
+    margin: 2px;
+    padding: 5px;
+}
+
+ul {
+    margin: auto;
+    text-align: center;
+    width: 25%;
+}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

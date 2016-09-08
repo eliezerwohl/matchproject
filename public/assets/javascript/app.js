@@ -12,6 +12,10 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/signUp',
       templateUrl: '../views/signUp.html'
     })
+      .state('questionManager', {
+      url: '/questionManager',
+      templateUrl: '../views/questionManager.html'
+    })
    .state('loggedIn', {
       url: '/loggedIn',
       templateUrl: '../views/loggedIn.html'
