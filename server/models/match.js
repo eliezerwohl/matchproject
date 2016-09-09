@@ -9,12 +9,11 @@ var matchSchema = new Schema({
 		ref: "User"
 	},
 	complete:{type:Boolean, default:0},
-	answer:[{
-					question:{
-					type:Schema.Types.ObjectId,
-					ref: "question"
-					},
-					answer:String,
+	answerArray:[
+	{number:Number, 
+	questionId:String,
+	multi:String,
+	explain:String,
 	}]
 });
 
