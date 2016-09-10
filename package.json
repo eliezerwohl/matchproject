@@ -1,34 +1,33 @@
 {
-  "name": "survey-creator",
+  "name": "j",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eliezerwohl/surveyCreator.git"
+    "url": "git+https://github.com/eliezerwohl/miriamsMemories.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eliezerwohl/surveyCreator/issues"
+    "url": "https://github.com/eliezerwohl/miriamsMemories/issues"
   },
-  "homepage": "https://github.com/eliezerwohl/surveyCreator#readme",
+  "homepage": "https://github.com/eliezerwohl/miriamsMemories#readme",
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.2",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
-    "mongoose": "^4.4.14",
-    "morgan": "^1.7.0",
-    "nodemailer": "^2.3.2",
+    "mysql": "^2.10.2",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
-  }
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.19.2"
+  },
+
+  "description": ""
 }

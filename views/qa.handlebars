@@ -1,0 +1,26 @@
+
+<div class="col-md-8">
+{{#each results}}
+<div class="panel panel-info">
+  <div class="panel-body">
+    <div class="col-md-8">
+      <h3>{{this.question}}</h3>
+      <p>{{this.answer}}</p>
+      <br>
+    </div>
+    <div class="col-md-4">
+      <a href="/ViewNote/{{this.id}}">
+        <button class="btn btn-default btn-lg btn-block btn-primary">View Notes </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+{{/each}}
+  </div>
+<div class="col-md-4">
+<a href="/back"><div class="col-md-12 btnDiv">
+    <button class="btn btn-default btn-lg btn-block">Back</button>
+  </div></a>
+  </div>
+
