@@ -10,6 +10,7 @@ var FilterSchema = new Schema({
 	upper:Number,
 	lower:Number,
 	city:String
+	// User.find({age: {$gte: 21, $lte: 65}}, callback);
 	//for use with matchers only, so they will only have this.  
 	//will be used so they can't match people more than once
 	matched:[{

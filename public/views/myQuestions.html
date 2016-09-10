@@ -4,29 +4,43 @@
 	<title></title>
 </head>
 <body>
+<div ng-controller="myQuestions">
+	<form ng-submit="myQuestions()">
+		<h4>seeking</h4>
+		<select>
+			<option>M</option>
+			<option>F</option>
+			<option>B</option>
+		</select>
 
-parameters
+		<h4>higher age</h4>
+		<input>
 
-seeking m/f/b
-question 1
-<h4>Who is your favorite reggae group/star</h4>
-<select>
-	<option>Eek a mouse </option>
-	<option>Buju Banton </option>
-	<option>The Upsetter </option>
-</select>
-
-<h4> Please explain why you didn't choose bob marley </h4>
-<textarea> </textarea>
+		<h4>lower age </h4>
+		<input>
 
 
-<h4>Cha la </h4>
-<select>
-	<option>Head cha la</option>
-	<option>CHA LA HEAD CH LA </option>
-</select>
-<h4>Why is it always yamcha?  </h4>
-<textarea></textarea>
+		<h4>Who is your favorite reggae group/star</h4>
+		<select>
+			<option>Eek a mouse </option>
+			<option>Buju Banton </option>
+			<option>The Upsetter </option>
+		</select>
+
+		<h4> Please explain why you didn't choose bob marley </h4>
+		<textarea> </textarea>
+
+
+		<h4>Cha la </h4>
+		<select>
+			<option>Head cha la</option>
+			<option>CHA LA HEAD CH LA </option>
+		</select>
+		<h4>Why is it always yamcha?  </h4>
+		<textarea></textarea>
+		<button type="submit">SUmbit</button>
+	</form>
+</div>
 
 <!-- so here goes a single choice question
 explain below
