@@ -9,7 +9,7 @@ var bcrypt = require("bcryptjs");
 //bodyParser
 // require("dotenv").config();
 var LocalStrategy = require('passport-local').Strategy;
-// var mysql = require('mysql');
+var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
   extended: false
@@ -26,16 +26,16 @@ hbs.getPartials().then(function(partials) {
   console.log(partials);
 });
 
-// var Sequelize = require('sequelize');
-// if (process.env.NODE_ENV === 'production') {
-//   // HEROKU DB
-//   console.log(process.env.JAWSDB_URL);
+var Sequelize = require('sequelize');
+if (process.env.NODE_ENV === 'production') {
+  // HEROKU DB
+  console.log(process.env.JAWSDB_URL);
 
-//   var connection = new Sequelize(process.env.JAWSDB_URL);
-// } else {
-//   // LOCAL DB
-//   var connection = new Sequelize('mmdb', 'root');
-// }
+  var connection = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  // LOCAL DB
+  var connection = new Sequelize('match', 'root');
+}
 // var models = require("./models/models.js");
 // app.use(express.static('public'));
 // app.use(require('express-session')({
@@ -389,6 +389,10 @@ passport.use('local', new LocalStrategy({
 // })
 
 require('./routes')(app);
+
+connection.sync({
+    force: true
+});
 
 // connection.sync()
 app.listen(PORT, function() {
