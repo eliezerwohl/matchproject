@@ -1,0 +1,21 @@
+<div class="col-md-8">
+{{#each results}}
+<div class="panel panel-info">
+  <div class="panel-body">
+    <div class="col-md-8">
+    <p>{{this.firstname}} {{this.lastname}} </p>
+    </div>
+    <div class="col-md-4">
+      <a href="/view/{{this.id}}"><button class="btn-block btn-primary btn btn-lg">View All info </button></a>
+    </div>
+  </div>  
+</div>
+{{/each}}
+</div>
+<div class="col-md-4">
+  <a href="/loggedIn">
+    <div class="col-md-12 btnDiv">
+    <button class="btn btn-default btn-lg btn-block">Back</button>
+    </div>
+  </a>
+</div>
