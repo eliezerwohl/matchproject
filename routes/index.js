@@ -8,9 +8,13 @@ app.get("/test", function(req,res){
 
 app.get("/homeController", home.homeController); 
 
-app.get("/", function(req,res){
-  res.send("test");
+app.get("/myQuestions", function(req, res){
+	res.render("myQuestions");
 });
 
-//sever can go here, much easier 
+app.get("/", function(req,res){
+  res.render("index");
+});
+
+
 }
