@@ -3,23 +3,18 @@
 		<h2>sign up page</h2>
 	</div>
 	<div class="panel panel-info col-md-4 col-md-offset-4">
-		<div class="panel-body">
-			<form ng-submit="signUp()">
+		<div= class="panel-body">
+			<form action="/signUp" method="POST">
 				<h4 class="text-center"> first name </h4>
-				<input class="col-md-12" type="firstName" ng-model="firstName">
+				<input class="col-md-12" name="firstName" >
 				<h4 class="text-center"> last name </h4>
-				<input class="col-md-12" type="lastName" ng-model="lastName">
+				<input class="col-md-12" name="lastName">
 				<h4 class="text-center">email </h4>
-				<input class="col-md-12" ng-model="email">
+				<input class="col-md-12" name="email">
 				{{msg}}
 				<h4 class="text-center"> Password </h4>
-				<input class="col-md-12" type="password" ng-model="password">
-				<select ng-model="city"> 
-					<option>Liberty City </option>
-					<option>Los Santos</option>
-					<option>Vice City</option>
-				</select>
-				<select ng-model="account"> 
+				<input class="col-md-12" name="password">
+				<select name="account"> 
 					<option>Match</option>
 					<option>Maker</option>
 				</select>

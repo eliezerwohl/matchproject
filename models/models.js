@@ -17,11 +17,12 @@ if (process.env.NODE_ENV === 'production') {
   password: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
+  account: Sequelize.STRING,
 });
 
 exports.User=User;
 
-connection.sync()
+connection.sync({force:true})
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
