@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 
 exports.User=User;
 
-connection.sync({force:true})
+connection.sync({})
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
