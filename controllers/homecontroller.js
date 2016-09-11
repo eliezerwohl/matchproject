@@ -1,8 +1,15 @@
 var models = require("../models/models.js");
 
 exports.homeController = function(req, res){
-	res.send("it worked!");
+	 models.User.create({
+   firstname:"John"
+  }).then(function(data) {
+  	debugger
+    res.send("back")
+  });
 }
+
+
 
 exports.register = function (req, res){
   models.User.findOne({

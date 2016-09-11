@@ -27,15 +27,15 @@ hbs.getPartials().then(function(partials) {
 });
 
 var Sequelize = require('sequelize');
-if (process.env.NODE_ENV === 'production') {
-  // HEROKU DB
-  console.log(process.env.JAWSDB_URL);
+// if (process.env.NODE_ENV === 'production') {
+//   // HEROKU DB
+//   console.log(process.env.JAWSDB_URL);
 
-  var connection = new Sequelize(process.env.JAWSDB_URL);
-} else {
-  // LOCAL DB
-  var connection = new Sequelize('match', 'root');
-}
+//   var connection = new Sequelize(process.env.JAWSDB_URL);
+// } else {
+//   // LOCAL DB
+//   var connection = new Sequelize('match', 'root', 'samusaran');
+// }
 // var models = require("./models/models.js");
 // app.use(express.static('public'));
 // app.use(require('express-session')({
@@ -390,9 +390,21 @@ passport.use('local', new LocalStrategy({
 
 require('./routes')(app);
 
-connection.sync({
-    force: true
-});
+
+
+// var User = connection.define('User', {
+//   email: {
+//     type: Sequelize.STRING,
+//     unique: true
+//   },
+//   password: Sequelize.STRING,
+//   firstname: Sequelize.STRING,
+//   lastname: Sequelize.STRING,
+// });
+
+var models = require("./models/models.js");
+console.log(models.User)
+
 
 // connection.sync()
 app.listen(PORT, function() {

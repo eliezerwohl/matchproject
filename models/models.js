@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
-  var connection = new Sequelize('match', 'root');
+  var connection = new Sequelize('match', 'root', 'samusaran');
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
@@ -89,6 +89,8 @@ var User = connection.define('User', {
 // connection.sync();
 // exports.Organization=Organization;
 exports.User=User;
+
+connection.sync()
 // exports.Question=Question;
 // exports.PatientComment=PatientComment;
 // exports.Note=Note;
