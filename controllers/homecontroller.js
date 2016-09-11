@@ -30,6 +30,22 @@ exports.signUp = function(req, res){
     });
   }
 
+exports.loggedin = function (req, res){
+   models.User.findAll({
+    where: [{
+      email: req.user.username
+    }]
+  }).then(function(User) {
+    req.session.UserId= User[0].dataValues.id;
+    req.session.account  = User[0].dataValues.account;
+    if (req.session.account=="maker"){
+      res.render("makerhome");
+    }
+    else{
+      res.render("matchhome")
+    }
+  });
+}
 
 exports.register = function (req, res){
   models.User.findOne({
