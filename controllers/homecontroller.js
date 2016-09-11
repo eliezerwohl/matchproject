@@ -1,5 +1,5 @@
 var models = require("../models/models.js");
-
+var password = require("../ignore/ignore.js");
 exports.homeController = function(req, res){
 	 models.User.create({
    firstname:"John"

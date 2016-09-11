@@ -1,3 +1,5 @@
+var password = require("../ignore/ignore.js");
+
 var Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
@@ -6,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
-  var connection = new Sequelize('match', 'root', 'borg');
+  var connection = new Sequelize('match', 'root', password.password);
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
