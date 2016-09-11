@@ -8,14 +8,6 @@ function saltyhash(pass) {
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
-exports.homeController = function(req, res){
-	 models.User.create({
-   firstname:"John"
-  }).then(function(data) {
-    res.send("back")
-  });
-}
-
 exports.signUp = function(req, res){
   models.User.findOne({
       where: {
@@ -36,16 +28,7 @@ exports.signUp = function(req, res){
         });
       }
     });
-
-
-  //  models.User.create({
-  //  firstname:"John"
-  // }).then(function(data) {
-  //   debugger
-  //   res.send("back")
-  // });
-
-}
+  }
 
 
 exports.register = function (req, res){
