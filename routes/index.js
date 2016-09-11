@@ -6,9 +6,7 @@ var models = require("../models/models.js");
 var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
-
 var session = require('express-session');
-
 app.use(require('express-session')({
   secret: "dexterslab",
   resave: true,
@@ -46,7 +44,6 @@ passport.use('local', new LocalStrategy({
           bcrypt.compare(password, user.dataValues.password, function(err, user) {
             if (user) {
               console.log(user);
-              //if password is correct authenticate the user with cookie
               done(null, {
                 id: email,
                 username: email
@@ -62,7 +59,6 @@ passport.use('local', new LocalStrategy({
   }));
 
 module.exports = function(app) {
-	
 	app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loggedin?msg=Login successful.',
@@ -84,5 +80,4 @@ module.exports = function(app) {
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
-
 }
