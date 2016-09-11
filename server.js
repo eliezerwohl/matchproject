@@ -27,16 +27,7 @@ hbs.getPartials().then(function(partials) {
 });
 
 var Sequelize = require('sequelize');
-// if (process.env.NODE_ENV === 'production') {
-//   // HEROKU DB
-//   console.log(process.env.JAWSDB_URL);
 
-//   var connection = new Sequelize(process.env.JAWSDB_URL);
-// } else {
-//   // LOCAL DB
-//   var connection = new Sequelize('match', 'root', 'samusaran');
-// }
-// var models = require("./models/models.js");
 // app.use(express.static('public'));
 // app.use(require('express-session')({
 //   secret: "dexterslab",
@@ -91,6 +82,12 @@ passport.use('local', new LocalStrategy({
         }
       });
   }));
+
+require('./routes')(app);
+
+app.listen(PORT, function() {
+  console.log("Listening on port %s", PORT);
+});
 //bcrypt define
 // function saltyhash(pass) {
 //   var salt = bcrypt.genSaltSync(10);
@@ -384,29 +381,3 @@ passport.use('local', new LocalStrategy({
 //  });
 // })
 
-// app.get("/test", function(req,res){
-//   res.render("test")
-// })
-
-require('./routes')(app);
-
-
-
-// var User = connection.define('User', {
-//   email: {
-//     type: Sequelize.STRING,
-//     unique: true
-//   },
-//   password: Sequelize.STRING,
-//   firstname: Sequelize.STRING,
-//   lastname: Sequelize.STRING,
-// });
-
-var models = require("./models/models.js");
-console.log(models.User)
-
-
-// connection.sync()
-app.listen(PORT, function() {
-  console.log("Listening on port %s", PORT);
-})
