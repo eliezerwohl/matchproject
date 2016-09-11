@@ -1,7 +1,6 @@
 var models = require("../models/models.js");
 var bcrypt = require("bcryptjs");
 
-
 function saltyhash(pass) {
   var salt = bcrypt.genSaltSync(10);
   console.log(salt);
@@ -42,7 +41,7 @@ exports.loggedin = function (req, res){
       res.render("makerhome");
     }
     else{
-      res.render("matchhome")
+      res.render("matchhome");
     }
   });
 }

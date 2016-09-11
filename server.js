@@ -18,7 +18,6 @@ var hbs = require('express-handlebars').create();
 hbs.getPartials().then(function(partials) {
   console.log(partials);
 });
-
 var Sequelize = require('sequelize');
 app.use(passport.initialize());
 

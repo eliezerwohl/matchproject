@@ -1,19 +1,11 @@
 var home = require("../controllers/homeController");
 var express = require('express');
 var app = express();
-
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var cookieParser = require('cookie-parser')
-app.use(cookieParser())
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
-
-
-
 var session = require('express-session');
-
-
 module.exports = function(app) {
 	app.use(require('express-session')({
   secret: "dexterslab",
@@ -65,6 +57,7 @@ passport.use('local', new LocalStrategy({
         }
       });
   }));
+
 	app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loggedin?msg=Login successful.',
@@ -72,17 +65,13 @@ passport.use('local', new LocalStrategy({
   }));
 
 	app.get("/loggedin", home.loggedin);
-
 	app.get("/signUp", function(req,res){
 	  res.render("signUp");
 	});
-
 	app.post("/signUp", home.signUp);
-
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
-
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
