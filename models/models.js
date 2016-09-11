@@ -1,5 +1,4 @@
 var password = require("../ignore/ignore.js");
-
 var Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
@@ -9,6 +8,20 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // LOCAL DB
   var connection = new Sequelize('match', 'root', password.password);
+
+  var User = connection.define('User', {
+  email: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  password: Sequelize.STRING,
+  firstname: Sequelize.STRING,
+  lastname: Sequelize.STRING,
+});
+
+exports.User=User;
+
+connection.sync()
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
@@ -48,16 +61,6 @@ if (process.env.NODE_ENV === 'production') {
  
 // });
 
-var User = connection.define('User', {
-  email: {
-    type: Sequelize.STRING,
-    unique: true
-  },
-  password: Sequelize.STRING,
-  firstname: Sequelize.STRING,
-  lastname: Sequelize.STRING,
-});
-
 // Organization.hasMany(User);
 // User.belongsTo(Organization);
 
@@ -90,9 +93,7 @@ var User = connection.define('User', {
 
 // connection.sync();
 // exports.Organization=Organization;
-exports.User=User;
 
-connection.sync()
 // exports.Question=Question;
 // exports.PatientComment=PatientComment;
 // exports.Note=Note;
