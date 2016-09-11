@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
-  var connection = new Sequelize('match', 'root', 'samusaran');
+  var connection = new Sequelize('match', 'root', 'borg');
 }
 // var BulkQuestion = connection.define("BulkQuestion", {
 // question:Sequelize.STRING
