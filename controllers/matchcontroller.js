@@ -15,12 +15,9 @@ models.Filter.update(
     where: { UserId : req.session.UserId }
   })
   .then(function (result) { 
-  	debugger
-  	res.send("good")
-
+  	res.send("good");
   }, function(rejectedPromiseError){
-  	debugger
-  	res.send("bad")
+  	res.send("bad");
   });
 
 }

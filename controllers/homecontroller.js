@@ -30,9 +30,6 @@ exports.signUp = function(req, res){
             }).then(function(results){
                 models.Filter.create({
                 UserId:results.dataValues.id,
-              }).then(function(why){
-                debugger
-                console.log(why)
               });
             });
           }

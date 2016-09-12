@@ -47,6 +47,6 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync({force:true})
+connection.sync()
 }
 
