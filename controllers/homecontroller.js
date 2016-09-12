@@ -23,23 +23,12 @@ exports.signUp = function(req, res){
           password: saltyhash(req.body.password),
           account:req.body.account.toLowerCase(),
         }).then(function(data) {
-          debugger
-            if (data.dataValues.account == "match") {
-              debugger
-              models.Filter.create({
-                UserId:data.dataValues.id,
-              }).then(function(data){
-                debugger
-                res.redirect("/?msg=Thanks for registering, please login.");
-
-              });
-            }
-            else{
-               res.redirect("/?msg=Thanks for registering, please login.");
-
-            }
-
-         
+          if (data.dataValues.account == "match") {
+            models.Filter.create({
+              UserId:data.dataValues.id,
+            });
+          }
+          res.redirect("/?msg=Thanks for registering, please login.");
         });
       }
     });
