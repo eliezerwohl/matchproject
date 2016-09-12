@@ -1,4 +1,5 @@
 var home = require("../controllers/homeController");
+var match = require("../controllers/matchController");
 var express = require('express');
 var app = express();
 var passport = require('passport');
@@ -72,6 +73,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
+
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
