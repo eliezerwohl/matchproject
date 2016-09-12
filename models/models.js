@@ -25,6 +25,7 @@ var Filter = connection.define('Filter', {
   upper:Sequelize.INTEGER,
   lower:Sequelize.INTEGER,
   seeking:Sequelize.STRING,
+  gender:Sequelize.STRING,
 });
 
 var Answer = connection.define('Answer', {

@@ -73,7 +73,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
-
+  app.post("/myQuestions", match.myQuestions);
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
