@@ -23,9 +23,17 @@ exports.signUp = function(req, res){
           password: saltyhash(req.body.password),
           account:req.body.account.toLowerCase(),
         }).then(function(data) {
+          var tempId = data.dataValues.id;
           if (data.dataValues.account == "match") {
-            models.Filter.create({
+            models.Answer.create({
               UserId:data.dataValues.id,
+            }).then(function(results){
+                models.Filter.create({
+                UserId:results.dataValues.id,
+              }).then(function(why){
+                debugger
+                console.log(why)
+              });
             });
           }
           res.redirect("/?msg=Thanks for registering, please login.");
@@ -35,13 +43,12 @@ exports.signUp = function(req, res){
   }
 
 exports.loggedin = function (req, res){
-  debugger
    models.User.findAll({
     where: [{
       email: req.user.username
     }]
   }).then(function(User) {
-    req.session.UserId= User[0].dataValues.id;
+    req.session.UserId = User[0].dataValues.id;
     req.session.account  = User[0].dataValues.account;
     if (req.session.account=="maker"){
       res.render("makerhome");
