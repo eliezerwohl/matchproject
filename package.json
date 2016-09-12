@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eliezerwohl/miriamsMemories.git"
+    "url": "git+https://github.com/eliezerwohl/matchproject.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eliezerwohl/miriamsMemories/issues"
+    "url": "https://github.com/eliezerwohl/matchproject/issues"
   },
-  "homepage": "https://github.com/eliezerwohl/miriamsMemories#readme",
+  "homepage": "https://github.com/eliezerwohl/matchproject#readme",
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",

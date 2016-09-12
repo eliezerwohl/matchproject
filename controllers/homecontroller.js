@@ -21,15 +21,32 @@ exports.signUp = function(req, res){
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
           password: saltyhash(req.body.password),
-          account:req.body.account,
-        }).then(function() {
-          res.send("data baby")
+          account:req.body.account.toLowerCase(),
+        }).then(function(data) {
+          debugger
+            if (data.dataValues.account == "match") {
+              debugger
+              models.Filter.create({
+                UserId:data.dataValues.id,
+              }).then(function(data){
+                debugger
+                res.redirect("/?msg=Thanks for registering, please login.");
+
+              });
+            }
+            else{
+               res.redirect("/?msg=Thanks for registering, please login.");
+
+            }
+
+         
         });
       }
     });
   }
 
 exports.loggedin = function (req, res){
+  debugger
    models.User.findAll({
     where: [{
       email: req.user.username
@@ -46,24 +63,3 @@ exports.loggedin = function (req, res){
   });
 }
 
-exports.register = function (req, res){
-  models.User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then(function(results) {
-    if (results) {
-      res.redirect("/register?msg=Your email is already registered, please login.");
-    } else {
-      models.User.create({
-        lastname: (req.body.lastname).trim(),
-        firstname:  (req.body.firstname).trim(),
-        email: req.body.email,
-        // password: saltyhash(req.body.password),
-        password: req.body.password,
-      }).then(function() {
-        res.redirect("/?msg=Thanks for registering, please login.");
-      });
-    }
-  });
-}
