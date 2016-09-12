@@ -40,9 +40,13 @@ User.hasMany(Filter);
 Filter.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
+User.hasMany(Answer);
+Answer.belongsTo(User);
+
 exports.User=User;
+exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync({})
+connection.sync({force:true})
 }
 
