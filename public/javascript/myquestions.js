@@ -13,6 +13,10 @@ var array = [];
     		}
 
 			});
-			 debugger
+			 for (var i = 0; i < array.length; i++) {
+			 	debugger
+			 	var location = ("#" + array[i].location);
+			 	$(location).val(array[i].value);
+			 }
     }});
 
