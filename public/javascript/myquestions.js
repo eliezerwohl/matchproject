@@ -4,14 +4,19 @@ var array = [];
     	$.each(result, function(key, element) {
     		var key = key;
     		var element = element;
-    		if (key == "id" || "createdAt" || "updatedAt") {
-    			console.log("nope")
+    		if (key === "id" || key == "createdAt" || key == "updatedAt") {
+    			return true
     		}
     		else {
     		var object = {location:key, value:element}
-    		debugger
-    		array.push(object)
+    		array.push(object);
     		}
+
 			});
+			 for (var i = 0; i < array.length; i++) {
+			 	debugger
+			 	var location = ("#" + array[i].location);
+			 	$(location).val(array[i].value);
+			 }
     }});
 
