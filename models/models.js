@@ -29,10 +29,10 @@ var Filter = connection.define('Filter', {
 });
 
 var Answer = connection.define('Answer', {
-  091201:Sequelize.STRING,
-  091202:Sequelize.STRING,
-  091203:Sequelize.STRING,
-  091204:Sequelize.STRING,
+  a091201:Sequelize.STRING,
+  a091202:Sequelize.STRING,
+  a091203:Sequelize.STRING,
+  a091204:Sequelize.STRING,
 });  
 
 
@@ -47,6 +47,6 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync()
+connection.sync({force:true})
 }
 
