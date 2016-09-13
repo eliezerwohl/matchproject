@@ -15,10 +15,20 @@ models.Filter.update(
     where: { UserId : req.session.UserId }
   })
   .then(function (result) { 
-  	res.send("good");
-  }, function(rejectedPromiseError){
-  	res.send("bad");
-  });
+      models.Answer.update(
+      {
+      a091201: req.body.a091201,
+      a091202:req.body.a091202,
+      a091203:req.body.a091203,
+      a091204:req.body.a091204,
+    },
+    {
+      where: { UserId : req.session.UserId }
+    })
+    .then(function (result) { 
+        res.send("good");
+    });
+   });
 
 }
 
