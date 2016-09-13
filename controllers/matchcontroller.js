@@ -2,7 +2,6 @@ var models = require("../models/models.js");
 
 exports.myQuestions = function(req, res){
 var userId = req.user.id;
-debugger
 models.Filter.update(
   {
     city: req.body.city,

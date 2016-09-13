@@ -10,14 +10,12 @@ var array = [];
     		var object = {location:key, value:element}
     		array.push(object);
     		}
-
 			});
 			 for (var i = 0; i < array.length; i++) {
 			 	var location = ("#" + array[i].location);
 			 	$(location).val(array[i].value);
 			 }
     }});
-
   // wont submit unless everything has been answered
 	$("#submit").submit(function(event){
 		var select = Array.from(document.getElementsByTagName("select"));
@@ -26,10 +24,10 @@ var array = [];
 		var allInputs = input.concat(textareas, select);
 		for (var i = 0; i < allInputs.length; i++) {
 			if (allInputs[i].value === ""){	
-				break
+				break;
 			}
 			else if(i === allInputs.length - 1) {
-				return true
+				return true;
 			}
 		}
 	  event.preventDefault();
