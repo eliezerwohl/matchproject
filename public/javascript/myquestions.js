@@ -1,6 +1,5 @@
 var array = [];
     $.ajax({url: "/myInfo", success: function(result){
-
     	$.each(result, function(key, element) {
     		var key = key;
     		var element = element;
@@ -14,9 +13,24 @@ var array = [];
 
 			});
 			 for (var i = 0; i < array.length; i++) {
-			 	debugger
 			 	var location = ("#" + array[i].location);
 			 	$(location).val(array[i].value);
 			 }
     }});
+
+  // wont submit unless everything has been answered
+	$("#submit").submit(function(event){
+		var select = Array.from(document.getElementsByTagName("select"));
+		var input = Array.from(document.getElementsByTagName("input"));
+		var textareas = Array.from(document.getElementsByTagName("textarea"));
+		var allInputs = input.concat(textareas, select);
+		for (var i = 0; i < allInputs.length; i++) {
+			if (!allInputs[i].val){			
+			}
+			else {
+				return
+			}
+		}
+	  event.preventDefault();
+	});
 
