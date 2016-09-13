@@ -69,6 +69,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/signUp", function(req,res){
 	  res.render("signUp");
 	});
+  app.get("/myInfo", match.myInfo);
 	app.post("/signUp", home.signUp);
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");

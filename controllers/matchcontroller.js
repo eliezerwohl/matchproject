@@ -21,3 +21,10 @@ models.Filter.update(
   });
 
 }
+
+exports.myInfo = function (req, res) {
+  models.Filter.find({where: {UserId : req.session.UserId}}).then(function(result){
+    debugger
+    res.send(result);
+  })
+}
