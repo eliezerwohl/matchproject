@@ -25,13 +25,10 @@ var array = [];
 		var textareas = Array.from(document.getElementsByTagName("textarea"));
 		var allInputs = input.concat(textareas, select);
 		for (var i = 0; i < allInputs.length; i++) {
-			debugger
-			if (allInputs[i].val === undefined){
-			debugger	
+			if (allInputs[i].value === ""){	
 				break
 			}
 			else if(i === allInputs.length - 1) {
-				debugger
 				return true
 			}
 		}

@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // LOCAL DB
   var connection = new Sequelize('match', 'root', password.password);
+  // var connection = new Sequelize('match', 'root');
 
   var User = connection.define('User', {
   email: {
