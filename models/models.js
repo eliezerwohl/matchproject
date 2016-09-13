@@ -3,13 +3,11 @@ var Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
   console.log(process.env.JAWSDB_URL);
-
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
   var connection = new Sequelize('match', 'root', password.password);
   // var connection = new Sequelize('match', 'root');
-
   var User = connection.define('User', {
   email: {
     type: Sequelize.STRING,
@@ -36,7 +34,6 @@ var Answer = connection.define('Answer', {
   a091204:Sequelize.STRING,
 });  
 
-
 User.hasMany(Filter);
 Filter.belongsTo(User);
 User.hasMany(Answer);
@@ -48,6 +45,5 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync({force:true})
-}
+connection.sync({})}
 

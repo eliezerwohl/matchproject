@@ -19,7 +19,6 @@ module.exports = function(app) {
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -58,13 +57,11 @@ passport.use('local', new LocalStrategy({
         }
       });
   }));
-
 	app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loggedin?msg=Login successful.',
     failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
   }));
-
 	app.get("/loggedin", home.loggedin);
 	app.get("/signUp", function(req,res){
 	  res.render("signUp");
