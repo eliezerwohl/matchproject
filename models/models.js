@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 });
 
 var Filter = connection.define('Filter', {
+  age:Sequelize.INTEGER,
   city: Sequelize.STRING,
   upper:Sequelize.INTEGER,
   lower:Sequelize.INTEGER,
@@ -45,5 +46,5 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync({})}
+connection.sync({force:true})}
 
