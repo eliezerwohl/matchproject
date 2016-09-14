@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
-  var connection = new Sequelize('match', 'root', password.password);
+  var connection = new Sequelize('match', 'root', password.password); }
   // var connection = new Sequelize('match', 'root');
   var User = connection.define('User', {
   email: {
@@ -28,11 +28,11 @@ var Filter = connection.define('Filter', {
   gender:Sequelize.STRING,
 });
 
-var MakerFilter connection.define('MakerFilter', {
+var MakerFilter = connection.define('MakerFilter', {
 matchId:Sequelize.INTEGER,
 status:{
-  type:Sequelize.Boolean,
-  default:false
+  type:Sequelize.BOOLEAN,
+  defaultValue:0
   }
 });
 
@@ -44,8 +44,8 @@ var Answer = connection.define('Answer', {
   a091204:Sequelize.STRING,
 });  
 
-User.hasMany(MatchFilter);
-MatchFilter.belongsTo(User);
+User.hasMany(MakerFilter);
+MakerFilter.belongsTo(User);
 User.hasMany(Filter);
 Filter.belongsTo(User);
 User.hasMany(Answer);
@@ -59,5 +59,4 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync({force:true})}
-
+connection.sync()
