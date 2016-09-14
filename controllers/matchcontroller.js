@@ -8,7 +8,8 @@ models.Filter.update(
   	upper:req.body.upper,
   	lower:req.body.lower,
   	seeking:req.body.seeking,
-  	gender:req.body.gender
+  	gender:req.body.gender,
+    age:req.body.age,
   },
   {
     where: { UserId : req.session.UserId }
