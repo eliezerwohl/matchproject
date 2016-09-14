@@ -28,6 +28,15 @@ var Filter = connection.define('Filter', {
   gender:Sequelize.STRING,
 });
 
+var MakerFilter connection.define('MakerFilter', {
+matchId:Sequelize.INTEGER,
+status:{
+  type:Sequelize.Boolean,
+  default:false
+  }
+});
+
+
 var Answer = connection.define('Answer', {
   a091201:Sequelize.STRING,
   a091202:Sequelize.STRING,
@@ -35,6 +44,8 @@ var Answer = connection.define('Answer', {
   a091204:Sequelize.STRING,
 });  
 
+User.hasMany(MatchFilter);
+MatchFilter.belongsTo(User);
 User.hasMany(Filter);
 Filter.belongsTo(User);
 User.hasMany(Answer);
@@ -42,6 +53,8 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+
+exports.MakerFilter = MakerFilter;
 exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
