@@ -36,9 +36,7 @@ passport.use('local', new LocalStrategy({
   },
   function(req, email, password, done) {
     models.User.findOne({
-        where: {
-          email: email
-        }
+        where: {email: email}
       })
       .then(function(user) {
         if (user) {
@@ -73,6 +71,7 @@ passport.use('local', new LocalStrategy({
 		res.render("myQuestions");
 	});
   app.post("/myQuestions", match.myQuestions);
+  app.get("/findPrime", maker.findPrime);
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
