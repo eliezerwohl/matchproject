@@ -70,6 +70,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
+  app.get("/nextPrime", maker.nextPrime);
   app.post("/myQuestions", match.myQuestions);
   app.get("/findPrime", maker.findPrime);
 	app.get("/", function(req,res){
