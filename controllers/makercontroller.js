@@ -4,6 +4,17 @@ var Sequelize = require('sequelize');
 var primeResults;
 var primeNumber;	
 
+function primeInfo(res, id){
+	debugger
+		models.Answer.findAll({
+		where:{
+			UserId:id
+		}}).then(function(data){
+
+		 res.send(data)
+		});
+}
+
 exports.findPrime = function(req, res){
 	primeNumber=0;
 	primeResults=[];
@@ -29,15 +40,16 @@ exports.findPrime = function(req, res){
 		}).then(function(results){
 				//stored results in array so don't have to search again
 			for (var i = 0; i < results.length; i++) {
-				primeResults.push(results[i].dataValues);
+				primeResults.push(results[i].dataValues.id);
 			}
 		}).then(function(){
-			res.send(primeResults[0]);
-		});
+
+			primeInfo(res, primeResults[0])
+		})
 	});
 }
 
 exports.nextPrime = function(req, res){
   primeNumber ++;
-  res.send(primeResults[primeNumber]);
+  primeInfo(res, primeResults[primeNumber]);
 }
