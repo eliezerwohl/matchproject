@@ -33,8 +33,8 @@ models.Filter.update(
 }
 
 exports.myInfo = function (req, res) {
-  models.Filter.find({where: {UserId : req.session.UserId}}).then(function(result){
-    models.Answer.find({where: {UserId : req.session.UserId}}).then(function(data){
+  models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){
+    models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
       var obj = Object.assign(result.dataValues, data.dataValues);
       res.send(obj);
     });
