@@ -1,15 +1,21 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 var primeResults;
-var primeNumber;	
+var primeNumber;
+var currentPrime;	
 
-function primeInfo(res, id){
-	models.Answer.findAll({
-		where:{
-			UserId:id
-	}}).then(function(data){
-		  res.send(data)
-	});
+// function primeInfo(res, id){
+// 	models.Answer.findAll({
+// 		where:{
+// 			UserId:id
+// 	}}).then(function(data){
+// 		  res.send(data)
+// 	});
+// }
+
+function primeSend(res, data){
+	currentPrime = data.id
+	res.send(data.Answers[0].dataValues)
 }
 
 exports.findPrime = function(req, res){
@@ -38,7 +44,6 @@ exports.findPrime = function(req, res){
     model: models.Answer,
         where: { UserId: Sequelize.col('User.id') },
    			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
-
     }],
 	  order: [
 	    Sequelize.fn( 'RAND' ),
@@ -47,16 +52,16 @@ exports.findPrime = function(req, res){
 			debugger
 				//stored results in array so don't have to search again
 			for (var i = 0; i < results.length; i++) {
-				primeResults.push(results[i].dataValues.id);
+				primeResults.push(results[i].dataValues);
 			}
 		}).then(function(){
-			primeInfo(res, primeResults[0])
+			primeSend(res, primeResults[0])
 		});
 	});
 }
 
 exports.nextPrime = function(req, res){
   primeNumber ++;
-  primeInfo(res, primeResults[primeNumber]);
+  primeSend(res, primeResults[primeNumber]);
   //also has to put the id in matchfilter
 }
