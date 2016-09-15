@@ -59,7 +59,7 @@ exports.nextPrime = function(req, res){
   //also has to put the id in matchfilter
 }
 
-exports.matched = function(req, res){
-	first match match match match filter
-	then search everybody who fits the description
-}
+// exports.matched = function(req, res){
+// 	first match match match match filter
+// 	then search everybody who fits the description
+// }

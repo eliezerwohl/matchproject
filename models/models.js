@@ -32,6 +32,28 @@ var MakerFilter = connection.define('MakerFilter', {
 matchId:Sequelize.INTEGER,
 });
 
+//if the person think they're a bad match, it goes here
+//so if they try to match the prime again, they won't 
+//come across the same people
+var MatchFilter = connection.define("MatchFilter",{
+  primeId:Sequelize.INTEGER,
+  matchId:Sequelize.INTEGER,
+});
+
+//when the person matches the people it goes here
+//so if both people agree based on profiles
+//the people who matched them get points
+//+5 for good, -1 for bad
+var PossibleMatches = connection.define("PossibleMatches",{
+  primeId:Sequelize.INTEGER,
+  matchId:Sequelize.INTEGER,
+});
+
+var Matched = connection.define("Matched",{
+  user1:Sequelize.INTEGER,
+  user2:Sequelize.INTEGER,
+});
+
 var Answer = connection.define('Answer', {
   a091201:Sequelize.STRING,
   a091202:Sequelize.STRING,
