@@ -4,15 +4,6 @@ var primeResults;
 var primeNumber;
 var currentPrime;	
 
-// function primeInfo(res, id){
-// 	models.Answer.findAll({
-// 		where:{
-// 			UserId:id
-// 	}}).then(function(data){
-// 		  res.send(data)
-// 	});
-// }
-
 function primeSend(res, data){
 	currentPrime = data.id
 	res.send(data.Answers[0].dataValues)
@@ -29,6 +20,8 @@ exports.findPrime = function(req, res){
 			UserId:1,
 		}
 	}).then(function(data){
+		//need to make another query, if are already matched
+		//also need to the person's own id so they aren't matched with themselves
 		for (var i = 0; i < data.length; i++) {
 			noMatch.push(data[i].dataValues.matchId)
 		}
@@ -64,4 +57,9 @@ exports.nextPrime = function(req, res){
   primeNumber ++;
   primeSend(res, primeResults[primeNumber]);
   //also has to put the id in matchfilter
+}
+
+exports.matched = function(req, res){
+	first match match match match filter
+	then search everybody who fits the description
 }
