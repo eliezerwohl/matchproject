@@ -16,6 +16,7 @@ exports.findPrime = function(req, res){
 	primeNumber=0;
 	primeResults=[];
 	var noMatch = [];
+	//make a find?  find one?
 	models.MakerFilter.findAll({
 		where:{
 			//after testing make this req.session.UserId
@@ -32,10 +33,18 @@ exports.findPrime = function(req, res){
 			id:{$notIn: noMatch},
 			account:"match"
 		},
+		attributes: ['id'],
+		include: [{
+    model: models.Answer,
+        where: { UserId: Sequelize.col('User.id') },
+   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+
+    }],
 	  order: [
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
+			debugger
 				//stored results in array so don't have to search again
 			for (var i = 0; i < results.length; i++) {
 				primeResults.push(results[i].dataValues.id);
