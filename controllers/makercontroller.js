@@ -1,18 +1,15 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-
 var primeResults;
 var primeNumber;	
 
 function primeInfo(res, id){
-	debugger
-		models.Answer.findAll({
+	models.Answer.findAll({
 		where:{
 			UserId:id
-		}}).then(function(data){
-
-		 res.send(data)
-		});
+	}}).then(function(data){
+		  res.send(data)
+	});
 }
 
 exports.findPrime = function(req, res){
@@ -21,6 +18,7 @@ exports.findPrime = function(req, res){
 	var noMatch = [];
 	models.MakerFilter.findAll({
 		where:{
+			//after testing make this req.session.UserId
 			UserId:1,
 		}
 	}).then(function(data){
@@ -43,13 +41,13 @@ exports.findPrime = function(req, res){
 				primeResults.push(results[i].dataValues.id);
 			}
 		}).then(function(){
-
 			primeInfo(res, primeResults[0])
-		})
+		});
 	});
 }
 
 exports.nextPrime = function(req, res){
   primeNumber ++;
   primeInfo(res, primeResults[primeNumber]);
+  //also has to put the id in matchfilter
 }

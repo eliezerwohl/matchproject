@@ -27,15 +27,10 @@ var Filter = connection.define('Filter', {
   seeking:Sequelize.STRING,
   gender:Sequelize.STRING,
 });
-
+//if a match put as matchId, user doesn't want to match them with anybody
 var MakerFilter = connection.define('MakerFilter', {
 matchId:Sequelize.INTEGER,
-status:{
-  type:Sequelize.BOOLEAN,
-  defaultValue:0
-  }
 });
-
 
 var Answer = connection.define('Answer', {
   a091201:Sequelize.STRING,
@@ -52,7 +47,6 @@ User.hasMany(Answer);
 Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
-
 
 exports.MakerFilter = MakerFilter;
 exports.User=User;
