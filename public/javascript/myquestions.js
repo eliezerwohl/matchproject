@@ -1,3 +1,12 @@
+$.ajax({url: "/currentStatus", success: function(result){
+
+}})
+
+$("#status").on("click", function(){
+	$.ajax({url: "/updateStatus", success: function(result){
+
+	}})
+})
 $.ajax({url: "/myInfo", success: function(result){
 	debugger
 	if (result === "blank"){
