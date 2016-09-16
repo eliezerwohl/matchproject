@@ -42,7 +42,6 @@ passport.use('local', new LocalStrategy({
         if (user) {
           bcrypt.compare(password, user.dataValues.password, function(err, user) {
             if (user) {
-              console.log(user);
               done(null, {
                 id: email,
                 username: email
@@ -70,6 +69,12 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
+  app.get("/makerhome", function(req, res){
+    res.render("makerhome");
+  })
+  app.get("/matchhome", function(req, res){
+    res.render("matchhome")
+  })
   app.get("/nextPrime", maker.nextPrime);
   app.post("/myQuestions", match.myQuestions);
   app.get("/findPrime", maker.findPrime);
