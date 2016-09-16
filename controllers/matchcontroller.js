@@ -41,18 +41,11 @@ models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).t
 }
 
 exports.updateStatus = function(req, res){
-  if (currentStatus === true){
-    currentStatus = false
-  }
-  else{
-    currentStatus = true;
-  }
-  
-models.User.update({match:currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
-    debugger
-    res.send("send")
-})
-
+  if (currentStatus === true){currentStatus = false}
+  else{currentStatus = true}
+  models.User.update({match:currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
+    res.send(currentStatus)
+  });
 }
 exports.myInfo = function (req, res) {
   models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){
