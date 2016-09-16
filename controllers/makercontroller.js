@@ -4,12 +4,45 @@ var primeResults;
 var primeNumber;
 var currentPrime;	
 
-// exports.activateMatch = function(req, res){
 
-// }
+exports.getMatch=function(req, res){
+	//if i change the user model to incorperate the filter, then i can query for all at once
+	var noMatch = [req.session.UserId, primeData];
+	//find people the user already matched them with
+	models.Filter.findOne({
+		where:{UserId:primeData}})
+	.then(function(data){
+		debugger
+		//terrible fix for searchign for both.  will have to redo how data is entered
+		if(data.dataValues.seeking === "both"){
+			data.dataValues.seeking = [m, f]
+		}
+		models.User.findAll({
+		where:{
+			id:{$notIn: noMatch},
+			match:1,
+		},
+		attributes: ['id'],
+		include: [{
+	    model: models.Answer,
+	        where: {Answer.city: 	"Vice City"};
+	       //   gender: data.dataValues.seeking,
+	      	// age:{ $between: [	data.dataValues.lower, 	data.dataValues.upper] } },
+	   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+    }],
+	  order: [
+	    Sequelize.fn( 'RAND' ),
+	  ]
+		}).then(function(results){
+			debugger
 
+		})
+})
+}
+
+var primedata;
 function primeSend(res, data){
-	currentPrime = data.id
+	primeData = data.id
 	res.send(data.Answers[0].dataValues)
 }
 
@@ -24,7 +57,6 @@ exports.findPrime = function(req, res){
 			UserId:req.session.UserId,
 		}
 	}).then(function(data){
-		debugger
 		//need to make another query, if are already matched
 		//also need to the person's own id so they aren't matched with themselves
 		for (var i = 0; i < data.length; i++) {
@@ -47,20 +79,21 @@ exports.findPrime = function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
-			debugger
 				//stored results in array so don't have to search again
 			for (var i = 0; i < results.length; i++) {
 				primeResults.push(results[i].dataValues);
 			}
 		}).then(function(){
-			primeSend(res, primeResults[0])
+			currentPrime = primeResults[0];
+			primeSend(res, currentPrime)
 		});
 	});
 }
 
 exports.nextPrime = function(req, res){
   primeNumber ++;
-  primeSend(res, primeResults[primeNumber]);
+ 	currentPrime = primeResults[primeNumber];
+  primeSend(res, currentPrime);
   //also has to put the id in matchfilter
 }
 
