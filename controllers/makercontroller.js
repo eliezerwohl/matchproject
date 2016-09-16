@@ -6,30 +6,25 @@ var currentPrime;
 
 
 exports.getMatch=function(req, res){
-	//if i change the user model to incorperate the filter, then i can query for all at once
-	var noMatch = [req.session.UserId, primeData];
+	// if i change the user model to incorperate the filter, then i can query for all at once
+	var noMatch = [req.session.UserId, currentPrime.id];
 	//find people the user already matched them with
-	models.Filter.findOne({
-		where:{UserId:primeData}})
-	.then(function(data){
+
 		debugger
 		//terrible fix for searchign for both.  will have to redo how data is entered
-		if(data.dataValues.seeking === "both"){
-			data.dataValues.seeking = [m, f]
-		}
+		// if(currentPrime.seeking === "both"){
+		// 	currentPrime.seeking = [m, f]
+		// }
 		models.User.findAll({
 		where:{
 			id:{$notIn: noMatch},
 			match:1,
+			city:currentPrime.city,
+			//gender must be seeking, seeking must be gender
+			age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
+			gender: currentPrime.seeking,
+			seeking:currentPrime.gender,
 		},
-		attributes: ['id'],
-		include: [{
-	    model: models.Answer,
-	        where: {Answer.city: 	"Vice City"};
-	       //   gender: data.dataValues.seeking,
-	      	// age:{ $between: [	data.dataValues.lower, 	data.dataValues.upper] } },
-	   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
-    }],
 	  order: [
 	    Sequelize.fn( 'RAND' ),
 	  ]
@@ -37,12 +32,10 @@ exports.getMatch=function(req, res){
 			debugger
 
 		})
-})
+
 }
 
-var primedata;
 function primeSend(res, data){
-	primeData = data.id
 	res.send(data.Answers[0].dataValues)
 }
 
@@ -69,7 +62,7 @@ exports.findPrime = function(req, res){
 			id:{$notIn: noMatch},
 			match:1,
 		},
-		attributes: ['id'],
+		attributes: ['id', 'city', "upper", "lower", "seeking", "gender"],
 		include: [{
     model: models.Answer,
         where: { UserId: Sequelize.col('User.id') },

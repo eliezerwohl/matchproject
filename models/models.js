@@ -18,16 +18,18 @@ if (process.env.NODE_ENV === 'production') {
   lastname: Sequelize.STRING,
   match:{
     type:Sequelize.BOOLEAN,
-    defaultValue:0}
-});
-
-var Filter = connection.define('Filter', {
+    defaultValue:0},
+    
   age:Sequelize.INTEGER,
   city: Sequelize.STRING,
   upper:Sequelize.INTEGER,
   lower:Sequelize.INTEGER,
   seeking:Sequelize.STRING,
   gender:Sequelize.STRING,
+});
+
+var Filter = connection.define('Filter', {
+
 });
 //if a match put as matchId, user doesn't want to match them with anybody
 var MakerFilter = connection.define('MakerFilter', {

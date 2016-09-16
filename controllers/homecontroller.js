@@ -25,11 +25,8 @@ exports.signUp = function(req, res){
           var tempId = data.dataValues.id;
             models.Answer.create({
               UserId:data.dataValues.id,
-            }).then(function(results){
-                models.Filter.create({
-                UserId:data.dataValues.id,
-              });
-            });
+            })
+            
           res.redirect("/?msg=Thanks for registering, please login.");
         });
       }
