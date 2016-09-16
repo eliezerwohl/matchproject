@@ -11,8 +11,7 @@ models.Filter.update(
   	gender:req.body.gender,
     age:req.body.age,
   },
-  {
-    where: { UserId : req.session.UserId }
+  {where: { UserId : req.session.UserId }
   })
   .then(function (result) { 
       models.Answer.update(
@@ -33,11 +32,10 @@ models.Filter.update(
 
 var currentStatus;
 exports.currentStatus = function(req, res){
-models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
-    res.send(data.dataValues.match)
-    currentStatus = data.dataValues.match;
-})
-
+  models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
+      res.send(data.dataValues.match)
+      currentStatus = data.dataValues.match;
+  });
 }
 
 exports.updateStatus = function(req, res){
@@ -45,7 +43,7 @@ exports.updateStatus = function(req, res){
   else{currentStatus = true}
   models.User.update({match:currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
     res.send(currentStatus)
-  });
+  }); 
 }
 exports.myInfo = function (req, res) {
   models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){

@@ -10,3 +10,9 @@ $(".next").on("click", function(){
 		 	append(result, "prime");
 	}});
 });
+
+$("#getMatch").on("click", function(){
+	$.ajax({url: "/getMatch", success: function(result){
+		
+	}})
+})

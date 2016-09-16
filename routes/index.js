@@ -70,6 +70,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
+  app.get("/getMatch", maker.getMatch);
   app.get("/makerhome", function(req, res){
     res.render("makerhome");
   });
