@@ -43,13 +43,8 @@ exports.loggedin = function (req, res){
     }]
   }).then(function(User) {
     req.session.UserId = User[0].dataValues.id;
+    res.render("matchOrMaker")
     req.session.account  = User[0].dataValues.account;
-    if (req.session.account=="maker"){
-      res.render("makerhome");
-    }
-    else{
-      res.render("matchhome");
-    }
   });
 }
 
