@@ -64,6 +64,7 @@ passport.use('local', new LocalStrategy({
 	app.get("/signUp", function(req,res){
 	  res.render("signUp");
 	});
+    app.get("/updateStatus", match.updateStatus);
   app.get("/myInfo", match.myInfo);
 	app.post("/signUp", home.signUp);
 	app.get("/myQuestions", function(req, res){
@@ -71,7 +72,8 @@ passport.use('local', new LocalStrategy({
 	});
   app.get("/makerhome", function(req, res){
     res.render("makerhome");
-  })
+  });
+  app.get("/currentStatus", match.currentStatus);
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })
