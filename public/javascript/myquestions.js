@@ -1,20 +1,35 @@
+function buttonColor(result){
+
+	 if (result === true){
+	 	debugger
+ 		$("#status").addClass("btn-success").removeClass("btn-danger")
+ 		.text("Live");
+ 		}
+ 		else{
+ 			 		$("#status").addClass("btn-danger").removeClass("btn-success")
+ 			 		.text("not live");
+ 		}
+
+
+}
 $.ajax({url: "/currentStatus", success: function(result){
+	buttonColor(result);
 
 }})
 
 $("#status").on("click", function(){
 	$.ajax({url: "/updateStatus", success: function(result){
-
+		buttonColor(result);
 	}})
 })
 $.ajax({url: "/myInfo", success: function(result){
-	debugger
+
 	if (result === "blank"){
-		debugger
+
 		return false
 	}
 	else {
-		debugger	
+
 	append(result, "myQuestions")
 	}
 }});

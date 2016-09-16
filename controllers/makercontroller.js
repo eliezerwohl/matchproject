@@ -13,18 +13,6 @@ function primeSend(res, data){
 	res.send(data.Answers[0].dataValues)
 }
 
-exports.activateMatch = function(req, res){
-	models.User.update({
-		match:1,
-		where:{
-			id:req.session.UserId
-		}
-	}).then(function(data){
-		res.send("updated")
-	})
-
-}
-
 exports.findPrime = function(req, res){
 	primeNumber=0;
 	primeResults=[];
