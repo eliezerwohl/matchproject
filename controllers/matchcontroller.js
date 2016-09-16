@@ -34,12 +34,12 @@ models.Filter.update(
 exports.myInfo = function (req, res) {
   models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){
     if (!result.dataValues.age){
-      console.log("we are here")
+      res.send("blank")
     }
     else{
       models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
-      var obj = Object.assign(result.dataValues, data.dataValues);
-      res.send(obj);
+        var obj = Object.assign(result.dataValues, data.dataValues);
+        res.send(obj);
       });
     }
   });
