@@ -6,8 +6,8 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
+
   var connection = new Sequelize('match', 'root', password.password); }
-  // var connection = new Sequelize('match', 'root');
   var User = connection.define('User', {
   email: {
     type: Sequelize.STRING,
@@ -16,7 +16,9 @@ if (process.env.NODE_ENV === 'production') {
   password: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
-  account: Sequelize.STRING,
+  match:{
+    type:Sequelize.BOOLEAN,
+    defaultValue:0}
 });
 
 var Filter = connection.define('Filter', {
@@ -75,4 +77,4 @@ exports.User=User;
 exports.Answer=Answer;
 exports.Filter=Filter;
 
-connection.sync()
+connection.sync({})

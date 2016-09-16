@@ -4,22 +4,39 @@ var primeResults;
 var primeNumber;
 var currentPrime;	
 
+// exports.activateMatch = function(req, res){
+
+// }
+
 function primeSend(res, data){
 	currentPrime = data.id
 	res.send(data.Answers[0].dataValues)
 }
 
+exports.activateMatch = function(req, res){
+	models.User.update({
+		match:1,
+		where:{
+			id:req.session.UserId
+		}
+	}).then(function(data){
+		res.send("updated")
+	})
+
+}
+
 exports.findPrime = function(req, res){
 	primeNumber=0;
 	primeResults=[];
-	var noMatch = [];
+	var noMatch = [req.session.UserId];
 	//make a find?  find one?
 	models.MakerFilter.findAll({
 		where:{
 			//after testing make this req.session.UserId
-			UserId:1,
+			UserId:req.session.UserId,
 		}
 	}).then(function(data){
+		debugger
 		//need to make another query, if are already matched
 		//also need to the person's own id so they aren't matched with themselves
 		for (var i = 0; i < data.length; i++) {
@@ -30,7 +47,7 @@ exports.findPrime = function(req, res){
 		models.User.findAll({
 		where:{
 			id:{$notIn: noMatch},
-			account:"match"
+			match:1,
 		},
 		attributes: ['id'],
 		include: [{

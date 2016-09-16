@@ -28,15 +28,19 @@ models.Filter.update(
     .then(function (result) { 
         res.send("good");
     });
-   });
-
+  });
 }
 
 exports.myInfo = function (req, res) {
   models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){
-    models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
+    if (!result.dataValues.age){
+      console.log("we are here")
+    }
+    else{
+      models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
       var obj = Object.assign(result.dataValues, data.dataValues);
       res.send(obj);
-    });
+      });
+    }
   });
 }
