@@ -1,9 +1,11 @@
 $.ajax({url: "/myInfo", success: function(result){
 	debugger
-	if (result.age === null){
+	if (result === "blank"){
+		debugger
 		return false
 	}
 	else {
+		debugger	
 	append(result, "myQuestions")
 	}
 }});
