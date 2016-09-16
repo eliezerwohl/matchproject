@@ -3,7 +3,6 @@ var bcrypt = require("bcryptjs");
 
 function saltyhash(pass) {
   var salt = bcrypt.genSaltSync(10);
-  console.log(salt);
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
@@ -24,15 +23,13 @@ exports.signUp = function(req, res){
           account:req.body.account.toLowerCase(),
         }).then(function(data) {
           var tempId = data.dataValues.id;
-          if (data.dataValues.account == "match") {
             models.Answer.create({
               UserId:data.dataValues.id,
             }).then(function(results){
                 models.Filter.create({
-                UserId:results.dataValues.id,
+                UserId:data.dataValues.id,
               });
             });
-          }
           res.redirect("/?msg=Thanks for registering, please login.");
         });
       }

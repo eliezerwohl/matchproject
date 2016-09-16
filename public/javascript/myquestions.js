@@ -1,4 +1,5 @@
 $.ajax({url: "/myInfo", success: function(result){
+	debugger
 	if (result.age === null){
 		return false
 	}
