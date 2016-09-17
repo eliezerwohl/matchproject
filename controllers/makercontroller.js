@@ -1,47 +1,48 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-var primeResults;
+var resultsArray;
 var primeNumber;
 var currentPrime;	
-
-
-exports.getMatch=function(req, res){
-	// if i change the user model to incorperate the filter, then i can query for all at once
-	var noMatch = [req.session.UserId, currentPrime.id];
-	//find people the user already matched them with
-
-		debugger
-		//terrible fix for searchign for both.  will have to redo how data is entered
-		// if(currentPrime.seeking === "both"){
-		// 	currentPrime.seeking = [m, f]
-		// }
-		models.User.findAll({
-		where:{
-			id:{$notIn: noMatch},
-			match:1,
-			city:currentPrime.city,
-			//gender must be seeking, seeking must be gender
-			age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
-			gender: currentPrime.seeking,
-			seeking:currentPrime.gender,
-		},
-	  order: [
-	    Sequelize.fn( 'RAND' ),
-	  ]
-		}).then(function(results){
-			debugger
-
-		})
-
-}
 
 function primeSend(res, data){
 	res.send(data.Answers[0].dataValues)
 }
+function next(res, prime){
+	primeNumber ++;
+		if (prime === true){
+			currentPrime = resultsArray[primeNumber];
+		}
+	primeSend(res, resultsArray[primeNumber]);
+}
+
+exports.getMatch=function(req, res){
+	var noMatch = [req.session.UserId, currentPrime.id];
+
+		//terrible fix for searchign for both.  will have to redo how data is entered
+		// if(currentPrime.seeking === "both"){
+		// 	currentPrime.seeking = [m, f]
+		// }
+	models.User.findAll({
+	where:{
+		id:{$notIn: noMatch},
+		match:1,
+		city:currentPrime.city,
+		//gender must be seeking, seeking must be gender
+		age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
+		gender: currentPrime.seeking,
+		seeking:currentPrime.gender,
+	},
+  order: [
+    Sequelize.fn( 'RAND' ),
+  ]
+	}).then(function(results){
+		dataStore(res, results, false)
+	});
+}
 
 exports.findPrime = function(req, res){
 	primeNumber=0;
-	primeResults=[];
+	resultsArray=[];
 	var noMatch = [req.session.UserId];
 	//make a find?  find one?
 	models.MakerFilter.findAll({
@@ -72,25 +73,27 @@ exports.findPrime = function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
-				//stored results in array so don't have to search again
-			for (var i = 0; i < results.length; i++) {
-				primeResults.push(results[i].dataValues);
-			}
-		}).then(function(){
-			currentPrime = primeResults[0];
-			primeSend(res, currentPrime)
+				dataStore(res, results, true)
 		});
 	});
 }
 
-exports.nextPrime = function(req, res){
-  primeNumber ++;
- 	currentPrime = primeResults[primeNumber];
-  primeSend(res, currentPrime);
-  //also has to put the id in matchfilter
+function dataStore(res, data, prime){
+	for (var i = 0; i < data.length; i++) {
+		resultsArray.push(data[i].dataValues);
+	}
+	if (prime===true){
+		currentPrime = resultsArray[0];
+	}
+	primeSend(res, currentPrime)
 }
 
-// exports.matched = function(req, res){
-// 	first match match match match filter
-// 	then search everybody who fits the description
-// }
+exports.nextPrime = function(req, res){
+		next(res, true)
+}
+
+exports.nextMatch = function(req, res){
+		next(res, false)
+}
+
+

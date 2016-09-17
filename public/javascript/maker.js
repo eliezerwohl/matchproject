@@ -13,6 +13,14 @@ $(".next").on("click", function(){
 
 $("#getMatch").on("click", function(){
 	$.ajax({url: "/getMatch", success: function(result){
-		
+				append(result, "match");
 	}})
 })
+
+$("#nextMatch").on("click", function(){
+	$.ajax({url: "/nextMatch", success: function(result){
+				append(result, "match");
+	}})
+})
+
+
