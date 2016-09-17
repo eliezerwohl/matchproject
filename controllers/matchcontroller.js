@@ -2,7 +2,7 @@ var models = require("../models/models.js");
 
 exports.myQuestions = function(req, res){
 var userId = req.user.id;
-models.Filter.update(
+models.User.update(
   {
     city: req.body.city,
   	upper:req.body.upper,
@@ -11,7 +11,7 @@ models.Filter.update(
   	gender:req.body.gender,
     age:req.body.age,
   },
-  {where: { UserId : req.session.UserId }
+  {where: { id : req.session.UserId }
   })
   .then(function (result) { 
       models.Answer.update(
@@ -46,7 +46,7 @@ exports.updateStatus = function(req, res){
   }); 
 }
 exports.myInfo = function (req, res) {
-  models.Filter.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(result){
+  models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },where: {id : req.session.UserId}}).then(function(result){
     if (!result.dataValues.age){
       res.send("blank")
     }
