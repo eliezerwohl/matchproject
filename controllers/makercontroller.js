@@ -1,22 +1,33 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 var resultsArray;
-var primeNumber;
+var currentNumber;
 var currentPrime;	
+var noMatch;
 
-function primeSend(res, data){
-	res.send(data.Answers[0].dataValues)
+function dataStore(res, data, prime){
+	for (var i = 0; i < data.length; i++) {
+		resultsArray.push(data[i].dataValues);
+	}
+	if (prime===true){
+		currentPrime = resultsArray[0];
+	}
+	res.send(resultsArray[currentNumber].Answers[0].dataValues)
 }
+
+
 function next(res, prime){
-	primeNumber ++;
+	currentNumber ++;
 		if (prime === true){
-			currentPrime = resultsArray[primeNumber];
+			currentPrime = resultsArray[currentNumber];
 		}
-	primeSend(res, resultsArray[primeNumber]);
+	res.send(resultsArray[currentNumber].Answers[0].dataValues);
 }
 
 exports.getMatch=function(req, res){
-	var noMatch = [req.session.UserId, currentPrime.id];
+		currentNumber=0;
+	noMatch = [req.session.UserId, currentPrime.id];
+	resultsArray=[]
 
 		//terrible fix for searchign for both.  will have to redo how data is entered
 		// if(currentPrime.seeking === "both"){
@@ -32,6 +43,11 @@ exports.getMatch=function(req, res){
 		gender: currentPrime.seeking,
 		seeking:currentPrime.gender,
 	},
+	include: [{
+    model: models.Answer,
+        where: { UserId: Sequelize.col('User.id') },
+   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+    }],
   order: [
     Sequelize.fn( 'RAND' ),
   ]
@@ -41,9 +57,9 @@ exports.getMatch=function(req, res){
 }
 
 exports.findPrime = function(req, res){
-	primeNumber=0;
+	currentNumber=0;
 	resultsArray=[];
-	var noMatch = [req.session.UserId];
+	noMatch = [0,req.session.UserId];
 	//make a find?  find one?
 	models.MakerFilter.findAll({
 		where:{
@@ -78,15 +94,6 @@ exports.findPrime = function(req, res){
 	});
 }
 
-function dataStore(res, data, prime){
-	for (var i = 0; i < data.length; i++) {
-		resultsArray.push(data[i].dataValues);
-	}
-	if (prime===true){
-		currentPrime = resultsArray[0];
-	}
-	primeSend(res, currentPrime)
-}
 
 exports.nextPrime = function(req, res){
 		next(res, true)
@@ -95,5 +102,4 @@ exports.nextPrime = function(req, res){
 exports.nextMatch = function(req, res){
 		next(res, false)
 }
-
 
