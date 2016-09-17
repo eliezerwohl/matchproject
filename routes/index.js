@@ -70,11 +70,13 @@ passport.use('local', new LocalStrategy({
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
+  app.get("/nextMatch", maker.nextMatch);
   app.get("/getMatch", maker.getMatch);
   app.get("/makerhome", function(req, res){
     res.render("makerhome");
   });
   app.get("/currentStatus", match.currentStatus);
+  app.get("/nextMatch", maker.nextMatch);
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })

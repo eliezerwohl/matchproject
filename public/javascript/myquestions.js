@@ -14,7 +14,6 @@ function buttonColor(result){
 }
 $.ajax({url: "/currentStatus", success: function(result){
 	buttonColor(result);
-
 }})
 
 $("#status").on("click", function(){
@@ -22,11 +21,7 @@ $("#status").on("click", function(){
 		buttonColor(result);
 	}})
 })
-$("#getMatch").on("click", function(){
-	$.ajax({url: "/getMatch", success: function(result){
-		
-	}})
-})
+
 $.ajax({url: "/myInfo", success: function(result){
 
 	if (result === "blank"){
