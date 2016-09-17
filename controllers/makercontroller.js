@@ -7,18 +7,11 @@ var noMatch;
 
 function dataStore(res, data, prime){
 	for (var i = 0; i < data.length; i++) {
-		debugger
-		if (noMatch.indexOf(data[i].dataValues.id) === -1) {
-			resultsArray.push(data[i].dataValues);
-		}
-		else{
-			return true
-		}
+		resultsArray.push(data[i].dataValues);
 	}
 	if (prime===true){
 		currentPrime = resultsArray[0];
 	}
-	debugger
 	res.send(resultsArray[currentNumber].Answers[0].dataValues)
 }
 
