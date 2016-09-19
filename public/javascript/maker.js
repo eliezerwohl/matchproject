@@ -7,19 +7,34 @@ $(".find").on("click", function(){
 
 $(".next").on("click", function(){
 		 $.ajax({url: "/nextPrime", success: function(result){
+		 		if (result === false){
+				alert("no more matches match")
+			}
+			else{
 		 	append(result, "prime");
+		 }
 	}});
 });
 
 $("#getMatch").on("click", function(){
 	$.ajax({url: "/getMatch", success: function(result){
+			if (result === false){
+				alert("no more matches match")
+			}
+			else{
 				append(result, "match");
+			}
 	}})
 })
 
 $("#nextMatch").on("click", function(){
 	$.ajax({url: "/nextMatch", success: function(result){
-				append(result, "match");
+			if (result === false){
+				alert("no more matches match")
+			}
+			else{
+		 	append(result, "match");
+		 }
 	}})
 })
 
