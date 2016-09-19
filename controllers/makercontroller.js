@@ -18,10 +18,15 @@ function dataStore(res, data, prime){
 
 function next(res, prime){
 	currentNumber ++;
-		if (prime === true){
-			currentPrime = resultsArray[currentNumber];
+		if (currentNumber === resultsArray.length) {
+			res.send(false);
 		}
-	res.send(resultsArray[currentNumber].Answers[0].dataValues);
+		else {
+			if (prime === true){
+				currentPrime = resultsArray[currentNumber];
+			}
+		res.send(resultsArray[currentNumber].Answers[0].dataValues);
+	}
 }
 
 exports.getMatch=function(req, res){
@@ -33,7 +38,6 @@ exports.getMatch=function(req, res){
 		// if(currentPrime.seeking === "both"){
 		// 	currentPrime.seeking = [m, f]
 		// }
-		debugger
 	models.User.findAll({
 	where:{
 		id:{$notIn: noMatch},
@@ -55,7 +59,12 @@ exports.getMatch=function(req, res){
     Sequelize.fn( 'RAND' ),
   ]
 	}).then(function(results){
-		dataStore(res, results, false)
+		if (results.length===0){
+			res.send(false);
+		}
+		else{
+		dataStore(res, results, false);
+		}
 	});
 }
 
