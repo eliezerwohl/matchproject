@@ -4,7 +4,7 @@ var resultsArray;
 var currentNumber;
 var currentPrime;	
 var noMatch;
-
+//need to mak sure that prime's age is within what the match wants
 function dataStore(res, data, prime){
 	for (var i = 0; i < data.length; i++) {
 		resultsArray.push(data[i].dataValues);
@@ -33,6 +33,7 @@ exports.getMatch=function(req, res){
 		// if(currentPrime.seeking === "both"){
 		// 	currentPrime.seeking = [m, f]
 		// }
+		debugger
 	models.User.findAll({
 	where:{
 		id:{$notIn: noMatch},
@@ -40,6 +41,8 @@ exports.getMatch=function(req, res){
 		city:currentPrime.city,
 		//gender must be seeking, seeking must be gender
 		age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
+		lower:{$lte: currentPrime.age},
+		upper:{$gte: currentPrime.age},
 		gender: currentPrime.seeking,
 		seeking:currentPrime.gender,
 	},
@@ -59,27 +62,15 @@ exports.getMatch=function(req, res){
 exports.findPrime = function(req, res){
 	currentNumber=0;
 	resultsArray=[];
-	noMatch = [0,req.session.UserId];
+	noMatch = [req.session.UserId];
 	//make a find?  find one?
-	models.MakerFilter.findAll({
-		where:{
-			//after testing make this req.session.UserId
-			UserId:req.session.UserId,
-		}
-	}).then(function(data){
-		//need to make another query, if are already matched
-		//also need to the person's own id so they aren't matched with themselves
-		for (var i = 0; i < data.length; i++) {
-			noMatch.push(data[i].dataValues.matchId)
-		}
-		}).then(function(){
-		//gets a list of the possible primes that the user has said no to
+	//gets a list of the possible primes that the user has said no to
 		models.User.findAll({
 		where:{
 			id:{$notIn: noMatch},
 			match:1,
 		},
-		attributes: ['id', 'city', "upper", "lower", "seeking", "gender"],
+		attributes: ['id', 'city', "upper", "lower", "age", "seeking", "gender"],
 		include: [{
     model: models.Answer,
         where: { UserId: Sequelize.col('User.id') },
@@ -91,7 +82,6 @@ exports.findPrime = function(req, res){
 		}).then(function(results){
 				dataStore(res, results, true)
 		});
-	});
 }
 
 
