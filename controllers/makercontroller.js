@@ -4,7 +4,7 @@ var resultsArray;
 var currentNumber;
 var currentPrime;	
 var noMatch;
-//need to mak sure that prime's age is within what the match wants
+//need to make sure that prime's age is within what the match wants
 function dataStore(res, data, prime){
 	for (var i = 0; i < data.length; i++) {
 		resultsArray.push(data[i].dataValues);
