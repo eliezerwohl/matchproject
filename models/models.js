@@ -6,7 +6,6 @@ if (process.env.NODE_ENV === 'production') {
   var connection = new Sequelize(process.env.JAWSDB_URL);
 } else {
   // LOCAL DB
-
   var connection = new Sequelize('match', 'root', password.password); }
   var User = connection.define('User', {
   email: {
@@ -27,8 +26,6 @@ if (process.env.NODE_ENV === 'production') {
   seeking:Sequelize.STRING,
   gender:Sequelize.STRING,
 });
-
-
 
 var Matched = connection.define("Matched",{
   user1:Sequelize.INTEGER,
@@ -62,6 +59,5 @@ exports.Vote = Vote;
 exports.Matched = Matched;
 exports.User=User;
 exports.Answer=Answer;
-exports.Filter=Filter;
 
 connection.sync({})
