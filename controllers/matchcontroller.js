@@ -1,5 +1,4 @@
 var models = require("../models/models.js");
-
 exports.myQuestions = function(req, res){
 var userId = req.user.id;
 models.User.update(
