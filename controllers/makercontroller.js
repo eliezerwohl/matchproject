@@ -59,7 +59,7 @@ exports.getMatch=function(req, res){
     Sequelize.fn( 'RAND' ),
   ]
 	}).then(function(results){
-		if (results.length===0){
+		if (results.length === 0){
 			res.send(false);
 		}
 		else{
@@ -92,8 +92,6 @@ exports.findPrime = function(req, res){
 				dataStore(res, results, true)
 		});
 }
-
-
 exports.nextPrime = function(req, res){
 		next(res, true)
 }
