@@ -55,8 +55,15 @@ var PossibleMatches = connection.define("PossibleMatches",{
 
 var Matched = connection.define("Matched",{
   user1:Sequelize.INTEGER,
+  user1Vote:  {type:Sequelize.BOOLEAN, defaultValue:0}
   user2:Sequelize.INTEGER,
+  user2Vote:  {type:Sequelize.BOOLEAN, defaultValue:0}
 });
+
+var Vote = connection.define("Votes", {
+  vote:{type:Sequelize.BOOLEAN, defaultValue:0}
+})
+
 
 var Answer = connection.define('Answer', {
   a091201:Sequelize.STRING,
@@ -64,6 +71,12 @@ var Answer = connection.define('Answer', {
   a091203:Sequelize.STRING,
   a091204:Sequelize.STRING,
 });  
+
+User.hasMany(Vote);
+Vote.belongsTo(User);
+Matched.hasMany(Vote);
+Vote.belongsTo(Matched);
+
 
 User.hasMany(MakerFilter);
 MakerFilter.belongsTo(User);
@@ -74,6 +87,8 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+exports.Vote = Vote;
+exports.Matched = Matched;
 exports.MakerFilter = MakerFilter;
 exports.User=User;
 exports.Answer=Answer;
