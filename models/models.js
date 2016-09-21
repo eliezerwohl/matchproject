@@ -55,9 +55,9 @@ var PossibleMatches = connection.define("PossibleMatches",{
 
 var Matched = connection.define("Matched",{
   user1:Sequelize.INTEGER,
-  user1Vote:  {type:Sequelize.BOOLEAN, defaultValue:0}
+  user1Vote:  {type:Sequelize.BOOLEAN, defaultValue:0},
   user2:Sequelize.INTEGER,
-  user2Vote:  {type:Sequelize.BOOLEAN, defaultValue:0}
+  user2Vote:  {type:Sequelize.BOOLEAN, defaultValue:0},
 });
 
 var Vote = connection.define("Votes", {
