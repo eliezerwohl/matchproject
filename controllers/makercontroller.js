@@ -36,9 +36,25 @@ function next(res, req, prime){
 }
 
 exports.getMatch=function(req, res){
-		currentNumber=0;
+	currentNumber=0;
 	noMatch = [req.session.UserId, currentPrime.id];
 	resultsArray=[]
+	models.Vote.findAll({
+		where:{
+			UserId:req.session.UserId
+		},
+		include: [{
+    model: models.Matched,
+        where: { MatchedId: Sequelize.col('Matched.id') },
+      }]
+	}).then(function (data){
+		if (data[i].Matched.dataValues.User1 == currentPrime.id  ){
+			noMatch.push(data[i].Matched.dataValues.User2)
+		}
+		else if  (data[i].Matched.dataValues.User2 == currentPrime.id  ){
+			noMatch.push(data[i].Matched.dataValues.User1)
+		}
+	});
 
 		//terrible fix for searchign for both.  will have to redo how data is entered
 		// if(currentPrime.seeking === "both"){
