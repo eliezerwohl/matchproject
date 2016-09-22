@@ -9,21 +9,27 @@ exports.saveMatch = function(req, res){
 			user2:{$in:req.session.matchedArray} ,
 		}
 	}).then(function(data){
-		debugger
 		if (data == null){
 			models.Matched.create({
 				user1:req.session.matchedArray[0],
 			user2:req.session.matchedArray[1],
 			}).then(function(results){
-				models.Vote
+				models.Vote.create({
+				UserId:req.session.UserId,
+				MatchedId:results.dataValues.id,
+				vote:req.body.data,
 			})
+		})
 
 		}
 		else {
-			models.Vote.Create({
-				UserId:req.session.UserId;
-				MatchId:data.dataValues.id;
-				vote:req.body.data;
+			models.Vote.create({
+				UserId:req.session.UserId,
+				MatchedId:data.dataValues.id,
+				vote:req.body.data,
+			}).then(function(data){
+				debugger
+
 			})
 		}
 	})
