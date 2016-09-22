@@ -5,18 +5,21 @@ var currentNumber;
 var currentPrime;	
 var noMatch;
 //need to make sure that prime's age is within what the match wants
-function dataStore(res, data, prime){
+function dataStore(res, req, data, prime){
 	for (var i = 0; i < data.length; i++) {
 		resultsArray.push(data[i].dataValues);
 	}
 	if (prime===true){
 		currentPrime = resultsArray[0];
 	}
+	else {
+		req.session.matchedArray = [currentPrime.id, resultsArray[0].id]
+	}
 	res.send(resultsArray[currentNumber].Answers[0].dataValues)
 }
 
 
-function next(res, prime){
+function next(res, req, prime){
 	currentNumber ++;
 		if (currentNumber === resultsArray.length) {
 			res.send(false);
@@ -24,6 +27,9 @@ function next(res, prime){
 		else {
 			if (prime === true){
 				currentPrime = resultsArray[currentNumber];
+			}
+			else{
+				req.session.matchedArray = [currentPrime.id, resultsArray[currentNumber.id]]
 			}
 		res.send(resultsArray[currentNumber].Answers[0].dataValues);
 	}
@@ -63,7 +69,7 @@ exports.getMatch=function(req, res){
 			res.send(false);
 		}
 		else{
-		dataStore(res, results, false);
+		dataStore(res, req, results, false);
 		}
 	});
 }
@@ -89,14 +95,14 @@ exports.findPrime = function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
-				dataStore(res, results, true)
+				dataStore(res, req, results, true)
 		});
 }
 exports.nextPrime = function(req, res){
-		next(res, true)
+		next(res, req, true)
 }
 
 exports.nextMatch = function(req, res){
-		next(res, false)
+		next(res, req, false)
 }
 
