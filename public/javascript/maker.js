@@ -38,8 +38,10 @@ $("#nextMatch").on("click", function(){
 	}})
 })
 
-$("#save").on("click", function(){
-	$.ajax({url: "/saveMatch", success: function(result){
+$(".save").on("click", function(){
+	console.log((this).value)
+	debugger
+	$.ajax({url: "/saveMatch", type:"POST", data:{data:true}, success: function(result){
 			console.log(result)
 	}})
 })

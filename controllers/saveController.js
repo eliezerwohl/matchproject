@@ -2,6 +2,7 @@ var models = require("../models/models.js");
 
 exports.saveMatch = function(req, res){
 	debugger
+	console.log(req.body)
 	models.Matched.findOne({
 		where:{
 			user1:{$in:req.session.matchedArray} ,
@@ -14,22 +15,17 @@ exports.saveMatch = function(req, res){
 				user1:req.session.matchedArray[0],
 			user2:req.session.matchedArray[1],
 			}).then(function(results){
-				debugger
+				models.Vote
 			})
 
 		}
 		else {
-
-
+			models.Vote.Create({
+				UserId:req.session.UserId;
+				MatchId:data.dataValues.id;
+				vote:req.body.data;
+			})
 		}
 	})
 	res.send("got it");
-
-	// first check the matched
-
-	// if nothing
-	// 	then put it in
-	// else
-	// 	find the vote of the two
-	// 	add them in
 }

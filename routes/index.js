@@ -81,7 +81,7 @@ passport.use('local', new LocalStrategy({
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })
-  app.get("/saveMatch", save.saveMatch);
+  app.post("/saveMatch", save.saveMatch);
   app.get("/nextPrime", maker.nextPrime);
   app.post("/myQuestions", match.myQuestions);
   app.get("/findPrime", maker.findPrime);
