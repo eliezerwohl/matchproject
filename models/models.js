@@ -29,13 +29,13 @@ if (process.env.NODE_ENV === 'production') {
 
 var Matched = connection.define("Matched",{
   user1:Sequelize.INTEGER,
-  user1Vote:  {type:Sequelize.BOOLEAN, defaultValue:0},
+  user1Vote:  {type:Sequelize.BOOLEAN, defaultValue:false},
   user2:Sequelize.INTEGER,
-  user2Vote:  {type:Sequelize.BOOLEAN, defaultValue:0},
+  user2Vote:  {type:Sequelize.BOOLEAN, defaultValue:false},
 });
 
 var Vote = connection.define("Votes", {
-  vote:{type:Sequelize.BOOLEAN, defaultValue:0}
+  vote:{type:Sequelize.BOOLEAN, defaultValue:false}
 })
 
 
