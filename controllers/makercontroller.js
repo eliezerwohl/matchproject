@@ -29,7 +29,7 @@ function next(res, req, prime){
 				currentPrime = resultsArray[currentNumber];
 			}
 			else{
-				req.session.matchedArray = [currentPrime.id, resultsArray[currentNumber.id]]
+				req.session.matchedArray = [currentPrime.id, resultsArray[currentNumber].id]
 			}
 		res.send(resultsArray[currentNumber].Answers[0].dataValues);
 	}
@@ -44,23 +44,28 @@ exports.getMatch=function(req, res){
 			UserId:req.session.UserId
 		},
 		include: [{
+		where: { UserId: Sequelize.col('User.id') },
     model: models.Matched,
         where: { MatchedId: Sequelize.col('Matched.id') },
       }]
 	}).then(function (data){
-		if (data[i].Matched.dataValues.User1 == currentPrime.id  ){
-			noMatch.push(data[i].Matched.dataValues.User2)
+		if (data.length < 1) {
+			return true
 		}
-		else if  (data[i].Matched.dataValues.User2 == currentPrime.id  ){
-			noMatch.push(data[i].Matched.dataValues.User1)
+		else {
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].Matched.dataValues.user1 == currentPrime.id  ){
+						noMatch.push(data[i].Matched.dataValues.user2)
+				}
+				else if  (data[i].Matched.dataValues.user2 == currentPrime.id  ){
+					noMatch.push(data[i].Matched.dataValues.user1)
+				}
+			}
 		}
-	});
-
-		//terrible fix for searchign for both.  will have to redo how data is entered
-		// if(currentPrime.seeking === "both"){
-		// 	currentPrime.seeking = [m, f]
-		// }
-	models.User.findAll({
+		
+	
+	}).then(function(){
+		models.User.findAll({
 	where:{
 		id:{$notIn: noMatch},
 		match:1,
@@ -88,6 +93,13 @@ exports.getMatch=function(req, res){
 		dataStore(res, req, results, false);
 		}
 	});
+
+	});
+
+		//terrible fix for searchign for both.  will have to redo how data is entered
+		// if(currentPrime.seeking === "both"){
+		// 	currentPrime.seeking = [m, f]
+		// 
 }
 
 exports.findPrime = function(req, res){
