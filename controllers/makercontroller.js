@@ -54,16 +54,14 @@ exports.getMatch=function(req, res){
 		}
 		else {
 			for (var i = 0; i < data.length; i++) {
-				if (data[i].Matched.dataValues.user1 == currentPrime.id  ){
-						noMatch.push(data[i].Matched.dataValues.user2)
+				if (data[i].Matched.dataValues.user1 == currentPrime.id){
+					noMatch.push(data[i].Matched.dataValues.user2)
 				}
-				else if  (data[i].Matched.dataValues.user2 == currentPrime.id  ){
+				else if  (data[i].Matched.dataValues.user2 == currentPrime.id){
 					noMatch.push(data[i].Matched.dataValues.user1)
 				}
 			}
 		}
-		
-	
 	}).then(function(){
 		models.User.findAll({
 	where:{
@@ -95,7 +93,6 @@ exports.getMatch=function(req, res){
 	});
 
 	});
-
 		//terrible fix for searchign for both.  will have to redo how data is entered
 		// if(currentPrime.seeking === "both"){
 		// 	currentPrime.seeking = [m, f]

@@ -1,14 +1,12 @@
 var models = require("../models/models.js");
 
 exports.saveMatch = function(req, res){
-	console.log(req.body)
 	models.Matched.findOne({
 		where:{
 			user1:{$in:req.session.matchedArray} ,
 			user2:{$in:req.session.matchedArray} ,
 		}
 	}).then(function(data){
-		debugger
 		if (data == null){
 			models.Matched.create({
 			user1:req.session.matchedArray[0],
@@ -18,9 +16,8 @@ exports.saveMatch = function(req, res){
 				UserId:req.session.UserId,
 				MatchedId:results.dataValues.id,
 				vote:req.body.data,
-			})
-		})
-
+				});
+			});
 		}
 		else {
 			models.Vote.create({
@@ -31,6 +28,6 @@ exports.saveMatch = function(req, res){
 
 			})
 		}
-	})
+	});
 	res.send("got it");
 }
