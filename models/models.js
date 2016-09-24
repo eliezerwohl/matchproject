@@ -32,10 +32,12 @@ var Matched = connection.define("Matched",{
   user1Vote:  {type:Sequelize.BOOLEAN},
   user2:Sequelize.INTEGER,
   user2Vote:  {type:Sequelize.BOOLEAN},
+  search:{type:Sequelize.STRING, default:"OK"}
+  answered:{type:Sequelize.INTEGER, default:0}
 });
 
 var Vote = connection.define("Votes", {
-  vote:{type:Sequelize.BOOLEAN, defaultValue:false}
+  vote:{type:Sequelize.BOOLEAN, default:false}
 })
 
 
