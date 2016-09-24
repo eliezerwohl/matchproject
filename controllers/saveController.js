@@ -1,5 +1,29 @@
 var models = require("../models/models.js");
 
+
+
+
+when  i go to save
+
+find the match again
+if answered !=0, 
+	put that user id there
+	see which id is larger
+	if user is larger, change user2vote to true or false
+		else
+	user 1
+
+else {
+	if current useranswer = false{
+		change search to false
+		-1 for everyboyd
+	}
+	else if {, 
+		see if user1 vote = true
+		if it is, and currentUser also = true
+			true match()
+}
+
 exports.saveMatch = function(req, res){
 	//lower user id will always be user 1
 	req.session.matchedArray.sort();
