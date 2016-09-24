@@ -28,10 +28,8 @@ if (process.env.NODE_ENV === 'production') {
 });
 
 var Matched = connection.define("Matched",{
-  user1:Sequelize.INTEGER,
-  user1Vote:  {type:Sequelize.BOOLEAN},
-  user2:Sequelize.INTEGER,
-  user2Vote:  {type:Sequelize.BOOLEAN},
+  userVote:Sequelize.BOOLEAN,
+  other:Sequelize.INTEGER,
 });
 
 var Vote = connection.define("Votes", {
@@ -48,8 +46,10 @@ var Answer = connection.define('Answer', {
 
 User.hasMany(Vote);
 Vote.belongsTo(User);
-Matched.hasMany(Vote);
-Vote.belongsTo(Matched);
+Vote.hasMany(Matched);
+Matched.belongsTo(Vote);
+User.hasMany(Matched);
+Matched.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 User.hasMany(Answer);
