@@ -32,8 +32,13 @@ var Matched = connection.define("Matched",{
   user1Vote:  {type:Sequelize.BOOLEAN},
   user2:Sequelize.INTEGER,
   user2Vote:  {type:Sequelize.BOOLEAN},
-  search:{type:Sequelize.STRING, default:"OK"}
-  answered:{type:Sequelize.INTEGER, default:0}
+  // clicks: sequelize.literal('clicks +1')
+  yes:{type:Sequelize.INTEGER, default:0},
+  no:{type:Sequelize.INTEGER, default:0},
+  //when both answer, change
+  search:{type:Sequelize.STRING, default:"OK"},
+  //if only one person answer, put thier id
+  answered:{type:Sequelize.INTEGER, default:0},
 });
 
 var Vote = connection.define("Votes", {
