@@ -37,6 +37,7 @@ exports.saveMatch = function(req, res){
 					user2:req.session.matchedArray[1],
 					yes:1
 				}).then(function(results){
+					debugger
 					models.Vote.create({
 						UserId:req.session.UserId,
 						MatchedId:results.dataValues.id,
@@ -59,15 +60,14 @@ exports.saveMatch = function(req, res){
 			}
 		}
 		else {
-			// first update matched with either plus or minus 1
-			// then use that to create a vote, with teh data.id as
-			// MatchedId
-			
+
+			debugger
+
 			models.Vote.create({
 				UserId:req.session.UserId,
 				MatchedId:data.dataValues.id,
 				vote:req.body.data,
-			}).
+			})
 		}
 	}); 
 	res.send("got it");
