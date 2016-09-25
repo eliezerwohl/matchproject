@@ -3,7 +3,7 @@ var models = require("../models/models.js");
 // when  i go to save
 
 // find the match again
-// if answered !=0, 
+// if 3 !=0, 
 // 	put that user id there
 // 	see which id is larger
 // 	if user is larger, change user2vote to true or false
@@ -31,26 +31,40 @@ exports.saveMatch = function(req, res){
 		}
 	}).then(function(data){
 		if (data == null){
-			models.Matched.create({
-			user1:req.session.matchedArray[0],
-			user2:req.session.matchedArray[1],
-			}).then(function(results){
-				models.Vote.create({
-				UserId:req.session.UserId,
-				MatchedId:results.dataValues.id,
-				vote:req.body.data,
-				});
-			});
+			if (req.body.data="true"){
+				models.Matched.create({
+					user1:req.session.matchedArray[0],
+					user2:req.session.matchedArray[1],
+					yes:1
+				}).then(function(results){
+					models.Vote.create({
+						UserId:req.session.UserId,
+						MatchedId:results.dataValues.id,
+						vote:req.body.data,
+					});
+				})
+			}
+			else{
+				models.Matched.create({
+					user1:req.session.matchedArray[0],
+					user2:req.session.matchedArray[1],
+					no:1
+				}).then(function(results){
+					models.Vote.create({
+						UserId:req.session.UserId,
+						MatchedId:results.dataValues.id,
+						vote:req.body.data,
+					})
+				})
+			}
 		}
 		else {
 			models.Vote.create({
 				UserId:req.session.UserId,
 				MatchedId:data.dataValues.id,
 				vote:req.body.data,
-			}).then(function(data){
-
-			})
+			});
 		}
-	});
+	}); 
 	res.send("got it");
 }
