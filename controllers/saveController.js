@@ -30,7 +30,6 @@ exports.saveMatch = function(req, res){
 			user2:{$in:req.session.matchedArray} ,
 		}
 	}).then(function(data){
-		matchedId = data.dataValues.id;
 		if (data == null){
 			if (req.body.data=="true"){
 
@@ -46,7 +45,8 @@ exports.saveMatch = function(req, res){
 					});
 				})
 			}
-			else{node 
+			else{
+
 				models.Matched.create({
 				user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],
@@ -61,6 +61,7 @@ exports.saveMatch = function(req, res){
 			}
 		}
 		else {
+			matchedId = data.dataValues.id;
 			models.Vote.create({
 				UserId:req.session.UserId,
 				MatchedId:data.dataValues.id,
