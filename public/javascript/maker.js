@@ -39,9 +39,9 @@ $("#nextMatch").on("click", function(){
 })
 
 $(".save").on("click", function(){
-	console.log((this).value)
-	debugger
-	$.ajax({url: "/saveMatch", type:"POST", data:{data:true}, success: function(result){
+	var data =(this).value;
+
+	$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
 			console.log(result)
 	}})
 })
