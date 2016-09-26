@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === 'production') {
   match:{
     type:Sequelize.BOOLEAN,
     defaultValue:0},
-    
   age:Sequelize.INTEGER,
   city: Sequelize.STRING,
   upper:Sequelize.INTEGER,
@@ -33,16 +32,16 @@ var Matched = connection.define("Matched",{
   user2:Sequelize.INTEGER,
   user2Vote:  {type:Sequelize.BOOLEAN},
   // clicks: sequelize.literal('clicks +1')
-  yes:{type:Sequelize.INTEGER, default:0},
-  no:{type:Sequelize.INTEGER, default:0},
+  yes:{type:Sequelize.INTEGER, defaultValue:0},
+  no:{type:Sequelize.INTEGER, defaultValue:0},
   //when both answer, change
-  search:{type:Sequelize.STRING, default:"OK"},
+  search:{type:Sequelize.STRING, defaultValue:"OK"},
   //if only one person answer, put thier id
-  answered:{type:Sequelize.INTEGER, default:0},
+  answered:{type:Sequelize.INTEGER, defaultValue:0},
 });
 
 var Vote = connection.define("Votes", {
-  vote:{type:Sequelize.BOOLEAN, default:false}
+  vote:{type:Sequelize.BOOLEAN, defaultValue:false}
 })
 
 
