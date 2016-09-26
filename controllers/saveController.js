@@ -20,7 +20,7 @@ var Sequelize = require('sequelize');
 // 		if it is, and currentUser also = true
 // 			true match()
 // }
-
+var matchedId
 exports.saveMatch = function(req, res){
 	//lower user id will always be user 1
 	req.session.matchedArray.sort();
@@ -30,7 +30,7 @@ exports.saveMatch = function(req, res){
 			user2:{$in:req.session.matchedArray} ,
 		}
 	}).then(function(data){
-		debugger
+		matchedId = data.dataValues.id;
 		if (data == null){
 			if (req.body.data=="true"){
 
@@ -39,7 +39,6 @@ exports.saveMatch = function(req, res){
 					user2:req.session.matchedArray[1],
 					yes:1
 				}).then(function(results){
-		
 					models.Vote.create({
 						UserId:req.session.UserId,
 						MatchedId:results.dataValues.id,
@@ -47,7 +46,7 @@ exports.saveMatch = function(req, res){
 					});
 				})
 			}
-			else{
+			else{node 
 				models.Matched.create({
 				user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],
@@ -62,32 +61,58 @@ exports.saveMatch = function(req, res){
 			}
 		}
 		else {
-			debugger
 			models.Vote.create({
 				UserId:req.session.UserId,
 				MatchedId:data.dataValues.id,
 				vote:req.body.data,
 			}).then(function(results){
 				if (req.body.data=="true"){
-					debugger
 					models.Matched.update({
 						  yes: Sequelize.literal('yes +1')},
 						{where:{
 							id:results.dataValues.MatchedId
 						}
-					})
+					}).then(function(data){
+						updateAvg(data)
+					});
 				}
 				else {
-					debugger
 					models.Matched.update({
 						  no: Sequelize.literal('no +1')},
 						{where:{
 							id:results.dataValues.MatchedId
 						}
-					})
+					}).then(function(modeldata){
+						debugger
+						updateAvg(modeldata)
+					});
 				}
 			})
 		}
 	}); 
+	// 100/(yes + no) * yes =
 	res.send("got it");
+}
+
+function updateAvg(data){
+	models.Matched.findOne({
+		where:{
+			id: matchedId
+		}
+	}).then(function(data){
+		debugger
+			var avg = Math.round((100/(data.dataValues.yes + data.dataValues.no)) * data.dataValues.yes);
+	debugger
+	models.Matched.update({
+		avg: avg
+	},
+	{
+		where:{
+			id:data.dataValues.id
+		}
+	})
+
+	})
+
+
 }

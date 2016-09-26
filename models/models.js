@@ -38,6 +38,7 @@ var Matched = connection.define("Matched",{
   search:{type:Sequelize.STRING, defaultValue:"OK"},
   //if only one person answer, put thier id
   answered:{type:Sequelize.INTEGER, defaultValue:0},
+  avg:{type: Sequelize.INTEGER, defaultValue:0}
 });
 
 var Vote = connection.define("Votes", {
