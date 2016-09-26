@@ -1,5 +1,5 @@
 var models = require("../models/models.js");
-
+var Sequelize = require('sequelize');
 // when  i go to save
 
 // find the match again
@@ -30,14 +30,16 @@ exports.saveMatch = function(req, res){
 			user2:{$in:req.session.matchedArray} ,
 		}
 	}).then(function(data){
+		debugger
 		if (data == null){
-			if (req.body.data="true"){
+			if (req.body.data=="true"){
+
 				models.Matched.create({
 					user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],
 					yes:1
 				}).then(function(results){
-					debugger
+		
 					models.Vote.create({
 						UserId:req.session.UserId,
 						MatchedId:results.dataValues.id,
@@ -46,10 +48,10 @@ exports.saveMatch = function(req, res){
 				})
 			}
 			else{
-				models.Matched.update({
-					where:{
-					id:data.dataValues.id
-					}
+				models.Matched.create({
+				user1:req.session.matchedArray[0],
+					user2:req.session.matchedArray[1],
+					no:1
 				}).then(function(results){
 					models.Vote.create({
 						UserId:req.session.UserId,
@@ -60,13 +62,30 @@ exports.saveMatch = function(req, res){
 			}
 		}
 		else {
-
 			debugger
-
 			models.Vote.create({
 				UserId:req.session.UserId,
 				MatchedId:data.dataValues.id,
 				vote:req.body.data,
+			}).then(function(results){
+				if (req.body.data=="true"){
+					debugger
+					models.Matched.update({
+						  yes: Sequelize.literal('yes +1')},
+						{where:{
+							id:results.dataValues.MatchedId
+						}
+					})
+				}
+				else {
+					debugger
+					models.Matched.update({
+						  no: Sequelize.literal('no +1')},
+						{where:{
+							id:results.dataValues.MatchedId
+						}
+					})
+				}
 			})
 		}
 	}); 
