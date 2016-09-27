@@ -64,39 +64,35 @@ exports.getMatch=function(req, res){
 		}
 	}).then(function(){
 		models.User.findAll({
-	where:{
-		id:{$notIn: noMatch},
-		match:1,
-		city:currentPrime.city,
-		//gender must be seeking, seeking must be gender
-		age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
-		lower:{$lte: currentPrime.age},
-		upper:{$gte: currentPrime.age},
-		gender: currentPrime.seeking,
-		seeking:currentPrime.gender,
-	},
-	include: [{
-    model: models.Answer,
-        where: { UserId: Sequelize.col('User.id') },
-   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
-    }],
-  order: [
-    Sequelize.fn( 'RAND' ),
-  ]
-	}).then(function(results){
-		if (results.length === 0){
-			res.send(false);
-		}
-		else{
-		dataStore(res, req, results, false);
-		}
-	});
+		where:{
+			id:{$notIn: noMatch},
+			match:1,
+			city:currentPrime.city,
+			//gender must be seeking, seeking must be gender
+			age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
+			lower:{$lte: currentPrime.age},
+			upper:{$gte: currentPrime.age},
+			gender: currentPrime.seeking,
+			seeking:currentPrime.gender,
+		},
+		include: [{
+	    model: models.Answer,
+	        where: { UserId: Sequelize.col('User.id') },
+	   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+	    }],
+	  order: [
+	    Sequelize.fn( 'RAND' ),
+	  ]
+		}).then(function(results){
+			if (results.length === 0){
+				res.send(false);
+			}
+			else{
+			dataStore(res, req, results, false);
+			}
+		});
 
 	});
-		//terrible fix for searchign for both.  will have to redo how data is entered
-		// if(currentPrime.seeking === "both"){
-		// 	currentPrime.seeking = [m, f]
-		// 
 }
 
 exports.findPrime = function(req, res){
@@ -105,7 +101,7 @@ exports.findPrime = function(req, res){
 	noMatch = [req.session.UserId];
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
-		models.User.findAll({
+	models.User.findAll({
 		where:{
 			id:{$notIn: noMatch},
 			match:1,
@@ -119,10 +115,11 @@ exports.findPrime = function(req, res){
 	  order: [
 	    Sequelize.fn( 'RAND' ),
 	  ]
-		}).then(function(results){
-				dataStore(res, req, results, true)
-		});
+	}).then(function(results){
+			dataStore(res, req, results, true)
+	});
 }
+
 exports.nextPrime = function(req, res){
 		next(res, req, true)
 }
