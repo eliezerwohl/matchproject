@@ -100,4 +100,13 @@ exports.Answer=Answer;
 
 // ])
 
+  Matched.bulkCreate([
+    {id:1, user1:2, user2:4, yes:1: no:1, search:"OK", answered:0, avg:50, createdAt:"2016-09-27 00:35:04", updatedAt:"2016-09-27 00:35:04"}
+    ])
+
+  Votes.bulkCreate([
+    {id:1, vote:1: UserId:1, MatchedId:1, createdAt:"2016-09-27 00:35:04", updatedAt:"2016-09-27 00:35:04"},
+    {id:2, vote:0, UserId:3, MatchedId:1, createdAt:"2016-09-27 00:35:04", updatedAt:"2016-09-27 00:35:04"}
+    ])
+  
 connection.sync({})
