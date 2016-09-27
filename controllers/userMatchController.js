@@ -2,7 +2,7 @@ var models = require("../models/models.js");
 var findMatch = [];
 
 exports.userMatch = function(req, res){
-	var lastMatch = new Date (req.session.lastMatch);
+	var lastMatch = req.session.lastMatch;
 	var today = new Date (Date.now());
 	if  (today.getDate() != lastMatch.getDate() && today.getMonth() != lastMatch.getMonth() && today.getFullMonth() != lastMatch.getFullMonth()  ){
 		models.Matched.findAll({
