@@ -46,7 +46,6 @@ exports.saveMatch = function(req, res){
 				})
 			}
 			else{
-
 				models.Matched.create({
 				user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],

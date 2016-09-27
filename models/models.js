@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   lower:Sequelize.INTEGER,
   seeking:Sequelize.STRING,
   gender:Sequelize.STRING,
+  lastMatch:{type:Sequelize.DATE, defaultValue: Sequelize.NOW}
 });
 
 var Matched = connection.define("Matched",{

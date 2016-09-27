@@ -2,7 +2,12 @@ var models = require("../models/models.js");
 var findMatch = [];
 
 exports.userMatch = function(req, res){
-	models.Matched.findAll({
+
+	var lastMatch = new Date (req.session.lastMatch);
+	var today = new Date (Date.now());
+
+	if  (today.getDate() != lastMatch.getDate() && today.getMonth() != lastMatch.getMonth() && today.getFullMonth() != lastMatch.getFullMonth()  ){
+		models.Matched.findAll({
 		where: {
 			//unless both ppl answer this should stay as OK
 		search:"OK",
@@ -22,4 +27,10 @@ exports.userMatch = function(req, res){
 		debugger
 
 	})
+	}
+	else {
+		debugger
+		res.send("you already get a match today")
+	}
+	
 }
