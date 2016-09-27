@@ -31,8 +31,8 @@ exports.saveMatch = function(req, res){
 		}
 	}).then(function(data){
 		if (data == null){
+			//that means this is the first person voting for this match
 			if (req.body.data=="true"){
-
 				models.Matched.create({
 					user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],
@@ -43,9 +43,9 @@ exports.saveMatch = function(req, res){
 						MatchedId:results.dataValues.id,
 						vote:req.body.data,
 					});
-				})
+				});
 			}
-			else{
+			else {
 				models.Matched.create({
 				user1:req.session.matchedArray[0],
 					user2:req.session.matchedArray[1],
@@ -55,11 +55,12 @@ exports.saveMatch = function(req, res){
 						UserId:req.session.UserId,
 						MatchedId:results.dataValues.id,
 						vote:req.body.data,
-					})
-				})
+					});
+				});
 			}
 		}
 		else {
+			//it's been matched before
 			matchedId = data.dataValues.id;
 			models.Vote.create({
 				UserId:req.session.UserId,
@@ -73,7 +74,7 @@ exports.saveMatch = function(req, res){
 							id:results.dataValues.MatchedId
 						}
 					}).then(function(data){
-						updateAvg(data)
+						updateAvg()
 					});
 				}
 				else {
@@ -83,14 +84,12 @@ exports.saveMatch = function(req, res){
 							id:results.dataValues.MatchedId
 						}
 					}).then(function(modeldata){
-						debugger
-						updateAvg(modeldata)
+						updateAvg()
 					});
 				}
-			})
+			});
 		}
 	}); 
-	// 100/(yes + no) * yes =
 	res.send("got it");
 }
 
@@ -100,19 +99,14 @@ function updateAvg(data){
 			id: matchedId
 		}
 	}).then(function(data){
-		debugger
-			var avg = Math.round((100/(data.dataValues.yes + data.dataValues.no)) * data.dataValues.yes);
-	debugger
-	models.Matched.update({
+		var avg = Math.round((100/(data.dataValues.yes + data.dataValues.no)) * data.dataValues.yes);
+		models.Matched.update({
 		avg: avg
-	},
-	{
-		where:{
-			id:data.dataValues.id
-		}
-	})
-
-	})
-
-
+		},
+		{
+			where:{
+				id:data.dataValues.id
+			}
+		});
+	});
 }
