@@ -11,6 +11,7 @@ exports.userMatch = function(req, res){
 		res.send("today")
 	} 
 	else if  (today != lastMatch){
+		//gets a new match
 		models.Matched.findAll({
 
 			where: {
@@ -44,6 +45,8 @@ exports.userMatch = function(req, res){
 				attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
 			}).then(function(data){
 				debugger
+				//needs to update lastmatch to today
+				//and update dailymatch
 				res.send(data.dataValues)
 			})
 
@@ -51,7 +54,10 @@ exports.userMatch = function(req, res){
 		});
 	}
 	else {
+		//gets match for the day
 		debugger
 		res.send("none")
 	}
 }
+
+//make a daily match put it on user
