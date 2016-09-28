@@ -1,6 +1,7 @@
 var home = require("../controllers/homeController");
 var match = require("../controllers/matchController");
 var save = require("../controllers/saveController");
+var userSave = require("../controllers/userSaveController");
 var maker = require("../controllers/makerController");
 var userMatch = require("../controllers/userMatchController");
 var express = require('express');
@@ -82,6 +83,7 @@ passport.use('local', new LocalStrategy({
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })
+  app.post("/userSave", userSave.userSave);
   app.get("/myMatch", function(req, res) {
     res.render("myMatch")
   })
