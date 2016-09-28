@@ -1,6 +1,7 @@
 var models = require("../models/models.js");
+var Sequelize = require('sequelize');
 var findMatch = [];
-
+var matchId
 exports.userMatch = function(req, res){
 	var lastMatch = new Date(req.session.lastMatch).toDateString();
 	var today = new Date (Date.now()).toDateString();
@@ -29,9 +30,9 @@ exports.userMatch = function(req, res){
 	    ['avg', 'DESC'],
 	    ],
 		}).then(function(data){
+			debugger
 			//currently it's just one pick a day, with the 
 			//highest like percentage.  can change later
-			var matchId;
 			if (data[0].dataValues.user1 == req.session.UserId){
 				matchId = data[0].dataValues.user2
 			}
@@ -44,10 +45,19 @@ exports.userMatch = function(req, res){
 				},
 				attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
 			}).then(function(data){
-				debugger
+				res.send(data.dataValues)
+				
+				models.User.update({
+					lastMatch:Date.now(),
+					dailyMatch:matchId
+					},
+					{where:{
+						id:req.session.UserId
+					}
+				})
 				//needs to update lastmatch to today
 				//and update dailymatch
-				res.send(data.dataValues)
+
 			})
 
 
