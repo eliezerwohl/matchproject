@@ -42,6 +42,7 @@ exports.loggedin = function (req, res){
     req.session.UserId = User[0].dataValues.id;
     req.session.lastMatch = User[0].dataValues.lastMatch;
     res.render("matchOrMaker");
+    req.session.dailyMatch = User[0].dataValues.dailyMatch;
     req.session.createdAt =User[0].dataValues.createdAt;
     req.session.account  = User[0].dataValues.account;
   });
