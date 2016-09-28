@@ -1,16 +1,9 @@
 // $("#status").on("click", function(){
 	$.ajax({url: "/userMatch", success: function(result){
-		if (result == "none"){
-
-		}
-		else if ( result === "today"){
-
+	 if ( result === "today"){
+	 		alert("account was created today.  Please wait")
 		}
 		else{
-				append(result, "prime")
+			append(result, "prime")
 		}
-
-		
-	
-	}})
-// })
+	}});
