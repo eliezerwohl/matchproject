@@ -38,6 +38,10 @@ $("#nextMatch").on("click", function(){
 	}})
 })
 
+$("#save").on("click", function(){
+alert("save")
+	})
+
 $(".save").on("click", function(){
 	var data =(this).value;
 

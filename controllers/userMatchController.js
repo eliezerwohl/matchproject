@@ -64,4 +64,3 @@ exports.userMatch = function(req, res){
 	}
 }
 
-//make a daily match put it on user
