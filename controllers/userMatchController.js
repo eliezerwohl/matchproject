@@ -2,9 +2,15 @@ var models = require("../models/models.js");
 var findMatch = [];
 
 exports.userMatch = function(req, res){
-	var lastMatch = req.session.lastMatch;
-	var today = new Date (Date.now());
-	if  (today.getDate() != lastMatch.getDate() && today.getMonth() != lastMatch.getMonth() && today.getFullMonth() != lastMatch.getFullMonth()  ){
+	var lastMatch = new Date(req.session.lastMatch).toDateString();
+	var today = new Date (Date.now()).toDateString();
+	var createdAt = new Date(req.session.createdAt).toDateString();
+	debugger
+	if (createdAt === lastMatch){
+		debugger
+		res.send("today")
+	} 
+	else if  (today != lastMatch){
 		models.Matched.findAll({
 			where: {
 				//unless both ppl answer this should stay as OK
@@ -21,7 +27,7 @@ exports.userMatch = function(req, res){
 	    ['avg', 'DESC'],
 	    ]
 		}).then(function(data){
-			debugger
+			res.send("new match")
 		});
 	}
 	else {
