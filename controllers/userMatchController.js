@@ -6,9 +6,8 @@ exports.userMatch = function(req, res){
 	var lastMatch = new Date(req.session.lastMatch).toDateString();
 	var today = new Date (Date.now()).toDateString();
 	var createdAt = new Date(req.session.createdAt).toDateString();
-	debugger
+
 	if (createdAt === today){
-		debugger
 		res.send("today")
 	} 
 	else if  (today != lastMatch){
@@ -55,18 +54,20 @@ exports.userMatch = function(req, res){
 						id:req.session.UserId
 					}
 				})
-				//needs to update lastmatch to today
-				//and update dailymatch
-
 			})
-
-
 		});
 	}
 	else {
 		//gets match for the day
 		debugger
-		res.send("none")
+		models.Answer.findOne({
+				where:{
+					UserId:req.session.dailyMatch
+				},
+				attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+			}).then(function(data){
+				res.send(data.dataValues)
+			})
 	}
 }
 
