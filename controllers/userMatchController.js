@@ -6,12 +6,13 @@ exports.userMatch = function(req, res){
 	var today = new Date (Date.now()).toDateString();
 	var createdAt = new Date(req.session.createdAt).toDateString();
 	debugger
-	if (createdAt === lastMatch){
+	if (createdAt === today){
 		debugger
 		res.send("today")
 	} 
 	else if  (today != lastMatch){
 		models.Matched.findAll({
+
 			where: {
 				//unless both ppl answer this should stay as OK
 			search:"OK",
@@ -25,13 +26,32 @@ exports.userMatch = function(req, res){
 	    order: [
 	    // Will escape username and validate DESC against a list of valid direction parameters
 	    ['avg', 'DESC'],
-	    ]
+	    ],
 		}).then(function(data){
-			res.send("new match")
+			//currently it's just one pick a day, with the 
+			//highest like percentage.  can change later
+			var matchId;
+			if (data[0].dataValues.user1 == req.session.UserId){
+				matchId = data[0].dataValues.user2
+			}
+			else {
+				matchId = data[0].dataValues.user1
+			}
+			models.Answer.findOne({
+				where:{
+					UserId:matchId
+				},
+				attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+			}).then(function(data){
+				debugger
+				res.send(data.dataValues)
+			})
+
+
 		});
 	}
 	else {
 		debugger
-		res.send("you already get a match today")
+		res.send("none")
 	}
 }
