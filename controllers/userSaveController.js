@@ -1,8 +1,27 @@
 var models = require("../models/models.js");
 exports.userSave = function(req, res){
 	debugger
-	console.log("hit it")
+	if (req.session.dailyMatch < req.session.UserId){
+		models.Matched.update({
+			user1Vote:req.body.data
+			},
+			{where:{user1:req.session.dailyMatch, user2:req.session.UserId}
+		}).then(function(data, option){
+			debugger
+
+		})
 	}
+	else {
+		models.Matched.update({
+			user2Vote:req.body.data
+			},
+			{where:{user2:req.session.dailyMatch, user1:req.session.UserId}
+		}).then(function(data, option){
+			debugger
+		})
+	}
+	console.log("hit it")
+}
 
 // when  i go to save
 
