@@ -1,6 +1,10 @@
 var models = require("../models/models.js");
-var user1;
+var Sequelize = require('sequelize');
 var matchedId;
+var user1Vote;
+var user2Vote;
+var trueArray =[];
+var falseArray =[];
 
 exports.userSave = function(req, res) {
   if (req.session.dailyMatch < req.session.UserId) {
@@ -18,10 +22,11 @@ exports.userSave = function(req, res) {
             user2: req.session.UserId
         }
       }).then(function(data) {
-      	debugger
-      	matchedId	= data.dataValues.id
+      	matchedId	= data.dataValues.id;
+      	user1Vote = data.dataValues.user1Vote;
+      	user2Vote = data.dataValues.user2Vote;
 	      if (data.dataValues.user1Vote === null) {
-	        //both haven't voted
+	        //both haven't voted 
 	        models.Matched.update({
 	          answered: req.session.UserId
 	        }, {
@@ -30,7 +35,6 @@ exports.userSave = function(req, res) {
             }
 	        })
 	      } else {
-	      	debugger
     		 //both have voted
           models.Matched.update({
             search: "None"
@@ -43,22 +47,43 @@ exports.userSave = function(req, res) {
               where: {
                 MatchedId: matchedId
               }
-            }).then(function(data) {
-            	debugger
-              if (user1.vote === user2.vote) {
 
-                  //update scores correcly
-                  // get all the votes
-                  // two array, yes and not
-	              if (user.vote == 0) {
+            }).then(function(data) {
+
+              if (user1Vote === user2Vote) {
+              	for (var i = 0; i < data.length; i++) {
+              		if(data[i].dataValues.vote === true){
+              			trueArray.push(data[i].dataValues.UserId)
+              		}
+              		else{
+              			falseArray.push(data[i].dataValues.UserId)
+              		}
+              	}
+	              if (user1Vote === true) {
+	              	debugger
+	              	models.User.update({
+	              		 score: Sequelize.literal('score +5')},
+										{where:{
+										id:{$in:trueArray}
+											}
+										}).then(function(data){
+											debugger
+											("we good?")
+										}
+
+										)
+
+
 	                  // update all with 0 +5
 	                  // update as a 1 as - 1
                 } else {
                     // update all with 1 +5
                     // update as a 0 as - 1
                 }
-            	} else {
-                // nothing has happened
+            	} 
+            	else {
+
+                // nothing has happened, they didn't agree
             	}
         		});
 	        });
