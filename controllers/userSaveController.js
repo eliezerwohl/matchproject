@@ -5,19 +5,20 @@ var matchedId;
 exports.userSave = function(req, res) {
   if (req.session.dailyMatch < req.session.UserId) {
     models.Matched.update({
-      user1Vote: req.body.data
+      user2Vote: req.body.data
     }, {
       where: {
         user1: req.session.dailyMatch,
         user2: req.session.UserId
     	}
-    }).then(function(data, option) {
+    }).then(function(data) {
       models.Matched.findOne({
         where: {
             user1: req.session.dailyMatch,
             user2: req.session.UserId
         }
       }).then(function(data) {
+      	debugger
       	matchedId	= data.dataValues.id
 	      if (data.dataValues.user1Vote === null) {
 	        //both haven't voted
@@ -29,6 +30,7 @@ exports.userSave = function(req, res) {
             }
 	        })
 	      } else {
+	      	debugger
     		 //both have voted
           models.Matched.update({
             search: "None"
@@ -42,7 +44,9 @@ exports.userSave = function(req, res) {
                 MatchedId: matchedId
               }
             }).then(function(data) {
+            	debugger
               if (user1.vote === user2.vote) {
+
                   //update scores correcly
                   // get all the votes
                   // two array, yes and not
@@ -62,8 +66,9 @@ exports.userSave = function(req, res) {
       });
     });
   } else {
+  	debugger
     models.Matched.update({
-      user2Vote: req.body.data
+      user1Vote: req.body.data
     }, {
       where: {
         user2: req.session.dailyMatch,
@@ -76,6 +81,7 @@ exports.userSave = function(req, res) {
           user1: req.session.UserId
         }
       }).then(function(data) {
+      	debugger
         matchedId	= data.dataValues.id
         if (data.dataValues.user2Vote === null) {
             //both haven't voted
@@ -83,9 +89,9 @@ exports.userSave = function(req, res) {
               answered: req.session.UserId
           }, {
               where: {
-                  id: matchedId
+                id: matchedId
               }
-          })
+          });
         } 
         else {
               //both have voted
