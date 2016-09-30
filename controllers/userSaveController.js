@@ -47,9 +47,7 @@ exports.userSave = function(req, res) {
               where: {
                 MatchedId: matchedId
               }
-
             }).then(function(data) {
-
               if (user1Vote === user2Vote) {
               	for (var i = 0; i < data.length; i++) {
               		if(data[i].dataValues.vote === true){
@@ -60,25 +58,37 @@ exports.userSave = function(req, res) {
               		}
               	}
 	              if (user1Vote === true) {
-	              	debugger
 	              	models.User.update({
-	              		 score: Sequelize.literal('score +5')},
+	              		score: Sequelize.literal('score +5')},
 										{where:{
-										id:{$in:trueArray}
+											id:{$in:trueArray}
+										}
+									}).then(function(data){
+										models.User.update({
+               		    score: Sequelize.literal('score -1')},
+											{where:{
+												id:{$in:falseArray}
 											}
 										}).then(function(data){
-											debugger
-											("we good?")
-										}
 
-										)
-
-
-	                  // update all with 0 +5
-	                  // update as a 1 as - 1
+										})
+									})
                 } else {
-                    // update all with 1 +5
-                    // update as a 0 as - 1
+                	models.User.update({
+              		 	score: Sequelize.literal('score -1')},
+										{where:{
+											id:{$in:trueArray}
+										}
+									}).then(function(data){
+										models.User.update({
+	              			score: Sequelize.literal('score +5')},
+											{where:{
+												id:{$in:falseArray}
+											}
+										}).then(function(data){
+
+										});
+									});
                 }
             	} 
             	else {
