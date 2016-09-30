@@ -25,7 +25,10 @@ if (process.env.NODE_ENV === 'production') {
   seeking:Sequelize.STRING,
   gender:Sequelize.STRING,
   lastMatch:{type:Sequelize.DATE, defaultValue: Sequelize.NOW},
-  dailyMatch:{type:Sequelize.INTEGER}
+  dailyMatch:{type:Sequelize.INTEGER},
+  //currently only doing one match per day, this help allow more matches
+  dailyMatchCount:{type:Sequelize.INTEGER, defaultValue:0},
+  score:{type:Sequelize.INTEGER, defaultValue:0}
 });
 
 var Matched = connection.define("Matched",{
