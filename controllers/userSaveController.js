@@ -8,7 +8,45 @@ exports.userSave = function(req, res){
 			{where:{user1:req.session.dailyMatch, user2:req.session.UserId}
 		}).then(function(data, option){
 			debugger
+					models.Matched.findOne({
+						where:{user1:req.session.dailyMatch, user2:req.session.UserId}
+					}).then(function(data){
+						//grab the user 2 datat here
+						//grab the id of the match here
+						var voteId
+						if (data.dataValues.user1Vote === null ){
+								models.Matched.update({
+									answered:req.session.UserId
+								},
+								{
+								where:{id:data.dataValues.id}
+								})
+						}
+						else{
+							models.Matched.update({
+									search:"None"
+								},
+								{
+								where:{id:data.dataValues.id}
+								}).then(function(data){
+									models.Vote.findAll({
+										where:{
+											id:voteId
+										}
+									}).then(function(data){
+										if (user1.vote === user.vote){
+											//update scores correcly
+										}
+										else{
+											nothing
+										}
+										//update all their scores 
+									})
+								})
 
+
+						}
+					})
 		})
 	}
 	else {
@@ -21,6 +59,14 @@ exports.userSave = function(req, res){
 		})
 	}
 	console.log("hit it")
+}
+
+
+
+if one equls null or other equals null
+	update  answered:req.session.UserId
+else{
+	update 
 }
 
 // when  i go to save
