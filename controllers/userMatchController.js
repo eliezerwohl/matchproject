@@ -45,7 +45,6 @@ exports.userMatch = function(req, res){
 			}).then(function(data){
 				res.send(data.dataValues)
 				models.User.update({
-					// don't update till user votes on match
 					lastMatch:Date.now(),
 					dailyMatch:matchId
 					},
