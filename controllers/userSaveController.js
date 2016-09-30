@@ -23,6 +23,7 @@ exports.userSave = function(req, res) {
             user2: req.session.UserId
         }
       }).then(function(data) {
+  			dailyMatchFunction(req)
       	matchedId	= data.dataValues.id;
       	user1Vote = data.dataValues.user1Vote;
       	user2Vote = data.dataValues.user2Vote;
@@ -56,7 +57,7 @@ exports.userSave = function(req, res) {
       });
     });
   } else {
-  	debugger
+
     models.Matched.update({
       user1Vote: req.body.data
     }, {
@@ -64,14 +65,17 @@ exports.userSave = function(req, res) {
         user2: req.session.dailyMatch,
         user1: req.session.UserId
       }
-    }).then(function(data, option) {
+    }).then(function(data) {
+  	  dailyMatchFunction(req)
+    	matchedId	= data.dataValues.id;
+    	user1Vote = data.dataValues.user1Vote;
+    	user2Vote = data.dataValues.user2Vote;
       models.Matched.findOne({
         where: {
           user2: req.session.dailyMatch,
           user1: req.session.UserId
         }
       }).then(function(data) {
-      	debugger
         matchedId	= data.dataValues.id
         if (data.dataValues.user2Vote === null) {
             //both haven't voted
@@ -98,6 +102,17 @@ exports.userSave = function(req, res) {
       });
     });
   }
+}
+
+function dailyMatchFunction(req) {
+  models.User.update({
+		dailyMatch:0,
+		},
+		{
+		where:{
+			id:req.session.UserId
+		}
+	});
 }
 
 function scoring (data){
