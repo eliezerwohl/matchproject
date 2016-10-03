@@ -25,6 +25,7 @@ Hello world
     return false;
   });
      socket.on('chat message', function(msg){
+     	debugger
     $('#messages').append($('<li>').text(msg));
   });
 </script>

@@ -46,6 +46,13 @@ var Matched = connection.define("Matched",{
   avg:{type: Sequelize.INTEGER, defaultValue:0}
 });
 
+
+
+var Message = connection.define("Message", {
+//connect with connected matches and user id
+  message:Sequelize.STRING,
+}); 
+
 var Vote = connection.define("Votes", {
   vote:{type:Sequelize.BOOLEAN, defaultValue:false}
 })
@@ -58,6 +65,10 @@ var Answer = connection.define('Answer', {
   a091204:Sequelize.STRING,
 });  
 
+User.hasMany(Message);
+Message.belongsTo(User);
+Matched.hasMany(Message);
+Message.belongsTo(User);
 User.hasMany(Vote);
 Vote.belongsTo(User);
 Matched.hasMany(Vote);
@@ -67,6 +78,8 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+exports.Message = Message;
+exports.Vote = Vote;
 exports.Vote = Vote;
 exports.Matched = Matched;
 exports.User=User;
