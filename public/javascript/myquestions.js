@@ -1,16 +1,12 @@
 function buttonColor(result){
-
-	 if (result === true){
-	 	debugger
- 		$("#status").addClass("btn-success").removeClass("btn-danger")
+	if (result === true){
+		$("#status").addClass("btn-success").removeClass("btn-danger")
  		.text("Live");
- 		}
- 		else{
- 			 		$("#status").addClass("btn-danger").removeClass("btn-success")
- 			 		.text("not live");
- 		}
-
-
+ 	}
+ 	else{
+ 		$("#status").addClass("btn-danger").removeClass("btn-success")
+ 		.text("not live");
+ 	}
 }
 $.ajax({url: "/currentStatus", success: function(result){
 	buttonColor(result);
