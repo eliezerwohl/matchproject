@@ -5,10 +5,14 @@ var expressHandlebars = require('express-handlebars');
 var passport = require('passport');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+
+
+
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 var PORT = process.env.PORT || 9000;
+
 app.use(express.static(__dirname + '/public'));
 app.engine('handlebars', expressHandlebars({
   defaultLayout: 'main'
@@ -22,6 +26,12 @@ app.use(passport.initialize());
 
 require('./routes')(app);
 
-app.listen(PORT, function() {
-  console.log("Listening on port %s", PORT);
+var server = app.listen(PORT, function(){
+	  console.log("Listening on port %s", PORT);
+});
+
+
+var io = require('socket.io').listen(server);
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
