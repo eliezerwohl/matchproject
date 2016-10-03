@@ -1,7 +1,8 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-var matchedId
+
 exports.saveMatch = function(req, res){
+	var matchedId
 	//lower user id will always be user 1
 	req.session.matchedArray.sort();
 	models.Matched.findOne({
@@ -53,8 +54,8 @@ exports.saveMatch = function(req, res){
 						{where:{
 							id:results.dataValues.MatchedId
 						}
-					}).then(function(data){
-						updateAvg()
+					}).then(function(){
+						updateAvg(matchedId)
 					});
 				}
 				else {
@@ -63,8 +64,8 @@ exports.saveMatch = function(req, res){
 						{where:{
 							id:results.dataValues.MatchedId
 						}
-					}).then(function(modeldata){
-						updateAvg()
+					}).then(function(){
+						updateAvg(matchedId)
 					});
 				}
 			});
@@ -73,7 +74,7 @@ exports.saveMatch = function(req, res){
 	res.send("got it");
 }
 
-function updateAvg(data){
+function updateAvg(matchedId){
 	models.Matched.findOne({
 		where:{
 			id: matchedId

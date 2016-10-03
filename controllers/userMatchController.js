@@ -1,8 +1,8 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-var findMatch = [];
-var matchId
+
 exports.userMatch = function(req, res){
+	var matchId;
 	models.User.findOne({
 		where:{
 			id:req.session.UserId
@@ -65,10 +65,9 @@ exports.userMatch = function(req, res){
 				});
 			});
 		}
-		
 		else {
 			debugger
-			//gets match for the day
+			//gets match for the day which was already calculated 
 			models.Answer.findOne({
 				where:{UserId:dailyMatch},
 				attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },

@@ -32,8 +32,8 @@ models.User.update(
 var currentStatus;
 exports.currentStatus = function(req, res){
   models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
-      res.send(data.dataValues.match)
-      currentStatus = data.dataValues.match;
+    res.send(data.dataValues.match)
+    currentStatus = data.dataValues.match;
   });
 }
 
@@ -48,8 +48,7 @@ exports.myInfo = function (req, res) {
   models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },where: {id : req.session.UserId}}).then(function(result){
     if (!result.dataValues.age){
       res.send("blank")
-    }
-    else{
+    }else{
       models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
         var obj = Object.assign(result.dataValues, data.dataValues);
         res.send(obj);

@@ -1,12 +1,12 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-var matchedId;
-var user1Vote;
-var user2Vote;
-var trueArray =[];
-var falseArray =[];
 
 exports.userSave = function(req, res) {
+	var matchedId;
+	var user1Vote;
+	var user2Vote;
+	var trueArray =[];
+	var falseArray =[];
 	res.send("saved")
   if (req.session.dailyMatch < req.session.UserId) {
     models.Matched.update({
@@ -50,14 +50,13 @@ exports.userSave = function(req, res) {
                 MatchedId: matchedId
               }
             }).then(function(data) {
-       				scoring(data)
+       				scoring(data, trueArray, falseArray,  user1Vote, user2Vote)
         		});
 	        });
         }
       });
     });
   } else {
-
     models.Matched.update({
       user1Vote: req.body.data
     }, {
@@ -96,7 +95,7 @@ exports.userSave = function(req, res) {
                 MatchedId: matchedId
             }
           }).then(function(data) {
-            scoring(data)
+            scoring(data, trueArray, falseArray, user1Vote, user2Vote)
           });
         }
       });
@@ -115,7 +114,7 @@ function dailyMatchFunction(req) {
 	});
 }
 
-function scoring (data){
+function scoring (data, trueArray, falseArray){
 	if (user1Vote === user2Vote) {
   	for (var i = 0; i < data.length; i++) {
   		if(data[i].dataValues.vote === true){
@@ -153,14 +152,8 @@ function scoring (data){
 					{where:{
 						id:{$in:falseArray}
 					}
-				}).then(function(data){
-
 				});
 			});
     }
 	} 
-	else {
-
-    // nothing has happened, they didn't agree
-	}
 }
