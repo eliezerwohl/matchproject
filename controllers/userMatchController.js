@@ -13,7 +13,6 @@ exports.userMatch = function(req, res){
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
 		var dailyMatch = data.dataValues.dailyMatch;
-
 		if  (createdAt === today){
 		res.send("today")
 		//account was created today
@@ -66,7 +65,6 @@ exports.userMatch = function(req, res){
 			});
 		}
 		else {
-			debugger
 			//gets match for the day which was already calculated 
 			models.Answer.findOne({
 				where:{UserId:dailyMatch},

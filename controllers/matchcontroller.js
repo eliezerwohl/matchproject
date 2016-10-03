@@ -32,7 +32,7 @@ models.User.update(
 var currentStatus;
 exports.currentStatus = function(req, res){
   models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
-    res.send(data.dataValues.match)
+    res.send(data.dataValues.match);
     currentStatus = data.dataValues.match;
   });
 }
