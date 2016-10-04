@@ -1,4 +1,5 @@
 var home = require("../controllers/homeController");
+var chat = require("../controllers/chatController");
 var match = require("../controllers/matchController");
 var save = require("../controllers/saveController");
 var userSave = require("../controllers/userSaveController");
@@ -11,7 +12,11 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var session = require('express-session');
-module.exports = function(app) {
+var io;
+
+module.exports = function(app, ioInstance) {
+
+
 	app.use(require('express-session')({
   secret: "dexterslab",
   resave: true,
@@ -58,6 +63,20 @@ passport.use('local', new LocalStrategy({
         }
       });
   }));
+
+  io = ioInstance
+   io.on('connection', function(socket){
+  console.log('a user connected');
+    socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+   socket.on('chat message', function(msg){
+    debugger
+    console.log(req.session.UserId)
+    chat.save(msg)
+    io.emit('chat message', msg);
+  });
+ });
 	app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loggedin?msg=Login successful.',
