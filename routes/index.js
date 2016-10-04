@@ -11,21 +11,18 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
-var session = require('express-session');
-var io;
+
+var sharedsession = require("express-socket.io-session");
 
 module.exports = function(app, ioInstance) {
-
-
-	app.use(require('express-session')({
-  secret: "dexterslab",
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,
-    maxAge: (1000 * 60 * 60 * 24 * 30)
-  },
-}));
+var io = ioInstance;
+var sock;
+var session = require("express-session")({
+    secret: "my-secret",
+    resave: true,
+    saveUninitialized: true
+});
+app.use(session); 
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(function(user, done) {
@@ -63,17 +60,19 @@ passport.use('local', new LocalStrategy({
         }
       });
   }));
-
-  io = ioInstance
+  io.use(sharedsession(session, {
+    autoSave:true
+  })); 
    io.on('connection', function(socket){
+    sock = socket
+
   console.log('a user connected');
     socket.on('disconnect', function(){
     console.log('user disconnected');
   });
    socket.on('chat message', function(msg){
     debugger
-    console.log(req.session.UserId)
-    chat.save(msg)
+    chat.save(msg, sock)
     io.emit('chat message', msg);
   });
  });
