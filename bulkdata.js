@@ -32,7 +32,7 @@ models.Answer.bulkCreate([
 ])
 
   models.Matched.bulkCreate([
-    {id:1, user1:2, user2:4, yes:1,  no:1, search:"OK", answered:0, avg:50, createdAt:"2016-09-27 00:35:04", updatedAt:"2016-09-27 00:35:04"}
+    {id:1, chat:0, user1:2, user2:4, yes:1,  no:1, search:"OK", answered:0, avg:50, createdAt:"2016-09-27 00:35:04", updatedAt:"2016-09-27 00:35:04"}
     ])
 
   models.Vote.bulkCreate([
