@@ -35,19 +35,19 @@ exports.findChat =function(req, res){
 	});
 }
 
-
 exports.chatHistory = function(req, res){
 	models.Message.findAll({
+		//go back and limit the returned data
 		where:{
 			MatchedId:req.session.chatId
 		}
 	}).then(function(data){
+		//put a function here than take the id and turn it into either "me" or "them" 
 		res.send(data)
 	})
 }
 exports.chatId = function(req, res){
 	req.session.chatId = req.session.matchData[req.body.data].id;
-	debugger
 	res.send("done");
 }
 

@@ -11,30 +11,29 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
-
 var sharedsession = require("express-socket.io-session");
 
 module.exports = function(app, ioInstance) {
-var io = ioInstance;
-var sock;
-var session = require("express-session")({
-    secret: "my-secret",
-    resave: true,
-    saveUninitialized: true
-});
-app.use(session); 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-  done(null, {
-    id: id,
-    username: id
-  })
-});
-passport.use('local', new LocalStrategy({
+  var io = ioInstance;
+  var sock;
+  var session = require("express-session")({
+      secret: "my-secret",
+      resave: true,
+      saveUninitialized: true
+  });
+  app.use(session); 
+  app.use(passport.initialize());
+  app.use(passport.session());
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  passport.deserializeUser(function(id, done) {
+    done(null, {
+      id: id,
+      username: id
+    })
+  });
+  passport.use('local', new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'email',
     passwordField: "password"
@@ -42,44 +41,40 @@ passport.use('local', new LocalStrategy({
   function(req, email, password, done) {
     models.User.findOne({
         where: {email: email}
-      })
-      .then(function(user) {
-        if (user) {
-          bcrypt.compare(password, user.dataValues.password, function(err, user) {
-            if (user) {
-              done(null, {
-                id: email,
-                username: email
-              });
-            } else {
-              done(null, null);
-            }
-          });
-        } else {
-          done(null, null);
-        }
-      });
+    }).then(function(user) {
+      if (user) {
+         bcrypt.compare(password, user.dataValues.password, function(err, user) {
+          if (user) {
+            done(null, {
+              id: email,
+              username: email
+            });
+          } else {
+            done(null, null);
+          }
+        });
+      } else {
+        done(null, null);
+      }
+    });
   }));
   io.use(sharedsession(session, {
     autoSave:true
   })); 
    io.on('connection', function(socket){
     sock = socket
-
-  console.log('a user connected');
+    console.log('a user connected');
     socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-    socket.on('room', function(room) {
-        debugger
-        socket.join(socket.handshake.session.chatId);
+      console.log('user disconnected');
     });
-   socket.on('chat message', function(msg){
-      debugger
-    chat.save(msg, sock)
-    io.to(socket.handshake.session.chatId).emit('chat message', msg);
+    socket.on('room', function(room) {
+      socket.join(socket.handshake.session.chatId);
+    });
+    socket.on('chat message', function(msg){
+      chat.save(msg, sock)
+      io.to(socket.handshake.session.chatId).emit('chat message', msg);
+    });
   });
- });
 	app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/loggedin?msg=Login successful.',
