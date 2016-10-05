@@ -17,15 +17,6 @@ Hello world
     </form>
 
 <script src="javascript/socket.js"></script>
-<script>
-  var socket = io();
-    $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-  });
-     socket.on('chat message', function(msg){
-     	debugger
-    $('#messages').append($('<li>').text(msg));
-  });
+<script src="javascript/chat.js">
+  
 </script>
