@@ -35,10 +35,6 @@ exports.findChat =function(req, res){
 	});
 }
 
-exports.chatroom = function(req, res){
-	debugger
-	res.send(req.session.chatId);
-}
 
 exports.chatId = function(req, res){
 	req.session.chatId = req.session.matchData[req.body.data].id;
@@ -47,6 +43,9 @@ exports.chatId = function(req, res){
 }
 
 exports.save = function(msg, socket){
-	console.log(socket.handshake.session.UserId);
-	console.log(msg);
+	models.Message.create({
+		message:msg,
+		UserId:socket.handshake.session.UserId,
+		MatchedId:socket.handshake.session.chatId
+	})
 }
