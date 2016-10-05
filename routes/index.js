@@ -70,10 +70,14 @@ passport.use('local', new LocalStrategy({
     socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+    socket.on('room', function(room) {
+        debugger
+        socket.join(socket.handshake.session.chatId);
+    });
    socket.on('chat message', function(msg){
-    debugger
+      debugger
     chat.save(msg, sock)
-    io.emit('chat message', msg);
+    io.to(socket.handshake.session.chatId).emit('chat message', msg);
   });
  });
 	app.post('/login',
@@ -118,6 +122,7 @@ passport.use('local', new LocalStrategy({
   });
   app.post("/chatId", chat.chatId)
   app.get("/findChat", chat.findChat);
+  app.get("/chatroom", chat.chatroom);
 	app.get("/", function(req,res){
 	  res.render("index");
 	});

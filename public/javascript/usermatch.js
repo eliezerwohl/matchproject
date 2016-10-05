@@ -4,7 +4,7 @@ $( document ).ready(function() {
 		var data =(this).value;
 		
 	$.ajax({url: "/userSave", type:"POST", data:{data:data}, success: function(result){
-			alert(results)
+
 		}});
 	})	
 	$.ajax({url: "/userMatch", success: function(result){

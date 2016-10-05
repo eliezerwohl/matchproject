@@ -12,6 +12,7 @@ exports.findChat =function(req, res){
 			}
 		}
 	}).then(function(data){
+		req.session.matchData = data
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
 				chatIds.push(data[i].dataValues.user2);
@@ -34,12 +35,14 @@ exports.findChat =function(req, res){
 	});
 }
 
-chat.chatroom = function(req, res){
-	
+exports.chatroom = function(req, res){
+	debugger
+	res.send(req.session.chatId);
 }
 
 exports.chatId = function(req, res){
-	req.session.chatId = req.session.chatArray[req.body.data];
+	req.session.chatId = req.session.matchData[req.body.data].id;
+	debugger
 	res.send("done");
 }
 
