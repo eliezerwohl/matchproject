@@ -121,6 +121,7 @@ passport.use('local', new LocalStrategy({
     res.render("chatHome")
   });
   app.post("/chatId", chat.chatId)
+  app.get("/chatHistory", chat.chatHistory)
   app.get("/findChat", chat.findChat);
 	app.get("/", function(req,res){
 	  res.render("index");
