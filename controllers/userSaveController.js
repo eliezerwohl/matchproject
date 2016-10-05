@@ -42,8 +42,7 @@ exports.userSave = function(req, res) {
               MatchedId: matchedId
             }
           }).then(function(data) {
-          	debugger
-     				scoring(data, user1Vote, user2Vote, matchedId);
+     				scoring(data, matchedId, user1Vote, user2Vote);
       		});
         }
       });
@@ -85,8 +84,7 @@ exports.userSave = function(req, res) {
               MatchedId: matchedId
             }
           }).then(function(data){
-          	debugger
-          	scoring(data, user1Vote, user2Vote, matchedId);
+          	scoring(data, matchedId, user1Vote, user2Vote);
           });
         }
       });
@@ -106,6 +104,7 @@ function dailyMatchFunction(req) {
 }
 
 function scoring (data, matchedId, user1Vote, user2Vote){
+	debugger
 	var trueArray = [];
 	var falseArray = [];
 	if (user1Vote == user2Vote) {
@@ -118,6 +117,7 @@ function scoring (data, matchedId, user1Vote, user2Vote){
   		}
   	}
     if (user1Vote == true) {
+    	debugger
     	models.Matched.update({
     		chat:true,
     		search:"none"
