@@ -1,17 +1,12 @@
 $( document ).ready(function() {
   var socket = io();
 	$.ajax({url: "/chatHistory", success: function(result){
-     for (var i = 0; i < result.length; i++) {
-      debugger
-       $('#messages').append($('<li>').text(result[i].message));
-
-       }
-    
-      }}).then(function(){
-         debugger
-         socket.emit('room', "data");
-      })
-
+    for (var i = 0; i < result.length; i++) {
+      $('#messages').append($('<li>').text(result[i].message));
+    }
+  }}).then(function(){
+    socket.emit('room', "data");
+  });
 
   $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
@@ -20,7 +15,7 @@ $( document ).ready(function() {
   });
 
   socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
+    $('#messages').append($('<li>').text(msg));
   });
+});
 
