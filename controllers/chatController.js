@@ -14,7 +14,7 @@ exports.findChat =function(req, res){
 	}).then(function(data){
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
-				chatIds.push(data[i].dataValues.user2)
+				chatIds.push(data[i].dataValues.user2);
 			}
 			else{chatIds.push(data[i].dataValues.user1)}
 		}
@@ -27,14 +27,23 @@ exports.findChat =function(req, res){
 			//knowing the other users id
 			req.session.chatArray = [];
 			for (var i = 0; i < data.length; i++) {
-				thisArray.push({arrayId:i, firstname:data[i].dataValues.firstname})
+				req.session.chatArray.push({arrayId:i, firstname:data[i].dataValues.firstname});
 			}
-			res.send(req.session.chatArray)
+			res.send(req.session.chatArray);
 		});
 	});
 }
 
+chat.chatroom = function(req, res){
+	
+}
+
+exports.chatId = function(req, res){
+	req.session.chatId = req.session.chatArray[req.body.data];
+	res.send("done");
+}
+
 exports.save = function(msg, socket){
-	console.log(socket.handshake.session.UserId)
-	console.log(msg)
+	console.log(socket.handshake.session.UserId);
+	console.log(msg);
 }
