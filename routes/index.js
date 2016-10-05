@@ -113,6 +113,10 @@ passport.use('local', new LocalStrategy({
   app.get("/chat", function(req,res){
     res.render("chat");
   });
+  app.get("/chatHome", function(req, res){
+    res.render("chatHome")
+  });
+  app.get("/findChat", chat.findChat);
 	app.get("/", function(req,res){
 	  res.render("index");
 	});
