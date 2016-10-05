@@ -36,6 +36,15 @@ exports.findChat =function(req, res){
 }
 
 
+exports.chatHistory = function(req, res){
+	models.Message.findAll({
+		where:{
+			MatchedId:req.session.chatId
+		}
+	}).then(function(data){
+		res.send(data)
+	})
+}
 exports.chatId = function(req, res){
 	req.session.chatId = req.session.matchData[req.body.data].id;
 	debugger
