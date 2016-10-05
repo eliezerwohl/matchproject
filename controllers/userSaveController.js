@@ -5,9 +5,8 @@ exports.userSave = function(req, res) {
 	var matchedId;
 	var user1Vote;
 	var user2Vote;
-	var trueArray =[];
-	var falseArray =[];
 	res.send("saved")
+	debugger
   if (req.session.dailyMatch < req.session.UserId) {
     models.Matched.update({
       user2Vote: req.body.data
@@ -38,21 +37,14 @@ exports.userSave = function(req, res) {
 	        })
 	      } else {
     		 //both have voted
-          models.Matched.update({
-            search: "None"
-          }, {
+          models.Vote.findAll({
             where: {
-                id: matchedId
+              MatchedId: matchedId
             }
           }).then(function(data) {
-            models.Vote.findAll({
-              where: {
-                MatchedId: matchedId
-              }
-            }).then(function(data) {
-       				scoring(data, trueArray, falseArray,  user1Vote, user2Vote)
-        		});
-	        });
+          	debugger
+     				scoring(data, user1Vote, user2Vote, matchedId);
+      		});
         }
       });
     });
@@ -87,15 +79,14 @@ exports.userSave = function(req, res) {
           });
         } 
         else {
-              //both have voted
-          models.Matched.update({
-            search: "None"
-          }, {
+            //both have voted
+           	models.Vote.findAll({
             where: {
-                MatchedId: matchedId
+              MatchedId: matchedId
             }
-          }).then(function(data) {
-            scoring(data, trueArray, falseArray, user1Vote, user2Vote)
+          }).then(function(data){
+          	debugger
+          	scoring(data, user1Vote, user2Vote, matchedId);
           });
         }
       });
@@ -114,8 +105,10 @@ function dailyMatchFunction(req) {
 	});
 }
 
-function scoring (data, trueArray, falseArray){
-	if (user1Vote === user2Vote) {
+function scoring (data, matchedId, user1Vote, user2Vote){
+	var trueArray = [];
+	var falseArray = [];
+	if (user1Vote == user2Vote) {
   	for (var i = 0; i < data.length; i++) {
   		if(data[i].dataValues.vote === true){
   			trueArray.push(data[i].dataValues.UserId)
@@ -124,36 +117,48 @@ function scoring (data, trueArray, falseArray){
   			falseArray.push(data[i].dataValues.UserId)
   		}
   	}
-    if (user1Vote === true) {
-    	models.User.update({
-    		score: Sequelize.literal('score +5')},
-				{where:{
-					id:{$in:trueArray}
-				}
-			}).then(function(data){
-				models.User.update({
-   		    score: Sequelize.literal('score -1')},
+    if (user1Vote == true) {
+    	models.Matched.update({
+    		chat:true,
+    		search:"none"
+    	},{
+    		where:{id:matchedId}
+    	}).then(function(data){
+    		models.User.update({
+	    		score: Sequelize.literal('score +5')},
 					{where:{
-						id:{$in:falseArray}
+						id:{$in:trueArray}
 					}
 				}).then(function(data){
-
-				})
-			})
-    } else {
-    	models.User.update({
-  		 	score: Sequelize.literal('score -1')},
-				{where:{
-					id:{$in:trueArray}
-				}
-			}).then(function(data){
-				models.User.update({
-    			score: Sequelize.literal('score +5')},
-					{where:{
-						id:{$in:falseArray}
-					}
+					models.User.update({
+	   		    score: Sequelize.literal('score -1')},
+						{where:{
+							id:{$in:falseArray}
+						}
+					});
 				});
-			});
+    	});
+    } else {
+    	models.Matched.update({
+    		search:"none"
+    	},{
+    		where:{id:matchedId}
+    	}).then(function(data){
+    		models.User.update({
+	  		 	score: Sequelize.literal('score -1')},
+					{where:{
+						id:{$in:trueArray}
+					}
+				}).then(function(data){
+					models.User.update({
+	    			score: Sequelize.literal('score +5')},
+						{where:{
+							id:{$in:falseArray}
+						}
+					});
+				});
+    	});
     }
 	} 
 }
+
