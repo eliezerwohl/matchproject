@@ -1,5 +1,6 @@
 var session = require('express-session');
 var models = require("../models/models.js");
+var Sequelize = require('sequelize');
 
 exports.findChat =function(req, res){
 	chatIds = [];
@@ -40,15 +41,44 @@ exports.chatHistory = function(req, res){
 		//go back and limit the returned data
 		where:{
 			MatchedId:req.session.chatId
-		}
+		},
+		attributes: { include: ['message', 'UserId'] },
 	}).then(function(data){
+		dataArray = [];
+		for (var i = 0; i < data.length; i++) {
+			if (data[i].dataValues.UserId == req.session.UserId){
+				dataArray.push({user:"user", message:data[i].dataValues.message})
+			}
+			else {
+				dataArray.push({user:"other", message:data[i].dataValues.message})
+			}
+		}
 		//put a function here than take the id and turn it into either "me" or "them" 
-		res.send(data)
+		res.send(dataArray)
 	})
 }
+
+exports.chatName = function(req, res){
+	debugger
+	req.session.test
+}
 exports.chatId = function(req, res){
+	req.session.test
 	req.session.chatId = req.session.matchData[req.body.data].id;
 	res.send("done");
+	if (req.session.matchData[req.body.data].user1 == req.session.UserId){
+	req.session.otherId = req.session.matchData[req.body.data].user2
+	}
+	else{
+		req.session.otherId = req.session.matchData[req.body.data].user1
+	}
+	models.User.findOne({
+		where:{id:req.session.otherId}
+	}).then(function(data){
+		debugger
+		req.session.test = data;
+	})
+
 }
 
 exports.save = function(msg, socket){
