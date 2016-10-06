@@ -37,6 +37,7 @@ exports.findChat =function(req, res){
 }
 
 exports.chatHistory = function(req, res){
+	debugger
 	models.Message.findAll({
 		//go back and limit the returned data
 		where:{

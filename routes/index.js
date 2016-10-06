@@ -68,11 +68,13 @@ module.exports = function(app, ioInstance) {
       console.log('user disconnected');
     });
     socket.on('room', function(room) {
+      io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
     });
     socket.on('chat message', function(msg){
       chat.save(msg, sock)
-      io.to(socket.handshake.session.chatId).emit('chat message', msg);
+      var message = {msg:msg, id:socket.id.substring(2, 15)}
+      io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
   });
 	app.post('/login',
