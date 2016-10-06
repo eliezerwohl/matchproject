@@ -10,3 +10,7 @@
 	overflow-y:scroll;
 	height: 100px;
 }
+
+#login button {
+	margin-top: 30px;
+}
