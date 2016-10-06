@@ -3,7 +3,7 @@ var chat = require("../controllers/chatController");
 var match = require("../controllers/matchController");
 var save = require("../controllers/saveController");
 var userSave = require("../controllers/userSaveController");
-var maker = require("../controllers/makerController");
+var make = require("../controllers/makeConnectionController");
 var userMatch = require("../controllers/userMatchController");
 var express = require('express');
 var app = express();
@@ -92,13 +92,16 @@ module.exports = function(app, ioInstance) {
 	app.get("/myQuestions", function(req, res){
 		res.render("myQuestions");
 	});
-  app.get("/nextMatch", maker.nextMatch);
-  app.get("/getMatch", maker.getMatch);
-  app.get("/makerhome", function(req, res){
-    res.render("makerhome");
+  app.get("/nextMatch", make.nextMatch);
+  app.get("/getMatch", make.getMatch);
+  app.get("/makeConnection", function(req, res){
+    res.render("makeConnection");
   });
+  app.get("/nextMatch", make.nextMatch);
+  app.get("/nextPrime", make.nextPrime);
+  app.get("/findPrime", make.findPrime);
   app.get("/currentStatus", match.currentStatus);
-  app.get("/nextMatch", maker.nextMatch);
+
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })
@@ -108,9 +111,7 @@ module.exports = function(app, ioInstance) {
   })
   app.get("/userMatch", userMatch.userMatch)
   app.post("/saveMatch", save.saveMatch);
-  app.get("/nextPrime", maker.nextPrime);
   app.post("/myQuestions", match.myQuestions);
-  app.get("/findPrime", maker.findPrime);
   app.get("/chat", function(req,res){
     res.render("chat");
   });
