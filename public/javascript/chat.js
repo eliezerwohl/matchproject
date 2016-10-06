@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+
   var id
   var socket = io();
 	$.ajax({url: "/chatName", success: function(result){
@@ -9,6 +10,7 @@ $( document ).ready(function() {
       $('#messages').append($('<li>').text(result[i].message).addClass(result[i].user));
     }
     }}).then(function(){
+        $('.chatBox').scrollTop($('.chatBox')[0].scrollHeight);
     socket.emit('room', "data");
   })
   });
@@ -26,6 +28,7 @@ $( document ).ready(function() {
     else {
        $('#messages').append($('<li>').text(msg.msg).addClass("other"));
     }
+     $('.chatBox').scrollTop($('.chatBox')[0].scrollHeight);
   });
   socket.on('message', function(msg){
     id = msg
