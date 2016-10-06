@@ -5,3 +5,8 @@
 .other {
 	color:blue;
 }
+
+.chatBox {
+	overflow-y:scroll;
+	height: 100px;
+}
