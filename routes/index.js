@@ -82,9 +82,14 @@ module.exports = function(app, ioInstance) {
     successRedirect: '/loggedin?msg=Login successful.',
     failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
   }));
+
+  app.get("/back", function(req, res){
+    debugger
+    var location = window.location.href ;
+  })
 	app.get("/loggedin", home.loggedin);
 	app.get("/signUp", function(req,res){
-	  res.render("signUp");
+	  res.render("signUp", {layout:"mainFront"});
 	});
     app.get("/updateStatus", match.updateStatus);
   app.get("/myInfo", match.myInfo);
@@ -123,6 +128,6 @@ module.exports = function(app, ioInstance) {
   app.get("/chatHistory", chat.chatHistory)
   app.get("/findChat", chat.findChat);
 	app.get("/", function(req,res){
-	  res.render("index");
+	  res.render("index", {layout: "mainFront"});
 	});
 }
