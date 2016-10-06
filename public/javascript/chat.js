@@ -1,12 +1,14 @@
 $( document ).ready(function() {
   var socket = io();
 	$.ajax({url: "/chatName", success: function(result){
+    $("#name").append(result.firstname + " " + result.lastname)
+
     
 
   }}).then(function(){
     $.ajax({url: "/chatHistory", success: function(result){
     for (var i = 0; i < result.length; i++) {
-      $('#messages').append($('<li class = ' + result[i].user +'>').text(result[i].message));
+      $('#messages').append($('<li>').text(result[i].message).addClass(result[i].user));
     }
     }}).then(function(){
     socket.emit('room', "data");

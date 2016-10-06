@@ -29,7 +29,7 @@ exports.findChat =function(req, res){
 			//knowing the other users id
 			req.session.chatArray = [];
 			for (var i = 0; i < data.length; i++) {
-				req.session.chatArray.push({arrayId:i, firstname:data[i].dataValues.firstname});
+				req.session.chatArray.push({arrayId:i, lastname:data[i].dataValues.lastname, firstname:data[i].dataValues.firstname});
 			}
 			res.send(req.session.chatArray);
 		});
@@ -53,34 +53,17 @@ exports.chatHistory = function(req, res){
 				dataArray.push({user:"other", message:data[i].dataValues.message})
 			}
 		}
-		//put a function here than take the id and turn it into either "me" or "them" 
 		res.send(dataArray)
 	})
 }
 
 exports.chatName = function(req, res){
-	var otherId;
-
-	if (req.session.match.user1 == req.session.UserId){
-		otherId = req.session.match.user2
-	}
-	else{
-		otherId = req.session.match.user1
-	}
-	models.User.findOne({
-		where:{id:otherId},
-		//limit to first and last name
-		attributes: { include: ['firstname', 'lastname'] },
-	}).then(function(data){
-		debugger
-		res.send(data)
-	})
+		res.send(req.session.match)
 }
 exports.chatId = function(req, res){
 	req.session.chatId = req.session.matchData[req.body.data].id;
-	req.session.match = req.session.matchData[req.body.data]
+	req.session.match = req.session.chatArray[req.body.data]
 	res.send("done");
-
 }
 
 exports.save = function(msg, socket){
@@ -88,5 +71,5 @@ exports.save = function(msg, socket){
 		message:msg,
 		UserId:socket.handshake.session.UserId,
 		MatchedId:socket.handshake.session.chatId
-	})
+	});
 }
