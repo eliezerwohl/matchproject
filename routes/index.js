@@ -115,6 +115,7 @@ module.exports = function(app, ioInstance) {
   app.get("/chatHome", function(req, res){
     res.render("chatHome")
   });
+  app.get("/chatName", chat.chatName);
   app.post("/chatId", chat.chatId)
   app.get("/chatHistory", chat.chatHistory)
   app.get("/findChat", chat.findChat);
