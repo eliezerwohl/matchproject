@@ -59,25 +59,27 @@ exports.chatHistory = function(req, res){
 }
 
 exports.chatName = function(req, res){
-	debugger
-	req.session.test
-}
-exports.chatId = function(req, res){
-	req.session.test
-	req.session.chatId = req.session.matchData[req.body.data].id;
-	res.send("done");
-	if (req.session.matchData[req.body.data].user1 == req.session.UserId){
-	req.session.otherId = req.session.matchData[req.body.data].user2
+	var otherId;
+
+	if (req.session.match.user1 == req.session.UserId){
+		otherId = req.session.match.user2
 	}
 	else{
-		req.session.otherId = req.session.matchData[req.body.data].user1
+		otherId = req.session.match.user1
 	}
 	models.User.findOne({
-		where:{id:req.session.otherId}
+		where:{id:otherId},
+		//limit to first and last name
+		attributes: { include: ['firstname', 'lastname'] },
 	}).then(function(data){
 		debugger
-		req.session.test = data;
+		res.send(data)
 	})
+}
+exports.chatId = function(req, res){
+	req.session.chatId = req.session.matchData[req.body.data].id;
+	req.session.match = req.session.matchData[req.body.data]
+	res.send("done");
 
 }
 
