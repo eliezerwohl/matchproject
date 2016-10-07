@@ -1,6 +1,6 @@
 var home = require("../controllers/homeController");
 var chat = require("../controllers/chatController");
-var match = require("../controllers/matchController");
+var myProfile = require("../controllers/myProfileController");
 var save = require("../controllers/saveController");
 var userSave = require("../controllers/userSaveController");
 var make = require("../controllers/makeConnectionController");
@@ -95,11 +95,13 @@ module.exports = function(app, ioInstance) {
 	app.get("/signUp", function(req,res){
 	  res.render("signUp", {layout:"mainFront"});
 	});
-    app.get("/updateStatus", match.updateStatus);
-  app.get("/myInfo", match.myInfo);
+  app.get("/updateStatus", myProfile.updateStatus);
+  app.get("/myInfo", myProfile.myInfo);
+  app.get("/currentStatus", myProfile.currentStatus);
+  app.post("/myQuestions", myProfile.myQuestions);
 	app.post("/signUp", home.signUp);
-	app.get("/myQuestions", function(req, res){
-		res.render("myQuestions");
+	app.get("/myProfile", function(req, res){
+		res.render("myProfile");
 	});
   app.get("/nextMatch", make.nextMatch);
   app.get("/getMatch", make.getMatch);
@@ -109,7 +111,7 @@ module.exports = function(app, ioInstance) {
   app.get("/nextMatch", make.nextMatch);
   app.get("/nextPrime", make.nextPrime);
   app.get("/findPrime", make.findPrime);
-  app.get("/currentStatus", match.currentStatus);
+
 
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
@@ -120,7 +122,6 @@ module.exports = function(app, ioInstance) {
   })
   app.get("/userMatch", userMatch.userMatch)
   app.post("/saveMatch", save.saveMatch);
-  app.post("/myQuestions", match.myQuestions);
   app.get("/chat", function(req,res){
     res.render("chat");
   });
