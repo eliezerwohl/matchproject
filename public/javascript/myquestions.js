@@ -1,23 +1,3 @@
-function buttonColor(result){
-	if (result === true){
-		$("#status").addClass("btn-success").removeClass("btn-danger")
- 		.text("Live");
- 	}
- 	else{
- 		$("#status").addClass("btn-danger").removeClass("btn-success")
- 		.text("not live");
- 	}
-}
-$.ajax({url: "/currentStatus", success: function(result){
-	buttonColor(result);
-}})
-
-$("#status").on("click", function(){
-	$.ajax({url: "/updateStatus", success: function(result){
-		buttonColor(result);
-	}})
-})
-
 $.ajax({url: "/myInfo", success: function(result){
 
 	if (result === "blank"){
