@@ -95,9 +95,10 @@ module.exports = function(app, ioInstance) {
 	  res.render("signUp", {layout:"mainFront"});
 	});
   app.get("/updateStatus", myProfile.updateStatus);
-  app.get("/myInfo", myProfile.myInfo);
+  app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.get("/currentStatus", myProfile.currentStatus);
   app.post("/myQuestions", myProfile.myQuestions);
+  app.get("/myInfo", myProfile.myInfo);
 	app.post("/signUp", home.signUp);
 	app.get("/myProfile", function(req, res){
 		res.render("myProfile");
