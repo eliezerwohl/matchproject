@@ -87,7 +87,6 @@ module.exports = function(app, ioInstance) {
     res.render("settings")
   })
   app.get("/logout", function(req, res){
-    debugger
     req.session.destroy()
     res.redirect("/")
   });

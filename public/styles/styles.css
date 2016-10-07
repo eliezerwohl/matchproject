@@ -18,3 +18,11 @@
 #home button, #myProfile button {
 	margin-bottom: 20px;
 }
+
+.test {
+	z-index: 6
+}
+
+#myProfile {
+	z-index: 4
+}
