@@ -19,10 +19,6 @@
 	margin-bottom: 20px;
 }
 
-.test {
-	z-index: 6
-}
-
-#myProfile {
-	z-index: 4
+.error {
+	border: 2px red solid;
 }
