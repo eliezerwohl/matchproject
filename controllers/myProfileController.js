@@ -24,7 +24,7 @@ models.User.update(
       where: { UserId : req.session.UserId }
     })
     .then(function (result) { 
-        res.send("good");
+        res.redirect("/myProfile")
     });
   });
 }
