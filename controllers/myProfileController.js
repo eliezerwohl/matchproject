@@ -1,19 +1,27 @@
 var models = require("../models/models.js");
-exports.myQuestions = function(req, res){
-var userId = req.user.id;
-models.User.update(
+exports.myInfoUpdate = function(req, res){
+  debugger
+  models.User.update(
   {
     city: req.body.city,
-  	upper:req.body.upper,
-  	lower:req.body.lower,
-  	seeking:req.body.seeking,
-  	gender:req.body.gender,
+    upper:req.body.upper,
+    lower:req.body.lower,
+    seeking:req.body.seeking,
+    gender:req.body.gender,
     age:req.body.age,
   },
   {where: { id : req.session.UserId }
+  }).then(function(results){
+    debugger
+
+    res.send("myInfo")
   })
-  .then(function (result) { 
-      models.Answer.update(
+
+
+}
+exports.myQuestions = function(req, res){
+  debugger
+  models.Answer.update(
       {
       a091201: req.body.a091201,
       a091202:req.body.a091202,
@@ -24,9 +32,9 @@ models.User.update(
       where: { UserId : req.session.UserId }
     })
     .then(function (result) { 
-        res.redirect("/myProfile")
+      debugger
+        res.send("/myQuestions")
     });
-  });
 }
 
 var currentStatus;
