@@ -84,9 +84,13 @@ module.exports = function(app, ioInstance) {
   }));
 
   app.get("/back", function(req, res){
-    debugger
     var location = window.location.href ;
   })
+  app.get("/logout", function(req, res){
+    debugger
+    req.session.destroy()
+    res.redirect("/")
+  });
 	app.get("/loggedin", home.loggedin);
 	app.get("/signUp", function(req,res){
 	  res.render("signUp", {layout:"mainFront"});
