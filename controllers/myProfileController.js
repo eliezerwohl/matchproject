@@ -38,7 +38,7 @@ exports.currentStatus = function(req, res){
 }
 
 exports.updateStatus = function(req, res){
-  if (currentStatus === true){currentStatus = false}
+  if (currentStatus == true){currentStatus = false}
   else{currentStatus = true}
   models.User.update({match:currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
     res.send(currentStatus)

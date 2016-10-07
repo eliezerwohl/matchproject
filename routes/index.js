@@ -83,8 +83,8 @@ module.exports = function(app, ioInstance) {
     failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
   }));
 
-  app.get("/back", function(req, res){
-    var location = window.location.href ;
+  app.get("/settings", function(req, res){
+    res.render("settings")
   })
   app.get("/logout", function(req, res){
     debugger
