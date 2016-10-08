@@ -17,8 +17,7 @@ if (process.env.NODE_ENV === 'production') {
   lastname: Sequelize.STRING,
   greeting: {type:Sequelize.BOOLEAN, defaultValue:0},
   match:{
-    type:Sequelize.BOOLEAN,
-    defaultValue:0},
+    type:Sequelize.BOOLEAN},
   age:Sequelize.INTEGER,
   city: Sequelize.STRING,
   upper:Sequelize.INTEGER,

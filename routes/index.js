@@ -103,7 +103,7 @@ module.exports = function(app, ioInstance) {
     res.render("myInfo");
   });
   app.post("/myInfoUpdate", myProfile.myInfoUpdate);
-  app.post("/myQuestionUpdate", myProfile.myQuestions);
+  app.post("/myQuestionsUpdate", myProfile.myQuestions);
   app.get("/myInfoData", myProfile.myInfo);
 	app.post("/signUp", home.signUp);
 	app.get("/myProfile", function(req, res){
