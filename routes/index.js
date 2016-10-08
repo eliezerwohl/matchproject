@@ -95,10 +95,16 @@ module.exports = function(app, ioInstance) {
 	  res.render("signUp", {layout:"mainFront"});
 	});
   app.get("/updateStatus", myProfile.updateStatus);
-  app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.get("/currentStatus", myProfile.currentStatus);
-  app.post("/myQuestions", myProfile.myQuestions);
-  app.get("/myInfo", myProfile.myInfo);
+  app.get("/myQuestions", function(req, res){
+    res.render("myQuestions");
+  });
+  app.get("/myInfo", function(req, res){
+    res.render("myInfo");
+  });
+  app.post("/myInfoUpdate", myProfile.myInfoUpdate);
+  app.post("/myQuestionUpdate", myProfile.myQuestions);
+  app.get("/myInfoData", myProfile.myInfo);
 	app.post("/signUp", home.signUp);
 	app.get("/myProfile", function(req, res){
 		res.render("myProfile");
