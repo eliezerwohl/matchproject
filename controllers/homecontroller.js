@@ -33,14 +33,25 @@ exports.signUp = function(req, res){
   }
 
 exports.loggedin = function (req, res){
-   models.User.findAll({
+   models.User.findOne({
     where: [{
       email: req.user.username
     }]
   }).then(function(User) {
-    req.session.UserId = User[0].dataValues.id;
-    req.session.account  = User[0].dataValues.account;
-    res.render("home");
+    req.session.UserId = User.dataValues.id;
+    req.session.account  = User.dataValues.account;
+    req.session.greeting = User.dataValues.greeting
+
+    if (req.session.greeting == false ){
+      res.render("greeting")
+      models.User.update({
+        greeting:1
+        },{where:{id:req.session.UserId}
+      });
+    }
+    else{
+       res.render("home");
+    }
   });
 }
 

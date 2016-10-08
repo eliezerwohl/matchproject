@@ -15,6 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   password: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
+  greeting: {type:Sequelize.BOOLEAN, defaultValue:0},
   match:{
     type:Sequelize.BOOLEAN,
     defaultValue:0},
