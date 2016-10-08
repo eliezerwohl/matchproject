@@ -40,10 +40,12 @@ exports.loggedin = function (req, res){
   }).then(function(User) {
     req.session.UserId = User.dataValues.id;
     req.session.account  = User.dataValues.account;
-    req.session.greeting = User.dataValues.greeting
+    var greeting = User.dataValues.greeting
 
-    if (req.session.greeting == false ){
+    if (greeting == false ){
       res.render("greeting")
+      req.session.tempGreeting = false
+      req.session.save()
       models.User.update({
         greeting:1
         },{where:{id:req.session.UserId}
