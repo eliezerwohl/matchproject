@@ -6,10 +6,12 @@ exports.myInfoUpdate = function(req, res){
     lower:req.body.lower,
     seeking:req.body.seeking,
     gender:req.body.gender,
-    age:req.body.age,
+    age:req.body.age
   },{where: { id : req.session.UserId }
   }).then(function(results){
-    res.send("myInfo")
+
+    if (req.session.tempGreeting == false){res.send("greeting");}
+    else{res.send("myInfo");}
   });
 }
 
@@ -22,6 +24,13 @@ exports.myQuestions = function(req, res){
     },{where: { UserId : req.session.UserId }
   }).then(function (result) { 
     res.send("myQuestions")
+    if (req.session.tempGreeting == false){
+       models.User.update({
+        match:1
+        },{where:{id:req.session.UserId}
+      });
+    }
+
   });
 }
 

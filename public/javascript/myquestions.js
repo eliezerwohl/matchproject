@@ -26,11 +26,13 @@ $( document ).ready(function() {
 			if (counter == array.length ){
 				if (error.length < 1){
 					$.ajax({url: url, type:"POST", data:data, success: function(result){
-						$("#myModal").modal("hide");
-						//will auto bring up the questions if the user hasn't filled them out
-						if ($("#a091202").val() == ' '){
-							$("#myModal2").modal("show")
+						if (result == "greeting"){
+							window.location.pathname = "/myQuestions"
 						}
+						else {
+							window.location.pathname = "/myProfile"
+						}
+						
 					}});
 				}
 				else{
