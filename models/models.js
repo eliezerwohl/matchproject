@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   score:{type:Sequelize.INTEGER, defaultValue:0}
 });
 
-var Matched = connection.define("Matched",{
+var Matched = connection.define("Matched", {
   chat:{type:Sequelize.BOOLEAN, defaultValue:0},
   user1:Sequelize.INTEGER,
   user1Vote:  {type:Sequelize.BOOLEAN},

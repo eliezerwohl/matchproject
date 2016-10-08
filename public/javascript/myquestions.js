@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 	var infoArray = ["seeking", "age", "city", "gender", "upper", "lower"]
 	var questionArray = ["a091201", "a091202", "a091203", "a091204"]
-	var data;
 //on first login, modal "welcome, would you like to setup your connection profile?  It'll only take a few minutes
 //or if your just here to help connect others, click here
 
@@ -11,12 +10,12 @@ $( document ).ready(function() {
 
 	$("#myQuestions").on("click", function(){
 		myProfile(questionArray, "/myQuestionsUpdate")
-	})
+	});
 
-		function myProfile(array, url){
+	function myProfile(array, url){
 		var counter = 0
 		var error = []
-		data = {}
+		var data = {}
 		for (var i = 0; i < array.length; i++) {
 			counter++
 			data[array[i]] = $("#" + array[i]).val();
@@ -47,7 +46,7 @@ $( document ).ready(function() {
 			return false
 		}
 		else {
-		append(result, "myQuestions")
+			append(result, "myQuestions")
 		}
 	}});
 });
