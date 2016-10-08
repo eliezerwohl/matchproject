@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	})
 
 	$("#myQuestions").on("click", function(){
-		myProfile(questionArray, "/myQuestions")
+		myProfile(questionArray, "/myQuestionsUpdate")
 	})
 
 		function myProfile(array, url){
@@ -42,7 +42,7 @@ $( document ).ready(function() {
 			}
 		}
 	}
-	$.ajax({url: "/myInfo", success: function(result){
+	$.ajax({url: "/myInfoData", success: function(result){
 		if (result === "blank"){
 			return false
 		}
