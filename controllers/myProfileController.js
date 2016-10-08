@@ -1,6 +1,5 @@
 var models = require("../models/models.js");
 exports.myInfoUpdate = function(req, res){
-  debugger
   models.User.update(
   {
     city: req.body.city,
@@ -12,15 +11,12 @@ exports.myInfoUpdate = function(req, res){
   },
   {where: { id : req.session.UserId }
   }).then(function(results){
-    debugger
-
     res.send("myInfo")
   })
 
 
 }
 exports.myQuestions = function(req, res){
-  debugger
   models.Answer.update(
       {
       a091201: req.body.a091201,
@@ -30,10 +26,8 @@ exports.myQuestions = function(req, res){
     },
     {
       where: { UserId : req.session.UserId }
-    })
-    .then(function (result) { 
-      debugger
-        res.send("/myQuestions")
+    }).then(function (result) { 
+      res.send("myQuestions")
     });
 }
 

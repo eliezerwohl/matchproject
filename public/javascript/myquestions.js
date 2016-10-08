@@ -1,39 +1,47 @@
 $( document ).ready(function() {
 	var infoArray = ["seeking", "age", "city", "gender", "upper", "lower"]
+	var questionArray = ["a091201", "a091202", "a091203", "a091204"]
 	var data;
+//on first login, modal "welcome, would you like to setup your connection profile?  It'll only take a few minutes
+//or if your just here to help connect others, click here
+
 	$("#myInfo").on("click", function(){
+		myProfile(infoArray, "/myInfoUpdate")
+	})
+
+	$("#myQuestions").on("click", function(){
+		myProfile(questionArray, "/myQuestions")
+	})
+
+		function myProfile(array, url){
 		var counter = 0
 		var error = []
 		data = {}
-
-		for (var i = 0; i < infoArray.length; i++) {
+		for (var i = 0; i < array.length; i++) {
 			counter++
-			data[infoArray[i]] = $("#" + infoArray[i]).val();
+			data[array[i]] = $("#" + array[i]).val();
 			debugger
-			if (data[infoArray[i]] == null || data[infoArray[i]].length < 1 ){
+			if (data[array[i]] == null || data[array[i]].length < 1 ){
 				error.push(i);
 			}
-			if (counter == infoArray.length ){
+			if (counter == array.length ){
 				if (error.length < 1){
-					$.ajax({url: "/myInfoUpdate", type:"POST", data:data, success: function(result){
-					$("#myModal").modal("hide");
-					//will auto bring up the questions if the user hasn't filled them out
-					if ($("#a091202").val() == ' '){
-						$("#myModal2").modal("show")
-					}
-				}});
+					$.ajax({url: url, type:"POST", data:data, success: function(result){
+						$("#myModal").modal("hide");
+						//will auto bring up the questions if the user hasn't filled them out
+						if ($("#a091202").val() == ' '){
+							$("#myModal2").modal("show")
+						}
+					}});
 				}
 				else{
 					for (var i = 0; i < error.length; i++) {
-						$("#" + infoArray[error[i]]).addClass("error");
+						$("#" + array[error[i]]).addClass("error");
 					}
 				}
 			}
 		}
-
-	})
-
-
+	}
 	$.ajax({url: "/myInfo", success: function(result){
 		if (result === "blank"){
 			return false
@@ -42,21 +50,4 @@ $( document ).ready(function() {
 		append(result, "myQuestions")
 		}
 	}});
-	  // wont submit unless everything has been answered
-	$("#submit").submit(function(event){
-		var select = Array.from(document.getElementsByTagName("select"));
-		var input = Array.from(document.getElementsByTagName("input"));
-		var textareas = Array.from(document.getElementsByTagName("textarea"));
-		var allInputs = input.concat(textareas, select);
-		for (var i = 0; i < allInputs.length; i++) {
-			if (allInputs[i].value === ""){	
-				break;
-			}
-			else if(i === allInputs.length - 1) {
-				return true;
-			}
-		}
-	  event.preventDefault();
-	});
-
 });
