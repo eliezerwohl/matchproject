@@ -1,49 +1,44 @@
 var models = require("../models/models.js");
 exports.myInfoUpdate = function(req, res){
-  models.User.update(
-  {
+  models.User.update({
     city: req.body.city,
     upper:req.body.upper,
     lower:req.body.lower,
     seeking:req.body.seeking,
     gender:req.body.gender,
     age:req.body.age,
-  },
-  {where: { id : req.session.UserId }
+  },{where: { id : req.session.UserId }
   }).then(function(results){
     res.send("myInfo")
-  })
-
-
+  });
 }
+
 exports.myQuestions = function(req, res){
-  models.Answer.update(
-      {
+  models.Answer.update({
       a091201: req.body.a091201,
       a091202:req.body.a091202,
       a091203:req.body.a091203,
       a091204:req.body.a091204,
-    },
-    {
-      where: { UserId : req.session.UserId }
-    }).then(function (result) { 
-      res.send("myQuestions")
-    });
+    },{where: { UserId : req.session.UserId }
+  }).then(function (result) { 
+    res.send("myQuestions")
+  });
 }
 
-var currentStatus;
+
 exports.currentStatus = function(req, res){
   models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
-    res.send(data.dataValues.match);
-    currentStatus = data.dataValues.match;
+   res.send(data.dataValues.match);
+   req.session.currentStatus = data.dataValues.match;
+   req.session.save()
   });
 }
 
 exports.updateStatus = function(req, res){
-  if (currentStatus == true){currentStatus = false}
-  else{currentStatus = true}
-  models.User.update({match:currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
-    res.send(currentStatus)
+  if (req.session.currentStatus == true){req.session.currentStatus = false}
+  else{req.session.currentStatus = true}
+  models.User.update({match:req.session.currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
+    res.send(req.session.currentStatus)
   }); 
 }
 exports.myInfo = function (req, res) {
