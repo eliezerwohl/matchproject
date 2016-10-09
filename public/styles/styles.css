@@ -6,7 +6,7 @@
 	color:blue;
 }
 
-.chatBox {
+#chatBox {
 	overflow-y:scroll;
 	height: 100px;
 }

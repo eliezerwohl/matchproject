@@ -8,6 +8,7 @@ $( document ).ready(function() {
 		}});
 	})	
 	$.ajax({url: "/userMatch", success: function(result){
+		debugger
 	 if ( result === "today"){
 	 		alert("account was created today.  Please wait")
 		}

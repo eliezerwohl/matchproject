@@ -2,6 +2,7 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.userMatch = function(req, res){
+	debugger
 	var matchId;
 	models.User.findOne({
 		where:{
