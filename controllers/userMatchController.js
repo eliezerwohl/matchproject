@@ -2,14 +2,13 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.userMatch = function(req, res){
-	debugger
 	var matchId;
 	models.User.findOne({
 		where:{
 			id:req.session.UserId
 		}
 	}).then(function(data){
-		debugger
+
 		var lastMatch = new Date(data.dataValues.lastMatch).toDateString();
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
