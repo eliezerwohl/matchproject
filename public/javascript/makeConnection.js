@@ -1,11 +1,9 @@
 // //make this load on page load
 $( document ).ready(function() {
 	function getPrime(){
-	$(".frontDiv").show();
-	$(".toggle").hide()
-	$("#match").hide();
-		$("#primeButtons").show()
-	$("#matchButtons").hide()
+	$(".frontDiv, #primeButtons").show();
+	$(".toggle, #match, #matchButtons").hide()
+
 	$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime")
 		}});

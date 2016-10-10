@@ -1,44 +1,42 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-var resultsArray;
-var currentNumber;
-var currentPrime;	
-var noMatch;
 //need to make sure that prime's age is within what the match wants
 function dataStore(res, req, data, prime){
 	for (var i = 0; i < data.length; i++) {
-		resultsArray.push(data[i].dataValues);
+		req.session.resultsArray.push(data[i].dataValues);
 	}
 	if (prime===true){
-		currentPrime = resultsArray[0];
+		req.session.currentPrime = req.session.resultsArray[0];
 	}
 	else {
-		req.session.matchedArray = [currentPrime.id, resultsArray[0].id]
+		req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[0].id]
 	}
-	res.send(resultsArray[currentNumber].Answers[0].dataValues)
+	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0])
+	req.session.save()
 }
 
-
 function next(res, req, prime){
-	currentNumber ++;
-		if (currentNumber === resultsArray.length) {
+	req.session.currentNumber ++;
+		if (req.session.currentNumber === req.session.resultsArray.length) {
 			res.send(false);
 		}
 		else {
 			if (prime === true){
-				currentPrime = resultsArray[currentNumber];
+				req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];
 			}
 			else{
-				req.session.matchedArray = [currentPrime.id, resultsArray[currentNumber].id]
+				req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
 			}
-		res.send(resultsArray[currentNumber].Answers[0].dataValues);
+		debugger
+		res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
+		req.session.save()
 	}
 }
 
 exports.getMatch=function(req, res){
-	currentNumber=0;
-	noMatch = [req.session.UserId, currentPrime.id];
-	resultsArray=[]
+	req.session.currentNumber=0;
+	req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
+	req.session.resultsArray=[]
 	models.Vote.findAll({
 		where:{
 			UserId:req.session.UserId
@@ -54,26 +52,26 @@ exports.getMatch=function(req, res){
 		}
 		else {
 			for (var i = 0; i < data.length; i++) {
-				if (data[i].Matched.dataValues.user1 == currentPrime.id){
-					noMatch.push(data[i].Matched.dataValues.user2)
+				if (data[i].Matched.dataValues.user1 == req.session.currentPrime.id){
+					req.session.noMatch.push(data[i].Matched.dataValues.user2)
 				}
-				else if  (data[i].Matched.dataValues.user2 == currentPrime.id){
-					noMatch.push(data[i].Matched.dataValues.user1)
+				else if  (data[i].Matched.dataValues.user2 == req.session.currentPrime.id){
+					req.session.noMatch.push(data[i].Matched.dataValues.user1)
 				}
 			}
 		}
 	}).then(function(){
 		models.User.findAll({
 		where:{
-			id:{$notIn: noMatch},
+			id:{$notIn: req.session.noMatch},
 			match:1,
-			city:currentPrime.city,
+			city:req.session.currentPrime.city,
 			//gender must be seeking, seeking must be gender
-			age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
-			lower:{$lte: currentPrime.age},
-			upper:{$gte: currentPrime.age},
-			gender: currentPrime.seeking,
-			seeking:currentPrime.gender,
+			age:{ $between: [	req.session.currentPrime.lower, 	req.session.currentPrime.upper] } ,
+			lower:{$lte: req.session.currentPrime.age},
+			upper:{$gte: req.session.currentPrime.age},
+			gender: req.session.currentPrime.seeking,
+			seeking:req.session.currentPrime.gender,
 		},
 		include: [{
 	    model: models.Answer,
@@ -84,26 +82,21 @@ exports.getMatch=function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
-			if (results.length === 0){
-				res.send(false);
-			}
-			else{
-			dataStore(res, req, results, false);
-			}
+			if (results.length === 0){res.send(false);}
+			else{dataStore(res, req, results, false);}
 		});
-
 	});
 }
 
 exports.findPrime = function(req, res){
-	currentNumber=0;
-	resultsArray=[];
-	noMatch = [req.session.UserId];
+	req.session.currentNumber=0;
+	req.session.resultsArray=[];
+	req.session.noMatch = [req.session.UserId];
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
 	models.User.findAll({
 		where:{
-			id:{$notIn: noMatch},
+			id:{$notIn: req.session.noMatch},
 			match:1,
 		},
 		attributes: ['id', 'city', "upper", "lower", "age", "seeking", "gender"],
@@ -116,15 +109,15 @@ exports.findPrime = function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 	}).then(function(results){
-			dataStore(res, req, results, true)
+		dataStore(res, req, results, true)
 	});
 }
 
 exports.nextPrime = function(req, res){
-		next(res, req, true)
+	next(res, req, true)
 }
 
 exports.nextMatch = function(req, res){
-		next(res, req, false)
+	next(res, req, false)
 }
 
