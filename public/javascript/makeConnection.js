@@ -1,9 +1,7 @@
-//make this load on page load
+// //make this load on page load
 $( document ).ready(function() {
-	$('#primeModal').modal({
-  backdrop: 'static',
-  keyboard: false
-	}) 
+			$(".toggle").hide()
+
 	$("#match").hide();
 	$("#matchButtons").hide()
 	function getPrime(){
@@ -31,9 +29,10 @@ $( document ).ready(function() {
 					//to choose another connection
 				}
 				else{
-					$("#primeModal").modal("hide");
+					$(".frontDiv").hide()
 					$("#primeButtons").hide()
 					$("#matchButtons").show()
+					$(".toggle").show()
 					$("#match").show()
 					append(result, "match");
 				}
@@ -61,4 +60,11 @@ $( document ).ready(function() {
 		}});
 	});
 
+
+$(".toggle").on("click", function(){
+	$(".frontDiv").toggle()
+})
+
 });
+
+
