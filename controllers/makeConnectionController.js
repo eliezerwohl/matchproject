@@ -32,7 +32,6 @@ function next(res, req, prime){
 		req.session.save()
 	}
 }
-
 exports.getMatch=function(req, res){
 	req.session.currentNumber=0;
 	req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
