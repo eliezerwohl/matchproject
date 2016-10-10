@@ -46,7 +46,8 @@ exports.loggedin = function (req, res){
     req.session.UserId = User.dataValues.id;
     req.session.account  = User.dataValues.account;
     var greeting = User.dataValues.greeting
-
+    debugger
+    req.session.save()
 
     if (greeting == false ){
       res.render("greeting")

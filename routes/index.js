@@ -67,6 +67,20 @@ module.exports = function(app, ioInstance) {
     socket.on('disconnect', function(){
       console.log('user disconnected');
     });
+    
+    socket.on("login", function(){
+      debugger
+      setInterval(function(){
+      models.User.findOne({
+        where:{id:socket.handshake.session.UserId}
+      }).then(function(data){
+        debugger
+        io.to(socket.id).emit('score', data.dataValues.score)
+      })
+     
+    }, 10000);
+
+    })
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
