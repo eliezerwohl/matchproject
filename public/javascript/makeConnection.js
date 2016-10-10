@@ -1,12 +1,12 @@
 // //make this load on page load
 $( document ).ready(function() {
-			$(".toggle").hide()
-
-	$("#match").hide();
-	$("#matchButtons").hide()
 	function getPrime(){
-	$.ajax({url: "/findPrime", success: function(result){
-		 	$("#primeModal").modal("show");
+	$(".frontDiv").show();
+	$(".toggle").hide()
+	$("#match").hide();
+		$("#primeButtons").show()
+	$("#matchButtons").hide()
+	$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime")
 		}});
 	}
@@ -24,9 +24,12 @@ $( document ).ready(function() {
 
 	$("#getMatch").on("click", function(){
 		$.ajax({url: "/getMatch", success: function(result){
+			debugger
 				if (result === false){
-					//thre are no more matches, please click here
-					//to choose another connection
+					//you've matched everybody
+					console.log("You've matched everyone for this person");
+					$("#warningModal").modal("show")
+					getPrime()
 				}
 				else{
 					$(".frontDiv").hide()
@@ -36,35 +39,35 @@ $( document ).ready(function() {
 					$("#match").show()
 					append(result, "match");
 				}
-		}})
+		}});
 	});
 
-	$("#nextMatch").on("click", function(){
+	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
-				if (result === false){
-								//thre are no more matches, please click here
-					//to choose another connection
-					alert("no more matches match")
-				}
-				else{
-			 	append(result, "match");
-			 }
-		}})
+			if (result === false){
+				$("#warningModal").modal("show")
+				getPrime()
+			}
+			else{
+		 		append(result, "match");
+		 	}
+		}});
+	}
+
+	$("#nextMatch").on("click", function(){
+		nextMatch()
 	})
 
 	$(".save").on("click", function(){
 		var data =(this).value;
-
 		$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
-				console.log(result)
+			nextMatch()
 		}});
 	});
 
-
-$(".toggle").on("click", function(){
-	$(".frontDiv").toggle()
-})
-
+	$(".toggle").on("click", function(){
+		$(".frontDiv").toggle()
+	});
 });
 
 
