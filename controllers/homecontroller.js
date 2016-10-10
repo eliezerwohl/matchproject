@@ -31,16 +31,22 @@ exports.signUp = function(req, res){
       }
     });
   }
-
+exports.score = function(req, res){
+  //if score is 0, wont' cause an error this way
+  var data={score:req.session.score}
+  res.send(data)
+}
 exports.loggedin = function (req, res){
    models.User.findOne({
     where: [{
       email: req.user.username
     }]
   }).then(function(User) {
+    req.session.score = User.dataValues.score;
     req.session.UserId = User.dataValues.id;
     req.session.account  = User.dataValues.account;
     var greeting = User.dataValues.greeting
+
 
     if (greeting == false ){
       res.render("greeting")

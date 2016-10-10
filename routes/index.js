@@ -90,6 +90,7 @@ module.exports = function(app, ioInstance) {
     req.session.destroy()
     res.redirect("/")
   });
+  app.get("/score", home.score);
 	app.get("/loggedin", home.loggedin);
 	app.get("/signUp", function(req,res){
 	  res.render("signUp", {layout:"mainFront"});
