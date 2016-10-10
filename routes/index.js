@@ -69,13 +69,13 @@ module.exports = function(app, ioInstance) {
     });
     
     socket.on("login", function(){
-      debugger
       setInterval(function(){
       models.User.findOne({
         where:{id:socket.handshake.session.UserId}
       }).then(function(data){
         debugger
-        io.to(socket.id).emit('score', data.dataValues.score)
+        if (data.dataValues.score != socket.handshake.session.score){
+          io.to(socket.id).emit('score', data.dataValues.score)}
       })
      
     }, 10000);
