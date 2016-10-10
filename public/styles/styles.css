@@ -22,3 +22,29 @@
 .error {
 	border: 2px red solid;
 }
+
+.backDiv {
+	height: 100%;
+	background-color: white;
+	position: relative;
+	z-index: 2;
+	padding: 0px;
+	background:lightgray;
+
+}
+
+.frontDiv {
+
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-color: white;
+	z-index: 1;
+		right:0px;
+}
+
+.frontDiv .primeButtons button {
+		position: absolute;
+		z-index: 1;
+
+}
