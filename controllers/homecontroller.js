@@ -31,9 +31,9 @@ exports.signUp = function(req, res){
       }
     });
   }
-exports.score = function(req, res){
+exports.loginData = function(req, res){
   //if score is 0, wont' cause an error this way
-  var data={score:req.session.score}
+  var data={score:req.session.score, match:req.session.match}
   res.send(data)
 }
 exports.loggedin = function (req, res){
@@ -43,10 +43,10 @@ exports.loggedin = function (req, res){
     }]
   }).then(function(User) {
     req.session.score = User.dataValues.score;
+    req.session.match = User.dataValues.match;
     req.session.UserId = User.dataValues.id;
     req.session.account  = User.dataValues.account;
     var greeting = User.dataValues.greeting
-    debugger
     req.session.save()
 
     if (greeting == false ){
