@@ -31,6 +31,11 @@ if (process.env.NODE_ENV === 'production') {
   score:{type:Sequelize.INTEGER, defaultValue:0}
 });
 
+var NotifyConnect = connection.define ("NotifyConnect", {
+  //matchedid
+  //userId
+  //delete aftet done
+})
 var Matched = connection.define("Matched", {
   chat:{type:Sequelize.BOOLEAN, defaultValue:0},
   user1:Sequelize.INTEGER,
@@ -52,6 +57,7 @@ var Matched = connection.define("Matched", {
 var Message = connection.define("Message", {
 //connect with connected matches and user id
   message:Sequelize.STRING,
+  checked:{type:Sequelize.BOOLEAN, defaultValue:0}
 }); 
 
 var Vote = connection.define("Votes", {
@@ -66,6 +72,10 @@ var Answer = connection.define('Answer', {
   a091204:Sequelize.STRING,
 });  
 
+User.hasMany(NotifyConnect);
+NotifyConnect.belongsTo(User);
+Matched.hasMany(NotifyConnect);
+NotifyConnect.belongsTo(Matched);
 User.hasMany(Message);
 Message.belongsTo(User);
 Matched.hasMany(Message);
@@ -79,6 +89,7 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+exports.notifyConnect  = NotifyConnect;
 exports.Message = Message;
 exports.Vote = Vote;
 exports.Vote = Vote;
