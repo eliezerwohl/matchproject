@@ -67,8 +67,12 @@ module.exports = function(app, ioInstance) {
     socket.on('disconnect', function(){
       console.log('user disconnected');
     });
+    socket.on("notify", function(){
+      home.checkedNotify(sock, io)
+    })
     socket.on("login", function(){
       home.score(sock, io);
+      home.notifyConnect(sock, io)
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));

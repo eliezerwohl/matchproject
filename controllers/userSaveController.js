@@ -56,17 +56,24 @@ exports.userSave = function(req, res) {
         user1: req.session.UserId
       }
     }).then(function(data) {
-  	  dailyMatchFunction(req)
-    	matchedId	= data.dataValues.id;
-    	user1Vote = data.dataValues.user1Vote;
-    	user2Vote = data.dataValues.user2Vote;
+       models.Matched.findOne({
+        where: {
+          user2: req.session.dailyMatch,
+          user1: req.session.UserId
+        }
+      }).then(function(data){
+              dailyMatchFunction(req)
+      //there is an error here
+      matchedId = data.dataValues.id;
+      user1Vote = data.dataValues.user1Vote;
+      user2Vote = data.dataValues.user2Vote;
       models.Matched.findOne({
         where: {
           user2: req.session.dailyMatch,
           user1: req.session.UserId
         }
       }).then(function(data) {
-        matchedId	= data.dataValues.id
+        matchedId = data.dataValues.id
         if (data.dataValues.user2Vote === null) {
             //both haven't voted
           models.Matched.update({
@@ -79,17 +86,20 @@ exports.userSave = function(req, res) {
         } 
         else {
             //both have voted
-           	models.Vote.findAll({
+            models.Vote.findAll({
             where: {
               MatchedId: matchedId
             }
           }).then(function(data){
-            debugger
-          	scoring(data, matchedId, user1Vote, user2Vote, req);
+            scoring(data, matchedId, user1Vote, user2Vote, req);
           });
         }
       });
     });
+
+      })
+      
+
   }
 }
 
@@ -105,7 +115,6 @@ function dailyMatchFunction(req) {
 }
 
 function scoring (data, matchedId, user1Vote, user2Vote, req){
-  debugger
   models.NotifyConnect.create({
     UserId:req.session.dailyMatch,
     MatchedId:matchedId,
@@ -113,7 +122,7 @@ function scoring (data, matchedId, user1Vote, user2Vote, req){
     models.NotifyConnect.create({
     UserId:req.session.UserId,
     MatchedId:matchedId,
-    });
+    })
   })
 	var trueArray = [];
 	var falseArray = [];
@@ -171,4 +180,3 @@ function scoring (data, matchedId, user1Vote, user2Vote, req){
     }
 	} 
 }
-
