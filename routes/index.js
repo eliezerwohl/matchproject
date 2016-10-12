@@ -68,14 +68,7 @@ module.exports = function(app, ioInstance) {
       console.log('user disconnected');
     });
     socket.on("login", function(){
-      setInterval(function(){
-        models.User.findOne({
-          where:{id:socket.handshake.session.UserId}
-        }).then(function(data){
-          if (data.dataValues.score != socket.handshake.session.score){
-            io.to(socket.id).emit('score', data.dataValues.score);}
-        }); 
-      }, 10000);
+      home.score(sock, io);
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));

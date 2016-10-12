@@ -33,7 +33,7 @@ exports.signUp = function(req, res){
   }
 exports.loginData = function(req, res){
   //if score is 0, wont' cause an error this way
-  var data={score:req.session.score, match:req.session.match}
+  var data={match:req.session.match}
   res.send(data)
 }
 exports.loggedin = function (req, res){
@@ -64,3 +64,19 @@ exports.loggedin = function (req, res){
   });
 }
 
+exports.score = function(socket, io) {
+  function score() {
+    models.User.findOne({
+      where:{id:socket.handshake.session.UserId}
+    }).then(function(data){
+      if (data.dataValues.score != socket.score){
+        callback(data.dataValues.score)
+        io.to(socket.id).emit('score', data.dataValues.score);}
+    });     
+  }
+  score()
+  function callback(score){
+    socket["score"] = score
+  }
+  setInterval(score, 10000);
+}
