@@ -89,7 +89,7 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
-exports.notifyConnect  = NotifyConnect;
+exports.NotifyConnect  = NotifyConnect;
 exports.Message = Message;
 exports.Vote = Vote;
 exports.Vote = Vote;

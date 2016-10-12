@@ -6,7 +6,6 @@ exports.userSave = function(req, res) {
 	var user1Vote;
 	var user2Vote;
 	res.send("saved")
-	debugger
   if (req.session.dailyMatch < req.session.UserId) {
     models.Matched.update({
       user2Vote: req.body.data
@@ -42,7 +41,8 @@ exports.userSave = function(req, res) {
               MatchedId: matchedId
             }
           }).then(function(data) {
-     				scoring(data, matchedId, user1Vote, user2Vote);
+            debugger
+     				scoring(data, matchedId, user1Vote, user2Vote, req);
       		});
         }
       });
@@ -84,7 +84,8 @@ exports.userSave = function(req, res) {
               MatchedId: matchedId
             }
           }).then(function(data){
-          	scoring(data, matchedId, user1Vote, user2Vote);
+            debugger
+          	scoring(data, matchedId, user1Vote, user2Vote, req);
           });
         }
       });
@@ -103,8 +104,17 @@ function dailyMatchFunction(req) {
 	});
 }
 
-function scoring (data, matchedId, user1Vote, user2Vote){
-	debugger
+function scoring (data, matchedId, user1Vote, user2Vote, req){
+  debugger
+  models.NotifyConnect.create({
+    UserId:req.session.dailyMatch,
+    MatchedId:matchedId,
+  }).then(function(data){
+    models.NotifyConnect.create({
+    UserId:req.session.UserId,
+    MatchedId:matchedId,
+    });
+  })
 	var trueArray = [];
 	var falseArray = [];
 	if (user1Vote == user2Vote) {
