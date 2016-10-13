@@ -8,7 +8,6 @@ exports.userMatch = function(req, res){
 			id:req.session.UserId
 		}
 	}).then(function(data){
-
 		var lastMatch = new Date(data.dataValues.lastMatch).toDateString();
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
@@ -48,6 +47,7 @@ exports.userMatch = function(req, res){
 				//will prevent if the day changes while the user is logged in
 				//everything goes smoothly 
 				req.session.dailyMatch = matchId;
+				req.session.save()
 				models.Answer.findOne({
 					where:{
 						UserId:matchId

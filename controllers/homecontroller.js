@@ -82,16 +82,26 @@ exports.score = function(socket, io) {
 }
 
 exports.notifyConnect = function(socket, io){
+  function notify(){
   models.NotifyConnect.findAll({
     where:{
     UserId:socket.handshake.session.UserId}
   }).then(function(data){
+       if (data.length != socket.notify){
+         callback(data.length)
     io.to(socket.id).emit('notify', data.length)
+    }
   })
+
+  }
+  notify()
+   function callback(notify){
+    socket["notify"] = notify
+  }
+  setInterval(notify, 10000);
 }
 
 exports.checkedNotify = function(socket, io){
-  console.log("hell")
       models.NotifyConnect.destroy({
       where:{
         UserId:socket.handshake.session.UserId
