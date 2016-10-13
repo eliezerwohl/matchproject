@@ -63,14 +63,22 @@ exports.chatName = function(req, res){
 }
 exports.chatId = function(req, res){
 	req.session.chatId = req.session.matchData[req.body.data].id;
+	if (req.session.matchData[req.body.data].user1 === req.session.UserId){
+		req.session.otherChat = req.session.matchData[req.body.data].user2
+	}
+	else{
+		req.session.otherChat = req.session.matchData[req.body.data].user1
+	}
 	req.session.match = req.session.chatArray[req.body.data]
 	res.send("done");
 }
 
 exports.save = function(msg, socket){
+	debugger
 	models.Message.create({
 		message:msg,
 		UserId:socket.handshake.session.UserId,
-		MatchedId:socket.handshake.session.chatId
+		MatchedId:socket.handshake.session.chatId,
+		recive:socket.handshake.session.otherChat,
 	});
 }

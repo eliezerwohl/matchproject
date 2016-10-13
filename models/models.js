@@ -57,7 +57,8 @@ var Matched = connection.define("Matched", {
 var Message = connection.define("Message", {
 //connect with connected matches and user id
   message:Sequelize.STRING,
-  checked:{type:Sequelize.BOOLEAN, defaultValue:0}
+  checked:{type:Sequelize.BOOLEAN, defaultValue:0},
+  reciveId: Sequelize.INTEGER,
 }); 
 
 var Vote = connection.define("Votes", {
