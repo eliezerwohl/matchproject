@@ -78,7 +78,7 @@ module.exports = function(app, ioInstance) {
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
-      if (io.sockets.adapter.rooms[1].length > 1){
+      // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
         models.Message.update({
           checked:1
         },{
@@ -86,10 +86,10 @@ module.exports = function(app, ioInstance) {
             MatchedId:socket.handshake.session.chatId,
           }
         });
-      }
+      // }
     });
     socket.on('chat message', function(msg){
-      chat.save(msg, sock, io.sockets.adapter.rooms[1].length)
+      chat.save(msg, sock, io.sockets.adapter.rooms[socket.handshake.session.chatId].length)
       var message = {msg:msg, id:socket.id.substring(2, 15)}
       io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
