@@ -108,3 +108,27 @@ exports.checkedNotify = function(socket, io){
       }
     })
 }
+
+exports.newMessage = function(socket, io){
+  function newMessage(){
+
+  models.Message.findAndCountAll({
+    where:{
+      reciveId:socket.handshake.session.UserId,
+      checked:0
+    }
+  }).then(function(data){
+       if (data.count != socket.newMessage){
+         callback(data.count)
+    io.to(socket.id).emit('newMessage', data.count)
+  }
+  })
+}
+    newMessage()
+   function callback(newMessage){
+    socket["newMessage"] = newMessage
+  }
+  setInterval(newMessage, 10000);
+
+
+}
