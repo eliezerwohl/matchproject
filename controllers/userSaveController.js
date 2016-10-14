@@ -139,6 +139,7 @@ function scoring (data, matchedId, user1Vote, user2Vote, req){
     	debugger
     	models.Matched.update({
     		chat:true,
+        MessageId:1,
     		search:"none"
     	},{
     		where:{id:matchedId}
