@@ -90,12 +90,11 @@ exports.save = function(msg, socket, room){
 	else{
 		checked = 1
 	}
-
 	models.Message.create({
 		message:msg,
 		UserId:socket.handshake.session.UserId,
 		MatchedId:socket.handshake.session.chatId,
-		recive:socket.handshake.session.otherChat,
+		reciveId:socket.handshake.session.otherChat,
 		checked:checked,
 	}).then(function(data){
 		models.Matched.update({
@@ -104,7 +103,6 @@ exports.save = function(msg, socket, room){
 			where:{
 				id:socket.handshake.session.chatId
 			}
-		})
-
-	})
+		});
+	});
 }
