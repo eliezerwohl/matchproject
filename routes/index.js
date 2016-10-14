@@ -75,9 +75,11 @@ module.exports = function(app, ioInstance) {
       home.notifyConnect(sock, io)
     });
     socket.on('room', function(room) {
-      io.to(socket.id).emit('message', socket.id.substring(2, 15));
-      socket.join(socket.handshake.session.chatId);
       debugger
+      io.to(socket.id).emit('message', socket.id.substring(2, 15));
+      debugger
+      socket.join(socket.handshake.session.chatId);
+      console.log(io.sockets.adapter.rooms[1].length)
     });
     socket.on('chat message', function(msg){
       chat.save(msg, sock)
