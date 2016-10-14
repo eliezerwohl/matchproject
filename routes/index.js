@@ -79,10 +79,10 @@ module.exports = function(app, ioInstance) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       debugger
       socket.join(socket.handshake.session.chatId);
-      console.log(io.sockets.adapter.rooms[1].length)
+
     });
     socket.on('chat message', function(msg){
-      chat.save(msg, sock)
+      chat.save(msg, sock, io.sockets.adapter.rooms[1].length)
       var message = {msg:msg, id:socket.id.substring(2, 15)}
       io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
