@@ -128,7 +128,7 @@ exports.newMessage = function(socket, io){
    function callback(newMessage){
     socket["newMessage"] = newMessage
   }
-  setInterval(newMessage, 10000);
+  setInterval(newMessage, 1000);
 
 
 }
