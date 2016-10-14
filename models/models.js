@@ -59,6 +59,7 @@ var Message = connection.define("Message", {
   message:Sequelize.STRING,
   checked:{type:Sequelize.BOOLEAN, defaultValue:0},
   reciveId: Sequelize.INTEGER,
+  MatchedId:Sequelize.INTEGER,
 }); 
 
 var Vote = connection.define("Votes", {
@@ -79,8 +80,13 @@ Matched.hasMany(NotifyConnect);
 NotifyConnect.belongsTo(Matched);
 User.hasMany(Message);
 Message.belongsTo(User);
-Matched.hasMany(Message);
-Message.belongsTo(User);
+
+
+Message.hasOne(Matched);
+Matched.belongsTo(Message);
+
+
+
 User.hasMany(Vote);
 Vote.belongsTo(User);
 Matched.hasMany(Vote);

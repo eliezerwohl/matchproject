@@ -74,11 +74,19 @@ exports.chatId = function(req, res){
 }
 
 exports.save = function(msg, socket){
-	debugger
 	models.Message.create({
 		message:msg,
 		UserId:socket.handshake.session.UserId,
 		MatchedId:socket.handshake.session.chatId,
 		recive:socket.handshake.session.otherChat,
-	});
+	}).then(function(data){
+		models.Matched.update({
+			MessageId:data.dataValues.id
+		},{
+			where:{
+				id:socket.handshake.session.chatId
+			}
+		})
+		debugger
+	})
 }
