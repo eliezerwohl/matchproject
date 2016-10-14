@@ -77,6 +77,7 @@ module.exports = function(app, ioInstance) {
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
+      debugger
     });
     socket.on('chat message', function(msg){
       chat.save(msg, sock)

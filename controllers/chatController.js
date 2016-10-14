@@ -19,11 +19,13 @@ exports.findChat =function(req, res){
 	}).then(function(data){
 		req.session.matchData = data
 		for (var i = 0; i < data.length; i++) {
+			debugger
 			if(data[i].dataValues.user1 === req.session.UserId){
 				chatIds.push(data[i].dataValues.user2);
 			}
 			else{chatIds.push(data[i].dataValues.user1)}
 		}
+	debugger
 		models.User.findAll({
 			where:{
 						id:{$in:chatIds}
@@ -42,6 +44,7 @@ exports.findChat =function(req, res){
 
 				}
 			}
+			debugger
 			res.send(req.session.chatArray);
 		});
 	});
