@@ -34,8 +34,13 @@ exports.findChat =function(req, res){
 			req.session.chatArray = [];
 			debugger
 			for (var i = 0; i < data.length; i++) {
-				//indefnity who is sending it
-				req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, firstname:data[i].dataValues.firstname});
+				if(req.session.matchData[i].dataValues.Message.dataValues.UserId == req.session.UserId){
+				req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"user", firstname:data[i].dataValues.firstname});
+				}
+				else{
+									req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"other", firstname:data[i].dataValues.firstname});
+
+				}
 			}
 			res.send(req.session.chatArray);
 		});
