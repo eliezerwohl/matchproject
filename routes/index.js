@@ -72,7 +72,8 @@ module.exports = function(app, ioInstance) {
     })
     socket.on("login", function(){
       home.score(sock, io);
-      home.notifyConnect(sock, io)
+      home.notifyConnect(sock, io);
+      home.newMessage(sock, io)
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));

@@ -6,6 +6,10 @@ $( document ).ready(function() {
 	socket.on("notify", function(notify){
  		$("#notify").text(notify);
 	});
+	socket.on("newMessage", function(newMessage){
+ 		$("#newMessage").text(newMessage);
+ 		debugger
+	});
 
   socket.emit('login')
 });
