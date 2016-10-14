@@ -11,7 +11,11 @@ exports.findChat =function(req, res){
 		    user1:req.session.UserId,
 		    user2: req.session.UserId,
 			}
-		}
+		},
+		include: [{
+	    model: models.Message,
+	        where: { MessageId: Sequelize.col('Message.id') }
+	    }],
 	}).then(function(data){
 		req.session.matchData = data
 		for (var i = 0; i < data.length; i++) {
@@ -28,8 +32,10 @@ exports.findChat =function(req, res){
 			//putting it in array so user can send back the i of the array, without
 			//knowing the other users id
 			req.session.chatArray = [];
+			debugger
 			for (var i = 0; i < data.length; i++) {
-				req.session.chatArray.push({arrayId:i, lastname:data[i].dataValues.lastname, firstname:data[i].dataValues.firstname});
+				//indefnity who is sending it
+				req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, firstname:data[i].dataValues.firstname});
 			}
 			res.send(req.session.chatArray);
 		});
@@ -37,7 +43,6 @@ exports.findChat =function(req, res){
 }
 
 exports.chatHistory = function(req, res){
-	debugger
 	models.Message.findAll({
 		//go back and limit the returned data
 		where:{
@@ -87,6 +92,6 @@ exports.save = function(msg, socket){
 				id:socket.handshake.session.chatId
 			}
 		})
-		debugger
+
 	})
 }
