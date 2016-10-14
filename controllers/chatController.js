@@ -82,12 +82,21 @@ exports.chatId = function(req, res){
 	res.send("done");
 }
 
-exports.save = function(msg, socket){
+exports.save = function(msg, socket, room){
+	var checked 
+	if (room < 2){
+		checked = 0
+	}
+	else{
+		checked = 1
+	}
+
 	models.Message.create({
 		message:msg,
 		UserId:socket.handshake.session.UserId,
 		MatchedId:socket.handshake.session.chatId,
 		recive:socket.handshake.session.otherChat,
+		checked:checked,
 	}).then(function(data){
 		models.Matched.update({
 			MessageId:data.dataValues.id
