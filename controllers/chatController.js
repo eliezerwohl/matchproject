@@ -34,11 +34,10 @@ exports.findChat =function(req, res){
 			req.session.chatArray = [];
 			for (var i = 0; i < data.length; i++) {
 				if(req.session.matchData[i].dataValues.Message.dataValues.UserId == req.session.UserId){
-				req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"user", firstname:data[i].dataValues.firstname});
+					req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"user", firstname:data[i].dataValues.firstname});
 				}
 				else{
-									req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"other", firstname:data[i].dataValues.firstname});
-
+					req.session.chatArray.push({arrayId:i, msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:"other", firstname:data[i].dataValues.firstname});
 				}
 			}
 			res.send(req.session.chatArray);
@@ -83,6 +82,7 @@ exports.chatId = function(req, res){
 }
 
 exports.save = function(msg, socket, room){
+	debugger
 	var checked 
 	if (room < 2){
 		checked = 0
