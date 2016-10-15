@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
 
   // console.log(process.env.JAWSDB_URL);
-  var connection = new Sequelize(' mysql://b1e734d72f7481:840b5f35@us-cdbr-iron-east-04.cleardb.net/heroku_75496f89e747476?reconnect=true');
+  var connection = new Sequelize('mysql://b1e734d72f7481:840b5f35@us-cdbr-iron-east-04.cleardb.net/heroku_75496f89e747476?reconnect=true');
 } else {
   var password = require("../ignore/ignore.js");
   // LOCAL DB

@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 
+
   var id
   var socket = io();
 	$.ajax({url: "/chatName", success: function(result){
@@ -16,6 +17,9 @@ $( document ).ready(function() {
   });
 
   $('form').submit(function(){
+    // $.ajax({url: "/reqCheck", success: function(result){
+    //   debugger
+    // }})
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;

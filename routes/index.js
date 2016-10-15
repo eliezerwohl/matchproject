@@ -75,7 +75,6 @@ module.exports = function(app, ioInstance) {
     })
     socket.on("login", function(){
       socket.leave(socket.handshake.session.chatId);
-      debugger
       home.score(sock, io);
       home.notifyConnect(sock, io);
       home.newMessage(sock, io)
@@ -83,7 +82,6 @@ module.exports = function(app, ioInstance) {
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
-      debugger
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
         models.Message.update({
           checked:1
@@ -95,7 +93,8 @@ module.exports = function(app, ioInstance) {
       // }
     });
     socket.on('chat message', function(msg){
-      chat.save(msg, sock, io.sockets.adapter.rooms[socket.handshake.session.chatId].length)
+      debugger
+      chat.save(msg, socket, socket.adapter.rooms[socket.handshake.session.chatId].length)
       var message = {msg:msg, id:socket.id.substring(2, 15)}
       io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
@@ -109,6 +108,7 @@ module.exports = function(app, ioInstance) {
   app.get("/settings", function(req, res){
     res.render("settings")
   })
+  // app.get("/reqCheck", home.reqCheck)
   app.get("/logout", function(req, res){
     req.session.destroy()
     res.redirect("/")
