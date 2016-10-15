@@ -129,3 +129,7 @@ exports.newMessage = function(socket, io){
   }
   setInterval(newMessage, 1000);
 }
+// exports.reqCheck = function(req, res){
+//   debugger
+//   console.log(req.session.UserId)
+// }
