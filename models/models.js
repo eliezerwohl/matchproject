@@ -2,8 +2,9 @@ var password = require("../ignore/ignore.js");
 var Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.JAWSDB_URL);
-  var connection = new Sequelize(process.env.JAWSDB_URL);
+
+  // console.log(process.env.JAWSDB_URL);
+  var connection = new Sequelize(var sequelize = new Sequelize('mysql://b4b5f8f9cc929d:531ce7b3@us-cdbr-iron-east-04.cleardb.net/heroku_fca057f239761d1?reconnect=true'));
 } else {
   // LOCAL DB
   var connection = new Sequelize('match', 'root', password.password); }

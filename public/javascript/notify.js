@@ -1,4 +1,4 @@
-$( document ).ready(function() { 
-	socket = io()
-	socket.emit("notify")
-	});
+// $( document ).ready(function() { 
+// 	socket = io()
+// 	socket.emit("notify")
+// 	});

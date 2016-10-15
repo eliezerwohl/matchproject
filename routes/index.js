@@ -69,8 +69,13 @@ module.exports = function(app, ioInstance) {
     });
     socket.on("notify", function(){
       home.checkedNotify(sock, io)
+    });
+    socket.on("leave", function(){
+      socket.leave(socket.handshake.session.chatId);
     })
     socket.on("login", function(){
+      socket.leave(socket.handshake.session.chatId);
+      debugger
       home.score(sock, io);
       home.notifyConnect(sock, io);
       home.newMessage(sock, io)
@@ -78,6 +83,7 @@ module.exports = function(app, ioInstance) {
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
+      debugger
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
         models.Message.update({
           checked:1
