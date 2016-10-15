@@ -17,9 +17,6 @@ $( document ).ready(function() {
   });
 
   $('form').submit(function(){
-    // $.ajax({url: "/reqCheck", success: function(result){
-    //   debugger
-    // }})
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
@@ -30,10 +27,9 @@ $( document ).ready(function() {
       $('#messages').append($('<li>').text(msg.msg).addClass("user"));
     }
     else {
-       $('#messages').append($('<li>').text(msg.msg).addClass("other"));
+      $('#messages').append($('<li>').text(msg.msg).addClass("other"));
     }
      $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
-
   });
   socket.on('message', function(msg){
     id = msg

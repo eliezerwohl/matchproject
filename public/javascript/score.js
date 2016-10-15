@@ -8,7 +8,6 @@ $( document ).ready(function() {
 	});
 	socket.on("newMessage", function(newMessage){
  		$("#newMessage").text(newMessage);
- 		debugger
 	});
 
   socket.emit('login')
