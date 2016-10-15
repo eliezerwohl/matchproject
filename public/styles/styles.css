@@ -45,3 +45,11 @@
 	position: absolute;
 	z-index: 1;
 }
+
+#chatHome .true {
+			border:green 2px solid;
+}
+
+#chatHome .false {
+	border:red 2px solid;
+}
