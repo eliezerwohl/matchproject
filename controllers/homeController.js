@@ -109,15 +109,26 @@ exports.checkedNotify = function(socket, io){
     })
 }
 
-exports.newMessage = function(socket, io){
+exports.newMessage = function(socket, io, location){
   function newMessage(){
     models.Message.findAndCountAll({
       where:{
         reciveId:socket.handshake.session.UserId,
         checked:0
       }
-    }).then(function(data){
+    }).then(function(data){ 
       if (data.count != socket.newMessage){
+        if (location == "/chathome" && typeof socket.newMessage != "undefined"){
+          for (var i = socket.newMessage; i < data.count; i++) {
+             var incomingMessage = {
+                msg:data.rows[i].dataValues.message,
+                updateId:data.rows[i].dataValues.MatchedId
+                }
+                debugger
+            io.to(socket.id).emit('incomingMessage', incomingMessage)    
+          }
+         
+        }
         callback(data.count)
         io.to(socket.id).emit('newMessage', data.count)
       }
