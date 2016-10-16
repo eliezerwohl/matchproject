@@ -2,7 +2,10 @@ $( document ).ready(function() {
 	$.ajax({url: "/findChat", success: function(result){
 
 		for (var i = 0; i < result.length; i++) {
-		 $(".target").append("<button class='" + result[0].checked + " chat' value=" + result[i].arrayId + ">" + result[i].firstname 
+		 $(".target").append("<button class='" + result[0].checked 
+		 	+ " chat col-xs-12 btn btn-default' value=" 
+		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
+		 	+result[i].lastname + "</h4><br>"
 		 	+ result[i].msg + "</button>")
 		}
 	}});

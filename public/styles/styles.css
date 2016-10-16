@@ -1,7 +1,12 @@
 .main {
 	padding:0px;
 }
-#main {
+
+#chatHome button h4 {
+	margin:0px;
+
+}
+.pad {
 	padding-top: 45px;
 }
 .navbar-default {
