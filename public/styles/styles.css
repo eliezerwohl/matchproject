@@ -1,5 +1,18 @@
+.main {
+	padding:0px;
+}
+.navbar-default {
+	margin-bottom:  0px;
+}
 .user {
 	color:red;
+}
+
+#signUp .btn-md {
+	margin-top: 15px;
+}
+#index .btn-md {
+	padding: 15px;
 }
 
 .other {
