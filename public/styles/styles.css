@@ -73,10 +73,10 @@
 	z-index: 1;
 }
 
-#chatHome .true {
-			border:green 2px solid;
+#chatHome button {
+ opacity: .6;
 }
 
-#chatHome .false {
-	border:red 2px solid;
+#chatHome .falseother {
+ opacity: 1.0;			
 }

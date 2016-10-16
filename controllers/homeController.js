@@ -95,18 +95,18 @@ exports.notifyConnect = function(socket, io){
 
   }
   notify()
-   function callback(notify){
+  function callback(notify){
     socket["notify"] = notify
   }
   setInterval(notify, 10000);
 }
 
 exports.checkedNotify = function(socket, io){
-      models.NotifyConnect.destroy({
-      where:{
-        UserId:socket.handshake.session.UserId
-      }
-    })
+  models.NotifyConnect.destroy({
+    where:{
+      UserId:socket.handshake.session.UserId
+    }
+  });
 }
 
 exports.newMessage = function(socket, io, location){
