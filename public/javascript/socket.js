@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-
 var url = _dereq_('./url');
 var parser = _dereq_('socket.io-parser');
 var Manager = _dereq_('./manager');
