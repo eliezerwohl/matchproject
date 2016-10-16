@@ -9,6 +9,10 @@ $( document ).ready(function() {
 	socket.on("newMessage", function(newMessage){
  		$("#newMessage").text(newMessage);
 	});
-
-  socket.emit('login')
+	socket.on("incomingMessage", function(data){
+		debugger
+ 		$("#" + data.updateId).text(data.msg);
+	});
+	var location = window.location.pathname
+  socket.emit('login', location)
 });

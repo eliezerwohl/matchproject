@@ -73,11 +73,11 @@ module.exports = function(app, ioInstance) {
     socket.on("leave", function(){
       socket.leave(socket.handshake.session.chatId);
     })
-    socket.on("login", function(){
+    socket.on("login", function(location){
       socket.leave(socket.handshake.session.chatId);
       home.score(sock, io);
       home.notifyConnect(sock, io);
-      home.newMessage(sock, io)
+      home.newMessage(sock, io, location)
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
