@@ -1,6 +1,11 @@
 $( document ).ready(function() {
-
-
+  function chatSize (){
+    var height = ($(window).height()); 
+    $("#chatBox").css("height", height-147 + "px")
+    $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+  }
+  chatSize(0)
+  $(window).resize(chatSize);
   var id
   var socket = io();
 	$.ajax({url: "/chatName", success: function(result){
