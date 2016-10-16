@@ -93,7 +93,6 @@ module.exports = function(app, ioInstance) {
       // }
     });
     socket.on('chat message', function(msg){
-      debugger
       chat.save(msg, socket, socket.adapter.rooms[socket.handshake.session.chatId].length)
       var message = {msg:msg, id:socket.id.substring(2, 15)}
       io.to(socket.handshake.session.chatId).emit('chat message', message);
@@ -104,11 +103,9 @@ module.exports = function(app, ioInstance) {
     successRedirect: '/loggedin?msg=Login successful.',
     failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
   }));
-
   app.get("/settings", function(req, res){
     res.render("settings")
   })
-  // app.get("/reqCheck", home.reqCheck)
   app.get("/logout", function(req, res){
     req.session.destroy()
     res.redirect("/")
@@ -141,8 +138,6 @@ module.exports = function(app, ioInstance) {
   app.get("/nextMatch", make.nextMatch);
   app.get("/nextPrime", make.nextPrime);
   app.get("/findPrime", make.findPrime);
-
-
   app.get("/matchhome", function(req, res){
     res.render("matchhome")
   })
