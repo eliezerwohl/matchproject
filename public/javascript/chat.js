@@ -13,7 +13,7 @@ $( document ).ready(function() {
   }}).then(function(){
     $.ajax({url: "/chatHistory", success: function(result){
     for (var i = 0; i < result.length; i++) {
-      $('#messages').append($('<li>').text(result[i].message).addClass(result[i].user));
+      $('#messages').append($('<div>').text(result[i].message).addClass(result[i].user).addClass("col-xs-12"));
     }
     }}).then(function(){
       $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
