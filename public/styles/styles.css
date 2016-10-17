@@ -57,22 +57,28 @@
 	border: 2px red solid;
 }
 
+.padding {
+	padding:10px;
+}
+
 .backDiv {
+
 	height: 100%;
-	background-color: white;
 	position: relative;
 	z-index: 2;
 	padding: 0px;
-	background:lightgray;
+	background:black;
+	color:white;
 }
 
 .frontDiv {
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	background-color: white;	
+	background-color: #282828 ;	
 	z-index: 1;
 	right:0px;
+
 }
 
 .frontDiv .primeButtons button {
