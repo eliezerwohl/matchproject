@@ -1,3 +1,6 @@
+<style>
+	body { background-color: #282828  }
+</style>
 <div id="warningModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -12,10 +15,11 @@
     </div>
   </div>
 </div>
-<button class="col-md-12 toggle"> show </button>
-<div class="backDiv col-md-6 col-md-offset-3">
+<button class="col-xs-12 col-md-4 col-md-offset-4 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
+<div class="backDiv col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 col-xs-12">
 	<div class="frontDiv">
-		<h4>Connection </h4>
+		<div class="padding">
+		<h3 class="text-center">Connection </h3>
     <h4 >Who is your favorite reggae group/star</h4>
 		<p name="a091201" id="a091201">
 		</p>
@@ -26,12 +30,14 @@
 		<h4>Why is it always yamcha?  </h4>
 		<p name="a091204" id="a091204"></p>
     <div id="primeButtons">
-      <button class="btn btn-md col-md-12" id="getMatch" >yes
-      </button><br>
-      <button class="btn btn-md col-md-12 next"> next </button>
+      <button class="btn col-xs-5 pull-right btn-primary" id="getMatch" >yes
+      </button>
+      <button class="btn col-xs-5 next pull-left " > next </button>
+	  </div>
 	  </div>
 	</div>
-	<h4>Match</h4>
+			<div class="padding">
+	<h3 class="text-center">Match</h3>
 	<h4 >Who is your favorite reggae group/star</h4>
 	<p name="a091201" id="ma091201"></p>
 	<h4> Please explain why you didn't choose bob marley </h4>
@@ -40,8 +46,9 @@
 	<p name="a091203" id="ma091203"></p>
 	<h4>Why is it always yamcha?  </h4>
 	<p name="a091204" id="ma091204"></p>
-	<button class="pull-right btn col-md-12 btn-default btn-md save" value="true">yes </button>
-	<button class="btn col-md-12 btn-default btn-md save" value ="false">no </button>
+	<button class="btn col-xs-5 pull-right btn-success save" value="true">yes </button>
+	<button class="btn col-xs-5 pull-left btn-danger save" value ="false">no </button>
+</div>
 </div>
 
 <script type="text/javascript" src="/javascript/makeConnection.js"></script>
