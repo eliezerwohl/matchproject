@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  $("#chatInput").bind('touchmove', function(e){e.preventDefault()})
   function chatSize (){
     var height = ($(window).height()); 
     $("#chatBox").css("height", height-147 + "px")
