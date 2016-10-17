@@ -29,10 +29,10 @@ $( document ).ready(function() {
 
   socket.on('chat message', function(msg){  
     if (id === msg.id){
-      $('#messages').append($('<li>').text(msg.msg).addClass("user"));
+      $('#messages').append($('<li>').text(msg.msg).addClass("user").addClass("col-xs-12"));
     }
     else {
-      $('#messages').append($('<li>').text(msg.msg).addClass("other"));
+      $('#messages').append($('<li>').text(msg.msg).addClass("other").addClass("col-xs-12"));
     }
      $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
   });
