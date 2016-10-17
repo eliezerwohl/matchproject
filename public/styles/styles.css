@@ -13,11 +13,12 @@
 	margin-bottom:  0px;
 }
 .user {
-	color:red;
+		color:#325d88;
+
 		text-align: right;;
 }
 .other {
-	color:blue;
+	color:black;
 	text-align: left;
 }
 
