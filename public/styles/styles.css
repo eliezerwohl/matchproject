@@ -14,6 +14,15 @@
 }
 .user {
 	color:red;
+		text-align: right;;
+}
+.other {
+	color:blue;
+	text-align: left;
+}
+
+#chatBox #messages div {
+	border-bottom: #FFFBFF 1px solid;
 }
 
 #signUp .btn-md {
@@ -23,9 +32,7 @@
 	padding: 15px;
 }
 
-.other {
-	color:blue;
-}
+
 
 #chatBox {
 	overflow-y:scroll;
