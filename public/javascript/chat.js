@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  $("#chatInput").bind('touchmove', function(e){e.preventDefault()})
   function chatSize (){
     var height = ($(window).height()); 
     $("#chatBox").css("height", height-147 + "px")
@@ -21,10 +22,13 @@ $( document ).ready(function() {
     });
   });
 
-  $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
+  $('#send').on("click", function(){
+    var msg =  $('#m').val()
+    if (/\S/.test(msg)) {
+      //checks to make sure it's not all blank
+      socket.emit('chat message', msg);
+     $('#m').val('')
+    }
   });
 
   socket.on('chat message', function(msg){  
