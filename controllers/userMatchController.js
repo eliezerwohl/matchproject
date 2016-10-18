@@ -12,11 +12,11 @@ exports.userMatch = function(req, res){
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
 		var dailyMatch = data.dataValues.dailyMatch;
-		if  (createdAt === today){
-		res.send("today")
-		//account was created today
-		}
-		else if (dailyMatch === 0 &&  today == lastMatch){
+		// if  (createdAt === today){
+		// res.send("today")
+		// //account was created today
+		// }
+		if (dailyMatch === 0 &&  today == lastMatch){
 			res.send("done");
 			//already did the one match a day
 		} 
@@ -38,30 +38,37 @@ exports.userMatch = function(req, res){
 		    ['avg', 'DESC'],
 		    ],
 			}).then(function(data){
-				//currently it's just one pick a day, with the 
-				//highest like percentage.  can change later
-				if (data[0].dataValues.user1 == req.session.UserId){
-					matchId = data[0].dataValues.user2
+				debugger
+				if (data.length == 0){
+					//if there are not matches
+					res.send("sorry")
 				}
-				else {matchId = data[0].dataValues.user1}
-				//will prevent if the day changes while the user is logged in
-				//everything goes smoothly 
-				req.session.dailyMatch = matchId;
-				req.session.save()
-				models.Answer.findOne({
-					where:{
-						UserId:matchId
-					},
-					attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
-				}).then(function(data){
-					res.send(data.dataValues)
-					models.User.update({
-						lastMatch:Date.now(),
-						dailyMatch:matchId
+				else {
+					//currently it's just one pick a day, with the 
+					//highest like percentage.  can change later
+					if (data[0].dataValues.user1 == req.session.UserId){
+						matchId = data[0].dataValues.user2
+					}
+					else {matchId = data[0].dataValues.user1}
+					//will prevent if the day changes while the user is logged in
+					//everything goes smoothly 
+					req.session.dailyMatch = matchId;
+					req.session.save()
+					models.Answer.findOne({
+						where:{
+							UserId:matchId
 						},
-						{where:{id:req.session.UserId}
+						attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+					}).then(function(data){
+						res.send(data.dataValues)
+						models.User.update({
+							lastMatch:Date.now(),
+							dailyMatch:matchId
+							},
+							{where:{id:req.session.UserId}
+						});
 					});
-				});
+				}
 			});
 		}
 		else {
