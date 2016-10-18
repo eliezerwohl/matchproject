@@ -20,7 +20,6 @@ exports.signUp = function(req, res){
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
           password: saltyhash(req.body.password),
-          account:req.body.account.toLowerCase(),
         }).then(function(data) {
           var tempId = data.dataValues.id;
             models.Answer.create({

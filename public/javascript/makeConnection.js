@@ -3,27 +3,23 @@ $( document ).ready(function() {
 	function getPrime(){
 	$(".frontDiv, #primeButtons").show();
 	$(".toggle, #match, #matchButtons").hide()
+	$(".frontDiv").on("swiperight",function(){
+  	getMatch()
+	});
+	$(".frontDiv").on("swipeleft",function(){
+  	next()
+	});
 
 	$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime")
 		}});
 	}
 	getPrime()
-	$(".frontDiv").on("swipeleft",function(){
-  	console.log("front left")
-	});
-	$(".frontDiv").on("swiperight",function(){
-  	console.log("front right")
-	});
 
-	$(".matchDiv").on("swipeleft",function(){
-  	console.log("back left")
-	});
-	$(".matchDiv").on("swiperight",function(){
-  	console.log("back right")
-	});
-	$(".next").on("click", function(){
-		$.ajax({url: "/nextPrime", success: function(result){
+
+	//next
+	function next(){
+			$.ajax({url: "/nextPrime", success: function(result){
 			if (result === false){
 				getPrime()
 			}
@@ -31,17 +27,18 @@ $( document ).ready(function() {
 			 	append(result, "prime");
 			 }
 		}});
+	}
+	$(".next").on("click", function(){
+		next()
 	});
-
-	$("#getMatch").on("click", function(){
+//get match
+	function getMatch(){
 		$.ajax({url: "/getMatch", success: function(result){
-			debugger
+			$(".frontDiv").off("swipeleft swiperight")
 				if (result === false){
 					//you've matched everybody
-					console.log("You've matched everyone for this person");
-						getPrime()
+					getPrime()
 					$("#warningModal").modal("show")
-				
 				}
 				else{
 					$(".frontDiv").hide()
@@ -52,6 +49,10 @@ $( document ).ready(function() {
 					append(result, "match");
 				}
 		}});
+	}
+
+	$("#getMatch").on("click", function(){
+		getMatch()
 	});
 
 	function nextMatch(){
@@ -71,11 +72,20 @@ $( document ).ready(function() {
 		nextMatch()
 	})
 
-	$(".save").on("click", function(){
-		var data =(this).value;
+	function save(data){
 		$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
 			nextMatch()
 		}});
+	}
+	$(".save").on("click", function(){
+		var data =(this).value;
+		save(data)
+	});
+	$(".matchDiv").on("swipeleft",function(){
+  	save(0)
+	});
+	$(".matchDiv").on("swiperight",function(){
+  	save(1)
 	});
 
 	$(".toggle").on("click", function(){

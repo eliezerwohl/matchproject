@@ -2,13 +2,14 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.saveMatch = function(req, res){
+
 	var matchedId
 	//lower user id will always be user 1
 	req.session.matchedArray.sort();
 	models.Matched.findOne({
 		where:{
-			user1:{$in:req.session.matchedArray} ,
-			user2:{$in:req.session.matchedArray} ,
+			user1:{$in:req.session.matchedArray},
+			user2:{$in:req.session.matchedArray},
 		}
 	}).then(function(data){
 		if (data == null){

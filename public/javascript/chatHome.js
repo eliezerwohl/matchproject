@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 	var socket = io();
 	$.ajax({url: "/findChat", success: function(result){
-		debugger
 		for (var i = 0; i < result.length; i++) {
 		  $(".target").append("<button class='chat col-xs-12 btn btn-default' value=" 
 		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
