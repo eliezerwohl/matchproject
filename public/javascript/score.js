@@ -18,6 +18,6 @@ $( document ).ready(function() {
   socket.emit('login', location)
   socket.on('disconnect', function () {
   	//possible android fix
-    location.reload();
+    window.location = "/"
 	});
 });

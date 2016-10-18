@@ -25,7 +25,12 @@ var server = app.listen(PORT, function(){
 	  console.log("Listening on port %s", PORT);
 });
 
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax : 5000,
+    reconnectionAttempts: 99999
+});
 require('./routes')(app, io);
 
 
