@@ -29,7 +29,7 @@ var io = require('socket.io').listen(server, {
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax : 5000,
-    reconnectionAttempts: Infinity
+    reconnectionAttempts: 1
 });
 require('./routes')(app, io);
 
