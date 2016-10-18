@@ -2,7 +2,6 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.saveMatch = function(req, res){
-
 	var matchedId
 	//lower user id will always be user 1
 	req.session.matchedArray.sort();

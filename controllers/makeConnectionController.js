@@ -11,8 +11,8 @@ function dataStore(res, req, data, prime){
 	else {
 		req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[0].id]
 	}
-	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0])
-	req.session.save()
+	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
+	req.session.save();
 }
 
 function next(res, req, prime){
