@@ -9,6 +9,19 @@ $( document ).ready(function() {
 		}});
 	}
 	getPrime()
+	$(".frontDiv").on("swipeleft",function(){
+  	console.log("front left")
+	});
+	$(".frontDiv").on("swiperight",function(){
+  	console.log("front right")
+	});
+
+	$(".matchDiv").on("swipeleft",function(){
+  	console.log("back left")
+	});
+	$(".matchDiv").on("swiperight",function(){
+  	console.log("back right")
+	});
 	$(".next").on("click", function(){
 		$.ajax({url: "/nextPrime", success: function(result){
 			if (result === false){
