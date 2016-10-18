@@ -26,8 +26,9 @@ $( document ).ready(function() {
 				if (result === false){
 					//you've matched everybody
 					console.log("You've matched everyone for this person");
+						getPrime()
 					$("#warningModal").modal("show")
-					getPrime()
+				
 				}
 				else{
 					$(".frontDiv").hide()
@@ -43,8 +44,9 @@ $( document ).ready(function() {
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
 			if (result === false){
-				$("#warningModal").modal("show")
 				getPrime()
+				$("#warningModal").modal("show")
+				
 			}
 			else{
 		 		append(result, "match");

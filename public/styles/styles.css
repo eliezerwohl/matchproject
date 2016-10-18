@@ -9,6 +9,15 @@
 #myProfile button {
 	margin-top: 20px;
 }
+
+#makeConnection .modal-dialog {
+	margin-top: 80px
+}
+.notify {
+	display:inline-block;
+	min-width:30px;
+}
+
 .pad {
 	padding-top: 45px;
 }
@@ -16,9 +25,8 @@
 	margin-bottom:  0px;
 }
 .user {
-		color:#325d88;
-
-		text-align: right;;
+	color:#325d88;
+	text-align: right;;
 }
 .other {
 	color:black;
