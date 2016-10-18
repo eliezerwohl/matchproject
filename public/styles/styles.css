@@ -10,6 +10,14 @@
 	margin-top: 20px;
 }
 
+#makeConnection .backDiv button {
+	font-size: 20px
+}
+
+#makeConnection .backDiv button span {
+	margin: 10px;
+}
+
 #chatHome .btn {
 		text-transform: none;
 	background-color: white;
