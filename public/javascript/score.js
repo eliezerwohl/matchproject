@@ -10,9 +10,7 @@ $( document ).ready(function() {
  		$("#newMessage").text(newMessage);
 	});
 	socket.on("incomingMessage", function(data){
-
- 		$("#" + data.updateId).text(data.msg);
- 		$("." + data.updateId).addClass("falseother")
+ 		$("#" + data.updateId).text(data.msg).removeClass().addClass("falseother pull-left");
 	});
 	var location = window.location.pathname
   socket.emit('login', location)

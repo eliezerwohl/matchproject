@@ -22,13 +22,24 @@ $( document ).ready(function() {
     });
   });
 
-  $('#send').on("click", function(){
+  function sendMessage(){
     var msg =  $('#m').val()
     if (/\S/.test(msg)) {
       //checks to make sure it's not all blank
       socket.emit('chat message', msg);
      $('#m').val('')
     }
+  }
+
+  $("#m").on('keyup', function (e) {
+    e.preventDefault
+    if (e.keyCode == 13) {
+        sendMessage()
+    }
+  });
+  $('#send').on("click", function(){
+    sendMessage()
+
   });
 
   socket.on('chat message', function(msg){  

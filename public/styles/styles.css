@@ -10,6 +10,34 @@
 	margin-top: 20px;
 }
 
+#chatHome .btn {
+		text-transform: none;
+	background-color: white;
+	border:#3e3f3a 1px solid ;
+}
+
+#chatHome .btn h4 { 
+	font-weight:600;
+		color:black;
+}
+
+#chatHome .btn .falseuser,
+#chatHome .btn .trueuser {
+	color:#325d88;
+}
+#chatHome .btn .trueother{
+	color:		#B0B0B0;
+}
+
+#chatHome .btn .falseother {
+	color:	#3e3f3a;
+ 		
+}
+
+#chatHome .btn:hover {
+	opacity: 1
+}
+
 #makeConnection .modal-dialog {
 	margin-top: 80px
 }
@@ -97,10 +125,3 @@
 	z-index: 1;
 }
 
-#chatHome button {
- opacity: .6;
-}
-
-#chatHome .falseother {
- opacity: 1.0;			
-}
