@@ -31,14 +31,14 @@
 
 #chatHome .btn .falseother {
 	color:	#3e3f3a;
- 		
 }
 
 #chatHome .btn:hover {
-	opacity: 1
+	opacity: .7
 }
 
-#makeConnection .modal-dialog {
+#makeConnection .modal-dialog,
+#myMatch .modal-dialog {
 	margin-top: 80px
 }
 .notify {

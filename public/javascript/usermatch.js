@@ -7,11 +7,13 @@ $( document ).ready(function() {
 	})	
 	$.ajax({url: "/userMatch", success: function(result){
 		debugger
-	 if ( result === "today"){
-	 		alert("account was created today.  Please wait")
+	 if ( result === "sorry"){
+	 		$("#warningModal").modal("show")
+	 		$("#modalText").text("sorry, not matches.  please check another time")
 		}
 		else if (result == "done"){
-			alert("you already had one, check back tomorrow ")
+			$("#warningModal").modal("show")
+	 		$("#modalText").text("you already had one, check back tomorrow")
 		}
 		else{
 			append(result, "prime")
