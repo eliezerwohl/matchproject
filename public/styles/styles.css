@@ -4,7 +4,10 @@
 
 #chatHome button h4 {
 	margin:0px;
+}
 
+#myProfile button {
+	margin-top: 20px;
 }
 .pad {
 	padding-top: 45px;
