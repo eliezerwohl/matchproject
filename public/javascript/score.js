@@ -17,6 +17,7 @@ $( document ).ready(function() {
 	var location = window.location.pathname
   socket.emit('login', location)
   socket.on('disconnect', function () {
+  	//possible android fix
     location.reload();
 	});
 });
