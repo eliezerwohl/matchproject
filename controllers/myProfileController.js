@@ -9,7 +9,6 @@ exports.myInfoUpdate = function(req, res){
     age:req.body.age
   },{where: { id : req.session.UserId }
   }).then(function(results){
-
     if (req.session.tempGreeting == false){res.send("greeting");}
     else{res.send("myInfo");}
   });

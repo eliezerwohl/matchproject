@@ -2,6 +2,10 @@
 	padding:0px;
 }
 
+.toggle, #match, #matchButtons {
+	display: none;
+}
+
 #chatHome button h4 {
 	margin:0px;
 }

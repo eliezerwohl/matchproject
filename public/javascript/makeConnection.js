@@ -2,26 +2,22 @@
 $( document ).ready(function() {
 	function getPrime(){
 	$(".frontDiv, #primeButtons").show();
-	$(".toggle, #match, #matchButtons").hide()
 	$(".frontDiv").on("swiperight",function(){
-  	getMatch()
+  	getMatch();
 	});
 	$(".frontDiv").on("swipeleft",function(){
-  	next()
+  	next();
 	});
+	getPrime();
 
 	$.ajax({url: "/findPrime", success: function(result){;
-		 	append(result, "prime")
+		 	append(result, "prime");
 		}});
 	}
-	getPrime()
-
-
-	//next
 	function next(){
 			$.ajax({url: "/nextPrime", success: function(result){
 			if (result === false){
-				getPrime()
+				getPrime();
 			}
 			else{
 			 	append(result, "prime");
@@ -29,30 +25,30 @@ $( document ).ready(function() {
 		}});
 	}
 	$(".next").on("click", function(){
-		next()
+		next();
 	});
 //get match
 	function getMatch(){
 		$.ajax({url: "/getMatch", success: function(result){
-			$(".frontDiv").off("swipeleft swiperight")
-				if (result === false){
-					//you've matched everybody
-					getPrime()
-					$("#warningModal").modal("show")
-				}
-				else{
-					$(".frontDiv").hide()
-					$("#primeButtons").hide()
-					$("#matchButtons").show()
-					$(".toggle").show()
-					$("#match").show()
-					append(result, "match");
-				}
+			$(".frontDiv").off("swipeleft swiperight");
+			if (result === false){
+				//you've matched everybody
+				getPrime()
+				$("#warningModal").modal("show");
+			}
+			else{
+				$(".frontDiv").hide();
+				$("#primeButtons").hide();
+				$("#matchButtons").show();
+				$(".toggle").show();
+				$("#match").show();
+				append(result, "match");
+			}
 		}});
 	}
 
 	$("#getMatch").on("click", function(){
-		getMatch()
+		getMatch();
 	});
 
 	function nextMatch(){
@@ -60,7 +56,6 @@ $( document ).ready(function() {
 			if (result === false){
 				getPrime()
 				$("#warningModal").modal("show")
-				
 			}
 			else{
 		 		append(result, "match");
@@ -69,23 +64,23 @@ $( document ).ready(function() {
 	}
 
 	$("#nextMatch").on("click", function(){
-		nextMatch()
+		nextMatch();
 	})
 
 	function save(data){
 		$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
-			nextMatch()
+			nextMatch();
 		}});
 	}
 	$(".save").on("click", function(){
 		var data =(this).value;
-		save(data)
+		save(data);
 	});
 	$(".matchDiv").on("swipeleft",function(){
-  	save(0)
+  	save(0);
 	});
 	$(".matchDiv").on("swiperight",function(){
-  	save(1)
+  	save(1);
 	});
 
 	$(".toggle").on("click", function(){
