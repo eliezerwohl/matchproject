@@ -1,16 +1,16 @@
 <style>
 	body { background-color: #282828  }
 </style>
+<div id="makeConnection">
 <div id="warningModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
-        <h2>There are no more matches for this connection <h2>
-        <h2>Click below to find a new connection </h2>
+        <h2>There are no more matches for this connection </h2>
       </div>
       <div class="modal-footer">
-		  	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  	<button type="button" class="col-xs-12 col-md-4 pull-right btn btn-info" data-dismiss="modal">Ok</button>
 	  	</div>
     </div>
   </div>
@@ -32,7 +32,7 @@
     <div id="primeButtons">
       <button class="btn col-xs-5 pull-right btn-primary" id="getMatch" >yes
       </button>
-      <button class="btn col-xs-5 next pull-left " > next </button>
+      <button class="btn col-xs-5 btn-default next pull-left " > next </button>
 	  </div>
 	  </div>
 	</div>
@@ -50,5 +50,5 @@
 	<button class="btn col-xs-5 pull-left btn-danger save" value ="false">no </button>
 </div>
 </div>
-
+</div>
 <script type="text/javascript" src="/javascript/makeConnection.js"></script>

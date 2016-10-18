@@ -10,6 +10,9 @@
 	margin-top: 20px;
 }
 
+#makeConnection .modal-dialog {
+	margin-top: 80px
+}
 .notify {
 	display:inline-block;
 	min-width:30px;
