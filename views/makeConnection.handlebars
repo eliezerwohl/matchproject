@@ -1,6 +1,4 @@
-<style>
-	body { background-color: #282828  }
-</style>
+
 <!-- <div id="makeConnection">
 	<div id="warningModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog"> -->
@@ -60,7 +58,7 @@
     	<h3 class="pull-left">Connection </h3><h3 class='pull-right'>Match</h3>
 			</div>
 			<div class="row">
-		    <h4 >Who is your favorite reggae group/star</h4>
+		    <h4 class="text-center">Who is your favorite reggae group/star</h4>
 		  </div>
 		  <div class="row">
 		  	<p name="a091201" class= "pull-right" id="ma091201"></p>
@@ -68,36 +66,39 @@
 				</p>
 			</div>
 			<div class="row">
-				<h4> Please explain why you didn't choose bob marley </h4>
+				<h4 class="text-center"> Please explain why you didn't choose bob marley </h4>
 			</div>
 			<div class="row">
 			<p name="a091202" class= "pull-right" id="ma091202"> </p>
 				<p name="a091202"  class= "pull-left" id="a091202"> </p>
 			</div>
 			<div class="row">
-				<h4>Cha la </h4>
+				<h4 class="text-center">Cha la </h4>
 			</div>
 			<div class="row">
 						<p name="a091203" class= "pull-right" id="ma091203"></p>
 				<p name="a091203" class= "pull-left" id="a091203"></p>
 			</div>
 			<div class="row">
-				<h4>Why is it always yamcha?  </h4>
+				<h4 class="text-center">Why is it always yamcha?  </h4>
 			</div>
 			<div class="row">
 					<p name="a091204" class= "pull-right" id="ma091204"></p>
 				<p name="a091204" class= "pull-left" id="a091204"></p>
 			</div>
   	</div>
-  <div id="chatControl" class="col-xs-12">
+  <div id="buttonControl" class="col-xs-12">
       <div id="primeButtons">
-		      <button class="btn col-xs-5 pull- btn-success" id="getMatch" >yes <span class="glyphicon glyphicon-arrow-right"> </span>
+       <button class="btn col-sm-2 col-xs-4 col-sm-offset-2 btn-danger next pull-left" ><span class="glyphicon glyphicon-arrow-left"> </span> next </button>
+		      <button class="btn col-sm-2  col-xs-4 col-xs-offset-4  btn-success" id="getMatch" >yes <span class="glyphicon glyphicon-arrow-right"> </span>
 		      </button>
-		      <button class="btn col-xs-5 btn-danger next pull-left" ><span class="glyphicon glyphicon-arrow-left"> </span> next </button>
 			  </div>
 			<div id="matchButtons">
-				<button class="col-xs-12 col-md-4 col-md-offset-4 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
+				<button class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" value ="false"><span class="glyphicon glyphicon-arrow-left"> </span> no </button>
+				<button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
+				<button class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span></button>
 			</div>
-  </div>
+  	</div>
+	</div>
 </div>
 <script type="text/javascript" src="/javascript/makeConnection.js"></script>

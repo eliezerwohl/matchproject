@@ -2,7 +2,7 @@
 $( document ).ready(function() {
 function chatSize (){
     var height = ($(window).height()); 
-    $("#chatBox").css("height", height-147 + "px")
+    $("#chatBox").css("height", height-117 + "px")
   }
   chatSize()
   $(window).resize(chatSize);
