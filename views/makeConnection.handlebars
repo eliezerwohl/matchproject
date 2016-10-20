@@ -50,8 +50,22 @@
 	</div>
 </div>
 <script type="text/javascript" src="/javascript/makeConnection.js"></script> -->
+<div id="warningModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog"> 
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <h2>There are no more matches for this connection </h2>
+	      </div>
+	      <div class="modal-footer">
+			  	<button type="button" class="col-xs-12 col-md-4 pull-right btn btn-info" data-dismiss="modal">Ok</button>
+		  	</div>
+	    </div>
+	  </div>
+	</div>
 
-<div class="col-xs-12 col-md-6 col-md-offset-3">
+
+<div id="makeConnection" class="col-xs-12 col-md-6 col-md-offset-3">
   <div id="chatBox" class="col-md-12">
     <div class="padding">
     	<div class="row">
@@ -88,16 +102,15 @@
 			</div>
   	</div>
   <div id="buttonControl" class="col-xs-12">
-      <div id="primeButtons">
-       <button class="btn col-sm-2 col-xs-4 col-sm-offset-2 btn-danger next pull-left" ><span class="glyphicon glyphicon-arrow-left"> </span> next </button>
-		      <button class="btn col-sm-2  col-xs-4 col-xs-offset-4  btn-success" id="getMatch" >yes <span class="glyphicon glyphicon-arrow-right"> </span>
+       <button id ="left" class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" ><span class="glyphicon glyphicon-arrow-left" value="false"> </span> <span id="rightText"> </span> </button>
+       	<button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
+		      <button id="right" class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span>
 		      </button>
-			  </div>
-			<div id="matchButtons">
+<!-- 			<div id="matchButtons">
 				<button class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" value ="false"><span class="glyphicon glyphicon-arrow-left"> </span> no </button>
 				<button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
 				<button class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span></button>
-			</div>
+			</div> -->
   	</div>
 	</div>
 </div>
