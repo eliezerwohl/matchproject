@@ -26,13 +26,13 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$("#right").on("click", function(){
 			getMatch();
 		});
-		$(".main, #buttonControl").on("swiperight",function(){
+		$(".main, #buttonControl").on("swiperight",function(event){
+			event.stopImmediatePropagation();
 	  	getMatch();
-	  	console.log("right")
 		});
-		$(".main, #buttonControl").on("swipeleft",function(){
+		$(".main, #buttonControl").on("swipeleft",function(event){
+			event.stopImmediatePropagation();
 	  	next();
-	  	console.log("left")
 		});
 		$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime");
@@ -54,8 +54,8 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	function getMatch(){
 		$(".main, #buttonControl").off("swiperight")
 		$(".main, #buttonControl").off("swiperleft")
-		$(".main, #buttonControl").on("swiperight",function(){save(1)});
-		$(".main, #buttonControl").on("swipeleft",function(){save(0)});
+		$(".main, #buttonControl").on("swiperight",function(event){event.stopImmediatePropagation();save(1)});
+		$(".main, #buttonControl").on("swipeleft",function(event){event.stopImmediatePropagation();save(0)});
 		$(".pull-left").hide();
 		$(".pull-right").show();
 		$("#left, #right").off("click")
