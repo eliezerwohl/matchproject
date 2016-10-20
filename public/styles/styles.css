@@ -121,6 +121,18 @@
 	border: 2px red solid;
 }
 
+#makeConnection h4 {
+	font-weight:600;
+	color:black;
+}
+
+#makeConnection .pull-left {
+ color:#3e3f3a;
+}
+
+#makeConnection .pull-right {
+	color:#325d88;
+}
 .padding {
 	padding:10px;
 }

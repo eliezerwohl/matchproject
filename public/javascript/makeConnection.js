@@ -39,6 +39,8 @@ function chatSize (){
 		$(".pull-left").hide();
 		$(".pull-right").show();
 		$("#matchButtons").show();
+		$("#primeButtons").hide();
+			$(".toggle").show();
 		$.ajax({url: "/getMatch", success: function(result){
 			$(".frontDiv").off("swipeleft swiperight");
 			if (result === false){
@@ -47,11 +49,6 @@ function chatSize (){
 				$("#warningModal").modal("show");
 			}
 			else{
-				$(".frontDiv").hide();
-				$("#primeButtons").hide();
-				$("#matchButtons").show();
-				$(".toggle").show();
-				$("#match").show();
 				append(result, "match");
 			}
 		}});
