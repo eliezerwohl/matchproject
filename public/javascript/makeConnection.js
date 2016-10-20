@@ -1,6 +1,14 @@
 // //make this load on page load
 $( document ).ready(function() {
+function chatSize (){
+    var height = ($(window).height()); 
+    $("#chatBox").css("height", height-147 + "px")
+  }
+  chatSize()
+  $(window).resize(chatSize);
 	function getPrime(){
+	$(".pull-right").hide()
+
 	$(".frontDiv, #primeButtons").show();
 	$(".frontDiv").on("swiperight",function(){
   	getMatch();
@@ -8,12 +16,11 @@ $( document ).ready(function() {
 	$(".frontDiv").on("swipeleft",function(){
   	next();
 	});
-	getPrime();
-
 	$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime");
 		}});
 	}
+		getPrime();
 	function next(){
 			$.ajax({url: "/nextPrime", success: function(result){
 			if (result === false){
@@ -29,6 +36,9 @@ $( document ).ready(function() {
 	});
 //get match
 	function getMatch(){
+		$(".pull-left").hide();
+		$(".pull-right").show();
+		$("#matchButtons").show();
 		$.ajax({url: "/getMatch", success: function(result){
 			$(".frontDiv").off("swipeleft swiperight");
 			if (result === false){
@@ -84,7 +94,8 @@ $( document ).ready(function() {
 	});
 
 	$(".toggle").on("click", function(){
-		$(".frontDiv").toggle()
+		$(".pull-left").toggle();
+		$(".pull-right").toggle()
 	});
 });
 
