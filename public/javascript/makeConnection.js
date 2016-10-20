@@ -1,5 +1,9 @@
 // //make this load on page load
 $( document ).ready(function() {
+	//fixes sensitivity issue on mobile devices
+$.event.special.swipe.scrollSupressionThreshold = (screen.availWidth) / 60;
+$.event.special.swipe.horizontalDistanceThreshold = (screen.availWidth) / 60;
+$.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	function chatSize (){
     var height = ($(window).height()); 
     $("#chatBox").css("height", height-117 + "px")
