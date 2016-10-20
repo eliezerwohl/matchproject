@@ -90,7 +90,20 @@
 	overflow-y:scroll;
 	margin-bottom: 25px
 }
+#connectionBox {
+		overflow-y:scroll;
+	margin-bottom: 10px
+
+}
+
 #chatControl {
+	bottom: 0;
+	left:0;
+	padding: 0px;
+	position: fixed;
+}
+
+#buttonControl {
 	bottom: 0;
 	left:0;
 	padding: 0px;
