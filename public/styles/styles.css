@@ -2,8 +2,12 @@
 	padding:0px;
 }
 
-.toggle, #match, #matchButtons {
+#match, #matchButtons {
 	display: none;
+}
+
+#makeConnection .toggle {
+	visibility: hidden;
 }
 
 #chatHome button h4 {

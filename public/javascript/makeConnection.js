@@ -1,20 +1,34 @@
 // //make this load on page load
 $( document ).ready(function() {
-function chatSize (){
+	function chatSize (){
     var height = ($(window).height()); 
     $("#chatBox").css("height", height-117 + "px")
   }
   chatSize()
   $(window).resize(chatSize);
 	function getPrime(){
+	$("#rightText").text("next")
+	$(".pull-left").show()
 	$(".pull-right").hide()
-
-	$(".frontDiv, #primeButtons").show();
-	$(".frontDiv").on("swiperight",function(){
-  	getMatch();
+	$(".main, #buttonControl").off("swiperight")
+	$(".main, #buttonControl").off("swiperleft")
+	//control
+	$(".save").off("click");
+	$(".toggle").css("visibility", "hidden")
+	$("#left").on("click", function(){
+		next();
 	});
-	$(".frontDiv").on("swipeleft",function(){
+	$("#right").on("click", function(){
+		getMatch();
+	});
+	$(".main, #buttonControl").on("swiperight",function(){
+  	getMatch();
+  	console.log("right")
+
+	});
+	$(".main, #buttonControl").on("swipeleft",function(){
   	next();
+  	console.log("left")
 	});
 	$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime");
@@ -31,32 +45,42 @@ function chatSize (){
 			 }
 		}});
 	}
-	$(".next").on("click", function(){
-		next();
-	});
+
 //get match
 	function getMatch(){
+		$(".main, #buttonControl").off("swiperight")
+		$(".main, #buttonControl").off("swiperleft")
+		$(".main, #buttonControl").on("swiperight",function(){
+  	save(1)
+  	console.log("other right")
+
+	});
+	$(".main, #buttonControl").on("swipeleft",function(){
+	save(0)
+  	console.log("other left")
+	});
+
 		$(".pull-left").hide();
 		$(".pull-right").show();
-		$("#matchButtons").show();
-		$("#primeButtons").hide();
-			$(".toggle").show();
+		$("#left, #right").off("click")
+		$("#rightText").text("no")
+		$(".toggle").css("visibility", "visible")
+		$(".save").on("click", function(){
+		var data =(this).value;
+		save(data);
+		});
 		$.ajax({url: "/getMatch", success: function(result){
-			$(".frontDiv").off("swipeleft swiperight");
+
 			if (result === false){
 				//you've matched everybody
-				getPrime()
 				$("#warningModal").modal("show");
+				getPrime();
 			}
-			else{
-				append(result, "match");
-			}
+			else{append(result, "match");}
 		}});
 	}
 
-	$("#getMatch").on("click", function(){
-		getMatch();
-	});
+
 
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
@@ -70,25 +94,22 @@ function chatSize (){
 		}});
 	}
 
-	$("#nextMatch").on("click", function(){
-		nextMatch();
-	})
+	// $("#nextMatch").on("click", function(){
+	// 	nextMatch();
+	// })
 
 	function save(data){
 		$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
 			nextMatch();
 		}});
 	}
-	$(".save").on("click", function(){
-		var data =(this).value;
-		save(data);
-	});
-	$(".matchDiv").on("swipeleft",function(){
-  	save(0);
-	});
-	$(".matchDiv").on("swiperight",function(){
-  	save(1);
-	});
+
+	// $(".buttonControl, .main").on("swipeleft",function(){
+ //  	save(0);
+	// });
+	// $(".matchDiv").on("swiperight",function(){
+ //  	save(1);
+	// });
 
 	$(".toggle").on("click", function(){
 		$(".pull-left").toggle();

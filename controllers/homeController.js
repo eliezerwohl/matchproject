@@ -68,6 +68,7 @@ exports.score = function(socket, io) {
     models.User.findOne({
       where:{id:socket.handshake.session.UserId}
     }).then(function(data){
+      //error msg Cannot read property 'dataValues' of null
       if (data.dataValues.score != socket.score){
         callback(data.dataValues.score)
         io.to(socket.id).emit('score', data.dataValues.score);}
