@@ -1,5 +1,9 @@
 $( document ).ready(function() { 
 	var socket = io();
+		socket.on("onlineStatus", function(data){
+		debugger
+		console.log(data)
+	})
   socket.on("score", function(score){
  		$("#score").text(score);
 	});
