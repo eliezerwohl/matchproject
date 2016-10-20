@@ -22,9 +22,12 @@ exports.signUp = function(req, res){
           password: saltyhash(req.body.password),
         }).then(function(data) {
           var tempId = data.dataValues.id;
+          models.Online.create({
+             UserId:data.dataValues.id,
+          })
             models.Answer.create({
               UserId:data.dataValues.id,
-            });
+            })
           res.redirect("/?msg=Thanks for registering, please login.");
         });
       }

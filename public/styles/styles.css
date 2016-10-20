@@ -64,6 +64,10 @@
 .pad {
 	padding-top: 45px;
 }
+
+#makeConnection #warningModal button {
+	float:right;
+}
 .navbar-default {
 	margin-bottom:  0px;
 }
