@@ -53,8 +53,7 @@
 	opacity: .7
 }
 
-#makeConnection .modal-dialog,
-#myMatch .modal-dialog {
+.modal-dialog {
 	margin-top: 80px
 }
 .notify {

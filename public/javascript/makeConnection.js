@@ -10,35 +10,35 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
   }
   chatSize()
   $(window).resize(chatSize);
-	function getPrime(){
-	$("#rightText").text("next")
-	$(".pull-left").show()
-	$(".pull-right").hide()
-	$(".main, #buttonControl").off("swiperight")
-	$(".main, #buttonControl").off("swiperleft")
-	//control
-	$(".save").off("click");
-	$(".toggle").css("visibility", "hidden")
-	$("#left").on("click", function(){
-		next();
-	});
-	$("#right").on("click", function(){
-		getMatch();
-	});
-	$(".main, #buttonControl").on("swiperight",function(){
-  	getMatch();
-  	console.log("right")
 
-	});
-	$(".main, #buttonControl").on("swipeleft",function(){
-  	next();
-  	console.log("left")
-	});
-	$.ajax({url: "/findPrime", success: function(result){;
+	function getPrime(){
+		$("#rightText").text("next")
+		$(".pull-left").show()
+		$(".pull-right").hide()
+		$(".main, #buttonControl").off("swiperight")
+		$(".main, #buttonControl").off("swiperleft")
+		//control
+		$(".save").off("click");
+		$(".toggle").css("visibility", "hidden")
+		$("#left").on("click", function(){
+			next();
+		});
+		$("#right").on("click", function(){
+			getMatch();
+		});
+		$(".main, #buttonControl").on("swiperight",function(){
+	  	getMatch();
+	  	console.log("right")
+		});
+		$(".main, #buttonControl").on("swipeleft",function(){
+	  	next();
+	  	console.log("left")
+		});
+		$.ajax({url: "/findPrime", success: function(result){;
 		 	append(result, "prime");
 		}});
 	}
-		getPrime();
+	getPrime();
 	function next(){
 			$.ajax({url: "/nextPrime", success: function(result){
 			if (result === false){
@@ -54,16 +54,8 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	function getMatch(){
 		$(".main, #buttonControl").off("swiperight")
 		$(".main, #buttonControl").off("swiperleft")
-		$(".main, #buttonControl").on("swiperight",function(){
-  	save(1)
-  	console.log("other right")
-
-	});
-	$(".main, #buttonControl").on("swipeleft",function(){
-	save(0)
-  	console.log("other left")
-	});
-
+		$(".main, #buttonControl").on("swiperight",function(){save(1)});
+		$(".main, #buttonControl").on("swipeleft",function(){save(0)});
 		$(".pull-left").hide();
 		$(".pull-right").show();
 		$("#left, #right").off("click")
@@ -74,7 +66,6 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		save(data);
 		});
 		$.ajax({url: "/getMatch", success: function(result){
-
 			if (result === false){
 				//you've matched everybody
 				$("#warningModal").modal("show");
@@ -83,8 +74,6 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 			else{append(result, "match");}
 		}});
 	}
-
-
 
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
@@ -98,26 +87,14 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		}});
 	}
 
-	// $("#nextMatch").on("click", function(){
-	// 	nextMatch();
-	// })
-
 	function save(data){
 		$.ajax({url: "/saveMatch", type:"POST", data:{data:data}, success: function(result){
 			nextMatch();
 		}});
 	}
 
-	// $(".buttonControl, .main").on("swipeleft",function(){
- //  	save(0);
-	// });
-	// $(".matchDiv").on("swiperight",function(){
- //  	save(1);
-	// });
-
 	$(".toggle").on("click", function(){
-		$(".pull-left").toggle();
-		$(".pull-right").toggle()
+		$(".pull-left, .pull-right").toggle();
 	});
 });
 

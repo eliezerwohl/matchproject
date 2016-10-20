@@ -1,70 +1,16 @@
-
-<!-- <div id="makeConnection">
-	<div id="warningModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog"> -->
-	    <!-- Modal content-->
-	    <!-- <div class="modal-content">
-	      <div class="modal-body">
-	        <h2>There are no more matches for this connection </h2>
-	      </div>
-	      <div class="modal-footer">
-			  	<button type="button" class="col-xs-12 col-md-4 pull-right btn btn-info" data-dismiss="modal">Ok</button>
-		  	</div>
-	    </div>
-	  </div>
-	</div> -->
-<!-- 	<button class="col-xs-12 col-md-4 col-md-offset-4 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
-	<div class="backDiv col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 col-xs-12">
-		<div class="frontDiv">
-			<div class="padding">
-				<h3 class="text-center">Connection </h3>
-		    <h4 >Who is your favorite reggae group/star</h4>
-				<p name="a091201" id="a091201">
-				</p>
-				<h4> Please explain why you didn't choose bob marley </h4>
-				<p name="a091202" id="a091202"> </p>
-				<h4>Cha la </h4>
-				<p name="a091203" id="a091203"></p>
-				<h4>Why is it always yamcha?  </h4>
-				<p name="a091204" id="a091204"></p>
-		    <div id="primeButtons">
-		      <button class="btn col-xs-5 pull-right btn-success" id="getMatch" >yes <span class="glyphicon glyphicon-arrow-right"> </span>
-		      </button>
-		      <button class="btn col-xs-5 btn-danger next pull-left" ><span class="glyphicon glyphicon-arrow-left"> </span> next </button>
-			  </div>
-	  	</div>
-		</div>
-		<div class="padding matchDiv">
-			<h3 class="text-center">Match</h3>
-			<h4 >Who is your favorite reggae group/star</h4>
-			<p name="a091201" id="ma091201"></p>
-			<h4> Please explain why you didn't choose bob marley </h4>
-			<p name="a091202" id="ma091202"> </p>
-			<h4>Cha la </h4>
-			<p name="a091203" id="ma091203"></p>
-			<h4>Why is it always yamcha?  </h4>
-			<p name="a091204" id="ma091204"></p>
-			<button class="btn col-xs-5 pull-right btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span></button>
-			<button class="btn col-xs-5 pull-left btn-danger save" value ="false"><span class="glyphicon glyphicon-arrow-left"> </span> no </button>
-		</div>
-	</div>
-</div>
-<script type="text/javascript" src="/javascript/makeConnection.js"></script> -->
 <div id="warningModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog"> 
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-body">
-	        <h2>There are no more matches for this connection </h2>
-	      </div>
-	      <div class="modal-footer">
-			  	<button type="button" class="col-xs-12 col-md-4 pull-right btn btn-info" data-dismiss="modal">Ok</button>
-		  	</div>
-	    </div>
-	  </div>
-	</div>
-
-
+  <div class="modal-dialog"> 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2>There are no more matches for this connection </h2>
+      </div>
+      <div class="modal-footer">
+		  	<button type="button" class="col-xs-12 col-md-4 pull-right btn btn-info" data-dismiss="modal">Ok</button>
+	  	</div>
+    </div>	
+  </div>
+</div>
 <div id="makeConnection" class="col-xs-12 col-md-6 col-md-offset-3">
   <div id="chatBox" class="col-md-12">
     <div class="padding">
@@ -83,34 +29,29 @@
 				<h4 class="text-center"> Please explain why you didn't choose bob marley </h4>
 			</div>
 			<div class="row">
-			<p name="a091202" class= "pull-right" id="ma091202"> </p>
+				<p name="a091202" class= "pull-right" id="ma091202"> </p>
 				<p name="a091202"  class= "pull-left" id="a091202"> </p>
 			</div>
 			<div class="row">
 				<h4 class="text-center">Cha la </h4>
 			</div>
 			<div class="row">
-						<p name="a091203" class= "pull-right" id="ma091203"></p>
+				<p name="a091203" class= "pull-right" id="ma091203"></p>
 				<p name="a091203" class= "pull-left" id="a091203"></p>
 			</div>
 			<div class="row">
 				<h4 class="text-center">Why is it always yamcha?  </h4>
 			</div>
 			<div class="row">
-					<p name="a091204" class= "pull-right" id="ma091204"></p>
+				<p name="a091204" class= "pull-right" id="ma091204"></p>
 				<p name="a091204" class= "pull-left" id="a091204"></p>
 			</div>
   	</div>
-  <div id="buttonControl" class="col-xs-12">
-       <button id ="left" class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" ><span class="glyphicon glyphicon-arrow-left" value="false"> </span> <span id="rightText"> </span> </button>
-       	<button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
-		      <button id="right" class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span>
-		      </button>
-<!-- 			<div id="matchButtons">
-				<button class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" value ="false"><span class="glyphicon glyphicon-arrow-left"> </span> no </button>
-				<button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
-				<button class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span></button>
-			</div> -->
+ 		<div id="buttonControl" class="col-xs-12">
+      <button id ="left" class="btn col-sm-2 col-xs-3 col-sm-offset-2 btn-danger save" ><span class="glyphicon glyphicon-arrow-left" value="false"> </span> <span id="rightText"> </span> </button>
+      <button class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-2 btn-default toggle"> <span class="glyphicon glyphicon-refresh"> </span> </button>
+		  <button id="right" class="btn col-sm-2  col-xs-3 col-xs-offset-2 col-sm-offset-1 btn-success save" value="true">yes <span class="glyphicon glyphicon-arrow-right"> </span>
+		  </button>
   	</div>
 	</div>
 </div>
