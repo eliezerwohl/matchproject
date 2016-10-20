@@ -37,6 +37,10 @@ var NotifyConnect = connection.define ("NotifyConnect", {
   //userId
   //delete aftet done
 })
+
+var Online = connection.define ("Online", {
+  online:{type:Sequelize.BOOLEAN, defaultValue:0}
+});
 var Matched = connection.define("Matched", {
   chat:{type:Sequelize.BOOLEAN, defaultValue:0},
   user1:Sequelize.INTEGER,
@@ -86,7 +90,8 @@ Message.belongsTo(User);
 Message.hasOne(Matched);
 Matched.belongsTo(Message);
 
-
+User.hasOne(Online);
+Online.belongsTo(User);
 
 User.hasMany(Vote);
 Vote.belongsTo(User);
@@ -104,6 +109,7 @@ exports.Vote = Vote;
 exports.Matched = Matched;
 exports.User=User;
 exports.Answer=Answer;
+exports.Online = Online;
 
 
 

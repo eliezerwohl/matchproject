@@ -60,7 +60,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$(".pull-right").show();
 		$("#left, #right").off("click")
 		$("#rightText").text("no")
-		$(".toggle").css("visibility", "visible")
+
 		$(".save").on("click", function(){
 		var data =(this).value;
 		save(data);
@@ -71,7 +71,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 				$("#warningModal").modal("show");
 				getPrime();
 			}
-			else{append(result, "match");}
+			else{append(result, "match");$(".toggle").css("visibility", "visible");}
 		}});
 	}
 
