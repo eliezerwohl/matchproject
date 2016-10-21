@@ -9,7 +9,12 @@ $( document ).ready(function() {
   $(window).resize(chatSize);
   var id
   var socket = io();
+  var uuid;
 	$.ajax({url: "/chatName", success: function(result){
+    debugger
+    uuid = result.uuid
+
+   $("#status").append("<span id='" + result.uuid  + "' class=''><span class='glyphicon glyphicon-certificate'> </span></span></span>")
     $("#name").append(result.firstname + " " + result.lastname)
   }}).then(function(){
     $.ajax({url: "/chatHistory", success: function(result){
@@ -17,6 +22,15 @@ $( document ).ready(function() {
       $('#messages').append($('<div>').text(result[i].message).addClass(result[i].user).addClass("col-xs-12"));
     }
     }}).then(function(){
+      debugger
+      socket.emit("online", [uuid])
+  });
+  socket.on("onlineStatus", function(data){
+    debugger
+    for (var i = 0; i < data.length; i++) {
+      $("#"+ data[i].user).removeClass().addClass("online" + data[i].online)
+    }
+
       $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
       socket.emit('room', "data");
     });

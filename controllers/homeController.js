@@ -160,7 +160,6 @@ exports.onlineStatus = function(){
       
 exports.online = function(socket, io){
   var data = socket.handshake.session.dataArray
-  debugger
   function online(){
       models.Online.findAll({
     where:{

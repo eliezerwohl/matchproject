@@ -3,9 +3,10 @@ $( document ).ready(function() {
 	$.ajax({url: "/findChat", success: function(result){
 	 chatArray = []
 		for (var i = 0; i < result.length; i++) {
+			debugger
 
 			chatArray.push(result[i].id)
-		  $(".target").append("<button class='chat col-xs-12 btn ' value=" 
+		  $(".target").append("<button data-match='" + result[i].id +"'class='chat col-xs-12 btn ' value=" 
 		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
 		 	+result[i].lastname + ":</h4><span class='pull-right'><span id='" + result[i].id  + "' class=''><span class='glyphicon glyphicon-certificate'> </span></span></span><br><span id='" + result[i].updateId + "' class='pull-left " + 
 		 	 result[i].checked +  result[i].user
@@ -23,7 +24,8 @@ $( document ).ready(function() {
 
 	})
 	$(".target").on("click", ".chat", function(){
-		var data = this.value;
+		debugger
+				var data = $(this).attr("data-match");
 		$.ajax({url: "/chatId", type:"POST", data:{data:data},  success: function(result){
 			 window.location = "/chat"
 		}});
