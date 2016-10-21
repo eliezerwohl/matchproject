@@ -5,9 +5,9 @@ $( document ).ready(function() {
 		for (var i = 0; i < result.length; i++) {
 
 			chatArray.push(result[i].id)
-		  $(".target").append("<button class='chat col-xs-12 btn btn-default' value=" 
+		  $(".target").append("<button class='chat col-xs-12 btn ' value=" 
 		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
-		 	+result[i].lastname + ":</h4><br><span id='" + result[i].updateId + "' class='pull-left " + 
+		 	+result[i].lastname + ":</h4><span class='pull-right'><span id='" + result[i].id  + "' class=''><span class='glyphicon glyphicon-certificate'> </span></span></span><br><span id='" + result[i].updateId + "' class='pull-left " + 
 		 	 result[i].checked +  result[i].user
 		 	+"'>"
 		 	+ result[i].msg + "</span></button>")
@@ -17,8 +17,10 @@ $( document ).ready(function() {
 	socket.emit("online", chatArray)
 	});
 	socket.on("onlineStatus", function(data){
-		
-		console.log(data)
+		for (var i = 0; i < data.length; i++) {
+			$("#"+ data[i].user).removeClass().addClass("online" + data[i].online)
+		}
+
 	})
 	$(".target").on("click", ".chat", function(){
 		var data = this.value;
