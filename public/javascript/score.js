@@ -13,6 +13,17 @@ $( document ).ready(function() {
 	socket.on("newMessage", function(newMessage){
  		$("#newMessage").text(newMessage);
 	});
+	socket.on("foundChat", function(result) {
+			for (var i = 0; i < result.length; i++) {
+		  $(".target").append("<button class='chat col-xs-12 btn btn-default' value=" 
+		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
+		 	+result[i].lastname + ":</h4><br><span id='" + result[i].updateId + "' class='pull-left " + 
+		 	 result[i].checked +  result[i].user
+		 	+"'>"
+		 	+ result[i].msg + "</span></button>")
+		}
+	// socket.emit("online")
+	})
 	socket.on("incomingMessage", function(data){
  		$("#" + data.updateId).text(data.msg).removeClass().addClass("falseother pull-left");
 	});
@@ -22,4 +33,8 @@ $( document ).ready(function() {
   	//possible android fix
     window.location = "/"
 	});
+		socket.on("chatIdDone", function(data){
+				window.location ="/chat"
+
+		})
 });

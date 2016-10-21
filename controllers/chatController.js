@@ -2,14 +2,17 @@ var session = require('express-session');
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
-exports.findChat =function(req, res){
-	req.session.chatIds = [];
+exports.findchat = function(socket, io){
+	socket.handshake.session.chatIds = [];
+	function callback2(data){
+		socket.chatArray = data;
+	}
 	models.Matched.findAll({
 		where:{
 			chat:1,
 			$or: {
-		    user1:req.session.UserId,
-		    user2: req.session.UserId,
+		    user1:socket.handshake.session.UserId,
+		    user2: socket.handshake.session.UserId,
 			}
 		},
 		include: [{
@@ -17,37 +20,43 @@ exports.findChat =function(req, res){
 	        where: { MessageId: Sequelize.col('Message.id') }
 	    }],
 	}).then(function(data){
-		req.session.matchData = data
+		function callback(data){
+						callback2(data)
+					}
+		socket.handshake.session.matchData = data
 		for (var i = 0; i < data.length; i++) {
-			if(data[i].dataValues.user1 === req.session.UserId){
-				req.session.chatIds.push(data[i].dataValues.user2);
+			if(data[i].dataValues.user1 === socket.handshake.session.UserId){
+				socket.handshake.session.chatIds.push(data[i].dataValues.user2);
 			}
-			else{req.session.chatIds.push(data[i].dataValues.user1)}
+			else{socket.handshake.session.chatIds.push(data[i].dataValues.user1)}
 		}
-		req.session.save()
+		socket.handshake.session.save()
 		models.User.findAll({
 			where:{
-						id:{$in:req.session.chatIds}
+						id:{$in:socket.handshake.session.chatIds}
 					}
+					
 		}).then(function(data){
 			//putting it in array so user can send back the i of the array, without
 			//knowing the other users id
-			req.session.chatArray = [];
+			socket.handshake.session.chatArray = [];
 			for (var i = 0; i < data.length; i++) {
 				var user;
-				if(req.session.matchData[i].dataValues.Message.dataValues.UserId == req.session.UserId){
+				if(socket.handshake.session.matchData[i].dataValues.Message.dataValues.UserId == socket.handshake.session.UserId){
 						user = "user"
 					}
 				else{user="other"}
-					debugger
-				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, firstname:data[i].dataValues.firstname});
+				socket.handshake.session.chatArray.push({arrayId:i, updateId:socket.handshake.session.matchData[i].dataValues.id, checked: socket.handshake.session.matchData[i].dataValues.Message.dataValues.checked,msg:socket.handshake.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, firstname:data[i].dataValues.firstname});
 			}
-			res.send(req.session.chatArray);
+		
+			callback(socket.handshake.session.chatArray)
+			io.to(socket.id).emit("foundChat", socket.handshake.session.chatArray);
 		});
 	});
 }
 
 exports.chatHistory = function(req, res){
+
 	models.Message.findAll({
 		//go back and limit the returned data
 		where:{
@@ -68,19 +77,21 @@ exports.chatHistory = function(req, res){
 	})
 }
 
-exports.chatName = function(req, res){
-		res.send(req.session.match)
+exports.chatName = function(socket, io){
+	debugger
+		io.to(socket.id).emit("chatNameDone", socket.handshake.session.match)
 }
-exports.chatId = function(req, res){
-	req.session.chatId = req.session.matchData[req.body.data].id;
-	if (req.session.matchData[req.body.data].user1 === req.session.UserId){
-		req.session.otherChat = req.session.matchData[req.body.data].user2
+exports.chatId = function(socket, io, data){
+	//not saving here for some reason
+	socket.handshake.session.chatId = socket.handshake.session.matchData[data].id;
+	if (socket.handshake.session.matchData[data].user1 === socket.handshake.session.UserId){
+		socket.handshake.session.otherChat = socket.handshake.session.matchData[data].user2
 	}
 	else{
-		req.session.otherChat = req.session.matchData[req.body.data].user1
+		socket.handshake.session.otherChat = socket.handshake.session.matchData[data].user1
 	}
-	req.session.match = req.session.chatArray[req.body.data]
-	res.send("done");
+	socket["testing"] = socket.chatArray[data]
+	io.to(socket.id).emit("chatIdDone", "computer world");
 }
 
 exports.save = function(msg, socket, room){

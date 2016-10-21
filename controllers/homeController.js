@@ -113,6 +113,7 @@ exports.checkedNotify = function(socket, io){
 }
 
 exports.newMessage = function(socket, io, location){
+
   function newMessage(){
     models.Message.findAndCountAll({
       where:{
@@ -144,8 +145,18 @@ exports.newMessage = function(socket, io, location){
   setInterval(newMessage, 1000);
 }
 
-exports.onlineStatus = function(){
-  io.to(socket.id).emit('onlineStatus', "hello")
+exports.onlineStatus = function(socket, io){
+  debugger
+  models.Online.findAll({
+    where:{
+    UserId:{$in:socket.handshake.session.chatIds}
+  }
+  }).then(function(data){
+    debugger
+      io.to(socket.id).emit('onlineStatus', "hello")
+
+  })
+
 
 }
       

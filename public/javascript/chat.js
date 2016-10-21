@@ -9,18 +9,21 @@ $( document ).ready(function() {
   $(window).resize(chatSize);
   var id
   var socket = io();
-	$.ajax({url: "/chatName", success: function(result){
-    $("#name").append(result.firstname + " " + result.lastname)
-  }}).then(function(){
-    $.ajax({url: "/chatHistory", success: function(result){
-    for (var i = 0; i < result.length; i++) {
-      $('#messages').append($('<div>').text(result[i].message).addClass(result[i].user).addClass("col-xs-12"));
-    }
-    }}).then(function(){
-      $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
-      socket.emit('room', "data");
-    });
-  });
+  socket.emit("chatName")
+
+
+	// $.ajax({url: "/chatName", success: function(result){
+ //    $("#name").append(result.firstname + " " + result.lastname)
+ //  }}).then(function(){
+ //    $.ajax({url: "/chatHistory", success: function(result){
+ //    for (var i = 0; i < result.length; i++) {
+ //      $('#messages').append($('<div>').text(result[i].message).addClass(result[i].user).addClass("col-xs-12"));
+ //    }
+ //    }}).then(function(){
+ //      $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+ //      socket.emit('room', "data");
+ //    });
+ //  });
 
   function sendMessage(){
     var msg =  $('#m').val()

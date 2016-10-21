@@ -73,10 +73,22 @@ module.exports = function(app, ioInstance) {
     socket.on("leave", function(){
       socket.leave(socket.handshake.session.chatId);
     })
+    socket.on("chatName", function(){
+      chat.chatName(socket, io)
+    })
     socket.on("online", function(){
-      io.to(socket.id).emit('onlineStatus', "hello")
+
+      home.onlineStatus(sock, io)
+    })
+
+    socket.on("chatId", function(data){
+      chat.chatId(sock, io, data)
+    })
+    socket.on("findchat", function(){
+      chat.findchat(sock, io)
     })
     socket.on("login", function(location){
+
       socket.leave(socket.handshake.session.chatId);
       home.score(sock, io);
       home.notifyConnect(sock, io);
@@ -159,7 +171,7 @@ module.exports = function(app, ioInstance) {
   app.get("/chatName", chat.chatName);
   app.post("/chatId", chat.chatId)
   app.get("/chatHistory", chat.chatHistory)
-  app.get("/findChat", chat.findChat);
+  // app.get("/findChat", chat.findChat);
 	app.get("/", function(req,res){
 	  res.render("index", {layout: "mainFront"});
 	});
