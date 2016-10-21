@@ -82,7 +82,8 @@ exports.chatName = function(req, res){
 	})
 }
 exports.chatId = function(req, res){
-	req.session.MatchUuid = req.body.data
+	req.session.MatchUuid = req.body.data.uuid
+	req.session.chatId = req.body.data.match;
 	res.send("okay")
 }
 
