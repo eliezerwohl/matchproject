@@ -3,6 +3,7 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.findChat =function(req, res){
+	//not saving to req.session
 	req.session.chatIds = [];
 	models.Matched.findAll({
 		where:{
@@ -24,6 +25,7 @@ exports.findChat =function(req, res){
 			}
 			else{req.session.chatIds.push(data[i].dataValues.user1)}
 		}
+		debugger
 		req.session.save()
 		models.User.findAll({
 			where:{
@@ -39,9 +41,10 @@ exports.findChat =function(req, res){
 						user = "user"
 					}
 				else{user="other"}
-					debugger
+					
 				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, id:data[i].dataValues.uuid ,firstname:data[i].dataValues.firstname});
 			}
+			req.session.save()
 			res.send(req.session.chatArray);
 		});
 	});

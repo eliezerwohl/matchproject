@@ -63,8 +63,22 @@ module.exports = function(app, ioInstance) {
   })); 
    io.on('connection', function(socket){
     sock = socket
+    models.Online.update({
+      online:1
+    },{
+      where:{
+        id:socket.handshake.session.UserId
+      }
+    })
     console.log('a user connected');
     socket.on('disconnect', function(){
+        models.Online.update({
+      online:0
+    },{
+      where:{
+        id:socket.handshake.session.UserId
+      }
+    })
       console.log('user disconnected');
     });
     socket.on("notify", function(){
@@ -73,7 +87,10 @@ module.exports = function(app, ioInstance) {
     socket.on("leave", function(){
       socket.leave(socket.handshake.session.chatId);
     })
-    socket.on("online", function(){
+    socket.on("online", function(data){
+      debugger
+
+
       io.to(socket.id).emit('onlineStatus', "hello")
     })
     socket.on("login", function(location){
