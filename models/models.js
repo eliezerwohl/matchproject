@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === 'production') {
     type: Sequelize.STRING,
     unique: true
   },
+  uuid:Sequelize.STRING,
   password: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
@@ -39,6 +40,7 @@ var NotifyConnect = connection.define ("NotifyConnect", {
 })
 
 var Online = connection.define ("Online", {
+  user:Sequelize.STRING,
   online:{type:Sequelize.BOOLEAN, defaultValue:0}
 });
 var Matched = connection.define("Matched", {
@@ -90,8 +92,6 @@ Message.belongsTo(User);
 Message.hasOne(Matched);
 Matched.belongsTo(Message);
 
-User.hasOne(Online);
-Online.belongsTo(User);
 
 User.hasMany(Vote);
 Vote.belongsTo(User);
