@@ -22,8 +22,10 @@ $( document ).ready(function() {
 
 	})
 	$(".target").on("click", ".chat", function(){
-		debugger
-				var data = $(this).attr("data-match");
+				var uuid = this.value;
+				var match = $(this).attr("data-match");
+				debugger
+				data:{match:match, uuid: uuid}
 		$.ajax({url: "/chatId", type:"POST", data:{data:data},  success: function(result){
 			 window.location = "/chat"
 		}});
