@@ -156,6 +156,52 @@ exports.newMessage = function(socket, io, location){
 
 exports.onlineStatus = function(){
   io.to(socket.id).emit('onlineStatus', "hello")
-
 }
       
+exports.online = function(socket, io){
+  var data = socket.handshake.session.dataArray
+  debugger
+  function online(){
+      models.Online.findAll({
+    where:{
+      user:{$in:data}
+    },
+     attributes: ["user", "online" ]
+  }).then(function(data){
+    if (socket.onlineStatus == undefined){
+      io.to(socket.id).emit('onlineStatus', data);      
+      callback(data)
+    }
+    else{
+      var updateArray = []
+      for (var i = 0; i < data.length; i++) {
+        for (var j = 0; j < socket.onlineStatus.length; j++) {
+
+        if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user  && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
+          updateArray.push(data[i]);
+          socket.onlineStatus[j].dataValues.online = data[i].dataValues.online 
+          break
+        }
+      }
+    }
+    if (updateArray.length < 1){
+      return true
+    }
+    else {
+    callback(socket.onlineStatus);
+    io.to(socket.id).emit('onlineStatus', updateArray); 
+    }     
+
+    }
+
+   
+  })
+
+  }
+
+  online()
+   function callback(data){
+    socket["onlineStatus"] = data
+  }
+  setInterval(online, 2000);
+}
