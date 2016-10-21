@@ -88,10 +88,13 @@ module.exports = function(app, ioInstance) {
       socket.leave(socket.handshake.session.chatId);
     })
     socket.on("online", function(data){
-      debugger
+     
+      socket.handshake.session.dataArray = data
+      home.online(socket, io, data)
+      // use the data to search for online
 
 
-      io.to(socket.id).emit('onlineStatus', "hello")
+      // io.to(socket.id).emit('onlineStatus', "hello")
     })
     socket.on("login", function(location){
       socket.leave(socket.handshake.session.chatId);

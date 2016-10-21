@@ -3,6 +3,7 @@ $( document ).ready(function() {
 	$.ajax({url: "/findChat", success: function(result){
 	 chatArray = []
 		for (var i = 0; i < result.length; i++) {
+
 			chatArray.push(result[i].id)
 		  $(".target").append("<button class='chat col-xs-12 btn btn-default' value=" 
 		 	+ result[i].arrayId + "><h4 class='pull-left'>" + result[i].firstname + " "
@@ -12,11 +13,11 @@ $( document ).ready(function() {
 		 	+ result[i].msg + "</span></button>")
 		}
 	}}).then(function(){
-		debugger
+		
 	socket.emit("online", chatArray)
 	});
 	socket.on("onlineStatus", function(data){
-		debugger
+		
 		console.log(data)
 	})
 	$(".target").on("click", ".chat", function(){
