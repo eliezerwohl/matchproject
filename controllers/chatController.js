@@ -39,7 +39,7 @@ exports.findChat =function(req, res){
 					}
 				else{user="other"}
 					debugger
-				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, firstname:data[i].dataValues.firstname});
+				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, id:data[i].dataValues.uuid ,firstname:data[i].dataValues.firstname});
 			}
 			res.send(req.session.chatArray);
 		});

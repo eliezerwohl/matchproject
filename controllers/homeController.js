@@ -15,7 +15,17 @@ exports.signUp = function(req, res){
       if (results) {
         res.redirect("/adminCreate?msg=Your email is already registered, please login.");
       } else {
+        function generateUUID() {
+        var d = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+         });
+        return uuid;
+        };
         models.User.create({
+          uuid:generateUUID(),
           lastname: (req.body.lastName).trim(),
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
@@ -23,7 +33,7 @@ exports.signUp = function(req, res){
         }).then(function(data) {
           var tempId = data.dataValues.id;
           models.Online.create({
-             UserId:data.dataValues.id,
+             user:data.dataValues.uuid,
           })
             models.Answer.create({
               UserId:data.dataValues.id,
