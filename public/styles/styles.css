@@ -18,6 +18,14 @@
 	margin-top: 20px;
 }
 
+button .onlinetrue{
+	color:green;
+}
+
+button .onlinefalse {
+	color:red;
+}
+
 #makeConnection .backDiv button {
 	font-size: 20px
 }
