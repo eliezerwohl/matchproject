@@ -127,7 +127,7 @@ exports.newMessage = function(socket, io, location){
                 msg:data.rows[i].dataValues.message,
                 updateId:data.rows[i].dataValues.MatchedId
                 }
-                debugger
+
             io.to(socket.id).emit('incomingMessage', incomingMessage)    
           }
          
@@ -143,3 +143,9 @@ exports.newMessage = function(socket, io, location){
   }
   setInterval(newMessage, 1000);
 }
+
+exports.onlineStatus = function(){
+  io.to(socket.id).emit('onlineStatus', "hello")
+
+}
+      

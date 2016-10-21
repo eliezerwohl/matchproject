@@ -73,6 +73,9 @@ module.exports = function(app, ioInstance) {
     socket.on("leave", function(){
       socket.leave(socket.handshake.session.chatId);
     })
+    socket.on("online", function(){
+      io.to(socket.id).emit('onlineStatus', "hello")
+    })
     socket.on("login", function(location){
       socket.leave(socket.handshake.session.chatId);
       home.score(sock, io);

@@ -9,7 +9,13 @@ $( document ).ready(function() {
 		 	+"'>"
 		 	+ result[i].msg + "</span></button>")
 		}
-	}});
+	}}).then(function(){
+		socket.emit("online")
+	});
+	socket.on("onlineStatus", function(data){
+		debugger
+		console.log(data)
+	})
 	$(".target").on("click", ".chat", function(){
 		var data = this.value;
 		$.ajax({url: "/chatId", type:"POST", data:{data:data},  success: function(result){

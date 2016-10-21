@@ -3,7 +3,7 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.findChat =function(req, res){
-	chatIds = [];
+	req.session.chatIds = [];
 	models.Matched.findAll({
 		where:{
 			chat:1,
@@ -20,13 +20,14 @@ exports.findChat =function(req, res){
 		req.session.matchData = data
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
-				chatIds.push(data[i].dataValues.user2);
+				req.session.chatIds.push(data[i].dataValues.user2);
 			}
-			else{chatIds.push(data[i].dataValues.user1)}
+			else{req.session.chatIds.push(data[i].dataValues.user1)}
 		}
+		req.session.save()
 		models.User.findAll({
 			where:{
-						id:{$in:chatIds}
+						id:{$in:req.session.chatIds}
 					}
 		}).then(function(data){
 			//putting it in array so user can send back the i of the array, without
