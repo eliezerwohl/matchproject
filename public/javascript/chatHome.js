@@ -12,7 +12,6 @@ $( document ).ready(function() {
 		 	+ result[i].msg + "</span></button>")
 		}
 	}}).then(function(){
-		
 	socket.emit("online", chatArray)
 	});
 	socket.on("onlineStatus", function(data){
