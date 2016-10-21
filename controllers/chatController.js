@@ -19,6 +19,7 @@ exports.findChat =function(req, res){
 	    }],
 	}).then(function(data){
 		req.session.matchData = data
+		req.session.save()
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
 				req.session.chatIds.push(data[i].dataValues.user2);
@@ -40,7 +41,7 @@ exports.findChat =function(req, res){
 						user = "user"
 					}
 				else{user="other"}
-					debugger
+					
 				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, id:data[i].dataValues.uuid ,firstname:data[i].dataValues.firstname});
 			}
 			req.session.save()
@@ -71,18 +72,18 @@ exports.chatHistory = function(req, res){
 }
 
 exports.chatName = function(req, res){
-		res.send(req.session.match)
+	models.User.findOne({
+		where:{
+			uuid:req.session.MatchUuid
+		},
+		attributes:["firstname", "lastname", "uuid"]
+	}).then(function(data){
+		res.send(data)
+	})
 }
 exports.chatId = function(req, res){
-	req.session.chatId = req.session.matchData[req.body.data].id;
-	if (req.session.matchData[req.body.data].user1 === req.session.UserId){
-		req.session.otherChat = req.session.matchData[req.body.data].user2
-	}
-	else{
-		req.session.otherChat = req.session.matchData[req.body.data].user1
-	}
-	req.session.match = req.session.chatArray[req.body.data]
-	res.send("done");
+	req.session.MatchUuid = req.body.data
+	res.send("okay")
 }
 
 exports.save = function(msg, socket, room){
