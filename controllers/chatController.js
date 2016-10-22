@@ -69,8 +69,11 @@ exports.chatHistory = function(req, res){
 exports.chatName = function(req, res){
 	models.User.findOne({
 		where:{uuid:req.session.MatchUuid},
-		attributes:["firstname", "lastname", "uuid"]
+		attributes:["firstname", "lastname", "uuid", "id"]
 	}).then(function(data){
+		req.session.otherChat = data.dataValues.id;
+		req.session.save();
+		//can't send id back
 		res.send(data)
 	})
 }
@@ -81,6 +84,8 @@ exports.chatId = function(req, res){
 }
 
 exports.save = function(msg, socket, room){
+	debugger
+	//change data type
 	var checked 
 	if (room < 2){checked = 0}
 	else{checked = 1}
@@ -88,7 +93,7 @@ exports.save = function(msg, socket, room){
 		message:msg,
 		UserId:socket.handshake.session.UserId,
 		MatchedId:socket.handshake.session.chatId,
-		reciveId:socket.handshake.session.otherChat,
+		reciveId:socket.handshake.session.MatchUuid,
 		checked:checked,
 	}).then(function(data){
 		models.Matched.update({

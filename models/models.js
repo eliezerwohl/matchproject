@@ -1,8 +1,6 @@
 var Sequelize = require('sequelize');
 if (process.env.NODE_ENV === 'production') {
   // HEROKU DB
-
-  // console.log(process.env.JAWSDB_URL);
   var connection = new Sequelize('mysql://b1e734d72f7481:840b5f35@us-cdbr-iron-east-04.cleardb.net/heroku_75496f89e747476?reconnect=true');
 } else {
   var password = require("../ignore/ignore.js");
@@ -18,8 +16,7 @@ if (process.env.NODE_ENV === 'production') {
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
   greeting: {type:Sequelize.BOOLEAN, defaultValue:0},
-  match:{
-    type:Sequelize.BOOLEAN},
+  match:{type:Sequelize.BOOLEAN},
   age:Sequelize.INTEGER,
   city: Sequelize.STRING,
   upper:Sequelize.INTEGER,
@@ -59,20 +56,17 @@ var Matched = connection.define("Matched", {
   avg:{type: Sequelize.INTEGER, defaultValue:0}
 });
 
-
-
 var Message = connection.define("Message", {
 //connect with connected matches and user id
   message:Sequelize.STRING,
   checked:{type:Sequelize.BOOLEAN, defaultValue:0},
-  reciveId: Sequelize.INTEGER,
+  reciveId: Sequelize.STRING,
   MatchedId:Sequelize.INTEGER,
 }); 
 
 var Vote = connection.define("Votes", {
   vote:{type:Sequelize.BOOLEAN, defaultValue:false}
 })
-
 
 var Answer = connection.define('Answer', {
   a091201:Sequelize.STRING,
@@ -87,12 +81,8 @@ Matched.hasMany(NotifyConnect);
 NotifyConnect.belongsTo(Matched);
 User.hasMany(Message);
 Message.belongsTo(User);
-
-
 Message.hasOne(Matched);
 Matched.belongsTo(Message);
-
-
 User.hasMany(Vote);
 Vote.belongsTo(User);
 Matched.hasMany(Vote);
@@ -110,7 +100,4 @@ exports.Matched = Matched;
 exports.User=User;
 exports.Answer=Answer;
 exports.Online = Online;
-
-
-
 connection.sync({})
