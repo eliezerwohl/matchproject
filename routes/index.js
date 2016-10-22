@@ -1,6 +1,7 @@
 var home = require("../controllers/homeController");
 var chat = require("../controllers/chatController");
 var myProfile = require("../controllers/myProfileController");
+var update = require("../controllers/updateController");
 var save = require("../controllers/saveController");
 var userSave = require("../controllers/userSaveController");
 var make = require("../controllers/makeConnectionController");
@@ -82,7 +83,7 @@ module.exports = function(app, ioInstance) {
       console.log('user disconnected');
     });
     socket.on("notify", function(){
-      home.checkedNotify(sock, io)
+      update.checkedNotify(sock, io)
     });
     socket.on("leave", function(){
       socket.leave(socket.handshake.session.chatId);
@@ -90,17 +91,13 @@ module.exports = function(app, ioInstance) {
     socket.on("online", function(data){
      
       socket.handshake.session.dataArray = data
-      home.online(socket, io, data)
-      // use the data to search for online
-
-
-      // io.to(socket.id).emit('onlineStatus', "hello")
+      update.online(socket, io, data)
     })
     socket.on("login", function(location){
       socket.leave(socket.handshake.session.chatId);
-      home.score(sock, io);
-      home.notifyConnect(sock, io);
-      home.newMessage(sock, io, location)
+      update.score(sock, io);
+      update.notifyConnect(sock, io);
+      update.newMessage(sock, io, location)
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
