@@ -19,7 +19,7 @@ exports.findChat =function(req, res){
 	    }],
 	}).then(function(data){
 		req.session.matchData = data
-		req.session.save()
+		//seperates the other person's id s from matches
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
 				req.session.chatIds.push(data[i].dataValues.user2);
@@ -31,20 +31,30 @@ exports.findChat =function(req, res){
 			where:{
 						id:{$in:req.session.chatIds}
 					}
-		}).then(function(data){
-			//putting it in array so user can send back the i of the array, without
-			//knowing the other users id
+		}).then(function(user){
 			req.session.chatArray = [];
-			for (var i = 0; i < data.length; i++) {
-				var user;
-				if(req.session.matchData[i].dataValues.Message.dataValues.UserId == req.session.UserId){
-						user = "user"
-					}
-				else{user="other"}
-					debugger
-				req.session.chatArray.push({arrayId:i, updateId:req.session.matchData[i].dataValues.id, checked: req.session.matchData[i].dataValues.Message.dataValues.checked,msg:req.session.matchData[i].dataValues.Message.dataValues.message, lastname:data[i].dataValues.lastname, user:user, id:data[i].dataValues.uuid ,firstname:data[i].dataValues.firstname});
+			matchData = req.session.matchData 
+			for (i = 0; i < user.length; i++) {
+			//first one loops over the user data 
+    		for (j = 0; j < req.session.matchData.length; j++) { 
+    			//second one loops over matchdata
+    		var userRole;
+    		debugger
+    		//check to make sure combining the arrays correctly
+    		if (user[i].dataValues.id == matchData[j].dataValues.user1 
+    			|| user[i].dataValues.id == matchData[j].dataValues.user2){
+   				if(matchData[j].dataValues.Message.dataValues.UserId == req.session.UserId){userRole = "user";}
+					else{userRole="other"}
+						req.session.chatArray.push({updateId:matchData[j].dataValues.id, 
+							checked: matchData[j].dataValues.Message.dataValues.checked,
+							msg:matchData[j].dataValues.Message.dataValues.message, 
+							lastname:user[i].dataValues.lastname, user:userRole, 
+							id:user[i].dataValues.uuid ,firstname:user[i].dataValues.firstname});	
+	        	matchData.splice(j, j+1)
+		        break
+        	}
+  			}
 			}
-			req.session.save()
 			res.send(req.session.chatArray);
 		});
 	});
