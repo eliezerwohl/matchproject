@@ -6,31 +6,22 @@ exports.findChat =function(req, res){
 	//not saving to req.session
 	req.session.chatIds = [];
 	models.Matched.findAll({
-		where:{
-			chat:1,
+		where:{chat:1,
 			$or: {
 		    user1:req.session.UserId,
-		    user2: req.session.UserId,
-			}
-		},
-		include: [{
-	    model: models.Message,
-	        where: { MessageId: Sequelize.col('Message.id') }
+		    user2: req.session.UserId,}},
+		include: [{model: models.Message,
+	      where: { MessageId: Sequelize.col('Message.id') }
 	    }],
 	}).then(function(data){
 		req.session.matchData = data
 		//seperates the other person's id s from matches
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
-				req.session.chatIds.push(data[i].dataValues.user2);
-			}
-			else{req.session.chatIds.push(data[i].dataValues.user1)}
-		}
-		req.session.save()
+				req.session.chatIds.push(data[i].dataValues.user2);}
+			else{req.session.chatIds.push(data[i].dataValues.user1);}}
 		models.User.findAll({
-			where:{
-						id:{$in:req.session.chatIds}
-					}
+			where:{id:{$in:req.session.chatIds}}
 		}).then(function(user){
 			req.session.chatArray = [];
 			matchData = req.session.matchData 
@@ -39,7 +30,6 @@ exports.findChat =function(req, res){
     		for (j = 0; j < req.session.matchData.length; j++) { 
     			//second one loops over matchdata
     		var userRole;
-    		debugger
     		//check to make sure combining the arrays correctly
     		if (user[i].dataValues.id == matchData[j].dataValues.user1 
     			|| user[i].dataValues.id == matchData[j].dataValues.user2){
@@ -52,16 +42,13 @@ exports.findChat =function(req, res){
 							id:user[i].dataValues.uuid ,firstname:user[i].dataValues.firstname});	
 	        	matchData.splice(j, j+1)
 		        break
-        	}
-  			}
-			}
+      }}}
 			res.send(req.session.chatArray);
 		});
 	});
 }
 
 exports.chatHistory = function(req, res){
-
 	models.Message.findAll({
 		//go back and limit the returned data
 		where:{
@@ -69,32 +56,25 @@ exports.chatHistory = function(req, res){
 		},
 		attributes: { include: ['message', 'UserId'] },
 	}).then(function(data){
-	
 		dataArray = [];
 		for (var i = 0; i < data.length; i++) {
 			if (data[i].dataValues.UserId == req.session.UserId){
-				dataArray.push({user:"user", message:data[i].dataValues.message})
-			}
-			else {
-				dataArray.push({user:"other", message:data[i].dataValues.message})
-			}
+				dataArray.push({user:"user", message:data[i].dataValues.message});}
+			else {dataArray.push({user:"other", message:data[i].dataValues.message});}
 		}
 		res.send(dataArray)
-	})
+	});
 }
 
 exports.chatName = function(req, res){
 	models.User.findOne({
-		where:{
-			uuid:req.session.MatchUuid
-		},
+		where:{uuid:req.session.MatchUuid},
 		attributes:["firstname", "lastname", "uuid"]
 	}).then(function(data){
 		res.send(data)
 	})
 }
 exports.chatId = function(req, res){
-	debugger
 	req.session.MatchUuid = req.body.uuid
 	req.session.chatId = req.body.match;
 	res.send("okay")
@@ -102,12 +82,8 @@ exports.chatId = function(req, res){
 
 exports.save = function(msg, socket, room){
 	var checked 
-	if (room < 2){
-		checked = 0
-	}
-	else{
-		checked = 1
-	}
+	if (room < 2){checked = 0}
+	else{checked = 1}
 	models.Message.create({
 		message:msg,
 		UserId:socket.handshake.session.UserId,
@@ -118,9 +94,7 @@ exports.save = function(msg, socket, room){
 		models.Matched.update({
 			MessageId:data.dataValues.id
 		},{
-			where:{
-				id:socket.handshake.session.chatId
-			}
+			where:{id:socket.handshake.session.chatId}
 		});
 	});
 }
