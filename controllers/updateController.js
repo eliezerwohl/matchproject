@@ -82,7 +82,7 @@ exports.online = function(socket, io){
             if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user  && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
               updateArray.push(data[i]);
               socket.onlineStatus[j].dataValues.online = data[i].dataValues.online 
-              matchData.splice(j, j+1)
+              socket.onlineStatus.splice(j, j+1)
               break
             }
           }
