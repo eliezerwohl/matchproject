@@ -6,8 +6,8 @@ $( document ).ready(function() {
 		for (var i = 0; i < result.length; i++) {
 			chatArray.push(result[i].id)
 		  $(".target").append("<button data-match='" + result[i].id +"'class='chat col-xs-12 btn ' value=" 
-		 	+ result[i].updateId + "><h4 class='pull-left'>" + result[i].firstname + " "
-		 	+result[i].lastname + ":</h4><span class='pull-right'><span id='" + result[i].id  + "' class=''><span class='glyphicon glyphicon-certificate'> </span></span></span><br><span id='" + result[i].updateId + "' class='pull-left " + 
+		 	+ result[i].updateId + "><span class='status'><span id='" + result[i].id  + "' class=''>.</span> </span><h4 class='pull-left'>" + result[i].firstname + " "
+		 	+result[i].lastname + ":</h4><br><span id='" + result[i].updateId + "' class='pull-left " + 
 		 	 result[i].checked +  result[i].user
 		 	+"'>"
 		 	+ result[i].msg + "</span></button>")

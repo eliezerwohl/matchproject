@@ -10,13 +10,25 @@
 	visibility: hidden;
 }
 
-#chat #name #status {
-	font-size: 10px;
-	margin-right: 10px
+#chat #name {
+	margin-left: 35px;
+}
+#chat #status {
+	display:block;
+	font-size: 65px;
+	line-height: 0px;
+	padding-top: 10px;
+
+}
+
+button, .target {
+	text-overflow: ellipsis;
 }
 
 #chatHome button h4 {
 	margin:0px;
+	padding-left: 10px;
+
 }
 
 #myProfile button {
@@ -60,6 +72,14 @@
 
 #chatHome .btn .falseother {
 	color:	#3e3f3a;
+}
+
+#chatHome .btn .status{
+	display:block;
+
+	line-height: 0px;
+	font-size: 40px;
+	float: left;
 }
 
 #chatHome .btn:hover {
