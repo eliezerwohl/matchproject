@@ -21,7 +21,9 @@
 
 }
 
-button, .target {
+#chatHome button{
+	white-space: nowrap;
+  overflow: hidden;
 	text-overflow: ellipsis;
 }
 
