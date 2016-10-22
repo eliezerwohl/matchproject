@@ -1,3 +1,3 @@
 $( document ).ready(function() {
-socket.emit("leave")
+	socket.emit("leave")
 });

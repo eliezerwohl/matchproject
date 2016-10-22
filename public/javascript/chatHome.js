@@ -6,10 +6,10 @@ $( document ).ready(function() {
 		for (var i = 0; i < result.length; i++) {
 			chatArray.push(result[i].id)
 		  $(".target").append("<button data-match='" + result[i].id +"'class='chat col-xs-12 btn ' value=" 
-		 	+ result[i].updateId + "><span class='status'><span id='" + result[i].id  + "' class=''>.</span> </span><h4 class='pull-left'>" + result[i].firstname + " "
-		 	+result[i].lastname + ":</h4><br><span id='" + result[i].updateId + "' class='pull-left " + 
-		 	 result[i].checked +  result[i].user
-		 	+"'>"
+		 	+ result[i].updateId + "><span class='status'><span id='" + result[i].id  
+		 	+ "' class=''>.</span> </span><h4 class='pull-left'>" + result[i].firstname + " "
+		 	+result[i].lastname + ":</h4><br><span id='" + result[i].updateId + "' class='pull-left " 
+		 	+ result[i].checked +  result[i].user +"'>"
 		 	+ result[i].msg + "</span></button>")
 		}
 	}}).then(function(){
@@ -20,10 +20,10 @@ $( document ).ready(function() {
 			$("#"+ data[i].user).removeClass().addClass("online" + data[i].online)
 		}
 
-	})
+	});
 	$(".target").on("click", ".chat", function(){
-				var match = this.value;
-				var uuid = $(this).attr("data-match");
+			var match = this.value;
+			var uuid = $(this).attr("data-match");
 		$.ajax({url: "/chatId", type:"POST", data:{match:match, uuid: uuid},  success: function(result){
 			 window.location = "/chat"
 		}});

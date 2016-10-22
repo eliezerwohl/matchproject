@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 var PORT = process.env.PORT || 9000;
-
 app.use(express.static(__dirname + '/public'));
 app.engine('handlebars', expressHandlebars({
   defaultLayout: 'main'
@@ -20,11 +19,9 @@ hbs.getPartials().then(function(partials) {
 });
 var Sequelize = require('sequelize');
 app.use(passport.initialize());
-
 var server = app.listen(PORT, function(){
 	  console.log("Listening on port %s", PORT);
 });
-
 var io = require('socket.io').listen(server, {
     reconnection: true,
     reconnectionDelay: 1000,
