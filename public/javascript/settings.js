@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 	function buttonColor(result){
 		if (result === true){
-			$("#status").addClass("btn-success").removeClass("btn-danger")
+			$("#status").addClass("btn-success").removeClass("btn-danger");
 	 		$("#statusText").text("Live");
 	 	}
 	 	else{
-	 		$("#status").addClass("btn-danger").removeClass("btn-success")
+	 		$("#status").addClass("btn-danger").removeClass("btn-success");
 	 		$("#statusText").text("not live");
 	 	}
 	}

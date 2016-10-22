@@ -2,11 +2,12 @@
 $( document ).ready(function() {
 	$(".save").on("click", function(){
 		var data =(this).value;
-		$.ajax({url: "/userSave", type:"POST", data:{data:data}, success: function(result){}});
-				window.location.pathname = "/loggedIn"
-	})	
+		$.ajax({url: "/userSave", type:"POST", data:{data:data}, success: function(result){
+			//?
+		}});
+			window.location.pathname = "/loggedIn"
+	});	
 	$.ajax({url: "/userMatch", success: function(result){
-		debugger
 	 if ( result === "sorry"){
 	 		$("#warningModal").modal("show")
 	 		$("#modalText").text("sorry, not matches.  please check another time")
