@@ -33,7 +33,6 @@ exports.myQuestions = function(req, res){
   });
 }
 
-
 exports.currentStatus = function(req, res){
   models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
    res.send(data.dataValues.match);

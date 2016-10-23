@@ -8,19 +8,18 @@ exports.score = function(socket, io) {
     }).then(function(data){
       //error msg Cannot read property 'dataValues' of null
       if (data.dataValues.score != socket.score){
-        callback("score", score, socket)
+        callback("score", score, socket);
         io.to(socket.id).emit('score', data.dataValues.score);}
     });     
   }
-  score()
+  score();
   setInterval(score, 10000);
 }
 
 exports.notifyConnect = function(socket, io){
   function notify(){
   models.NotifyConnect.findAll({
-    where:{
-    UserId:socket.handshake.session.UserId}
+    where:{UserId:socket.handshake.session.UserId}
   }).then(function(data){
      if (data.length != socket.notify){
           callback("notify", notify, socket);
@@ -41,27 +40,25 @@ exports.newMessage = function(socket, io, location){
   function newMessage(){
     models.Message.findAndCountAll({
       where:{
-        reciveId:socket.handshake.session.uuid,
-        checked:0
-      }
+        reciveId:socket.handshake.session.uuid,checked:0}
     }).then(function(data){ 
       if (data.count != socket.newMessage){
         if (location == "/chathome" && typeof socket.newMessage != "undefined"){
           for (var i = socket.newMessage; i < data.count; i++) {
-             var incomingMessage = {
+              var incomingMessage = {
                 msg:data.rows[i].dataValues.message,
                 updateId:data.rows[i].dataValues.MatchedId
-                }
-            io.to(socket.id).emit('incomingMessage', incomingMessage)    
+              }
+            io.to(socket.id).emit('incomingMessage', incomingMessage);    
           }
         }
-        callback("newMessage", data.count, socket)
+        callback("newMessage", data.count, socket);
         //what?
-        io.to(socket.id).emit('newMessage', data.count)
+        io.to(socket.id).emit('newMessage', data.count);
       }
     });
   }
-  newMessage()
+  newMessage();
   setInterval(newMessage, 3000);
 }
 
@@ -73,16 +70,17 @@ exports.online = function(socket, io){
     }).then(function(data){
       if (socket.onlineStatus == undefined){
         io.to(socket.id).emit('onlineStatus', data);      
-        callback("onlineStatus", data, socket)
+        callback("onlineStatus", data, socket);
       }
       else{
         var updateArray = []
         for (var i = 0; i < data.length; i++) {
           for (var j = 0; j < socket.onlineStatus.length; j++) {
-            if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user  && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
+            if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user 
+              && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
               updateArray.push(data[i]);
-              socket.onlineStatus[j].dataValues.online = data[i].dataValues.online 
-              socket.onlineStatus.splice(j, j+1)
+              socket.onlineStatus[j].dataValues.online = data[i].dataValues.online; 
+              socket.onlineStatus.splice(j, j+1);
               break
             }
           }
