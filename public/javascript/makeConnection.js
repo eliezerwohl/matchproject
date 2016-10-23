@@ -10,16 +10,15 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
   }
   chatSize()
   $(window).resize(chatSize);
-
 	function getPrime(){
-		$("#rightText").text("next")
-		$(".pull-left").show()
-		$(".pull-right").hide()
-		$(".main, #buttonControl").off("swiperight")
-		$(".main, #buttonControl").off("swiperleft")
+		$("#rightText").text("next");
+		$(".pull-left").show();
+		$(".pull-right").hide();
+		$(".main, #buttonControl").off("swiperight");
+		$(".main, #buttonControl").off("swiperleft");
 		//control
 		$(".save").off("click");
-		$(".toggle").css("visibility", "hidden")
+		$(".toggle").css("visibility", "hidden");
 		$("#left").on("click", function(){
 			next();
 		});
@@ -52,15 +51,14 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 
 //get match
 	function getMatch(){
-		$(".main, #buttonControl").off("swiperight")
-		$(".main, #buttonControl").off("swiperleft")
+		$(".main, #buttonControl").off("swiperight");
+		$(".main, #buttonControl").off("swiperleft");
 		$(".main, #buttonControl").on("swiperight",function(event){event.stopImmediatePropagation();save(1)});
 		$(".main, #buttonControl").on("swipeleft",function(event){event.stopImmediatePropagation();save(0)});
 		$(".pull-left").hide();
 		$(".pull-right").show();
-		$("#left, #right").off("click")
-		$("#rightText").text("no")
-
+		$("#left, #right").off("click");
+		$("#rightText").text("no");
 		$(".save").on("click", function(){
 		var data =(this).value;
 		save(data);
@@ -78,8 +76,8 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
 			if (result === false){
-				getPrime()
-				$("#warningModal").modal("show")
+				getPrime();
+				$("#warningModal").modal("show");
 			}
 			else{
 		 		append(result, "match");

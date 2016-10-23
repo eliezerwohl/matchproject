@@ -21,16 +21,17 @@
 
 }
 
-#chatHome button{
-	white-space: nowrap;
-  overflow: hidden;
-	text-overflow: ellipsis;
+#chatHome .messageDisplay {
+/*	white-space: nowrap;*/
+   white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden
 }
 
 #chatHome button h4 {
 	margin:0px;
 	padding-left: 10px;
-
 }
 
 #myProfile button {
@@ -76,12 +77,19 @@
 	color:	#3e3f3a;
 }
 
-#chatHome .btn .status{
-	display:block;
-
+#chatHome .btn {
+	 position: relative;
+}
+#chatHome .btn .row span{
+/*	display:block;*/
+/*	display:inline-block;*/
+	position: absolute;
 	line-height: 0px;
+	top:0;
+	right:0;
+	margin-top: 10px;
+	margin-right:10px;
 	font-size: 40px;
-	float: left;
 }
 
 #chatHome .btn:hover {
