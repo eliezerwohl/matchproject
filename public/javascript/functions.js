@@ -25,7 +25,7 @@ function formCheck(url){
 			if (counter == array.length ){
 				if (error.length < 1){
 					$.ajax({url: url, type:"POST", data:data, success: function(result){
-						debugger
+						//make into a switch case
 						if (result == "greeting"){window.location.pathname = "/myQuestions";}
 						else if (result == "myInfo" || result == "myQuestions") {window.location.pathname = "/myProfile";}
 						else if (result == "taken"){$(".errorMsg").show();}
@@ -33,11 +33,16 @@ function formCheck(url){
 							document.cookie = "signup=true"
 							window.location.pathname="/";
 						}
+						else if (result == "incorrect"){
+							console.log("nope")
+						}
+						else if (result == "login"){
+							window.location.pathname="/loggedin"
+						}
 					}});
 				}
 				else{
 					for (var i = 0; i < error.length; i++) {
-
 						$("#" + array[error[i]].id).addClass("error");
 					}
 				}

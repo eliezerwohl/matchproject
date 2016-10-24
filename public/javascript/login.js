@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-
 	function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -11,15 +10,21 @@ $( document ).ready(function() {
         if (c.indexOf(name) == 0) {
             return c.substring(name.length,c.length);
         }
-    }
-    return "";
-}
- if 	(getCookie("signup") == "true"){
- 	debugger
- 	$(".thanks").show()
- 	document.cookie = "signup=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
- 		
- }
+    	}
+    	return "";
+		}
+ 		if (getCookie("signup") == "true"){
+ 			$(".thanks").show()
+ 			document.cookie = "signup=; expires=Thu, 01 Jan 1970 00:00:00 UTC"		
+		}
+		$("#loginButton").on("click", function(){
+			alert("Hell")
+			formCheck("/login")
+		})
+	
+
+
+
 
 
 });

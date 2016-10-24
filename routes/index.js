@@ -118,11 +118,11 @@ module.exports = function(app, ioInstance) {
       io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
   });
-	app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loggedin?msg=Login successful.',
-    failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
-  }));
+	app.post('/login', home.login)
+  // passport.authenticate('local', {
+  //   successRedirect: '/loggedin?msg=Login successful.',
+  //   failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
+
   app.get("/settings", function(req, res){
     res.render("settings")
   })
