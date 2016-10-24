@@ -11,8 +11,7 @@ if (process.env.NODE_ENV === 'production') {
     type: Sequelize.STRING,
     unique: true
   },
-  uuid:{ type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV1},
+  uuid:{ type: Sequelize.UUID,defaultValue: Sequelize.UUIDV1},
   password: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,

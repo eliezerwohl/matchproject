@@ -6,8 +6,8 @@ function saltyhash(pass) {
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
+
 exports.signUp = function(req, res){
-  debugger
   models.User.findOne({
       where: {
         email: req.body.email

@@ -40,6 +40,7 @@ module.exports = function(app, ioInstance) {
     passwordField: "password"
   },
   function(req, email, password, done) {
+    debugger
     models.User.findOne({
         where: {email: email}
     }).then(function(user) {
@@ -89,7 +90,6 @@ module.exports = function(app, ioInstance) {
       socket.leave(socket.handshake.session.chatId);
     })
     socket.on("online", function(data){
-     
       socket.handshake.session.dataArray = data
       update.online(socket, io, data)
     })
@@ -120,8 +120,8 @@ module.exports = function(app, ioInstance) {
   });
 	app.post('/login',
   passport.authenticate('local', {
-    successRedirect: '/loggedin?msg=Login successful.',
-    failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
+    successRedirect: '/loggedin',
+    failureRedirect: '/?incorrect'
   }));
   app.get("/settings", function(req, res){
     res.render("settings")

@@ -10,7 +10,7 @@
 	visibility: hidden;
 }
 
-#index .thanks {
+#index .thanks, #index .incorrect {
 	display: none;
 }
 #chat #name {
