@@ -27,8 +27,8 @@ function formCheck(url){
 					$.ajax({url: url, type:"POST", data:data, success: function(result){
 						debugger
 						if (result == "greeting"){window.location.pathname = "/myQuestions";}
-						else if (result == "myInfo" || "myQuestions") {window.location.pathname = "/myProfile";}
-						else if (result == "taken"){console.log("wrong")}
+						else if (result == "myInfo" || result == "myQuestions") {window.location.pathname = "/myProfile";}
+						else if (result == "taken"){$(".errorMsg").show();}
 						else if (result == "accept"){
 							window.location.pathname="/";
 						}
@@ -36,15 +36,11 @@ function formCheck(url){
 				}
 				else{
 					for (var i = 0; i < error.length; i++) {
-						debugger
-						$("#" + array[error[i]].id).addClass("error")
-						debugger;
+
+						$("#" + array[error[i]].id).addClass("error");
 					}
 				}
 			}
 	}
-		
-		// for (var i = 0; i < array.length; i++) {
-			
-		// }
-	}
+
+}

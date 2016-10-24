@@ -21,6 +21,10 @@
 
 }
 
+
+.errorMsg {
+	display: none;
+}
 #chatHome .messageDisplay {
 /*	white-space: nowrap;*/
    white-space: nowrap;
