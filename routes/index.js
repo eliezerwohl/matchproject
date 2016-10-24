@@ -83,6 +83,12 @@ module.exports = function(app, ioInstance) {
     })
       console.log('user disconnected');
     });
+    socket.on("pulse", function(location){
+      update.score(socket, io);
+      update.notifyConnect(socket, io);
+      update.newMessage(socket, io, location)
+
+    })
     socket.on("notify", function(){
       update.checkedNotify(sock, io)
     });
