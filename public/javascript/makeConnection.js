@@ -1,5 +1,9 @@
 // //make this load on page load
 $( document ).ready(function() {
+$("#closeModal").on("click", function(){
+	$("#warningModal").modal("hide");
+	getPrime();
+})
 	//fixes sensitivity issue on mobile devices
 $.event.special.swipe.scrollSupressionThreshold = (screen.availWidth) / 60;
 $.event.special.swipe.horizontalDistanceThreshold = (screen.availWidth) / 60;
@@ -15,7 +19,8 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$(".pull-left").show();
 		$(".pull-right").hide();
 		$(".main, #buttonControl").off("swiperight");
-		$(".main, #buttonControl").off("swiperleft");
+		$(".main, #buttonControl").off("swipeleft");
+
 		//control
 		$(".save").off("click");
 		$(".toggle").css("visibility", "hidden");
@@ -52,7 +57,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 //get match
 	function getMatch(){
 		$(".main, #buttonControl").off("swiperight");
-		$(".main, #buttonControl").off("swiperleft");
+		$(".main, #buttonControl").off("swipeleft");
 		$(".main, #buttonControl").on("swiperight",function(event){event.stopImmediatePropagation();save(1)});
 		$(".main, #buttonControl").on("swipeleft",function(event){event.stopImmediatePropagation();save(0)});
 		$(".pull-left").hide();
@@ -66,8 +71,9 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$.ajax({url: "/getMatch", success: function(result){
 			if (result === false){
 				//you've matched everybody
+				$(".main, #buttonControl").off("swiperight");
+		$(".main, #buttonControl").off("swipeleft");
 				$("#warningModal").modal("show");
-				getPrime();
 			}
 			else{append(result, "match");$(".toggle").css("visibility", "visible");}
 		}});
@@ -76,7 +82,8 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
 			if (result === false){
-				getPrime();
+				$(".main, #buttonControl").off("swiperight");
+		$(".main, #buttonControl").off("swipeleft");
 				$("#warningModal").modal("show");
 			}
 			else{
