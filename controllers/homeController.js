@@ -7,6 +7,7 @@ function saltyhash(pass) {
   return hash;
 }
 exports.signUp = function(req, res){
+  debugger
   models.User.findOne({
       where: {
         email: req.body.email
@@ -16,8 +17,6 @@ exports.signUp = function(req, res){
         res.send("taken")
       } else {
         models.User.create({
-          uuid:{ type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV1},
           lastname: (req.body.lastName).trim(),
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
