@@ -2,18 +2,20 @@ var models = require("../models/models.js");
 function callback(name, data, socket){socket[name] = data}
 
 exports.score = function(socket, io) {
+  debugger
+  socket.handshake.session.mooby = "dooby"
   function score() {
     models.User.findOne({
       where:{id:socket.handshake.session.UserId}
     }).then(function(data){
       //error msg Cannot read property 'dataValues' of null
       if (data.dataValues.score != socket.score){
-        callback("score", score, socket);
+        callback("score", data.dataValues.score, socket);
         io.to(socket.id).emit('score', data.dataValues.score);}
     });     
   }
   score();
-  setInterval(score, 10000);
+
 }
 
 exports.notifyConnect = function(socket, io){
@@ -27,7 +29,6 @@ exports.notifyConnect = function(socket, io){
     });
   }
   notify();
-  setInterval(notify, 10000);
 }
 
 exports.checkedNotify = function(socket, io){
@@ -59,7 +60,10 @@ exports.newMessage = function(socket, io, location){
     });
   }
   newMessage();
-  setInterval(newMessage, 3000);
+  setTimeout(newMessage, 2000);
+  setTimeout(newMessage, 4000);
+  setTimeout(newMessage, 6000);
+  setTimeout(newMessage, 8000);
 }
 
 exports.online = function(socket, io){
@@ -94,9 +98,5 @@ exports.online = function(socket, io){
     });
   }
   online();
-  setInterval(online, 3000);
+  setTimeout(online, 5000);
 }
-
-// exports.onlineStatus = function(){
-//   io.to(socket.id).emit('onlineStatus', "hello")
-// }

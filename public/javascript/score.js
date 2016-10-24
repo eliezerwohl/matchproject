@@ -1,10 +1,16 @@
 $( document ).ready(function() { 
 	var socket = io();
+	setInterval(pulse, 5000)
+	function pulse(location){
+		socket.emit("pulse")
+	}
+
+
 		socket.on("onlineStatus", function(data){
-		debugger
 		console.log(data)
 	})
   socket.on("score", function(score){
+  	debugger
  		$("#score").text(score);
 	});
 	socket.on("notify", function(notify){
