@@ -33,12 +33,6 @@ function formCheck(url){
 							document.cookie = "signup=true"
 							window.location.pathname="/";
 						}
-						else if (result == "incorrect"){
-							console.log("nope")
-						}
-						else if (result == "login"){
-							window.location.pathname="/loggedin"
-						}
 					}});
 				}
 				else{

@@ -7,25 +7,7 @@ function saltyhash(pass) {
   return hash;
 }
 
-exports.login = function(req, res){
-  var  password = req.body.password
-  models.User.findOne({
-    where:{
-      email:req.body.email
-    }
-  }).then(function(data){
-
-    if (data){
-      bcrypt.compare( password, data.dataValues.password, function(err, compare) {
-        debugger
-        if (compare){res.send("login");}else{res.send("incorrect");}
-      });}else {res.send("incorrect");
-    }
-  });
-}
-
 exports.signUp = function(req, res){
-
   models.User.findOne({
       where: {
         email: req.body.email

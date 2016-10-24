@@ -17,8 +17,10 @@ $( document ).ready(function() {
  			$(".thanks").show()
  			document.cookie = "signup=; expires=Thu, 01 Jan 1970 00:00:00 UTC"		
 		}
+		if (window.location.search == "?incorrect") {
+			$(".incorrect").show()
+		}
 		$("#loginButton").on("click", function(){
-			alert("Hell")
 			formCheck("/login")
 		})
 	
