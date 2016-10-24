@@ -30,6 +30,7 @@ function formCheck(url){
 						else if (result == "myInfo" || result == "myQuestions") {window.location.pathname = "/myProfile";}
 						else if (result == "taken"){$(".errorMsg").show();}
 						else if (result == "accept"){
+							document.cookie = "signup=true"
 							window.location.pathname="/";
 						}
 					}});

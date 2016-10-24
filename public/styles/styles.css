@@ -10,6 +10,9 @@
 	visibility: hidden;
 }
 
+#index .thanks {
+	display: none;
+}
 #chat #name {
 	margin-left: 35px;
 }
