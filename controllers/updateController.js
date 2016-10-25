@@ -3,7 +3,6 @@ function callback(name, data, socket){socket[name] = data}
 
 exports.score = function(socket, io) {
   debugger
-  socket.handshake.session.mooby = "dooby"
   function score() {
     models.User.findOne({
       where:{id:socket.handshake.session.UserId}

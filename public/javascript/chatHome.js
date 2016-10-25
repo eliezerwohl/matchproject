@@ -1,12 +1,15 @@
 $( document ).ready(function() {
 	var socket = io();
 	$.ajax({url: "/findChat", success: function(result){
-		debugger
+		if (result.length < 1){
+			debugger
+			$(".sorry").show()
+		}
 	 chatArray = []
 		for (var i = 0; i < result.length; i++) {
 			chatArray.push(result[i].id)
 		  $(".target").append("<button data-match='" + result[i].id +"'class='chat col-xs-12 btn ' value=" 
-		 	+ result[i].updateId + "><div class='row'><h4 class='pull-left'>" + result[i].firstname + " "
+		 	+ result[i].updateId + "><div class='row pull-left'><h4 class='pull-left'>" + result[i].firstname + " "
 		 	+result[i].lastname + ":</h4><span id='" + result[i].id  
 		 	+ "' class=''>.</span> </div><div class='messageDisplay'><span id='" + result[i].updateId + "' class='pull-left " 
 		 	+ result[i].checked +  result[i].user +"'>"

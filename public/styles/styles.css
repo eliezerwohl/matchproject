@@ -23,8 +23,9 @@
 	padding-top: 10px;
 
 }
-
-
+#chatHome .sorry {
+	display: none;
+}
 .errorMsg {
 	display: none;
 }

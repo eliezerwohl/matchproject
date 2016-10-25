@@ -13,6 +13,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var sharedsession = require("express-socket.io-session");
+var cookieParser = require('cookie-parser')
+var cookieSession = require('cookie-session')
 
 function isAuthenticated(req, res, next) {
     if (req.user)
@@ -23,18 +25,20 @@ function isAuthenticated(req, res, next) {
 module.exports = function(app, ioInstance) {
   var io = ioInstance;
   var sock;
-  app.set('trust proxy', 1) // trust first proxy
-  var session = require("express-session")({
-      secret: "my-secret",
-      resave: true,
-      saveUninitialized: true,
-        cookie: { secure: true }
-  });
-  // if (app.get('env') === 'production') {
-  //   app.set('trust proxy', 1) // trust first proxy
-  //   session.cookie.secure = true // serve secure cookies
-  // }
-  app.use(session); 
+
+  app.set('trust proxy', 1) // trust first proxy 
+   session = require("cookie-session")({
+  name: 'session',
+  keys: ['key1', 'key2']
+  })
+  // var session = require("express-session")({
+  //     secret: "my-secret",
+  //     resave: true,
+  //     saveUninitialized: true
+  // });
+  app.use(session)
+  app.use(cookieParser())
+
   app.use(passport.initialize());
   app.use(passport.session());
   passport.serializeUser(function(user, done) {
@@ -52,7 +56,6 @@ module.exports = function(app, ioInstance) {
     passwordField: "password"
   },
   function(req, email, password, done) {
-    debugger
     models.User.findOne({
         where: {email: email}
     }).then(function(user) {
