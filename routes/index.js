@@ -24,6 +24,7 @@ module.exports = function(app, ioInstance) {
   var io = ioInstance;
   var sock;
   var session = require("express-session")({
+        cookie: {},
       secret: "my-secret",
       resave: true,
       saveUninitialized: true
