@@ -23,11 +23,12 @@ function isAuthenticated(req, res, next) {
 module.exports = function(app, ioInstance) {
   var io = ioInstance;
   var sock;
+  app.set('trust proxy', 1) // trust first proxy
   var session = require("express-session")({
       secret: "my-secret",
       resave: true,
       saveUninitialized: true,
-      cookie: {},
+        cookie: { secure: true }
   });
   if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
