@@ -14,6 +14,12 @@ var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var sharedsession = require("express-socket.io-session");
 
+function isAuthenticated(req, res, next) {
+    if (req.user)
+        return next();
+    res.redirect('/');
+}
+
 module.exports = function(app, ioInstance) {
   var io = ioInstance;
   var sock;
@@ -129,7 +135,7 @@ module.exports = function(app, ioInstance) {
     successRedirect: '/loggedin',
     failureRedirect: '/?incorrect'
   }));
-  app.get("/settings", function(req, res){
+  app.get("/settings", isAuthenticated, function(req, res){
     res.render("settings")
   })
   app.get("/logout", function(req, res){
@@ -137,28 +143,28 @@ module.exports = function(app, ioInstance) {
     res.redirect("/")
   });
   app.get("/loginData", home.loginData);
-	app.get("/loggedin", home.loggedin);
+	app.get("/loggedin", isAuthenticated, home.loggedin);
 	app.get("/signUp", function(req,res){
 	  res.render("signUp", {layout:"mainFront"});
 	});
   app.get("/updateStatus", myProfile.updateStatus);
   app.get("/currentStatus", myProfile.currentStatus);
-  app.get("/myQuestions", function(req, res){
+  app.get("/myQuestions", isAuthenticated, function(req, res){
     res.render("myQuestions");
   });
-  app.get("/myInfo", function(req, res){
+  app.get("/myInfo", isAuthenticated, function(req, res){
     res.render("myInfo");
   });
   app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.post("/myQuestionsUpdate", myProfile.myQuestions);
   app.get("/myInfoData", myProfile.myInfo);
 	app.post("/signUp", home.signUp);
-	app.get("/myProfile", function(req, res){
+	app.get("/myProfile", isAuthenticated, function(req, res){
 		res.render("myProfile");
 	});
   app.get("/nextMatch", make.nextMatch);
   app.get("/getMatch", make.getMatch);
-  app.get("/makeConnection", function(req, res){
+  app.get("/makeConnection", isAuthenticated, function(req, res){
     res.render("makeConnection");
   });
   app.get("/nextMatch", make.nextMatch);
@@ -168,15 +174,15 @@ module.exports = function(app, ioInstance) {
     res.render("matchhome")
   })
   app.post("/userSave", userSave.userSave);
-  app.get("/myMatch", function(req, res) {
+  app.get("/myMatch", isAuthenticated, function(req, res) {
     res.render("myMatch")
   })
-  app.get("/userMatch", userMatch.userMatch)
+  app.get("/userMatch", isAuthenticated, userMatch.userMatch)
   app.post("/saveMatch", save.saveMatch);
-  app.get("/chat", function(req,res){
+  app.get("/chat", isAuthenticated, function(req,res){
     res.render("chat");
   });
-  app.get("/chatHome", function(req, res){
+  app.get("/chatHome",isAuthenticated, function(req, res){
     res.render("chatHome")
   });
   app.get("/chatName", chat.chatName);
