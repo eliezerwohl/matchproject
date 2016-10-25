@@ -23,13 +23,15 @@
 	padding-top: 10px;
 
 }
+
 #chatHome .sorry {
 	display: none;
 }
+
 .errorMsg {
 	display: none;
 }
-#chatHome button h4, #chatHome .messageDisplay span {
+#chatHome button h4, #chatHome .btn h5, #chatHome .btn .messageDisplay span {
    white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
@@ -37,9 +39,11 @@
     width:92%;
 }
 
-#chatHome button h4 {
+#chatHome button h5 {
 	margin:0px;
+	color:black;
 	padding-left: 10px;
+
 }
 
 #myProfile button {
