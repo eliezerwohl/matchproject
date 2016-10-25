@@ -13,7 +13,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var sharedsession = require("express-socket.io-session");
-var cookieParser = require('cookie-parser')
 var cookieSession = require('cookie-session')
 
 function isAuthenticated(req, res, next) {
@@ -31,14 +30,7 @@ module.exports = function(app, ioInstance) {
   name: 'session',
   keys: ['key1', 'key2']
   })
-  // var session = require("express-session")({
-  //     secret: "my-secret",
-  //     resave: true,
-  //     saveUninitialized: true
-  // });
   app.use(session)
-  app.use(cookieParser())
-
   app.use(passport.initialize());
   app.use(passport.session());
   passport.serializeUser(function(user, done) {
@@ -148,7 +140,7 @@ module.exports = function(app, ioInstance) {
     res.render("settings")
   })
   app.get("/logout", function(req, res){
-    req.session.destroy()
+    req.session = null;
     res.redirect("/")
   });
   app.get("/loginData", home.loginData);
