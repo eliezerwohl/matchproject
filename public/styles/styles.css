@@ -29,8 +29,6 @@
 	display: none;
 }
 #chatHome button h4, #chatHome .messageDisplay span {
-/*	white-space: nowrap;*/
-
    white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
