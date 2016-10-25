@@ -22,6 +22,7 @@ function isAuthenticated(req, res, next) {
 }
 
 module.exports = function(app, ioInstance) {
+
   var io = ioInstance;
   var sock;
 
@@ -70,7 +71,11 @@ module.exports = function(app, ioInstance) {
   io.use(sharedsession(session, {
     autoSave:true
   })); 
-   io.on('connection', function(socket){
+    function callback(data, socket){
+      socket.handshake.session[data] = data;
+    }
+  io.on('connection', function(socket){
+    
     sock = socket
     models.Online.update({
       online:1
@@ -81,6 +86,7 @@ module.exports = function(app, ioInstance) {
     })
     console.log('a user connected');
     socket.on('disconnect', function(){
+      
         models.Online.update({
       online:0
     },{
@@ -91,10 +97,10 @@ module.exports = function(app, ioInstance) {
       console.log('user disconnected');
     });
     socket.on("pulse", function(location){
-      update.score(socket, io);
-      update.notifyConnect(socket, io);
-      update.newMessage(socket, io, location)
-
+      callback("testing", socket)
+      // update.score(socket, io);
+      // update.notifyConnect(socket, io);
+      // update.newMessage(socket, io, location)
     })
     socket.on("notify", function(){
       update.checkedNotify(sock, io)
@@ -107,10 +113,10 @@ module.exports = function(app, ioInstance) {
       update.online(socket, io, data)
     })
     socket.on("login", function(location){
-      socket.leave(socket.handshake.session.chatId);
-      update.score(sock, io);
-      update.notifyConnect(sock, io);
-      update.newMessage(sock, io, location)
+      // socket.leave(socket.handshake.session.chatId);
+      // update.score(sock, io);
+      // update.notifyConnect(sock, io);
+      // update.newMessage(sock, io, location)
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));

@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 	var socket = io();
+	var currentData
 	$.ajax({url: "/findChat", success: function(result){
 		if (result.length < 1){
 			$(".sorry").show()
@@ -15,14 +16,13 @@ $( document ).ready(function() {
 		 	+ result[i].msg + "</span></div></button>")
 		}
 	}}).then(function(){
-	 function onlinePulse(){
+	 // function onlinePulse(){
 		socket.emit("online", chatArray)
-	}
-	onlinePulse()
-		setInterval(onlinePulse, 10000)
+	// }
+	// onlinePulse()
+		// setInterval(onlinePulse, 10000)
 	});
 	socket.on("onlineStatus", function(data){
-		debugger
 		for (var i = 0; i < data.length; i++) {
 			$("#"+ data[i].user).removeClass().addClass("online" + data[i].online)
 		}

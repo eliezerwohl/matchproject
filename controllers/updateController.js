@@ -64,27 +64,30 @@ exports.newMessage = function(socket, io, location){
   setTimeout(newMessage, 8000);
 }
 
-exports.online = function(socket, io){
+exports.online = function(socket, io){ 
+
+
   var dataArray = socket.handshake.session.dataArray
   function online(){
+
     models.Online.findAll(
       {where:{user:{$in:dataArray}}, 
       attributes: ["user", "online" ]
     }).then(function(data){
-      debugger
+     
       if (socket.onlineStatus == undefined){
         io.to(socket.id).emit('onlineStatus', data);      
         callback("onlineStatus", data, socket);
       }
       else{
-        debugger
+       
         var updateArray = []
         var onlineArray = socket.onlineStatus
         for (var i = 0; i < data.length; i++) {
           for (var j = 0; j < onlineArray.length; j++) {
             if (data[i].dataValues.user == onlineArray[j].dataValues.user 
               && data[i].dataValues.online != onlineArray[j].dataValues.online){
-              debugger
+             
               updateArray.push(data[i]);
               socket.onlineStatus[j].dataValues.online = data[i].dataValues.online;
          
@@ -95,13 +98,17 @@ exports.online = function(socket, io){
         }
         if (updateArray.length < 1){return true}
         else {
-          debugger
           callback("onlineStatus", socket.onlineStatus, socket);
-          io.to(socket.id).emit('onlineStatus', updateArray); 
+          io.to(socket.id).emit('onlineStatus', updateArray, function(error, msg){
+          }); 
         }     
       }
     });
   }
   online();
-  setTimeout(online, 5000);
+  var test = setInterval(online, 1000);
+  //this is the f'n key right here
+  socket.on('disconnect', function(){
+    clearInterval(test)
+  })
 }
