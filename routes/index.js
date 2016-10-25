@@ -30,7 +30,7 @@ module.exports = function(app, ioInstance) {
   });
   if (app.get('env') === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    session.cookie.secure = true // serve secure cookies
   }
   app.use(session); 
   app.use(passport.initialize());
