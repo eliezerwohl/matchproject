@@ -2,7 +2,6 @@ var models = require("../models/models.js");
 function callback(name, data, socket){socket[name] = data}
 
 exports.score = function(socket, io) {
-  debugger
   function score() {
     models.User.findOne({
       where:{id:socket.handshake.session.UserId}
@@ -66,30 +65,37 @@ exports.newMessage = function(socket, io, location){
 }
 
 exports.online = function(socket, io){
-  var data = socket.handshake.session.dataArray
+  var dataArray = socket.handshake.session.dataArray
   function online(){
-    models.Online.findAll({where:{user:{$in:data}},
+    models.Online.findAll(
+      {where:{user:{$in:dataArray}}, 
       attributes: ["user", "online" ]
     }).then(function(data){
+      debugger
       if (socket.onlineStatus == undefined){
         io.to(socket.id).emit('onlineStatus', data);      
         callback("onlineStatus", data, socket);
       }
       else{
+        debugger
         var updateArray = []
+        var onlineArray = socket.onlineStatus
         for (var i = 0; i < data.length; i++) {
-          for (var j = 0; j < socket.onlineStatus.length; j++) {
-            if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user 
-              && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
+          for (var j = 0; j < onlineArray.length; j++) {
+            if (data[i].dataValues.user == onlineArray[j].dataValues.user 
+              && data[i].dataValues.online != onlineArray[j].dataValues.online){
+              debugger
               updateArray.push(data[i]);
-              socket.onlineStatus[j].dataValues.online = data[i].dataValues.online; 
-              socket.onlineStatus.splice(j, j+1);
+              socket.onlineStatus[j].dataValues.online = data[i].dataValues.online;
+         
+              onlineArray.splice(j, j+1);
               break
             }
           }
         }
         if (updateArray.length < 1){return true}
         else {
+          debugger
           callback("onlineStatus", socket.onlineStatus, socket);
           io.to(socket.id).emit('onlineStatus', updateArray); 
         }     

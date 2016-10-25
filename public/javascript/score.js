@@ -1,16 +1,14 @@
 $( document ).ready(function() { 
 	var socket = io();
+	var location = window.location.pathname;
 	setInterval(pulse, 5000)
-	function pulse(location){
-		socket.emit("pulse")
+	function pulse(){
+		socket.emit("pulse", location)
 	}
-
-
-		socket.on("onlineStatus", function(data){
-		console.log(data)
-	})
+	// socket.on("onlineStatus", function(data){
+	// 	console.log(data)
+	// })
   socket.on("score", function(score){
-  	debugger
  		$("#score").text(score);
 	});
 	socket.on("notify", function(notify){
@@ -22,7 +20,6 @@ $( document ).ready(function() {
 	socket.on("incomingMessage", function(data){
  		$("#" + data.updateId).text(data.msg).removeClass().addClass("falseother pull-left");
 	});
-	var location = window.location.pathname
   socket.emit('login', location)
   socket.on('disconnect', function () {
   	//possible android fix
