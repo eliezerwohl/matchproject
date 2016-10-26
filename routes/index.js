@@ -22,10 +22,8 @@ function isAuthenticated(req, res, next) {
 }
 
 module.exports = function(app, ioInstance) {
-
   var io = ioInstance;
   var sock;
-
   app.set('trust proxy', 1) // trust first proxy 
    session = require("cookie-session")({
   name: 'session',
@@ -96,12 +94,6 @@ module.exports = function(app, ioInstance) {
     })
       console.log('user disconnected');
     });
-    socket.on("pulse", function(location){
-      callback("testing", socket)
-      // update.score(socket, io);
-      // update.notifyConnect(socket, io);
-      // update.newMessage(socket, io, location)
-    })
     socket.on("notify", function(){
       update.checkedNotify(sock, io)
     });
@@ -113,12 +105,13 @@ module.exports = function(app, ioInstance) {
       update.online(socket, io, data)
     })
     socket.on("login", function(location){
-      // socket.leave(socket.handshake.session.chatId);
-      // update.score(sock, io);
-      // update.notifyConnect(sock, io);
-      // update.newMessage(sock, io, location)
+      socket.leave(socket.handshake.session.chatId);
+      update.score(sock, io);
+      update.notifyConnect(sock, io);
+      update.newMessage(sock, io, location);
     });
     socket.on('room', function(room) {
+      debugger
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
