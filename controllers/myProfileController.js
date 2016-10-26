@@ -1,4 +1,6 @@
 var models = require("../models/models.js");
+var Sequelize = require('sequelize');
+
 exports.myInfoUpdate = function(req, res){
   models.User.update({
     city: req.body.city,
@@ -9,7 +11,7 @@ exports.myInfoUpdate = function(req, res){
     age:req.body.age
   },{where: { id : req.session.UserId }
   }).then(function(results){
-    if (req.session.tempGreeting == false){res.send("greeting");}
+    if (req.session.greeting == false){res.send("greeting");}
     else{res.send("myInfo");}
   });
 }
@@ -28,7 +30,7 @@ exports.myQuestions = function(req, res){
     },{where: { UserId : req.session.UserId }
   }).then(function (result) { 
     res.send("myQuestions")
-    if (req.session.tempGreeting == false){
+    if (req.session.greeting == true){
        models.User.update({
         match:1
         },{where:{id:req.session.UserId}
@@ -38,11 +40,23 @@ exports.myQuestions = function(req, res){
 }
 
 exports.currentStatus = function(req, res){
-  models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}})
+  models.User.findOne({attributes: ['match', 'age'],
+    where: {id : req.session.UserId},
+      include: [{
+      model: models.Answer,
+        where: { UserId: Sequelize.col('User.id') },
+        attributes: ["q01"],
+      }],
+  })
   .then(function(data){
-   res.send(data.dataValues.match);
-   req.session.currentStatus = data.dataValues.match;
-   req.session.save()
+    debugger
+    if ((!data.dataValues.age) || (!data.dataValues.Answers[0].dataValues.q01)  ){
+      res.send("incomplete")
+    }
+    else {
+      res.send(data.dataValues.match);
+      req.session.currentStatus = data.dataValues.match;
+    }
   });
 }
 
@@ -54,17 +68,21 @@ exports.updateStatus = function(req, res){
     res.send(req.session.currentStatus)
   }); 
 }
+
+exports.myQuestionsData = function(req, res){
+  models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+    where: {UserId : req.session.UserId}}).then(function(data){
+      res.send(data.dataValues);
+  });
+}
 exports.myInfo = function (req, res) {
-  models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },where: {id : req.session.UserId}})
-  .then(function(result){
-    if (!result.dataValues.age){
+  models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+    where: {id : req.session.UserId}})
+  .then(function(data){
+    if (!data.dataValues.age){
       res.send("blank")
     }else{
-      models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
-        where: {UserId : req.session.UserId}}).then(function(data){
-        var obj = Object.assign(result.dataValues, data.dataValues);
-        res.send(obj);
-      });
+      res.send(data.dataValues);
     }
   });
 }

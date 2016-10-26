@@ -78,7 +78,6 @@ var Answer = connection.define('Answer', {
   q07:Sequelize.TEXT,
   q08:Sequelize.TEXT,
   q09:Sequelize.TEXT,
-
 });  
 
 User.hasMany(NotifyConnect);

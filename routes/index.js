@@ -154,6 +154,7 @@ module.exports = function(app, ioInstance) {
   app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.post("/myQuestionsUpdate", myProfile.myQuestions);
   app.get("/myInfoData", myProfile.myInfo);
+  app.get("/myQuestionsData", myProfile.myQuestionsData);
 	app.post("/signUp", home.signUp);
 	app.get("/myProfile", isAuthenticated, function(req, res){
 		res.render("myProfile");
@@ -181,6 +182,7 @@ module.exports = function(app, ioInstance) {
   app.get("/chatHome",isAuthenticated, function(req, res){
     res.render("chatHome")
   });
+  app.get("/homecheck", home.homecheck);
   app.get("/chatName", chat.chatName);
   app.post("/chatId", chat.chatId)
   app.get("/chatHistory", chat.chatHistory)

@@ -10,7 +10,8 @@ $( document ).ready(function() {
 	 	}
 	}
 	$.ajax({url: "/currentStatus", success: function(result){
-		buttonColor(result);
+		if (result === "incomplete"){return true}
+			else{	buttonColor(result)};
 	}})
 
 	$("#status").on("click", function(){
