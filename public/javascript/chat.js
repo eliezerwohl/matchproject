@@ -49,7 +49,6 @@ $( document ).ready(function() {
   });
   $('#send').on("click", function(){
     sendMessage()
-
   });
 
   socket.on('chat message', function(msg){  

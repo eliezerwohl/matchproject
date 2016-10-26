@@ -14,8 +14,7 @@ exports.score = function(socket, io) {
   }
   score();
    var scoreFunc = setInterval(score, 10000);
-  //this is the f'n key right here
-  socket.on('disconnect', function(){
+   socket.on('disconnect', function(){
     clearInterval(scoreFunc)
   });
 }
@@ -32,7 +31,6 @@ exports.notifyConnect = function(socket, io){
   }
   notify();
   var notifyFunc = setInterval(notify, 10000);
-  //this is the f'n key right here
   socket.on('disconnect', function(){
     clearInterval(notifyFunc)
   });
@@ -68,7 +66,6 @@ exports.newMessage = function(socket, io, location){
   }
   newMessage();
   var newMessageFunc = setInterval(newMessage, 3000);
-  //this is the f'n key right here
   socket.on('disconnect', function(){
     clearInterval(newMessageFunc)
   });
@@ -99,7 +96,6 @@ exports.online = function(socket, io, data){
         }
         if (updateArray.length < 1){return true}
         else {
-          debugger
           callback("onlineStatus", socket.onlineStatus, socket);
           io.to(socket.id).emit('onlineStatus', updateArray); 
         }     

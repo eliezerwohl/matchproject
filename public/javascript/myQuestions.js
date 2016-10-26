@@ -8,8 +8,6 @@ $( document ).ready(function() {
 	$("#myQuestions").on("click", function(){
 		formCheck("/myQuestionsUpdate")
 	});
-
-	
 	$.ajax({url: "/myInfoData", success: function(result){
 		if (result === "blank"){return false}
 		else {append(result, "myQuestions");}

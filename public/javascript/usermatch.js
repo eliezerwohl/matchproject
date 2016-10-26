@@ -1,4 +1,3 @@
-// $("#status").on("click", function(){
 $( document ).ready(function() {
 	$(".save").on("click", function(){
 		var data =(this).value;
@@ -21,14 +20,3 @@ $( document ).ready(function() {
 		}
 	}});
 });
-
-
-	// 	$.ajax({url: "/userSave", success: function(result){
-	//  if ( result === "today"){
-	//  		alert("account was created today.  Please wait")
-	// 	}
-	// 	else{
-	// 		append(result, "prime")
-	// 	}
-	// }});
-// });
