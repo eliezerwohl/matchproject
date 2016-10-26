@@ -34,7 +34,7 @@ function next(res, req, prime){
 exports.getMatch=function(req, res){
 	req.session.currentNumber=0;
 	req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
-	req.session.resultsArray=[]
+	req.session.resultsArray=[];
 	models.Vote.findAll({
 		where:{UserId:req.session.UserId},
 		include: [{

@@ -1,4 +1,6 @@
 var models = require("../models/models.js");
+var Sequelize = require('sequelize');
+
 exports.myInfoUpdate = function(req, res){
   models.User.update({
     city: req.body.city,
@@ -38,11 +40,23 @@ exports.myQuestions = function(req, res){
 }
 
 exports.currentStatus = function(req, res){
-  models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}})
+  models.User.findOne({attributes: ['match', 'age'],
+    where: {id : req.session.UserId},
+      include: [{
+      model: models.Answer,
+        where: { UserId: Sequelize.col('User.id') },
+        attributes: ["q01"],
+      }],
+  })
   .then(function(data){
     debugger
-   res.send(data.dataValues.match);
-   req.session.currentStatus = data.dataValues.match;
+    if ((!data.dataValues.age) || (!data.dataValues.Answers[0].dataValues.q01)  ){
+      res.send("incomplete")
+    }
+    else {
+      res.send(data.dataValues.match);
+      req.session.currentStatus = data.dataValues.match;
+    }
   });
 }
 

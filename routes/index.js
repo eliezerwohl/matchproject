@@ -182,6 +182,7 @@ module.exports = function(app, ioInstance) {
   app.get("/chatHome",isAuthenticated, function(req, res){
     res.render("chatHome")
   });
+  app.get("/homecheck", home.homecheck);
   app.get("/chatName", chat.chatName);
   app.post("/chatId", chat.chatId)
   app.get("/chatHistory", chat.chatHistory)

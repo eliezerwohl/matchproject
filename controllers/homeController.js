@@ -40,20 +40,18 @@ exports.loggedin = function (req, res){
     req.session.match = User.dataValues.match;
     req.session.UserId = User.dataValues.id;
     req.session.uuid = User.dataValues.uuid;
-    req.session.account  = User.dataValues.account;
     req.session.greeting = User.dataValues.greeting
+    res.render("home");
+  });
+}
 
-    if (req.session.greeting == 0 ){
-      res.render("greeting")
-      req.session.tempGreeting = 0
-      req.session.save()
-      models.User.update({
+exports.homecheck = function(req, res){
+  if (req.session.greeting == false){
+     models.User.update({
         greeting:1
         },{where:{id:req.session.UserId}
       });
-    }
-    else{
-       res.render("home");
-    }
-  });
+     res.send("greeting");
+  }
+  else{res.send("false");}
 }
