@@ -54,19 +54,13 @@ exports.saveMatch = function(req, res){
 						{where:{
 							id:results.dataValues.MatchedId
 						}
-					}).then(function(){
-						updateAvg(matchedId)
-					});
+					}).then(function(){updateAvg(matchedId);});
 				}
 				else {
 					models.Matched.update({
 						  no: Sequelize.literal('no +1')},
-						{where:{
-							id:results.dataValues.MatchedId
-						}
-					}).then(function(){
-						updateAvg(matchedId)
-					});
+						{where:{id:results.dataValues.MatchedId}
+					}).then(function(){updateAvg(matchedId);});
 				}
 			});
 		}
@@ -76,18 +70,11 @@ exports.saveMatch = function(req, res){
 
 function updateAvg(matchedId){
 	models.Matched.findOne({
-		where:{
-			id: matchedId
-		}
+		where:{id: matchedId}
 	}).then(function(data){
 		var avg = Math.round((100/(data.dataValues.yes + data.dataValues.no)) * data.dataValues.yes);
-		models.Matched.update({
-		avg: avg
-		},
-		{
-			where:{
-				id:data.dataValues.id
-			}
+		models.Matched.update({avg: avg},
+		{where:{id:data.dataValues.id}
 		});
 	});
 }

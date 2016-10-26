@@ -12,10 +12,6 @@ exports.userMatch = function(req, res){
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
 		var dailyMatch = data.dataValues.dailyMatch;
-		// if  (createdAt === today){
-		// res.send("today")
-		// //account was created today
-		// }
 		if (dailyMatch === 0 &&  today == lastMatch){
 			res.send("done");
 			//already did the one match a day

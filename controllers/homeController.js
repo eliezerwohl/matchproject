@@ -6,30 +6,23 @@ function saltyhash(pass) {
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
-
 exports.signUp = function(req, res){
   models.User.findOne({
-      where: {
-        email: req.body.email
-      }
+      where: {email: req.body.email}
     }).then(function(results) {
-      if (results) {
-        res.send("taken")
-      } else {
+      if (results) {res.send("taken");} 
+      else {
         models.User.create({
           lastname: (req.body.lastName).trim(),
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
           password: saltyhash(req.body.password),
         }).then(function(data) {
-          var tempId = data.dataValues.id;
           models.Online.create({
              user:data.dataValues.uuid,
           });
-            models.Answer.create({
-              UserId:data.dataValues.id,
-          });
-          res.send("accept")
+            models.Answer.create({UserId:data.dataValues.id});
+          res.send("accept");
         });
       }
     });
