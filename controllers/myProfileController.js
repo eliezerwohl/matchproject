@@ -16,10 +16,15 @@ exports.myInfoUpdate = function(req, res){
 
 exports.myQuestions = function(req, res){
   models.Answer.update({
-      a091201: req.body.a091201,
-      a091202:req.body.a091202,
-      a091203:req.body.a091203,
-      a091204:req.body.a091204,
+      q01: req.body.q01,
+      q02: req.body.q02,
+      q03: req.body.q03,
+      q04: req.body.q04,
+      q05: req.body.q05,
+      q06: req.body.q06,
+      q07: req.body.q07,
+      q08: req.body.q08,
+      q09: req.body.q09,
     },{where: { UserId : req.session.UserId }
   }).then(function (result) { 
     res.send("myQuestions")

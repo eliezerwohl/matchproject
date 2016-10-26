@@ -69,10 +69,16 @@ var Vote = connection.define("Votes", {
 })
 
 var Answer = connection.define('Answer', {
-  a091201:Sequelize.STRING,
-  a091202:Sequelize.STRING,
-  a091203:Sequelize.STRING,
-  a091204:Sequelize.STRING,
+  q01:Sequelize.TEXT,
+  q02:Sequelize.TEXT,
+  q03:Sequelize.STRING,
+  q04:Sequelize.TEXT,
+  q05:Sequelize.STRING,
+  q06:Sequelize.TEXT,
+  q07:Sequelize.TEXT,
+  q08:Sequelize.TEXT,
+  q09:Sequelize.TEXT,
+
 });  
 
 User.hasMany(NotifyConnect);
