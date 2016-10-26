@@ -1,4 +1,10 @@
 $( document ).ready(function() {
+		function chatSize (){
+    var height = ($(window).height()); 
+    $("#chatBox").css("height", height-117 + "px")
+  }
+  chatSize()
+  $(window).resize(chatSize);
 	$(".save").on("click", function(){
 		var data =(this).value;
 		$.ajax({url: "/userSave", type:"POST", data:{data:data}, success: function(result){

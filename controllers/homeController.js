@@ -34,9 +34,7 @@ exports.loginData = function(req, res){
 }
 exports.loggedin = function (req, res){
    models.User.findOne({
-    where: [{
-      email: req.user.username
-    }]
+    where: [{email: req.user.username}]
   }).then(function(User) {
     req.session.score = User.dataValues.score;
     req.session.match = User.dataValues.match;
@@ -45,7 +43,6 @@ exports.loggedin = function (req, res){
     req.session.account  = User.dataValues.account;
     var greeting = User.dataValues.greeting
     req.session.save()
-
     if (greeting == false ){
       res.render("greeting")
       req.session.tempGreeting = false
