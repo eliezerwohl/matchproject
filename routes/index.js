@@ -154,6 +154,7 @@ module.exports = function(app, ioInstance) {
   app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.post("/myQuestionsUpdate", myProfile.myQuestions);
   app.get("/myInfoData", myProfile.myInfo);
+  app.get("/myQuestionsData", myProfile.myQuestionsData);
 	app.post("/signUp", home.signUp);
 	app.get("/myProfile", isAuthenticated, function(req, res){
 		res.render("myProfile");

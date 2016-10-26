@@ -41,11 +41,11 @@ exports.loggedin = function (req, res){
     req.session.UserId = User.dataValues.id;
     req.session.uuid = User.dataValues.uuid;
     req.session.account  = User.dataValues.account;
-    var greeting = User.dataValues.greeting
-    req.session.save()
-    if (greeting == false ){
+    req.session.greeting = User.dataValues.greeting
+
+    if (req.session.greeting == 0 ){
       res.render("greeting")
-      req.session.tempGreeting = false
+      req.session.tempGreeting = 0
       req.session.save()
       models.User.update({
         greeting:1
