@@ -14,11 +14,10 @@ var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var sharedsession = require("express-socket.io-session");
 var cookieSession = require('cookie-session')
-
 function isAuthenticated(req, res, next) {
-    if (req.user)
-        return next();
-    res.redirect('/');
+  if (req.user)
+    return next();
+  res.redirect('/');
 }
 
 module.exports = function(app, ioInstance) {
@@ -48,7 +47,7 @@ module.exports = function(app, ioInstance) {
   },
   function(req, email, password, done) {
     models.User.findOne({
-        where: {email: email}
+      where: {email: email}
     }).then(function(user) {
       if (user) {
          bcrypt.compare(password, user.dataValues.password, function(err, user) {
@@ -73,7 +72,6 @@ module.exports = function(app, ioInstance) {
       socket.handshake.session[data] = data;
     }
   io.on('connection', function(socket){
-    
     sock = socket
     models.Online.update({
       online:1
@@ -84,7 +82,6 @@ module.exports = function(app, ioInstance) {
     })
     console.log('a user connected');
     socket.on('disconnect', function(){
-      
         models.Online.update({
       online:0
     },{
@@ -111,7 +108,6 @@ module.exports = function(app, ioInstance) {
       update.newMessage(sock, io, location);
     });
     socket.on('room', function(room) {
-      debugger
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){

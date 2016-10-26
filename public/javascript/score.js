@@ -5,9 +5,6 @@ $( document ).ready(function() {
 	function pulse(){
 		socket.emit("pulse", location)
 	}
-	// socket.on("onlineStatus", function(data){
-	// 	console.log(data)
-	// })
   socket.on("score", function(score){
  		$("#score").text(score);
 	});

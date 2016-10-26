@@ -16,6 +16,6 @@ $( document ).ready(function() {
 	$("#status").on("click", function(){
 		$.ajax({url: "/updateStatus", success: function(result){
 			buttonColor(result);
-		}})
-	})
+		}});
+	});
 });
