@@ -6,30 +6,23 @@ function saltyhash(pass) {
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
-
 exports.signUp = function(req, res){
   models.User.findOne({
-      where: {
-        email: req.body.email
-      }
+      where: {email: req.body.email}
     }).then(function(results) {
-      if (results) {
-        res.send("taken")
-      } else {
+      if (results) {res.send("taken");} 
+      else {
         models.User.create({
           lastname: (req.body.lastName).trim(),
           firstname:  (req.body.firstName).trim(),
           email: req.body.email,
           password: saltyhash(req.body.password),
         }).then(function(data) {
-          var tempId = data.dataValues.id;
           models.Online.create({
              user:data.dataValues.uuid,
           });
-            models.Answer.create({
-              UserId:data.dataValues.id,
-          });
-          res.send("accept")
+            models.Answer.create({UserId:data.dataValues.id});
+          res.send("accept");
         });
       }
     });
@@ -41,9 +34,7 @@ exports.loginData = function(req, res){
 }
 exports.loggedin = function (req, res){
    models.User.findOne({
-    where: [{
-      email: req.user.username
-    }]
+    where: [{email: req.user.username}]
   }).then(function(User) {
     req.session.score = User.dataValues.score;
     req.session.match = User.dataValues.match;
@@ -52,7 +43,6 @@ exports.loggedin = function (req, res){
     req.session.account  = User.dataValues.account;
     var greeting = User.dataValues.greeting
     req.session.save()
-
     if (greeting == false ){
       res.render("greeting")
       req.session.tempGreeting = false

@@ -105,6 +105,6 @@ exports.online = function(socket, io, data){
   online();
   var onlineFunc = setInterval(online, 3000);
   socket.on('disconnect', function(){
-    clearInterval(onlineFunc)
+    clearInterval(onlineFunc);
   });
 }

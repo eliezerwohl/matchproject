@@ -85,21 +85,16 @@ exports.userSave = function(req, res) {
           });
         } 
         else {
-            //both have voted
-            models.Vote.findAll({
-            where: {
-              MatchedId: matchedId
-            }
+          //both have voted
+          models.Vote.findAll({
+            where: { MatchedId: matchedId}
           }).then(function(data){
             scoring(data, matchedId, user1Vote, user2Vote, req);
           });
         }
       });
+      });
     });
-
-      })
-      
-
   }
 }
 

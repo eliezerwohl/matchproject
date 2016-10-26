@@ -27,7 +27,6 @@ function next(res, req, prime){
 			else{
 				req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
 			}
-		debugger
 		res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
 		req.session.save()
 	}
@@ -37,18 +36,14 @@ exports.getMatch=function(req, res){
 	req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
 	req.session.resultsArray=[]
 	models.Vote.findAll({
-		where:{
-			UserId:req.session.UserId
-		},
+		where:{UserId:req.session.UserId},
 		include: [{
 		where: { UserId: Sequelize.col('User.id') },
     model: models.Matched,
         where: { MatchedId: Sequelize.col('Matched.id') },
       }]
 	}).then(function (data){
-		if (data.length < 1) {
-			return true
-		}
+		if (data.length < 1) {return true}
 		else {
 			for (var i = 0; i < data.length; i++) {
 				if (data[i].Matched.dataValues.user1 == req.session.currentPrime.id){
@@ -74,8 +69,8 @@ exports.getMatch=function(req, res){
 		},
 		include: [{
 	    model: models.Answer,
-	        where: { UserId: Sequelize.col('User.id') },
-	   			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+	      where: { UserId: Sequelize.col('User.id') },
+	   		attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
 	    }],
 	  order: [
 	    Sequelize.fn( 'RAND' ),
@@ -94,22 +89,15 @@ exports.findPrime = function(req, res){
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
 	models.User.findAll({
-		where:{
-			id:{$notIn: req.session.noMatch},
-			match:1,
-		},
+		where:{id:{$notIn: req.session.noMatch},match:1,},
 		attributes: ['id', 'city', "upper", "lower", "age", "seeking", "gender"],
 		include: [{
     model: models.Answer,
         where: { UserId: Sequelize.col('User.id') },
    			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
     }],
-	  order: [
-	    Sequelize.fn( 'RAND' ),
-	  ]
-	}).then(function(results){
-		dataStore(res, req, results, true)
-	});
+	  order: [ Sequelize.fn( 'RAND' ),]
+	}).then(function(results){dataStore(res, req, results, true);});
 }
 
 exports.nextPrime = function(req, res){

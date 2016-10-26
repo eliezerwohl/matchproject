@@ -29,12 +29,12 @@ exports.myQuestions = function(req, res){
         },{where:{id:req.session.UserId}
       });
     }
-
   });
 }
 
 exports.currentStatus = function(req, res){
-  models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}}).then(function(data){
+  models.User.findOne({attributes: ['match'] ,where: {id : req.session.UserId}})
+  .then(function(data){
    res.send(data.dataValues.match);
    req.session.currentStatus = data.dataValues.match;
    req.session.save()
@@ -44,16 +44,19 @@ exports.currentStatus = function(req, res){
 exports.updateStatus = function(req, res){
   if (req.session.currentStatus == true){req.session.currentStatus = false}
   else{req.session.currentStatus = true}
-  models.User.update({match:req.session.currentStatus}, {where: {id : req.session.UserId}}).then(function(data){
+  models.User.update({match:req.session.currentStatus}, {where: {id : req.session.UserId}})
+  .then(function(data){
     res.send(req.session.currentStatus)
   }); 
 }
 exports.myInfo = function (req, res) {
-  models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },where: {id : req.session.UserId}}).then(function(result){
+  models.User.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },where: {id : req.session.UserId}})
+  .then(function(result){
     if (!result.dataValues.age){
       res.send("blank")
     }else{
-      models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },where: {UserId : req.session.UserId}}).then(function(data){
+      models.Answer.find({attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
+        where: {UserId : req.session.UserId}}).then(function(data){
         var obj = Object.assign(result.dataValues, data.dataValues);
         res.send(obj);
       });
