@@ -16,11 +16,7 @@ $( document ).ready(function() {
 		 	+ result[i].msg + "</span></div></button>")
 		}
 	}}).then(function(){
-	 // function onlinePulse(){
 		socket.emit("online", chatArray)
-	// }
-	// onlinePulse()
-		// setInterval(onlinePulse, 10000)
 	});
 	socket.on("onlineStatus", function(data){
 		for (var i = 0; i < data.length; i++) {

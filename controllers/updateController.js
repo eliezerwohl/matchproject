@@ -13,7 +13,11 @@ exports.score = function(socket, io) {
     });     
   }
   score();
-
+   var scoreFunc = setInterval(score, 10000);
+  //this is the f'n key right here
+  socket.on('disconnect', function(){
+    clearInterval(scoreFunc)
+  });
 }
 
 exports.notifyConnect = function(socket, io){
@@ -27,6 +31,11 @@ exports.notifyConnect = function(socket, io){
     });
   }
   notify();
+  var notifyFunc = setInterval(notify, 10000);
+  //this is the f'n key right here
+  socket.on('disconnect', function(){
+    clearInterval(notifyFunc)
+  });
 }
 
 exports.checkedNotify = function(socket, io){
@@ -58,57 +67,48 @@ exports.newMessage = function(socket, io, location){
     });
   }
   newMessage();
-  setTimeout(newMessage, 2000);
-  setTimeout(newMessage, 4000);
-  setTimeout(newMessage, 6000);
-  setTimeout(newMessage, 8000);
+  var newMessageFunc = setInterval(newMessage, 3000);
+  //this is the f'n key right here
+  socket.on('disconnect', function(){
+    clearInterval(newMessageFunc)
+  });
 }
 
-exports.online = function(socket, io){ 
-
-
-  var dataArray = socket.handshake.session.dataArray
+exports.online = function(socket, io, data){ 
+  var dataArray = data
   function online(){
-
     models.Online.findAll(
       {where:{user:{$in:dataArray}}, 
       attributes: ["user", "online" ]
     }).then(function(data){
-     
       if (socket.onlineStatus == undefined){
         io.to(socket.id).emit('onlineStatus', data);      
         callback("onlineStatus", data, socket);
       }
       else{
-       
         var updateArray = []
-        var onlineArray = socket.onlineStatus
         for (var i = 0; i < data.length; i++) {
-          for (var j = 0; j < onlineArray.length; j++) {
-            if (data[i].dataValues.user == onlineArray[j].dataValues.user 
-              && data[i].dataValues.online != onlineArray[j].dataValues.online){
-             
+          for (var j = 0; j < socket.onlineStatus.length; j++) {
+            if (data[i].dataValues.user == socket.onlineStatus[j].dataValues.user 
+              && data[i].dataValues.online != socket.onlineStatus[j].dataValues.online){
               updateArray.push(data[i]);
               socket.onlineStatus[j].dataValues.online = data[i].dataValues.online;
-         
-              onlineArray.splice(j, j+1);
               break
             }
           }
         }
         if (updateArray.length < 1){return true}
         else {
+          debugger
           callback("onlineStatus", socket.onlineStatus, socket);
-          io.to(socket.id).emit('onlineStatus', updateArray, function(error, msg){
-          }); 
+          io.to(socket.id).emit('onlineStatus', updateArray); 
         }     
       }
     });
   }
   online();
-  var test = setInterval(online, 1000);
-  //this is the f'n key right here
+  var onlineFunc = setInterval(online, 3000);
   socket.on('disconnect', function(){
-    clearInterval(test)
-  })
+    clearInterval(onlineFunc)
+  });
 }
