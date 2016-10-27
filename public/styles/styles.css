@@ -21,7 +21,6 @@
 	font-size: 65px;
 	line-height: 0px;
 	padding-top: 10px;
-
 }
 
 #chatHome .sorry {
@@ -146,16 +145,13 @@
 	padding: 15px;
 }
 
-
-
 #chatBox {
 	overflow-y:scroll;
 	margin-bottom: 25px
 }
 #connectionBox {
-		overflow-y:scroll;
+	overflow-y:scroll;
 	margin-bottom: 10px
-
 }
 
 #chatControl {
@@ -200,7 +196,6 @@
 }
 
 .backDiv {
-
 	height: 100%;
 	position: relative;
 	z-index: 2;
@@ -216,7 +211,6 @@
 	background-color: #282828 ;	
 	z-index: 1;
 	right:0px;
-
 }
 
 .frontDiv .primeButtons button {
