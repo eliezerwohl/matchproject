@@ -10,6 +10,12 @@
 	visibility: hidden;
 }
 
+#myProfile textarea {
+	height:80px;}
+
+#login .text {
+	color:darkred;
+}
 #index .thanks, #index .incorrect {
 	display: none;
 }
