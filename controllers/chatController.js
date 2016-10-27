@@ -62,7 +62,7 @@ exports.chatHistory = function(req, res){
 				dataArray.push({user:"user", message:data[i].dataValues.message});}
 			else {dataArray.push({user:"other", message:data[i].dataValues.message});}
 		}
-		res.send(dataArray)
+		res.send(dataArray);
 	});
 }
 
@@ -73,13 +73,13 @@ exports.chatName = function(req, res){
 	}).then(function(data){
 		req.session.otherChat = data.dataValues.id;
 		//can't send id back
-		res.send(data)
+		res.send(data);
 	})
 }
 exports.chatId = function(req, res){
-	req.session.MatchUuid = req.body.uuid
+	req.session.MatchUuid = req.body.uuid;
 	req.session.chatId = req.body.match;
-	res.send("okay")
+	res.send("okay");
 }
 
 exports.save = function(msg, socket, room){

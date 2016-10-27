@@ -11,7 +11,6 @@ function dataStore(res, req, data, prime){
 	else {
 		req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[0].id]
 	}
-	debugger
 	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
 }
 
@@ -21,14 +20,11 @@ function next(res, req, prime){
 			res.send(false);
 		}
 		else {
-			if (prime === true){
-				req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];
-			}
+			if (prime === true){req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];}
 			else{
 				req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
 			}
 		res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
-		req.session.save()
 	}
 }
 exports.getMatch=function(req, res){

@@ -41,7 +41,6 @@ exports.userSave = function(req, res) {
               MatchedId: matchedId
             }
           }).then(function(data) {
-            debugger
      				scoring(data, matchedId, user1Vote, user2Vote, req);
       		});
         }
@@ -79,9 +78,7 @@ exports.userSave = function(req, res) {
           models.Matched.update({
               answered: req.session.UserId
           }, {
-              where: {
-                id: matchedId
-              }
+              where: {id: matchedId}
           });
         } 
         else {
@@ -100,12 +97,8 @@ exports.userSave = function(req, res) {
 
 function dailyMatchFunction(req) {
   models.User.update({
-		dailyMatch:0,
-		},
-		{
-		where:{
-			id:req.session.UserId
-		}
+		dailyMatch:0,},
+		{where:{id:req.session.UserId}
 	});
 }
 
@@ -117,8 +110,8 @@ function scoring (data, matchedId, user1Vote, user2Vote, req){
     models.NotifyConnect.create({
     UserId:req.session.UserId,
     MatchedId:matchedId,
-    })
-  })
+    });
+  });
 	var trueArray = [];
 	var falseArray = [];
 	if (user1Vote == user2Vote) {
