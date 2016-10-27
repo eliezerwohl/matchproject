@@ -72,7 +72,6 @@ exports.chatName = function(req, res){
 		attributes:["firstname", "lastname", "uuid", "id"]
 	}).then(function(data){
 		req.session.otherChat = data.dataValues.id;
-		req.session.save();
 		//can't send id back
 		res.send(data)
 	})

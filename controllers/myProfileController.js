@@ -29,13 +29,11 @@ exports.myQuestions = function(req, res){
       q09: req.body.q09,
     },{where: { UserId : req.session.UserId }
   }).then(function (result) { 
-    res.send("myQuestions")
-    if (req.session.greeting == true){
-       models.User.update({
-        match:1
-        },{where:{id:req.session.UserId}
-      });
+    debugger
+    if (req.session.greeting == false){
+      res.send("activate")
     }
+     else{res.send("myQuestions")}
   });
 }
 

@@ -22,6 +22,7 @@ function formCheck(url, login){
 				if (login) {return true}
 				else {
 					$.ajax({url: url, type:"POST", data:data, success: function(result){
+						debugger
 						//make into a switch case
 						if (result == "greeting"){window.location.pathname = "/myQuestions";}
 						else if (result == "myInfo" || result == "myQuestions") {window.location.pathname = "/myProfile";}
@@ -30,6 +31,8 @@ function formCheck(url, login){
 							document.cookie = "signup=true";
 							window.location.pathname="/";
 						}
+						else if (result == "activate"){
+							window.location.pathname = "/settings";}
 					}});
 				}
 			}
