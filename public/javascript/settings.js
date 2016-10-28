@@ -13,7 +13,6 @@ $( document ).ready(function() {
 		if (result === "incomplete"){return true}
 			else{	buttonColor(result)};
 	}})
-
 	$("#status").on("click", function(){
 		$.ajax({url: "/updateStatus", success: function(result){
 			buttonColor(result);

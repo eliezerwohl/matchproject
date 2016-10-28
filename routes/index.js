@@ -72,6 +72,7 @@ module.exports = function(app, ioInstance) {
       socket.handshake.session[data] = data;
     }
   io.on('connection', function(socket){
+    socket.leave(socket.handshake.session.chatId);
     sock = socket
     models.Online.update({
       online:1
@@ -82,27 +83,19 @@ module.exports = function(app, ioInstance) {
     })
     console.log('a user connected');
     socket.on('disconnect', function(){
-        models.Online.update({
-      online:0
-    },{
-      where:{
-        id:socket.handshake.session.UserId
-      }
-    })
+      models.Online.update({online:0},
+        {where:{id:socket.handshake.session.UserId}
+      });
       console.log('user disconnected');
     });
     socket.on("notify", function(){
       update.checkedNotify(sock, io)
     });
-    socket.on("leave", function(){
-      socket.leave(socket.handshake.session.chatId);
-    })
     socket.on("online", function(data){
       socket.handshake.session.dataArray = data
       update.online(socket, io, data)
     })
     socket.on("login", function(location){
-      socket.leave(socket.handshake.session.chatId);
       update.score(sock, io);
       update.notifyConnect(sock, io);
       update.newMessage(sock, io, location);
@@ -114,9 +107,7 @@ module.exports = function(app, ioInstance) {
         models.Message.update({
           checked:1
         },{
-          where:{
-            MatchedId:socket.handshake.session.chatId,
-          }
+          where:{MatchedId:socket.handshake.session.chatId}
         });
       // }
     });
@@ -131,63 +122,38 @@ module.exports = function(app, ioInstance) {
     successRedirect: '/loggedin',
     failureRedirect: '/?incorrect'
   }));
-  app.get("/settings", isAuthenticated, function(req, res){
-    res.render("settings")
-  })
-  app.get("/logout", function(req, res){
-    req.session = null;
-    res.redirect("/")
-  });
+  app.get("/settings", isAuthenticated, function(req, res){res.render("settings");})
+  app.get("/logout", function(req, res){req.session = null;res.redirect("/");});
   app.get("/loginData", home.loginData);
 	app.get("/loggedin", isAuthenticated, home.loggedin);
-	app.get("/signUp", function(req,res){
-	  res.render("signUp", {layout:"mainFront"});
-	});
+	app.get("/signUp", function(req,res){res.render("signUp", {layout:"mainFront"});});
   app.get("/updateStatus", myProfile.updateStatus);
   app.get("/currentStatus", myProfile.currentStatus);
-  app.get("/myQuestions", isAuthenticated, function(req, res){
-    res.render("myQuestions");
-  });
-  app.get("/myInfo", isAuthenticated, function(req, res){
-    res.render("myInfo");
-  });
+  app.get("/myQuestions", isAuthenticated, function(req, res){res.render("myQuestions");});
+  app.get("/myInfo", isAuthenticated, function(req, res){res.render("myInfo");});
   app.post("/myInfoUpdate", myProfile.myInfoUpdate);
   app.post("/myQuestionsUpdate", myProfile.myQuestions);
   app.get("/myInfoData", myProfile.myInfo);
   app.get("/myQuestionsData", myProfile.myQuestionsData);
 	app.post("/signUp", home.signUp);
-	app.get("/myProfile", isAuthenticated, function(req, res){
-		res.render("myProfile");
-	});
+	app.get("/myProfile", isAuthenticated, function(req, res){res.render("myProfile");});
   app.get("/nextMatch", make.nextMatch);
   app.get("/getMatch", make.getMatch);
-  app.get("/makeConnection", isAuthenticated, function(req, res){
-    res.render("makeConnection");
-  });
+  app.get("/makeConnection", isAuthenticated, function(req, res){res.render("makeConnection");});
   app.get("/nextMatch", make.nextMatch);
   app.get("/nextPrime", make.nextPrime);
   app.get("/findPrime", make.findPrime);
-  app.get("/matchhome", function(req, res){
-    res.render("matchhome")
-  })
+  app.get("/matchhome", function(req, res){res.render("matchhome");})
   app.post("/userSave", userSave.userSave);
-  app.get("/myMatch", isAuthenticated, function(req, res) {
-    res.render("myMatch")
-  })
+  app.get("/myMatch", isAuthenticated, function(req, res) {res.render("myMatch");})
   app.get("/userMatch", isAuthenticated, userMatch.userMatch)
   app.post("/saveMatch", save.saveMatch);
-  app.get("/chat", isAuthenticated, function(req,res){
-    res.render("chat");
-  });
-  app.get("/chatHome",isAuthenticated, function(req, res){
-    res.render("chatHome")
-  });
+  app.get("/chat", isAuthenticated, function(req,res){res.render("chat");});
+  app.get("/chatHome",isAuthenticated, function(req, res){res.render("chatHome");});
   app.get("/homecheck", home.homecheck);
   app.get("/chatName", chat.chatName);
   app.post("/chatId", chat.chatId)
   app.get("/chatHistory", chat.chatHistory)
   app.get("/findChat", chat.findChat);
-	app.get("/", function(req,res){
-	  res.render("index", {layout: "mainFront"});
-	});
+	app.get("/", function(req,res){res.render("index", {layout: "mainFront"});});
 }

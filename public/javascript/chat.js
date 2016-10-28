@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-  debugger
   $("#chatInput").bind('touchmove', function(e){e.preventDefault()})
   function chatSize (){
     var height = ($(window).height()); 
@@ -8,9 +7,8 @@ $( document ).ready(function() {
   }
   chatSize(0)
   $(window).resize(chatSize);
-  var id
+  var id; var uuid;
   var socket = io();
-  var uuid;
 	$.ajax({url: "/chatName", success: function(result){
     uuid = result.uuid
     $("#status").append("<span id='" + result.uuid  + "' class=''>.</span></span>")
@@ -43,25 +41,16 @@ $( document ).ready(function() {
 
   $("#m").on('keyup', function (e) {
     e.preventDefault
-    if (e.keyCode == 13) {
-        sendMessage()
-    }
+    if (e.keyCode == 13) { sendMessage();}
   });
-  $('#send').on("click", function(){
-    sendMessage()
-  });
+  $('#send').on("click", function(){sendMessage();});
 
   socket.on('chat message', function(msg){  
-    if (id === msg.id){
-      $('#messages').append($('<li>').text(msg.msg).addClass("user").addClass("col-xs-12"));
-    }
-    else {
-      $('#messages').append($('<li>').text(msg.msg).addClass("other").addClass("col-xs-12"));
-    }
+    var user;
+    if (id === msg.id){user = "user";} else {user= "other";}
+     $('#messages').append($('<li>').text(msg.msg).addClass(user).addClass("col-xs-12"));
      $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
   });
-  socket.on('message', function(msg){
-    id = msg
-  });
+  socket.on('message', function(msg){id = msg});
 });
 
