@@ -1,11 +1,9 @@
 $( document ).ready(function() { 
 		$.ajax({url: "/homecheck", success: function(result){
-			debugger
 			if (result == "false"){
 				return true
 			}
 			else {
-
 			$("#welcomeModal").modal("show")
 		}
 	}});

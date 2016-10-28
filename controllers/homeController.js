@@ -10,11 +10,11 @@ exports.signUp = function(req, res){
   models.User.findOne({
       where: {email: req.body.email}
     }).then(function(results) {
-      if (results) {res.send("taken");} 
+      if (results) {res.redirect("/signup?taken");} 
       else {
         models.User.create({
-          lastname: (req.body.lastName).trim(),
-          firstname:  (req.body.firstName).trim(),
+          lastname: (req.body.lastname).trim(),
+          firstname:  (req.body.firstname).trim(),
           email: req.body.email,
           password: saltyhash(req.body.password),
         }).then(function(data) {
@@ -22,7 +22,7 @@ exports.signUp = function(req, res){
              user:data.dataValues.uuid,
           });
             models.Answer.create({UserId:data.dataValues.id});
-          res.send("accept");
+          res.redirect("/?success")
         });
       }
     });

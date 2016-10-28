@@ -4,37 +4,39 @@
 	</div>
 	<div class="panel panel-info col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
 		<div class="panel-body">
-		<div class="errorMsg">
-			<p> your email has already been used.</p>
-		</div>
-			<div class="row">
-				<h4 class=""> first name </h4>
-			</div>
-			<div class="row">
-				<input class="col-xs-12 col-md-8 col-md-offset-2" id="firstName">
-			</div>
-			<div class="row">
-				<h4 class=""> last name </h4>
-			</div>
-			<div class="row">
-				<input class="col-xs-12 col-md-8 col-md-offset-2" id="lastName">
-			</div>
-			<div class="row">
-				<h4 class="">email </h4>
-			</div>
-			<div class="row">
-				<input class="col-xs-12 col-md-8 col-md-offset-2" id="email">
-			</div>
-			<div class="row">
-				<h4 class=""> Password </h4>
-			</div>
-			<div class="row">
-				<input class="col-xs-12 col-md-8 col-md-offset-2" id="password">
-			</div>
-			<div class="row">
-				<button class="btn btn-md btn-info col-xs-12" id="signup" > Submit
-				</button>
-			</div>
+			<form id="signupForm" action="/signUp" method="post">
+				<div class="errorMsg text-center">
+					<p> your email has already been used</p>
+				</div>
+				<div class="row">
+					<h4 class=""> first name </h4>
+				</div>
+				<div class="row">
+					<input class="col-xs-12 input col-md-8 col-md-offset-2" name="firstname" id="firstName">
+				</div>
+				<div class="row">
+					<h4 class=""> last name </h4>
+				</div>
+				<div class="row">
+					<input class="col-xs-12 input col-md-8 col-md-offset-2" name="lastname" id="lastName">
+				</div>
+				<div class="row">
+					<h4 class="">email </h4>
+				</div>
+				<div class="row">
+					<input class="col-xs-12 input col-md-8 col-md-offset-2" name="email" type="email" id="email">
+				</div>
+				<div class="row">
+					<h4 class=""> Password </h4>
+				</div>
+				<div class="row">
+					<input class="col-xs-12 input col-md-8 col-md-offset-2" name="password" type="password" id="password">
+				</div>
+				<div class="row">
+					<button class="btn btn-md btn-info col-xs-12" type="submit" id="signup" > Submit
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

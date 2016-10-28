@@ -1,10 +1,11 @@
 <div id="myProfile" class="pad text-center col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1
  col-md-4 col-md-offset-4">
+ 	<form id="myInfoForm" action="/myInfoUpdate" method="post">
 	<div class="row">
 		<h4 class= "col-md-12">seeking</h4>
 	</div>
 	<div class="row">
-		<select class= "col-sm-6 col-sm-offset-3 col-xs-12" id="seeking" name="seeking">
+		<select class= "input col-sm-6 col-sm-offset-3 col-xs-12" id="seeking" name="seeking">
 			<option disabled selected value> -- select an option -- </option>
 			<option>M</option>
 			<option>F</option>
@@ -14,13 +15,13 @@
 		<h4>My Age </h4>
 	</div>
 	<div class="row">
-			<input class= "col-sm-6 col-sm-offset-3 col-xs-12" name="age" id="age">
+			<input type="number" class= "input col-sm-6 col-sm-offset-3 col-xs-12" name="age" id="age">
 	</div>
 	<div class="row">
 		<h4>My city </h4> 
 	</div>
 	<div class="row">
-		<select class= "col-sm-6 col-sm-offset-3 col-xs-12"  id="city" name="city">
+		<select class= "input col-sm-6 col-sm-offset-3 col-xs-12"  id="city" name="city">
 			<option disabled selected value> -- select an option -- </option>
 			<option>Liberty City</option>
 			<option>Vice City</option>
@@ -30,7 +31,7 @@
 		<h4>My gender </h4>
 	</div>
 	<div class="row">
-		<select class= "col-sm-6 col-sm-offset-3 col-xs-12"  id="gender" name="gender">
+		<select class= "input col-sm-6 col-sm-offset-3 col-xs-12"  id="gender" name="gender">
 			<option disabled selected value> -- select an option -- </option>
 			<option>M</option>
 			<option>F</option>
@@ -40,17 +41,18 @@
 		<h4>higher age</h4>
 	</div>
 	<div class="row">
-		<input class= "col-sm-6 col-sm-offset-3 col-xs-12"  id="upper" name="upper">
+		<input type="number" class= "input col-sm-6 col-sm-offset-3 col-xs-12"  id="upper" name="upper">
 	</div>
 	<div class="row">
 		<h4>lower age </h4>
 	</div>
 	<div class="row">
-		<input class= "col-sm-6 col-sm-offset-3 col-xs-12" id="lower" name="lower">
+		<input type="number" class= "input col-sm-6 col-sm-offset-3 col-xs-12" id="lower" name="lower">
 	</div>
 	<div class="row">
-		<button class="col-xs-12 col-sm-6 col-sm-offset-3 btn btn-primary" id="myInfo"> save </button>
+		<button type="submit" class="col-xs-12 col-sm-6 col-sm-offset-3 btn btn-primary" id="myInfo"> save </button>
 	</div>
+</form>
 </div>
 
 <script type="text/javascript" src="/javascript/myQuestions.js"></script>
