@@ -11,8 +11,8 @@ exports.myInfoUpdate = function(req, res){
     age:req.body.age
   },{where: { id : req.session.UserId }
   }).then(function(results){
-    if (req.session.greeting == false){res.send("greeting");}
-    else{res.send("myInfo");}
+    if (req.session.greeting == false){res.redirect("/myQuestions");}
+    else{res.redirect("/myprofile");}
   });
 }
 
@@ -29,11 +29,8 @@ exports.myQuestions = function(req, res){
       q09: req.body.q09,
     },{where: { UserId : req.session.UserId }
   }).then(function (result) { 
-    debugger
-    if (req.session.greeting == false){
-      res.send("activate")
-    }
-     else{res.send("myQuestions")}
+    if (req.session.greeting == false){res.redirect("/settings");}
+     else{res.redirect("/myProfile");}
   });
 }
 
@@ -47,7 +44,6 @@ exports.currentStatus = function(req, res){
       }],
   })
   .then(function(data){
-    debugger
     if ((!data.dataValues.age) || (!data.dataValues.Answers[0].dataValues.q01)  ){
       res.send("incomplete")
     }

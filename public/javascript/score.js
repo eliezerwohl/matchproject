@@ -1,10 +1,6 @@
 $( document ).ready(function() { 
 	var socket = io();
 	var location = window.location.pathname;
-	setInterval(pulse, 5000)
-	function pulse(){
-		socket.emit("pulse", location)
-	}
   socket.on("score", function(score){
  		$("#score").text(score);
 	});
