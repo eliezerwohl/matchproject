@@ -16,15 +16,15 @@ function dataStore(res, req, data, prime){
 
 function next(res, req, prime){
 	req.session.currentNumber ++;
-		if (req.session.currentNumber === req.session.resultsArray.length) {
-			res.send(false);
+	if (req.session.currentNumber === req.session.resultsArray.length) {
+		res.send(false);
+	}
+	else {
+		if (prime === true){req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];}
+		else{
+			req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
 		}
-		else {
-			if (prime === true){req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];}
-			else{
-				req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
-			}
-		res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
+	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
 	}
 }
 exports.getMatch=function(req, res){
@@ -95,11 +95,9 @@ exports.findPrime = function(req, res){
 	  order: [ Sequelize.fn( 'RAND' ),]
 	}).then(function(results){dataStore(res, req, results, true);});
 }
-
 exports.nextPrime = function(req, res){
 	next(res, req, true)
 }
-
 exports.nextMatch = function(req, res){
 	next(res, req, false)
 }
