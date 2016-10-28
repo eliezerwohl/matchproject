@@ -4,9 +4,7 @@ var Sequelize = require('sequelize');
 exports.userMatch = function(req, res){
 	var matchId;
 	models.User.findOne({
-		where:{
-			id:req.session.UserId
-		}
+		where:{id:req.session.UserId}
 	}).then(function(data){
 		var lastMatch = new Date(data.dataValues.lastMatch).toDateString();
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
@@ -34,7 +32,6 @@ exports.userMatch = function(req, res){
 		    ['avg', 'DESC'],
 		    ],
 			}).then(function(data){
-				debugger
 				if (data.length == 0){
 					//if there are not matches
 					res.send("sorry")
@@ -49,7 +46,7 @@ exports.userMatch = function(req, res){
 					//will prevent if the day changes while the user is logged in
 					//everything goes smoothly 
 					req.session.dailyMatch = matchId;
-					req.session.save()
+
 					models.Answer.findOne({
 						where:{
 							UserId:matchId
