@@ -2,22 +2,30 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.saveMatch = function(req, res){
-	var matchedId
+
+	models.MatchData.findOne({
+		where:{UserId:req.session.UserId}
+	}).then(function(data){
+	var currentPrime = 	JSON.parse(data.currentPrime)
+		var matchedArray = [currentPrime.id, data.matchId]
+	
+		var matchedId
 	//lower user id will always be user 1
-	req.session.matchedArray.sort();
+	matchedArray.sort();
 	models.Matched.findOne({
 		where:{
-			user1:{$in:req.session.matchedArray},
-			user2:{$in:req.session.matchedArray},
+			user1:{$in:matchedArray},
+			user2:{$in:matchedArray},
 		}
 	}).then(function(data){
 		if (data == null){
 			//that means this is the first person voting for this match
 			if (req.body.data=="true"){
 				models.Matched.create({
-					user1:req.session.matchedArray[0],
-					user2:req.session.matchedArray[1],
-					yes:1
+					user1:matchedArray[0],
+					user2:matchedArray[1],
+					yes:1, 
+					MessageId:1
 				}).then(function(results){
 					models.Vote.create({
 						UserId:req.session.UserId,
@@ -28,9 +36,10 @@ exports.saveMatch = function(req, res){
 			}
 			else {
 				models.Matched.create({
-				user1:req.session.matchedArray[0],
-					user2:req.session.matchedArray[1],
-					no:1
+				user1:matchedArray[0],
+					user2:matchedArray[1],
+					no:1,
+					MessageId:1
 				}).then(function(results){
 					models.Vote.create({
 						UserId:req.session.UserId,
@@ -65,7 +74,11 @@ exports.saveMatch = function(req, res){
 			});
 		}
 	}); 
-	res.send("got it");
+	res.send("got it");	
+
+
+	})
+	
 }
 
 function updateAvg(matchedId){
