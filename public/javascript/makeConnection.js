@@ -53,6 +53,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 
 	function nextMatch(){
 		$.ajax({url: "/nextMatch", success: function(result){
+			debugger
 			if (result === false){
 				$(".main, #buttonControl").off("swiperight");
 				$(".main, #buttonControl").off("swipeleft");

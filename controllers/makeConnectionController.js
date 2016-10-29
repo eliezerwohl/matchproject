@@ -99,7 +99,10 @@ exports.nextMatch = function(req, res){
 		attributes:["matchArray"]
 	}).then(function(data){
 		var match = JSON.parse(data.matchArray);
-		res.send (match[req.session.currentNumber]);
+		if (req.session.currentNumber == match.length){
+			res.send(false)
+		}
+		else{res.send (match[req.session.currentNumber].Answers[0]);}
 	})
 }
 
