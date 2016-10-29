@@ -36,6 +36,11 @@ var NotifyConnect = connection.define ("NotifyConnect", {
   //delete aftet done
 })
 
+var NoMatch = connection.define("NoMatch", {
+  UserId:Sequelize.INTEGER,
+  Array:Sequelize.TEXT
+})
+
 var Online = connection.define ("Online", {
   user:Sequelize.STRING,
   online:{type:Sequelize.BOOLEAN, defaultValue:0}
@@ -105,4 +110,5 @@ exports.Matched = Matched;
 exports.User=User;
 exports.Answer=Answer;
 exports.Online = Online;
+exports.NoMatch = NoMatch;
 connection.sync({})

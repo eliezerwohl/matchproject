@@ -18,6 +18,9 @@ exports.signUp = function(req, res){
           email: req.body.email,
           password: saltyhash(req.body.password),
         }).then(function(data) {
+          models.NoMatch.create({
+            UserId: data.dataValues.uuid,
+          })
           models.Online.create({
              user:data.dataValues.uuid,
           });

@@ -1,19 +1,6 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 //need to make sure that prime's age is within what the match wants
-function dataStore(res, req, data, prime){
-	for (var i = 0; i < data.length; i++) {
-		req.session.resultsArray.push(data[i].dataValues);
-	}
-	if (prime===true){
-		req.session.currentPrime = req.session.resultsArray[0];
-	}
-	else {
-		req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[0].id]
-	}
-	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
-}
-
 function next(res, req, prime){
 	req.session.currentNumber ++;
 	if (req.session.currentNumber === req.session.resultsArray.length) {
@@ -28,8 +15,8 @@ function next(res, req, prime){
 	}
 }
 exports.getMatch=function(req, res){
-	req.session.currentNumber=0;
-	req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
+	if (req.session.noMatch == undefined){
+			req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
 	req.session.resultsArray=[];
 	models.Vote.findAll({
 		where:{UserId:req.session.UserId},
@@ -50,7 +37,15 @@ exports.getMatch=function(req, res){
 				}
 			}
 		}
-	}).then(function(){
+	})
+
+	}
+	else{
+
+	}
+
+
+
 		models.User.findAll({
 		where:{
 			id:{$notIn: req.session.noMatch},
@@ -75,15 +70,15 @@ exports.getMatch=function(req, res){
 			if (results.length === 0){res.send(false);}
 			else{dataStore(res, req, results, false);}
 		});
-	});
 }
 
 exports.findPrime = function(req, res){
-	req.session.noMatch = [req.session.UserId];
+	req.session.noMatch= undefined;
+	var noMatch = [req.session.UserId];
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
 	models.User.findAll({
-		where:{id:{$notIn: req.session.noMatch},match:1,},
+		where:{id:{$notIn: noMatch},match:1,},
 		attributes: ['id', 'city', "upper", "lower", "age", "seeking", "gender"],
 		include: [{
     model: models.Answer,
@@ -93,14 +88,12 @@ exports.findPrime = function(req, res){
     	order: [ Sequelize.fn( 'RAND' ),]
 	}).then(function(results){
 		//extra random?
-		var random = Math.floor(Math.random() * results.length)
+		var random = Math.floor(Math.random() * results.length);
 		res.send(results[random].dataValues.Answers[0]);
 		req.session.currentPrime = results[random].dataValues});
 }
 
-exports.nextPrime = function(req, res){
-	next(res, req, true)
-}
+
 exports.nextMatch = function(req, res){
 	next(res, req, false)
 }
