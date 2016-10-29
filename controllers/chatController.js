@@ -4,7 +4,7 @@ var Sequelize = require('sequelize');
 
 exports.findChat =function(req, res){
 	//not saving to req.session
-	req.session.chatIds = [];
+	var chatIds = [];
 	models.Matched.findAll({
 		where:{chat:1,
 			$or: {
@@ -18,10 +18,10 @@ exports.findChat =function(req, res){
 		//seperates the other person's id s from matches
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].dataValues.user1 === req.session.UserId){
-				req.session.chatIds.push(data[i].dataValues.user2);}
-			else{req.session.chatIds.push(data[i].dataValues.user1);}}
+				chatIds.push(data[i].dataValues.user2);}
+			else{chatIds.push(data[i].dataValues.user1);}}
 		models.User.findAll({
-			where:{id:{$in:req.session.chatIds}}
+			where:{id:{$in:chatIds}}
 		}).then(function(user){
 			req.session.chatArray = [];
 			matchData = req.session.matchData 

@@ -10,6 +10,7 @@ exports.userMatch = function(req, res){
 		var createdAt = new Date(data.dataValues.createdAt).toDateString()
 		var today = new Date (Date.now()).toDateString();
 		var dailyMatch = data.dataValues.dailyMatch;
+		debugger
 		if (dailyMatch === 0 &&  today == lastMatch){
 			res.send("done");
 			//already did the one match a day
@@ -46,13 +47,13 @@ exports.userMatch = function(req, res){
 					//will prevent if the day changes while the user is logged in
 					//everything goes smoothly 
 					req.session.dailyMatch = matchId;
-
 					models.Answer.findOne({
 						where:{
 							UserId:matchId
 						},
 						attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
 					}).then(function(data){
+						debugger
 						res.send(data.dataValues)
 						models.User.update({
 							lastMatch:Date.now(),

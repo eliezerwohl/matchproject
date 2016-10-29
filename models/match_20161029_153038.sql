@@ -57,13 +57,81 @@ INSERT INTO `answers`(`id`,`q01`,`q02`,`q03`,`q04`,`q05`,`q06`,`q07`,`q08`,`q09`
 -- ---------------------------------------------------------
 
 
--- Dump data of "matcheds" ---------------------------------
+-- Dump data of "matchdata" --------------------------------
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '1', '1', '[{"id":5,"email":"jontron@gmail.com","uuid":"782774d0-9d13-11e6-a466-7b584387ece1","password":"$2a$10$8B6LtRF/1BmFNb6SzxXss.m7aPrj3Jw1wg5gZkGBBHI38IWoZs.m2","firstname":"Jon","lastname":"Tron","greeting":true,"match":true,"age":20,"city":"Liberty City","upper":34,"lower":19,"seeking":"F","gender":"M","lastMatch":"2016-10-28T13:36:02.000Z","dailyMatch":null,"dailyMatchCount":0,"score":0,"createdAt":"2016-10-28T13:36:02.000Z","updatedAt":"2016-10-28T15:02:54.000Z","Answers":[{"q01":"Just a friend, maybe something else a little later on.","q02":"Opera singer.","q03":"almost every night","q04":"My two parrots.  They are so well behaved.","q05":"casually","q06":"Checking out the sites and sounds of my adopted hometown, NYC.","q07":"Luciano Pavarotti","q08":"I\'ve always wanted to visit Italy.  Heard the bread is fantastic.","q09":"I\'m spiritual but not very religious.  "}]},{"id":4,"email":"ross@gmail.com","uuid":"6d9ffdc0-9d13-11e6-a466-7b584387ece1","password":"$2a$10$FQtBpbhpwp9sz76UYt9liOc2KHWRiYhHYTiwBLaqwL0xUtfeaDkK2","firstname":"Ross","lastname":"Don","greeting":true,"match":true,"age":32,"city":"Liberty City","upper":49,"lower":21,"seeking":"F","gender":"M","lastMatch":"2016-10-28T13:35:45.000Z","dailyMatch":null,"dailyMatchCount":0,"score":0,"createdAt":"2016-10-28T13:35:45.000Z","updatedAt":"2016-10-28T14:55:03.000Z","Answers":[{"q01":"A life long mate to watch soccer with me.","q02":"Painter.  ","q03":"almost every night","q04":"My garden.  It has a wide variety of flowers.","q05":"never","q06":"Drawing the sunset at sunset, drawing the moon at night, grabbing a pint in between.","q07":"Bill Watterson, he\'s had such an impact on my work","q08":"Australia","q09":"I\'ve accepted Jesus Christ as my lord and savior.  His hand guides me through life."}]}]', '{"id":27,"city":"Liberty City","upper":20,"lower":29,"age":24,"seeking":"M","gender":"F","Answers":[{"q01":"Oh jeez I don\'t know, I\'m just trying this website cause my friend said it was cool.  ","q02":"Attorney General.  Or Pumpkin Spice Latte taste tester.  ","q03":"almost every night","q04":"I helped my dad renovate his kitchen last weekend.  He taught me so much about working with tools, it was nice to help him out.","q05":"casually","q06":"going to renaissance fair with my younger brother and older sister.","q07":"William Shakespeare","q08":"The Admont Library in Austria.  ","q09":"still looking "}]}', '5', '2016-10-29 15:49:53', '2016-10-29 19:19:30' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '2', '2', '[{"id":4,"email":"ross@gmail.com","uuid":"6d9ffdc0-9d13-11e6-a466-7b584387ece1","password":"$2a$10$FQtBpbhpwp9sz76UYt9liOc2KHWRiYhHYTiwBLaqwL0xUtfeaDkK2","firstname":"Ross","lastname":"Don","greeting":true,"match":true,"age":32,"city":"Liberty City","upper":49,"lower":21,"seeking":"F","gender":"M","lastMatch":"2016-10-28T13:35:45.000Z","dailyMatch":null,"dailyMatchCount":0,"score":0,"createdAt":"2016-10-28T13:35:45.000Z","updatedAt":"2016-10-28T14:55:03.000Z","Answers":[{"q01":"A life long mate to watch soccer with me.","q02":"Painter.  ","q03":"almost every night","q04":"My garden.  It has a wide variety of flowers.","q05":"never","q06":"Drawing the sunset at sunset, drawing the moon at night, grabbing a pint in between.","q07":"Bill Watterson, he\'s had such an impact on my work","q08":"Australia","q09":"I\'ve accepted Jesus Christ as my lord and savior.  His hand guides me through life."}]}]', '{"id":27,"city":"Liberty City","upper":20,"lower":29,"age":24,"seeking":"M","gender":"F","Answers":[{"q01":"Oh jeez I don\'t know, I\'m just trying this website cause my friend said it was cool.  ","q02":"Attorney General.  Or Pumpkin Spice Latte taste tester.  ","q03":"almost every night","q04":"I helped my dad renovate his kitchen last weekend.  He taught me so much about working with tools, it was nice to help him out.","q05":"casually","q06":"going to renaissance fair with my younger brother and older sister.","q07":"William Shakespeare","q08":"The Admont Library in Austria.  ","q09":"still looking "}]}', '4', '2016-10-29 15:49:53', '2016-10-29 19:24:13' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '3', '3', '[{"id":25,"email":"annie@gmail.com","uuid":"8a819470-9d19-11e6-a466-7b584387ece1","password":"$2a$10$9uD7/j0ZRafOxYVKK6DruO.tsGeDhPoE3PB5.L6i7axk9XYG.UF62","firstname":"Annie","lastname":"Spam","greeting":true,"match":true,"age":38,"city":"Liberty City","upper":40,"lower":25,"seeking":"M","gender":"F","lastMatch":"2016-10-28T14:19:30.000Z","dailyMatch":null,"dailyMatchCount":0,"score":0,"createdAt":"2016-10-28T14:19:30.000Z","updatedAt":"2016-10-29T00:59:53.000Z","Answers":[{"q01":"I don\'t know, but when I find it, I\'ll know.","q02":"My current job, at the local fresh co-op","q03":"out every night","q04":"How I\'ve ","q05":"casually","q06":"Jazz festival, local clubs, meeting new people, camping in the woods","q07":"Salvador Dali","q08":"Egypt","q09":"I\'m a devout catholic, and not afraid to share my beliefs with the world."}]}]', '{"id":24,"city":"Liberty City","upper":35,"lower":24,"age":29,"seeking":"M","gender":"F","Answers":[{"q01":"True love.  Or just a guy that wants to hang and drink some beers, watch the game.","q02":"Cheerleader for the New York Giants.  Mascot for the New York Giants.  Hot dog vendor for the New York Giants.  YOU GETTING A THEME YET!  LETS GO BLUE!","q03":"almost every night","q04":"My PHD in mathematical finance.","q05":"intense","q06":"Well we all know what I want to be doing on sunday ;-)","q07":"Michael Strahan","q08":"GIANTS STADIUM!","q09":"Football is religion.  Jesus is pretty good too :)"}]}', '25', '2016-10-29 15:49:53', '2016-10-29 19:30:27' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '4', '4', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '5', '5', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '6', '6', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '7', '7', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '8', '8', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '9', '9', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '10', '10', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '11', '11', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '12', '12', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '13', '13', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '14', '14', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '15', '15', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '16', '16', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '17', '17', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '18', '18', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '19', '19', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '20', '20', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '21', '21', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '22', '22', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '23', '23', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '24', '24', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '25', '25', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '26', '26', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '27', '27', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '28', '28', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '29', '29', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '30', '30', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '31', '31', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '32', '32', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '33', '33', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '34', '34', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '35', '35', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '36', '36', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '37', '37', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '38', '38', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '39', '39', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`currentPrime`,`matchId`,`createdAt`,`updatedAt`) VALUES ( '40', '40', NULL, NULL, NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
 -- ---------------------------------------------------------
 
 
+-- Dump data of "matcheds" ---------------------------------
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '1', '0', '24', NULL, '4', NULL, '2', '2', 'OK', '0', '50', '2016-10-29 19:18:24', '2016-10-29 19:26:54', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '2', '0', '2', NULL, '26', NULL, '7', '0', 'OK', '0', '100', '2016-10-29 19:18:26', '2016-10-29 19:28:51', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '3', '0', '21', NULL, '6', NULL, '6', '1', 'OK', '0', '86', '2016-10-29 19:18:30', '2016-10-29 19:27:08', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '4', '0', '25', NULL, '8', NULL, '6', '2', 'OK', '0', '75', '2016-10-29 19:18:32', '2016-10-29 19:27:35', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '5', '0', '21', NULL, '3', NULL, '3', '0', 'OK', '0', '100', '2016-10-29 19:18:34', '2016-10-29 19:18:34', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '6', '0', '22', NULL, '5', NULL, '7', '0', 'OK', '0', '100', '2016-10-29 19:18:36', '2016-10-29 19:29:03', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '7', '0', '25', NULL, '7', NULL, '2', '1', 'OK', '0', '67', '2016-10-29 19:18:39', '2016-10-29 19:26:30', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '8', '0', '25', NULL, '3', NULL, '7', '0', 'OK', '0', '100', '2016-10-29 19:18:41', '2016-10-29 19:22:57', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '9', '0', '22', NULL, '6', NULL, '2', '2', 'OK', '0', '50', '2016-10-29 19:18:43', '2016-10-29 19:27:03', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '10', '0', '21', NULL, '5', NULL, '2', '3', 'OK', '0', '40', '2016-10-29 19:18:45', '2016-10-29 19:26:43', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '11', '0', '23', NULL, '8', NULL, '4', '0', 'OK', '0', '100', '2016-10-29 19:18:51', '2016-10-29 19:18:51', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '12', '0', '26', NULL, '3', NULL, '2', '0', 'OK', '0', '100', '2016-10-29 19:18:56', '2016-10-29 19:18:57', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '13', '0', '26', NULL, '8', NULL, '3', '0', 'OK', '0', '100', '2016-10-29 19:19:00', '2016-10-29 19:19:00', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '14', '0', '26', NULL, '5', NULL, '2', '4', 'OK', '0', '33', '2016-10-29 19:19:02', '2016-10-29 19:26:35', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '15', '0', '21', NULL, '8', NULL, '4', '0', 'OK', '0', '100', '2016-10-29 19:19:06', '2016-10-29 19:28:56', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '16', '0', '23', NULL, '3', NULL, '1', '0', 'OK', '0', '0', '2016-10-29 19:19:13', '2016-10-29 19:19:13', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '17', '0', '23', NULL, '5', NULL, '2', '2', 'OK', '0', '50', '2016-10-29 19:19:17', '2016-10-29 19:27:38', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '18', '0', '1', NULL, '24', NULL, '2', '1', 'OK', '0', '67', '2016-10-29 19:22:12', '2016-10-29 19:27:06', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '19', '0', '1', NULL, '25', NULL, '3', '4', 'OK', '0', '43', '2016-10-29 19:22:43', '2016-10-29 19:26:28', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '20', '0', '1', NULL, '23', NULL, '3', '0', 'OK', '0', '100', '2016-10-29 19:22:53', '2016-10-29 19:30:17', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '21', '0', '23', NULL, '4', NULL, '5', '0', 'OK', '0', '100', '2016-10-29 19:23:06', '2016-10-29 19:28:43', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '22', '0', '1', NULL, '26', NULL, '1', '3', 'OK', '0', '25', '2016-10-29 19:23:38', '2016-10-29 19:26:40', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '23', '0', '26', NULL, '4', NULL, '4', '3', 'OK', '0', '57', '2016-10-29 19:23:46', '2016-10-29 19:27:43', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '24', '0', '25', NULL, '4', NULL, '1', '4', 'OK', '0', '20', '2016-10-29 19:24:04', '2016-10-29 19:26:48', '1' );
+INSERT INTO `matcheds`(`id`,`chat`,`user1`,`user1Vote`,`user2`,`user2Vote`,`yes`,`no`,`search`,`answered`,`avg`,`createdAt`,`updatedAt`,`MessageId`) VALUES ( '25', '0', '2', NULL, '25', NULL, '1', '0', 'OK', '0', '0', '2016-10-29 19:30:23', '2016-10-29 19:30:23', '1' );
+-- ---------------------------------------------------------
+
 
 -- Dump data of "messages" ---------------------------------
-INSERT INTO `messages`(`id`,`checked`,`createdAt`,`updatedAt`) VALUES ( '1', '0', '2016-10-28 13:33:54', '2016-10-29 14:05:12' );
+INSERT INTO `messages`(`id`,`message`,`checked`,`reciveId`,`MatchedId`,`createdAt`,`updatedAt`,`UserId`) VALUES ( '1', NULL, '0', NULL, NULL, '2016-10-28 13:33:54', '2016-10-29 14:05:12', NULL );
 -- ---------------------------------------------------------
 
 
@@ -72,9 +140,9 @@ INSERT INTO `messages`(`id`,`checked`,`createdAt`,`updatedAt`) VALUES ( '1', '0'
 
 
 -- Dump data of "onlines" ----------------------------------
-INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '1', '2b9c6cb0-9d13-11e6-a466-7b584387ece1', '1', '2016-10-28 13:33:54', '2016-10-29 14:05:12' );
-INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '2', '3e7e1a90-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:34:25', '2016-10-29 01:51:13' );
-INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '3', '4fc99810-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:34:55', '2016-10-28 14:50:10' );
+INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '1', '2b9c6cb0-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:33:54', '2016-10-29 19:21:03' );
+INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '2', '3e7e1a90-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:34:25', '2016-10-29 19:25:54' );
+INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '3', '4fc99810-9d13-11e6-a466-7b584387ece1', '1', '2016-10-28 13:34:55', '2016-10-29 19:26:21' );
 INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '4', '6d9ffdc0-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:35:45', '2016-10-28 14:55:07' );
 INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '5', '782774d0-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:36:02', '2016-10-28 15:04:21' );
 INSERT INTO `onlines`(`id`,`user`,`online`,`createdAt`,`updatedAt`) VALUES ( '6', '95f241c0-9d13-11e6-a466-7b584387ece1', '0', '2016-10-28 13:36:52', '2016-10-28 16:29:26' );
@@ -164,50 +232,119 @@ INSERT INTO `users`(`id`,`email`,`uuid`,`password`,`firstname`,`lastname`,`greet
 
 
 -- Dump data of "votes" ------------------------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "matchdata" --------------------------------
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '1', '1', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '2', '2', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '3', '3', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '4', '4', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '5', '5', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '6', '6', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '7', '7', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '8', '8', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '9', '9', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '10', '10', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '11', '11', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '12', '12', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '13', '13', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '14', '14', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '15', '15', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '16', '16', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '17', '17', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '18', '18', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '19', '19', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '20', '20', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '21', '21', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '22', '22', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '23', '23', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '24', '24', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '25', '25', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '26', '26', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '27', '27', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '28', '28', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '29', '29', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '30', '30', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '31', '31', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '32', '32', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '33', '33', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '34', '34', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '35', '35', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '36', '36', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '37', '37', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '38', '38', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '39', '39', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
-INSERT INTO `matchdata`(`id`,`UserId`,`matchArray`,`createdAt`,`updatedAt`) VALUES ( '40', '40', NULL, '2016-10-29 15:49:53', '2016-10-29 15:49:53' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '1', '1', '2016-10-29 19:18:24', '2016-10-29 19:18:24', '1', '1' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '2', '1', '2016-10-29 19:18:26', '2016-10-29 19:18:26', '1', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '3', '1', '2016-10-29 19:18:26', '2016-10-29 19:18:26', '1', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '4', '1', '2016-10-29 19:18:27', '2016-10-29 19:18:27', '1', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '5', '1', '2016-10-29 19:18:27', '2016-10-29 19:18:27', '1', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '6', '1', '2016-10-29 19:18:28', '2016-10-29 19:18:28', '1', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '7', '1', '2016-10-29 19:18:30', '2016-10-29 19:18:30', '1', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '8', '1', '2016-10-29 19:18:30', '2016-10-29 19:18:30', '1', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '9', '1', '2016-10-29 19:18:32', '2016-10-29 19:18:32', '1', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '10', '1', '2016-10-29 19:18:32', '2016-10-29 19:18:32', '1', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '11', '1', '2016-10-29 19:18:32', '2016-10-29 19:18:32', '1', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '12', '1', '2016-10-29 19:18:32', '2016-10-29 19:18:32', '1', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '13', '1', '2016-10-29 19:18:34', '2016-10-29 19:18:34', '1', '5' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '14', '1', '2016-10-29 19:18:34', '2016-10-29 19:18:34', '1', '5' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '15', '1', '2016-10-29 19:18:34', '2016-10-29 19:18:34', '1', '5' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '16', '1', '2016-10-29 19:18:36', '2016-10-29 19:18:36', '1', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '17', '1', '2016-10-29 19:18:36', '2016-10-29 19:18:36', '1', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '18', '1', '2016-10-29 19:18:39', '2016-10-29 19:18:39', '1', '7' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '19', '1', '2016-10-29 19:18:41', '2016-10-29 19:18:41', '1', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '20', '1', '2016-10-29 19:18:41', '2016-10-29 19:18:41', '1', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '21', '1', '2016-10-29 19:18:41', '2016-10-29 19:18:41', '1', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '22', '1', '2016-10-29 19:18:43', '2016-10-29 19:18:43', '1', '9' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '23', '1', '2016-10-29 19:18:45', '2016-10-29 19:18:45', '1', '10' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '24', '1', '2016-10-29 19:18:46', '2016-10-29 19:18:46', '1', '10' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '25', '1', '2016-10-29 19:18:51', '2016-10-29 19:18:51', '1', '11' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '26', '1', '2016-10-29 19:18:51', '2016-10-29 19:18:51', '1', '11' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '27', '1', '2016-10-29 19:18:51', '2016-10-29 19:18:51', '1', '11' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '28', '1', '2016-10-29 19:18:51', '2016-10-29 19:18:51', '1', '11' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '29', '1', '2016-10-29 19:18:56', '2016-10-29 19:18:56', '1', '12' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '30', '1', '2016-10-29 19:18:57', '2016-10-29 19:18:57', '1', '12' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '31', '1', '2016-10-29 19:19:00', '2016-10-29 19:19:00', '1', '13' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '32', '1', '2016-10-29 19:19:00', '2016-10-29 19:19:00', '1', '13' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '33', '1', '2016-10-29 19:19:00', '2016-10-29 19:19:00', '1', '13' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '34', '1', '2016-10-29 19:19:02', '2016-10-29 19:19:02', '1', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '35', '1', '2016-10-29 19:19:03', '2016-10-29 19:19:03', '1', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '36', '1', '2016-10-29 19:19:06', '2016-10-29 19:19:06', '1', '15' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '37', '1', '2016-10-29 19:19:13', '2016-10-29 19:19:13', '1', '16' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '38', '1', '2016-10-29 19:19:17', '2016-10-29 19:19:17', '1', '17' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '39', '1', '2016-10-29 19:19:17', '2016-10-29 19:19:17', '1', '17' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '40', '1', '2016-10-29 19:22:13', '2016-10-29 19:22:13', '2', '18' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '41', '1', '2016-10-29 19:22:13', '2016-10-29 19:22:13', '2', '18' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '42', '1', '2016-10-29 19:22:31', '2016-10-29 19:22:31', '2', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '43', '1', '2016-10-29 19:22:31', '2016-10-29 19:22:31', '2', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '44', '1', '2016-10-29 19:22:32', '2016-10-29 19:22:32', '2', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '45', '1', '2016-10-29 19:22:32', '2016-10-29 19:22:32', '2', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '46', '1', '2016-10-29 19:22:43', '2016-10-29 19:22:43', '2', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '47', '1', '2016-10-29 19:22:43', '2016-10-29 19:22:43', '2', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '48', '1', '2016-10-29 19:22:43', '2016-10-29 19:22:43', '2', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '49', '1', '2016-10-29 19:22:53', '2016-10-29 19:22:53', '2', '20' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '50', '1', '2016-10-29 19:22:54', '2016-10-29 19:22:54', '2', '20' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '51', '1', '2016-10-29 19:22:56', '2016-10-29 19:22:56', '2', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '52', '1', '2016-10-29 19:22:56', '2016-10-29 19:22:56', '2', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '53', '1', '2016-10-29 19:22:57', '2016-10-29 19:22:57', '2', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '54', '1', '2016-10-29 19:22:57', '2016-10-29 19:22:57', '2', '8' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '55', '1', '2016-10-29 19:22:59', '2016-10-29 19:22:59', '2', '9' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '56', '1', '2016-10-29 19:23:06', '2016-10-29 19:23:06', '2', '21' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '57', '1', '2016-10-29 19:23:07', '2016-10-29 19:23:07', '2', '21' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '58', '1', '2016-10-29 19:23:07', '2016-10-29 19:23:07', '2', '21' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '59', '1', '2016-10-29 19:23:07', '2016-10-29 19:23:07', '2', '21' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '60', '1', '2016-10-29 19:23:18', '2016-10-29 19:23:18', '2', '7' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '61', '1', '2016-10-29 19:23:21', '2016-10-29 19:23:21', '2', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '62', '1', '2016-10-29 19:23:21', '2016-10-29 19:23:21', '2', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '63', '1', '2016-10-29 19:23:38', '2016-10-29 19:23:38', '2', '22' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '64', '1', '2016-10-29 19:23:41', '2016-10-29 19:23:41', '2', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '65', '1', '2016-10-29 19:23:41', '2016-10-29 19:23:41', '2', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '66', '1', '2016-10-29 19:23:41', '2016-10-29 19:23:41', '2', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '67', '1', '2016-10-29 19:23:42', '2016-10-29 19:23:42', '2', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '68', '1', '2016-10-29 19:23:52', '2016-10-29 19:23:52', '2', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '69', '1', '2016-10-29 19:23:52', '2016-10-29 19:23:52', '2', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '70', '1', '2016-10-29 19:23:52', '2016-10-29 19:23:52', '2', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '71', '1', '2016-10-29 19:23:52', '2016-10-29 19:23:52', '2', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '72', '1', '2016-10-29 19:24:04', '2016-10-29 19:24:04', '2', '24' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '73', '1', '2016-10-29 19:24:10', '2016-10-29 19:24:10', '2', '1' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '74', '0', '2016-10-29 19:26:27', '2016-10-29 19:26:27', '3', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '75', '0', '2016-10-29 19:26:27', '2016-10-29 19:26:27', '3', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '76', '0', '2016-10-29 19:26:27', '2016-10-29 19:26:27', '3', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '77', '0', '2016-10-29 19:26:28', '2016-10-29 19:26:28', '3', '19' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '78', '0', '2016-10-29 19:26:30', '2016-10-29 19:26:30', '3', '7' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '79', '1', '2016-10-29 19:26:32', '2016-10-29 19:26:32', '3', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '80', '1', '2016-10-29 19:26:33', '2016-10-29 19:26:33', '3', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '81', '0', '2016-10-29 19:26:34', '2016-10-29 19:26:34', '3', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '82', '0', '2016-10-29 19:26:35', '2016-10-29 19:26:35', '3', '14' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '83', '0', '2016-10-29 19:26:38', '2016-10-29 19:26:38', '3', '22' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '84', '0', '2016-10-29 19:26:39', '2016-10-29 19:26:39', '3', '22' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '85', '0', '2016-10-29 19:26:40', '2016-10-29 19:26:40', '3', '22' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '86', '0', '2016-10-29 19:26:43', '2016-10-29 19:26:43', '3', '10' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '87', '0', '2016-10-29 19:26:43', '2016-10-29 19:26:43', '3', '10' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '88', '0', '2016-10-29 19:26:43', '2016-10-29 19:26:43', '3', '10' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '89', '0', '2016-10-29 19:26:46', '2016-10-29 19:26:46', '3', '24' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '90', '1', '2016-10-29 19:26:47', '2016-10-29 19:26:47', '3', '24' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '91', '0', '2016-10-29 19:26:47', '2016-10-29 19:26:47', '3', '24' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '92', '1', '2016-10-29 19:26:48', '2016-10-29 19:26:48', '3', '24' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '93', '0', '2016-10-29 19:26:53', '2016-10-29 19:26:53', '3', '1' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '94', '0', '2016-10-29 19:26:54', '2016-10-29 19:26:54', '3', '1' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '95', '1', '2016-10-29 19:27:02', '2016-10-29 19:27:02', '3', '9' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '96', '0', '2016-10-29 19:27:03', '2016-10-29 19:27:03', '3', '9' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '97', '0', '2016-10-29 19:27:06', '2016-10-29 19:27:06', '3', '18' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '98', '0', '2016-10-29 19:27:08', '2016-10-29 19:27:08', '3', '3' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '99', '1', '2016-10-29 19:27:33', '2016-10-29 19:27:33', '3', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '100', '0', '2016-10-29 19:27:35', '2016-10-29 19:27:35', '3', '4' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '101', '0', '2016-10-29 19:27:38', '2016-10-29 19:27:38', '3', '17' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '102', '1', '2016-10-29 19:27:38', '2016-10-29 19:27:38', '3', '17' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '103', '1', '2016-10-29 19:27:43', '2016-10-29 19:27:43', '3', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '104', '1', '2016-10-29 19:27:43', '2016-10-29 19:27:43', '3', '23' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '105', '1', '2016-10-29 19:28:43', '2016-10-29 19:28:43', '3', '21' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '106', '1', '2016-10-29 19:28:50', '2016-10-29 19:28:50', '3', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '107', '1', '2016-10-29 19:28:51', '2016-10-29 19:28:51', '3', '2' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '108', '1', '2016-10-29 19:28:55', '2016-10-29 19:28:55', '3', '15' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '109', '1', '2016-10-29 19:28:55', '2016-10-29 19:28:55', '3', '15' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '110', '1', '2016-10-29 19:28:56', '2016-10-29 19:28:56', '3', '15' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '111', '1', '2016-10-29 19:29:03', '2016-10-29 19:29:03', '3', '6' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '112', '1', '2016-10-29 19:30:17', '2016-10-29 19:30:17', '3', '20' );
+INSERT INTO `votes`(`id`,`vote`,`createdAt`,`updatedAt`,`UserId`,`MatchedId`) VALUES ( '113', '1', '2016-10-29 19:30:23', '2016-10-29 19:30:23', '3', '25' );
 -- ---------------------------------------------------------
 
 

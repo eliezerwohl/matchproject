@@ -79,7 +79,9 @@ module.exports = function(app, ioInstance) {
       socket.join(socket.handshake.session.chatId);
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
         models.Message.update({checked:1},
-        {where:{MatchedId:socket.handshake.session.chatId}
+        {where:{
+          MatchedId:socket.handshake.session.chatId,
+          reciveId:socket.handshake.session.uuid}
         });
       // }
     });

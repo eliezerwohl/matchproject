@@ -22,9 +22,7 @@ exports.userSave = function(req, res) {
         }
       }).then(function(data) {
   			dailyMatchFunction(req)
-      	matchedId	= data.dataValues.id;
-      	user1Vote = data.dataValues.user1Vote;
-      	user2Vote = data.dataValues.user2Vote;
+          matchedId = data.dataValues.id;
 	      if (data.dataValues.user1Vote === null) {
 	        //both haven't voted 
 	        models.Matched.update({
@@ -35,6 +33,9 @@ exports.userSave = function(req, res) {
             }
 	        })
 	      } else {
+        
+          user1Vote = data.dataValues.user1Vote;
+         user2Vote = data.dataValues.user2Vote;
     		 //both have voted
           models.Vote.findAll({
             where: {
@@ -63,17 +64,9 @@ exports.userSave = function(req, res) {
       }).then(function(data){
               dailyMatchFunction(req)
       //there is an error here
+      //fix it
       matchedId = data.dataValues.id;
-      user1Vote = data.dataValues.user1Vote;
-      user2Vote = data.dataValues.user2Vote;
-      models.Matched.findOne({
-        where: {
-          user2: req.session.dailyMatch,
-          user1: req.session.UserId
-        }
-      }).then(function(data) {
-        matchedId = data.dataValues.id
-        if (data.dataValues.user2Vote === null) {
+      if (data.dataValues.user2Vote === null) {
             //both haven't voted
           models.Matched.update({
               answered: req.session.UserId
@@ -82,6 +75,9 @@ exports.userSave = function(req, res) {
           });
         } 
         else {
+   
+      user1Vote = data.dataValues.user1Vote;
+      user2Vote = data.dataValues.user2Vote;
           //both have voted
           models.Vote.findAll({
             where: { MatchedId: matchedId}
@@ -90,19 +86,19 @@ exports.userSave = function(req, res) {
           });
         }
       });
-      });
     });
   }
 }
 
 function dailyMatchFunction(req) {
   models.User.update({
-		dailyMatch:0,},
+		dailyMatch:0},
 		{where:{id:req.session.UserId}
 	});
 }
 
 function scoring (data, matchedId, user1Vote, user2Vote, req){
+  debugger
   models.NotifyConnect.create({
     UserId:req.session.dailyMatch,
     MatchedId:matchedId,
