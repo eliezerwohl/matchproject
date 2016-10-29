@@ -2,9 +2,7 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.userSave = function(req, res) {
-	var matchedId;
-	var user1Vote;
-	var user2Vote;
+	var matchedId;var user1Vote;var user2Vote;
 	res.send("saved")
   if (req.session.dailyMatch < req.session.UserId) {
     models.Matched.update({

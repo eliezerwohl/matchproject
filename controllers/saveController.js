@@ -7,9 +7,9 @@ exports.saveMatch = function(req, res){
 		where:{UserId:req.session.UserId}
 	}).then(function(data){
 	var currentPrime = 	JSON.parse(data.currentPrime)
-		var matchedArray = [currentPrime.id, data.matchId]
-		debugger
-	
+	var matchId = JSON.parse(data.matchArray)
+
+		var matchedArray = [currentPrime.id, matchId[req.session.currentNumber].id]
 		var matchedId
 	//lower user id will always be user 1
 	matchedArray.sort(function(a, b){return a-b});
