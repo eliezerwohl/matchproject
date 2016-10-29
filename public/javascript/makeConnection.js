@@ -25,9 +25,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 	}
 	getPrime();
 	function next(){
-		$.ajax({url: "/nextPrime", success: function(result){
-			if (result === false){getPrime();}
-			else{append(result, "prime");}
+		$.ajax({url: "/findPrime", success: function(result){append(result, "prime");
 		}});
 	}
 	function getMatch(){
