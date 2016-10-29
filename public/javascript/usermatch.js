@@ -13,6 +13,7 @@ $( document ).ready(function() {
 			window.location.pathname = "/loggedIn"
 	});	
 	$.ajax({url: "/userMatch", success: function(result){
+		debugger
 	 if ( result === "sorry"){
 	 		$("#warningModal").modal("show")
 	 		$("#modalText").text("sorry, not matches.  please check another time")

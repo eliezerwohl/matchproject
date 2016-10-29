@@ -43,8 +43,10 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$.ajax({url: "/getMatch", success: function(result){
 			if (result === false){
 				//you've matched everybody
+				$(".pull-right").hide();
 				$(".main, #buttonControl").off("swiperight");
 				$(".main, #buttonControl").off("swipeleft");
+
 				$("#warningModal").modal("show");
 			}
 			else{append(result, "match");$(".toggle").css("visibility", "visible");}
@@ -55,6 +57,7 @@ $.event.special.swipe.verticalDistanceThreshold = (screen.availHeight) / 13;
 		$.ajax({url: "/nextMatch", success: function(result){
 			debugger
 			if (result === false){
+				$(".pull-right").hide();
 				$(".main, #buttonControl").off("swiperight");
 				$(".main, #buttonControl").off("swipeleft");
 				$("#warningModal").modal("show");
