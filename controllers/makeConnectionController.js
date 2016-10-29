@@ -79,8 +79,6 @@ exports.getMatch=function(req, res){
 }
 
 exports.findPrime = function(req, res){
-	req.session.currentNumber=0;
-	req.session.resultsArray=[];
 	req.session.noMatch = [req.session.UserId];
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
@@ -92,9 +90,14 @@ exports.findPrime = function(req, res){
         where: { UserId: Sequelize.col('User.id') },
    			attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'UserId'] },
     }],
-	  order: [ Sequelize.fn( 'RAND' ),]
-	}).then(function(results){dataStore(res, req, results, true);});
+    	order: [ Sequelize.fn( 'RAND' ),]
+	}).then(function(results){
+		//extra random?
+		var random = Math.floor(Math.random() * results.length)
+		res.send(results[random].dataValues.Answers[0]);
+		req.session.currentPrime = results[random].dataValues});
 }
+
 exports.nextPrime = function(req, res){
 	next(res, req, true)
 }
