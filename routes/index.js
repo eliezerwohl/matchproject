@@ -13,16 +13,14 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
 var models = require("../models/models.js");
 var sharedsession = require("express-socket.io-session");
-var cookieSession = require('cookie-session')
+var cookieSession = require('cookie-session');
 function isAuthenticated(req, res, next) {
   if (req.user)
     return next();
   res.redirect('/');
 }
-
 module.exports = function(app, ioInstance) {
   var io = ioInstance;
-  var sock;
   app.set('trust proxy', 1) // trust first proxy 
    session = require("cookie-session")({
   name: 'session',
@@ -35,10 +33,7 @@ module.exports = function(app, ioInstance) {
     done(null, user.id);
   });
   passport.deserializeUser(function(id, done) {
-    done(null, {
-      id: id,
-      username: id
-    })
+    done(null, {id: id, username: id})
   });
   passport.use('local', new LocalStrategy({
     passReqToCallback: true,
@@ -46,41 +41,22 @@ module.exports = function(app, ioInstance) {
     passwordField: "password"
   },
   function(req, email, password, done) {
-    models.User.findOne({
-      where: {email: email}
-    }).then(function(user) {
+    models.User.findOne({where: {email: email}}).then(function(user) {
       if (user) {
          bcrypt.compare(password, user.dataValues.password, function(err, user) {
           if (user) {
-            done(null, {
-              id: email,
-              username: email
-            });
-          } else {
-            done(null, null);
-          }
+            done(null, {id: email,username: email});
+          } else {done(null, null);}
         });
-      } else {
-        done(null, null);
-      }
+      } else {done(null, null);}
     });
   }));
-  io.use(sharedsession(session, {
-    autoSave:true
-  })); 
-    function callback(data, socket){
-      socket.handshake.session[data] = data;
-    }
+  io.use(sharedsession(session, {autoSave:true})); 
   io.on('connection', function(socket){
     socket.leave(socket.handshake.session.chatId);
-    sock = socket
-    models.Online.update({
-      online:1
-    },{
-      where:{
-        id:socket.handshake.session.UserId
-      }
-    })
+    models.Online.update({online:1},
+      {where:{id:socket.handshake.session.UserId}
+    });
     console.log('a user connected');
     socket.on('disconnect', function(){
       models.Online.update({online:0},
@@ -88,26 +64,22 @@ module.exports = function(app, ioInstance) {
       });
       console.log('user disconnected');
     });
-    socket.on("notify", function(){
-      update.checkedNotify(sock, io)
-    });
+    socket.on("notify", function(){update.checkedNotify(socket, io);});
     socket.on("online", function(data){
-      socket.handshake.session.dataArray = data
-      update.online(socket, io, data)
+      socket.handshake.session.dataArray = data;
+      update.online(socket, io, data);
     })
     socket.on("login", function(location){
-      update.score(sock, io);
-      update.notifyConnect(sock, io);
-      update.newMessage(sock, io, location);
+      update.score(socket, io);
+      update.notifyConnect(socket, io);
+      update.newMessage(socket, io, location);
     });
     socket.on('room', function(room) {
       io.to(socket.id).emit('message', socket.id.substring(2, 15));
       socket.join(socket.handshake.session.chatId);
       // if (io.sockets.adapter.rooms[socket.handshake.session.chatId].length > 1){
-        models.Message.update({
-          checked:1
-        },{
-          where:{MatchedId:socket.handshake.session.chatId}
+        models.Message.update({checked:1},
+        {where:{MatchedId:socket.handshake.session.chatId}
         });
       // }
     });
@@ -118,10 +90,7 @@ module.exports = function(app, ioInstance) {
     });
   });
 	app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loggedin',
-    failureRedirect: '/?incorrect'
-  }));
+  passport.authenticate('local', {successRedirect: '/loggedin',failureRedirect: '/?incorrect'}));
   app.get("/settings", isAuthenticated, function(req, res){res.render("settings");})
   app.get("/logout", function(req, res){req.session = null;res.redirect("/");});
   app.get("/loginData", home.loginData);
