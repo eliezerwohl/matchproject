@@ -1,23 +1,15 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 //need to make sure that prime's age is within what the match wants
-function next(res, req, prime){
-	req.session.currentNumber ++;
-	if (req.session.currentNumber === req.session.resultsArray.length) {
-		res.send(false);
-	}
-	else {
-		if (prime === true){req.session.currentPrime = req.session.resultsArray[req.session.currentNumber];}
-		else{
-			req.session.matchedArray = [req.session.currentPrime.id, req.session.resultsArray[req.session.currentNumber].id]
-		}
-	res.send(req.session.resultsArray[req.session.currentNumber].Answers[0]);
-	}
-}
 exports.getMatch=function(req, res){
-	if (req.session.noMatch == undefined){
-			req.session.noMatch = [req.session.UserId, req.session.currentPrime.id];
-	req.session.resultsArray=[];
+	req.session.currentNumber=0;
+	var noMatch = []
+	models.MatchData.findOne({
+		where:{UserId:req.session.UserId}
+	}).then(function(data){
+		var currentPrime = JSON.parse(data.currentPrime)
+		noMatch = [req.session.UserId, currentPrime.id];
+	var resultsArray=[];
 	models.Vote.findAll({
 		where:{UserId:req.session.UserId},
 		include: [{
@@ -30,33 +22,26 @@ exports.getMatch=function(req, res){
 		else {
 			for (var i = 0; i < data.length; i++) {
 				if (data[i].Matched.dataValues.user1 == req.session.currentPrime.id){
-					req.session.noMatch.push(data[i].Matched.dataValues.user2)
+					noMatch.push(data[i].Matched.dataValues.user2)
 				}
 				else if  (data[i].Matched.dataValues.user2 == req.session.currentPrime.id){
-					req.session.noMatch.push(data[i].Matched.dataValues.user1)
+					noMatch.push(data[i].Matched.dataValues.user1)
 				}
 			}
 		}
-	})
-
-	}
-	else{
-
-	}
-
-
-
+	}).then(function(){
+		debugger
 		models.User.findAll({
 		where:{
-			id:{$notIn: req.session.noMatch},
+			id:{$notIn: noMatch},
 			match:1,
-			city:req.session.currentPrime.city,
+			city:currentPrime.city,
 			//gender must be seeking, seeking must be gender
-			age:{ $between: [	req.session.currentPrime.lower, 	req.session.currentPrime.upper] } ,
-			lower:{$lte: req.session.currentPrime.age},
-			upper:{$gte: req.session.currentPrime.age},
-			gender: req.session.currentPrime.seeking,
-			seeking:req.session.currentPrime.gender,
+			age:{ $between: [	currentPrime.lower, 	currentPrime.upper] } ,
+			lower:{$lte: currentPrime.age},
+			upper:{$gte: currentPrime.age},
+			gender: currentPrime.seeking,
+			seeking:currentPrime.gender,
 		},
 		include: [{
 	    model: models.Answer,
@@ -67,13 +52,26 @@ exports.getMatch=function(req, res){
 	    Sequelize.fn( 'RAND' ),
 	  ]
 		}).then(function(results){
+			debugger
+
 			if (results.length === 0){res.send(false);}
-			else{dataStore(res, req, results, false);}
+			else{
+				res.send(results[0].dataValues.Answers[0]);
+				models.MatchData.update({
+					matchArray:JSON.stringify(results),
+					matchId:results[0].dataValues.id
+				 },
+					{where:{id:req.session.UserId},
+				})
+				}
 		});
+	});
+
+	})
+
 }
 
 exports.findPrime = function(req, res){
-	req.session.noMatch= undefined;
 	var noMatch = [req.session.UserId];
 	//make a find?  find one?
 	//gets a list of the possible primes that the user has said no to
@@ -90,7 +88,14 @@ exports.findPrime = function(req, res){
 		//extra random?
 		var random = Math.floor(Math.random() * results.length);
 		res.send(results[random].dataValues.Answers[0]);
-		req.session.currentPrime = results[random].dataValues});
+		models.MatchData.update({
+			currentPrime:JSON.stringify(results[random].dataValues)
+		},{
+			where:{UserId:req.session.UserId}
+			})
+		})
+
+
 }
 
 
