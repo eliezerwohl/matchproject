@@ -36,9 +36,11 @@ var NotifyConnect = connection.define ("NotifyConnect", {
   //delete aftet done
 })
 
-var NoMatch = connection.define("NoMatch", {
+var MatchData = connection.define("MatchData", {
   UserId:Sequelize.INTEGER,
-  Array:Sequelize.TEXT
+  matchArray:Sequelize.TEXT,
+  currentPrime:Sequelize.TEXT,
+  matchId:Sequelize.INTEGER,
 })
 
 var Online = connection.define ("Online", {
@@ -110,5 +112,5 @@ exports.Matched = Matched;
 exports.User=User;
 exports.Answer=Answer;
 exports.Online = Online;
-exports.NoMatch = NoMatch;
+exports.MatchData = MatchData;
 connection.sync({})

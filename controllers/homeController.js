@@ -18,8 +18,8 @@ exports.signUp = function(req, res){
           email: req.body.email,
           password: saltyhash(req.body.password),
         }).then(function(data) {
-          models.NoMatch.create({
-            UserId: data.dataValues.uuid,
+          models.MatchData.create({
+            UserId: data.dataValues.id,
           })
           models.Online.create({
              user:data.dataValues.uuid,
@@ -39,11 +39,11 @@ exports.loggedin = function (req, res){
    models.User.findOne({
     where: [{email: req.user.username}]
   }).then(function(User) {
-    req.session.score = User.dataValues.score;
+    // req.session.score = User.dataValues.score;
     req.session.match = User.dataValues.match;
     req.session.UserId = User.dataValues.id;
     req.session.uuid = User.dataValues.uuid;
-    req.session.greeting = User.dataValues.greeting
+    // req.session.greeting = User.dataValues.greeting
 
     res.render("home");
   });

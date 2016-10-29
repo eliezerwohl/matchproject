@@ -110,7 +110,6 @@ module.exports = function(app, ioInstance) {
   app.get("/getMatch", make.getMatch);
   app.get("/makeConnection", isAuthenticated, function(req, res){res.render("makeConnection");});
   app.get("/nextMatch", make.nextMatch);
-  app.get("/nextPrime", make.nextPrime);
   app.get("/findPrime", make.findPrime);
   app.get("/matchhome", function(req, res){res.render("matchhome");})
   app.post("/userSave", userSave.userSave);
