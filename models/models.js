@@ -57,7 +57,7 @@ var Matched = connection.define("Matched", {
   yes:{type:Sequelize.INTEGER, defaultValue:0},
   no:{type:Sequelize.INTEGER, defaultValue:0},
   //when both answer, change
-  search:{type:Sequelize.STRING, defaultValue:"OK"},
+  search:{type:Sequelize.STRING, defaultValue:"pending"},
   //if only one person answer, put thier id
   answered:{type:Sequelize.INTEGER, defaultValue:0},
   avg:{type: Sequelize.INTEGER, defaultValue:0}
@@ -104,6 +104,7 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+exports.connection = connection;
 exports.NotifyConnect  = NotifyConnect;
 exports.Message = Message;
 exports.Vote = Vote;
