@@ -1,9 +1,6 @@
 var models = require("../models/models.js");
 var Sequelize = require('sequelize');
-if (process.env.NODE_ENV === 'production') {
-  var connection = new Sequelize('mysql://b1e734d72f7481:840b5f35@us-cdbr-iron-east-04.cleardb.net/heroku_75496f89e747476?reconnect=true');}
-  else {var password = require("../ignore/ignore.js");var connection = new Sequelize('match', 'root', password.password); }
-
+var connect = require("../models/models.js");
 exports.userSave = function(req, res) {
 	res.send("saved")
   if (req.session.dailyMatch < req.session.UserId) {
@@ -14,7 +11,7 @@ exports.userSave = function(req, res) {
 
 function saveUpdate(req, id1, id2, vote, thisVar){
   var matchedId;  var user1Vote;var user2Vote;
-  connection.query("UPDATE `Matcheds` SET `"+ thisVar + "`='1',`updatedAt`= NOW() WHERE `user1` = " + id1 + " AND `user2` = " +id2 +" ")
+  connect.connection.query("UPDATE `Matcheds` SET `"+ thisVar + "`='1',`updatedAt`= NOW() WHERE `user1` = " + id1 + " AND `user2` = " +id2 +" ")
   .then(function(data) {
     models.Matched.findOne({
       where: {user1: id1, user2: id2}

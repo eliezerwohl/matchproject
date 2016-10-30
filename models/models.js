@@ -104,6 +104,7 @@ Answer.belongsTo(User);
 User.hasMany(Answer);
 Answer.belongsTo(User);
 
+exports.connection = connection;
 exports.NotifyConnect  = NotifyConnect;
 exports.Message = Message;
 exports.Vote = Vote;
