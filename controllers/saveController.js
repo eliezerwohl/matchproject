@@ -60,6 +60,7 @@ exports.saveMatch = function(req, res){
 			}).then(function(results){
 				if (req.body.data=="true"){
 					models.Matched.update({
+							search:"OK", 
 						  yes: Sequelize.literal('yes +1')},
 						{where:{
 							id:results.dataValues.MatchedId
@@ -68,6 +69,7 @@ exports.saveMatch = function(req, res){
 				}
 				else {
 					models.Matched.update({
+							search:"OK", 
 						  no: Sequelize.literal('no +1')},
 						{where:{id:results.dataValues.MatchedId}
 					}).then(function(){updateAvg(matchedId);});
@@ -76,10 +78,7 @@ exports.saveMatch = function(req, res){
 		}
 	}); 
 	res.send("got it");	
-
-
-	})
-	
+	});
 }
 
 function updateAvg(matchedId){

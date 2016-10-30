@@ -57,7 +57,7 @@ var Matched = connection.define("Matched", {
   yes:{type:Sequelize.INTEGER, defaultValue:0},
   no:{type:Sequelize.INTEGER, defaultValue:0},
   //when both answer, change
-  search:{type:Sequelize.STRING, defaultValue:"OK"},
+  search:{type:Sequelize.STRING, defaultValue:"pending"},
   //if only one person answer, put thier id
   answered:{type:Sequelize.INTEGER, defaultValue:0},
   avg:{type: Sequelize.INTEGER, defaultValue:0}
