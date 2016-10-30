@@ -33,7 +33,7 @@ exports.signUp = function(req, res){
 exports.loginData = function(req, res){
   //if score is 0, wont' cause an error this way
   var data={match:req.session.match}
-  res.send(data)
+  res.send(data);
 }
 exports.loggedin = function (req, res){
    models.User.findOne({
@@ -44,7 +44,6 @@ exports.loggedin = function (req, res){
     req.session.UserId = User.dataValues.id;
     req.session.uuid = User.dataValues.uuid;
     // req.session.greeting = User.dataValues.greeting
-
     res.render("home");
   });
 }
