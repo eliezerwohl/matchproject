@@ -2,81 +2,79 @@ var models = require("../models/models.js");
 var Sequelize = require('sequelize');
 
 exports.saveMatch = function(req, res){
-
 	models.MatchData.findOne({
 		where:{UserId:req.session.UserId}
 	}).then(function(data){
-	var currentPrime = 	JSON.parse(data.currentPrime)
-	var matchId = JSON.parse(data.matchArray)
-
+		var currentPrime = 	JSON.parse(data.currentPrime)
+		var matchId = JSON.parse(data.matchArray)
 		var matchedArray = [currentPrime.id, matchId[req.session.currentNumber].id]
 		var matchedId
 	//lower user id will always be user 1
-	matchedArray.sort(function(a, b){return a-b});
-	models.Matched.findOne({
-		where:{
-			user1:{$in:matchedArray},
-			user2:{$in:matchedArray},
-		}
-	}).then(function(data){
-		if (data == null){
-			//that means this is the first person voting for this match
-			if (req.body.data=="true"){
-				models.Matched.create({
-					user1:matchedArray[0],
-					user2:matchedArray[1],
-					yes:1, 
-					MessageId:1
-				}).then(function(results){
-					models.Vote.create({
-						UserId:req.session.UserId,
-						MatchedId:results.dataValues.id,
-						vote:req.body.data,
-					});
-				});
+		matchedArray.sort(function(a, b){return a-b});
+		models.Matched.findOne({
+			where:{
+				user1:{$in:matchedArray},
+				user2:{$in:matchedArray},
 			}
-			else {
-				models.Matched.create({
-				user1:matchedArray[0],
-					user2:matchedArray[1],
-					no:1,
-					MessageId:1
-				}).then(function(results){
-					models.Vote.create({
-						UserId:req.session.UserId,
-						MatchedId:results.dataValues.id,
-						vote:req.body.data,
-					});
-				});
-			}
-		}
-		else {
-			//it's been matched before
-			matchedId = data.dataValues.id;
-			models.Vote.create({
-				UserId:req.session.UserId,
-				MatchedId:data.dataValues.id,
-				vote:req.body.data,
-			}).then(function(results){
+		}).then(function(data){
+			if (data == null){
+				//that means this is the first person voting for this match
 				if (req.body.data=="true"){
-					models.Matched.update({
-							search:"OK", 
-						  yes: Sequelize.literal('yes +1')},
-						{where:{
-							id:results.dataValues.MatchedId
-						}
-					}).then(function(){updateAvg(matchedId);});
+					models.Matched.create({
+						user1:matchedArray[0],
+						user2:matchedArray[1],
+						yes:1, 
+						MessageId:1
+					}).then(function(results){
+						models.Vote.create({
+							UserId:req.session.UserId,
+							MatchedId:results.dataValues.id,
+							vote:req.body.data,
+						});
+					});
 				}
 				else {
-					models.Matched.update({
-							search:"OK", 
-						  no: Sequelize.literal('no +1')},
-						{where:{id:results.dataValues.MatchedId}
-					}).then(function(){updateAvg(matchedId);});
+					models.Matched.create({
+					user1:matchedArray[0],
+						user2:matchedArray[1],
+						no:1,
+						MessageId:1
+					}).then(function(results){
+						models.Vote.create({
+							UserId:req.session.UserId,
+							MatchedId:results.dataValues.id,
+							vote:req.body.data,
+						});
+					});
 				}
-			});
-		}
-	}); 
+			}
+			else {
+				//it's been matched before
+				matchedId = data.dataValues.id;
+				models.Vote.create({
+					UserId:req.session.UserId,
+					MatchedId:data.dataValues.id,
+					vote:req.body.data,
+				}).then(function(results){
+					if (req.body.data=="true"){
+						models.Matched.update({
+								search:"OK", 
+							  yes: Sequelize.literal('yes +1')},
+							{where:{
+								id:results.dataValues.MatchedId
+							}
+						}).then(function(){updateAvg(matchedId);});
+					}
+					else {
+						models.Matched.update({
+								search:"OK", 
+							  no: Sequelize.literal('no +1')},
+							{where:{id:results.dataValues.MatchedId}
+						}).then(function(){updateAvg(matchedId);});
+					}
+				});
+			}
+		}); 
 	res.send("got it");	
 	});
 }

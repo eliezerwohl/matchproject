@@ -59,7 +59,6 @@ exports.newMessage = function(socket, io, location){
           }
         }
         callback("newMessage", data.count, socket);
-        //what?
         io.to(socket.id).emit('newMessage', data.count);
       }
     });

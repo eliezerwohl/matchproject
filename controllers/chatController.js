@@ -83,7 +83,6 @@ exports.chatId = function(req, res){
 }
 
 exports.save = function(msg, socket, room){
-	debugger
 	//change data type
 	var checked 
 	if (room < 2){checked = 0}
