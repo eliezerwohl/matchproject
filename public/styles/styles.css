@@ -1,12 +1,9 @@
 .main {
 	padding:0px;
 }
-
 #match, #matchButtons {
 	display: none;
 }
-
-
 #welcomeModal .modal-footer button {
 	margin-top: 10px
 }
@@ -14,8 +11,8 @@
 	visibility: hidden;
 }
 #myProfile textarea {
-	height:80px;}
-
+	height:80px;
+}
 #login .text, #signUp .errorMsg {
 	color:darkred;
 }
@@ -31,7 +28,6 @@
 	line-height: 0px;
 	padding-top: 10px;
 }
-
 #chatHome .sorry {
 	display: none;
 }
@@ -39,51 +35,41 @@
 	display: none;
 }
 #chatHome button h4, #chatHome .btn h5, #chatHome .btn .messageDisplay span {
-   white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden;
-    width:92%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  width:92%;
 }
-
 #chatHome button h5 {
 	margin:0px;
 	color:black;
 	padding-left: 10px;
-
 }
-
 #myProfile button {
 	margin-top: 20px;
 }
-
- .onlinetrue{
+.onlinetrue {
 	color:green;
 }
-
- .onlinefalse {
+.onlinefalse {
 	color:red;
 }
-
 #makeConnection .backDiv button {
 	font-size: 20px
 }
-
 #makeConnection .backDiv button span {
 	margin: 10px;
 }
-
 #chatHome .btn {
-		text-transform: none;
+	text-transform: none;
 	background-color: white;
 	border:#3e3f3a 1px solid ;
 }
-
 #chatHome .btn h4 { 
 	font-weight:600;
-		color:black;
+	color:black;
 }
-
 #chatHome .btn .falseuser,
 #chatHome .btn .trueuser {
 	color:#325d88;
@@ -91,13 +77,11 @@
 #chatHome .btn .trueother{
 	color:		#B0B0B0;
 }
-
 #chatHome .btn .falseother {
 	color:	#3e3f3a;
 }
-
 #chatHome .btn {
-	 position: relative;
+ position: relative;
 }
 #chatHome .btn .row span{
 	position: absolute;
@@ -108,11 +92,9 @@
 	margin-right:10px;
 	font-size: 40px;
 }
-
 #chatHome .btn:hover {
 	opacity: .7
 }
-
 .modal-dialog {
 	margin-top: 80px
 }
@@ -120,11 +102,9 @@
 	display:inline-block;
 	min-width:30px;
 }
-
 .pad {
 	padding-top: 45px;
 }
-
 #makeConnection #warningModal button {
 	float:right;
 }
@@ -150,7 +130,6 @@
 #index .btn-md {
 	padding: 15px;
 }
-
 #chatBox {
 	overflow-y:scroll;
 	margin-bottom: 25px
@@ -159,14 +138,12 @@
 	overflow-y:scroll;
 	margin-bottom: 10px
 }
-
 #chatControl {
 	bottom: 0;
 	left:0;
 	padding: 0px;
 	position: fixed;
 }
-
 #buttonControl {
 	bottom: 0;
 	left:0;
@@ -180,24 +157,19 @@
 #home button, #myProfile button {
 	margin-bottom: 20px;
 }
-
 .error {
 	border: 2px red solid;
 }
-
 #makeConnection h4 {
 	font-weight:600;
 	color:black;
 }
-
 #makeConnection .pull-left {
  color:#3e3f3a;
 }
-
 #makeConnection .pull-right {
 	color:#325d88;
 }
 .padding {
 	padding:10px;
 }
-

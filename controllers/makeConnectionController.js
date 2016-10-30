@@ -91,7 +91,6 @@ exports.findPrime = function(req, res){
 	})
 }
 
-
 exports.nextMatch = function(req, res){
 	req.session.currentNumber ++ ;
 	models.MatchData.findOne({
