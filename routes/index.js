@@ -64,7 +64,7 @@ module.exports = function(app, ioInstance) {
       });
       console.log('user disconnected');
     });
-    socket.on("notify", function(){update.checkedNotify(socket, io);});
+    socket.on("checkedNotify", function(){update.checkedNotify(socket, io);});
     socket.on("online", function(data){
       socket.handshake.session.dataArray = data;
       update.online(socket, io, data);

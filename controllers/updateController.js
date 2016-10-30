@@ -38,7 +38,7 @@ exports.notifyConnect = function(socket, io){
 
 exports.checkedNotify = function(socket, io){
   models.NotifyConnect.destroy({
-    where:{UserId:socket.handshake.session.uuid}
+    where:{UserId:socket.handshake.session.UserId}
   });
 }
 
