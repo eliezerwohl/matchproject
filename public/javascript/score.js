@@ -4,16 +4,13 @@ $( document ).ready(function() {
   socket.on("score", function(score){
  		$("#score").text(score);
 	});
-	socket.on("notify", function(notify){
- 		$("#notify").text(notify);
-	});
-	socket.on("newMessage", function(newMessage){
- 		$("#newMessage").text(newMessage);
-	});
+	socket.on("notify", function(notify){$("#notify").text(notify);});
+	if (location == "/chathome"){socket.emit("checkedNotify")}
+	socket.on("newMessage", function(newMessage){$("#newMessage").text(newMessage);});
 	socket.on("incomingMessage", function(data){
  		$("#" + data.updateId).text(data.msg).removeClass().addClass("falseother pull-left");
 	});
-  socket.emit('login', location)
+  socket.emit('login', location);
   socket.on('disconnect', function () {
   	//possible android fix
     window.location = "/"
