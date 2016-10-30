@@ -43,7 +43,7 @@ exports.loggedin = function (req, res){
     req.session.match = User.dataValues.match;
     req.session.UserId = User.dataValues.id;
     req.session.uuid = User.dataValues.uuid;
-    // req.session.greeting = User.dataValues.greeting
+    req.session.greeting = User.dataValues.greeting;
     res.render("home");
   });
 }

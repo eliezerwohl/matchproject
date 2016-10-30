@@ -6,6 +6,10 @@
 	display: none;
 }
 
+
+#welcomeModal .modal-footer button {
+	margin-top: 10px
+}
 #makeConnection .toggle {
 	visibility: hidden;
 }
