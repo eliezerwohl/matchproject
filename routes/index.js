@@ -6,8 +6,6 @@ var save = require("../controllers/saveController");
 var userSave = require("../controllers/userSaveController");
 var make = require("../controllers/makeConnectionController");
 var userMatch = require("../controllers/userMatchController");
-var express = require('express');
-var app = express();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcryptjs");
@@ -91,6 +89,7 @@ module.exports = function(app, ioInstance) {
       io.to(socket.handshake.session.chatId).emit('chat message', message);
     });
   });
+
 	app.post('/login',
   passport.authenticate('local', {successRedirect: '/loggedin',failureRedirect: '/?incorrect'}));
   app.get("/settings", isAuthenticated, function(req, res){res.render("settings");})

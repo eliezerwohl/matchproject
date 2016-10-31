@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
+var compression = require('compression')
+app.use(compression())
 var expressHandlebars = require('express-handlebars'); 
-//passport
-var passport = require('passport');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
