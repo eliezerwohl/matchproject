@@ -21,4 +21,8 @@ $( document ).ready(function() {
       if (form == true) {return}
       event.preventDefault();
     });
+    document.getElementById("demo").addEventListener("click", function(){
+      document.getElementById("password").value ="demo";
+      document.getElementById("email").value = "demoPerson@demo.com"
+    });
 });
