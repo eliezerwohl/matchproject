@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
-var compression = require('compression')
-app.use(compression())
+var compression = require('compression');
+var minify = require('express-minify');
+// app.use(compression());
+// app.use(minify());
 var expressHandlebars = require('express-handlebars'); 
 //passport
 var passport = require('passport');

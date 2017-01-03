@@ -1,3 +1,12 @@
+ var d = document.getElementById("main");
+ d.classList.add("backgroundPurple");
+  document.getElementById("navbar").style.display ="none";
+function layoutFunction(){
+  var h = window.innerHeight;
+  $("#main").css({"height":h});
+}
+layoutFunction();
+
 $( document ).ready(function() {
 	function getCookie(cname) {
     var name = cname + "=";
