@@ -173,3 +173,14 @@
 .padding {
 	padding:10px;
 }
+
+.backgroundPurple{
+  background: url(../img/purple_city.jpg) no-repeat ; 
+  background-size: cover;
+  background-attachment: fixed;
+
+}
+
+.btn-primary {
+	background-color: none
+}
