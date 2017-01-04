@@ -3455,6 +3455,8 @@ fieldset[disabled] .btn-default:hover {
     border-color: transparent
 }
 
+
+.btn-primary:hover,
 .btn-primary.active,
 .btn-primary.focus,
 .btn-primary:active,
@@ -3477,7 +3479,8 @@ opacity: .8;
 .open>.dropdown-toggle.btn-primary:hover {
     color: #fff;
     background-color:transparent;
-    border-color: transparent
+   border:1px solid white;
+
 }
 
 .btn-primary.disabled.focus,
@@ -3490,12 +3493,17 @@ fieldset[disabled] .btn-primary.focus,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:hover {
     background-color: transparent;
-    border-color: transparent
+    border:1px solid white;
+
 }
+
+
 
 .btn-primary .badge {
     color: transparent;
-    background-color: #fff
+    background-color: #fff;
+    border:1px solid white;
+
 }
 
 .btn-success {
@@ -6819,8 +6827,11 @@ button.close {
 .btn,
 .navbar-form .form-control,
 .navbar-form input {
-    border: none
+    border: 1px solid white;
+    text-transform: uppercase;
 }
+
+
 
 .affix {
     position: fixed
@@ -6947,7 +6958,8 @@ button.close {
 }
 
 .btn:hover {
-    border-color: transparent
+   border:1px solid white;
+
 }
 
 .nav .open>a,
