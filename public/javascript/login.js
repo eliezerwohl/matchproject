@@ -1,6 +1,4 @@
- var d = document.getElementById("main");
- d.classList.add("backgroundPurple");
-  document.getElementById("navbar").style.display ="none";
+document.getElementById("navbar").style.display ="none";
 function layoutFunction(){
   var h = window.innerHeight;
   $("#main").css({"height":h});
@@ -8,6 +6,10 @@ function layoutFunction(){
 layoutFunction();
 
 $( document ).ready(function() {
+    function submitFunction(){
+      document.getElementById("loginForm").submit();
+    }
+
 	function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -34,4 +36,6 @@ $( document ).ready(function() {
       document.getElementById("password").value ="demo";
       document.getElementById("email").value = "demoPerson@demo.com"
     });
+    document.getElementById("loginButton").addEventListener("click", submitFunction);
+
 });
