@@ -175,7 +175,7 @@
 }
 
 .backgroundPurple {
-  background: url(../img/purple_city.jpg) no-repeat ; 
+  background: url(../img/purple_city_dark.jpeg) no-repeat ; 
   background-size: cover;
   background-attachment: fixed;
   min-height:100vh;

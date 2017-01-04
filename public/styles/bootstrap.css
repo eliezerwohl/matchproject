@@ -6008,7 +6008,7 @@ button.list-group-item-danger.active:hover {
 
 .panel {
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: transparent;
     border: 1px solid transparent;
     border-radius: 4px
 }
@@ -6162,7 +6162,7 @@ button.list-group-item-danger.active:hover {
 
 .panel-info,
 .panel-info>.panel-heading {
-    border-color: #bce8f1
+    border-color: white;
 }
 
 .panel-success>.panel-heading+.panel-collapse>.panel-body {
