@@ -1,6 +1,9 @@
 .main {
 	padding:0px;
 }
+html, body {
+    height: 100%;
+}
 #match, #matchButtons {
 	display: none;
 }
@@ -182,8 +185,10 @@
 
 }
 .backgroundColor {
-	
+
 	background-color: #24142e;
 }
 
-
+input, option, select, textarea {
+	color: black
+}

@@ -1,9 +1,4 @@
 document.getElementById("navbar").style.display ="none";
-function layoutFunction(){
-  var h = window.innerHeight;
-  $("#main").css({"height":h});
-}
-layoutFunction();
 
 $( document ).ready(function() {
     function submitFunction(){
