@@ -1,6 +1,9 @@
 .main {
 	padding:0px;
 }
+html, body {
+    height: 100%;
+}
 #match, #matchButtons {
 	display: none;
 }
@@ -175,10 +178,21 @@
 }
 
 .backgroundPurple {
-  background: url(../img/purple_city.jpg) no-repeat ; 
+  background: url(../img/purple_city_dark.jpeg) no-repeat ; 
   background-size: cover;
   background-attachment: fixed;
-  min-height:100vh;
 
 }
+.backgroundColor {
 
+	background-color:#471f42;
+}
+
+input, option, select, textarea {
+	color: black
+}
+
+
+#myProfile input, #myProfile textarea, #myProfile select {
+	margin-bottom: 12px;
+}
