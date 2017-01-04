@@ -1,4 +1,4 @@
-document.getElementById("navbar").style.display ="none";
+
 
 $( document ).ready(function() {
     function submitFunction(){
