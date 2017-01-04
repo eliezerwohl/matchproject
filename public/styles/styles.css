@@ -14,7 +14,7 @@
 	height:80px;
 }
 #login .text, #signUp .errorMsg {
-	color:darkred;
+	color:red;
 }
 #index .thanks, #index .incorrect {
 	display: none;
@@ -174,7 +174,7 @@
 	padding:10px;
 }
 
-.backgroundPurple{
+.backgroundPurple {
   background: url(../img/purple_city.jpg) no-repeat ; 
   background-size: cover;
   background-attachment: fixed;
