@@ -181,14 +181,18 @@ html, body {
   background: url(../img/purple_city_dark.jpeg) no-repeat ; 
   background-size: cover;
   background-attachment: fixed;
-  min-height:100vh;
 
 }
 .backgroundColor {
 
-	background-color: #24142e;
+	background-color:#471f42;
 }
 
 input, option, select, textarea {
 	color: black
+}
+
+
+#myProfile input, #myProfile textarea, #myProfile select {
+	margin-bottom: 12px;
 }
