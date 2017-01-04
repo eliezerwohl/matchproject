@@ -16,10 +16,10 @@ html, body {
 #myProfile textarea {
 	height:80px;
 }
-#login .text, #signUp .errorMsg {
+#login .text, #signUp .errorMsg , .text {
 	color:red;
 }
-#index .thanks, #index .incorrect {
+.thanks, .incorrect  {
 	display: none;
 }
 #chat #name {
@@ -135,7 +135,13 @@ html, body {
 }
 #chatBox {
 	overflow-y:scroll;
-	margin-bottom: 25px
+	margin-bottom: 25px;
+	background-color: transparent;
+
+	color: black;
+}
+#chatBox h3 {
+	margin-top: 0px;
 }
 #connectionBox {
 	overflow-y:scroll;
@@ -163,15 +169,15 @@ html, body {
 .error {
 	border: 2px red solid;
 }
-#makeConnection h4 {
+#makeConnection h4, #chatBox h4 {
 	font-weight:600;
-	color:black;
+	color:white;
 }
 #makeConnection .pull-left {
- color:#3e3f3a;
+ color:#DDD2D5;
 }
 #makeConnection .pull-right {
-	color:#325d88;
+	color:#B9ADAF;
 }
 .padding {
 	padding:10px;
@@ -184,7 +190,6 @@ html, body {
 
 }
 .backgroundColor {
-
 	background-color:#471f42;
 }
 
