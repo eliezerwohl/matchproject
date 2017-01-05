@@ -202,6 +202,13 @@ input, option, select, textarea {
 	margin-bottom: 12px;
 }
 
-input , textarea{
+option, select, 
+input, input:hover, input:active, input:focus, input:visited,   textarea {
 background-color: transparent;
+color: white
 }
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
