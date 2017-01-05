@@ -190,7 +190,7 @@ html, body {
 
 }
 .backgroundColor {
-	background-color:#471f42;
+	background-color: #24142e;
 }
 
 input, option, select, textarea {
@@ -200,4 +200,8 @@ input, option, select, textarea {
 
 #myProfile input, #myProfile textarea, #myProfile select {
 	margin-bottom: 12px;
+}
+
+input , textarea{
+background-color: transparent;
 }
