@@ -32,5 +32,11 @@ $( document ).ready(function() {
       document.getElementById("email").value = "demoPerson@demo.com"
     });
     document.getElementById("loginButton").addEventListener("click", submitFunction);
+  $('#login').keypress(function (e) {
+    if (e.which == 13) {
+      submitFunction()
+    return false;    //<---- Add this line
+  }
+});
 
 });

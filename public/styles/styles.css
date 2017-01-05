@@ -51,7 +51,7 @@ html, body {
 }
 #chatHome button h5 {
 	margin:0px;
-	color:black;
+
 	padding-left: 10px;
 }
 #myProfile button {
@@ -71,16 +71,16 @@ html, body {
 }
 #chatHome .btn {
 	text-transform: none;
-	background-color: white;
+	background-color: transparent;
 	border:#3e3f3a 1px solid ;
 }
 #chatHome .btn h4 { 
 	font-weight:600;
-	color:black;
+	color:white;
 }
 #chatHome .btn .falseuser,
 #chatHome .btn .trueuser {
-	color:#325d88;
+	color:white;
 }
 #chatHome .btn .trueother{
 	color:		#B0B0B0;
@@ -120,17 +120,17 @@ html, body {
 	margin-bottom:  0px;
 }
 .user {
-	color:#325d88;
+	color:white;
 	text-align: right;;
 }
 .other {
-	color:black;
+	color:#DDD2D5;
 	text-align: left;
 }
 
-#chatBox #messages div {
+/*#chatBox #messages div {
 	border-bottom: #FFFBFF 1px solid;
-}
+}*/
 
 #signUp .btn-md {
 	margin-top: 15px;
@@ -215,5 +215,9 @@ color: white
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.chat h5 {
+	color: white;
 }
 
