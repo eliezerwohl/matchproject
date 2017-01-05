@@ -6361,7 +6361,7 @@ button.close {
 
 .modal-content {
     position: relative;
-    background-color: #241021;
+    background-color: transparent;
     border: 1px solid #f8f5f0;
     border-radius: 6px;
     -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
