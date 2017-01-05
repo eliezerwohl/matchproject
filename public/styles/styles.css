@@ -127,6 +127,9 @@ html, body {
 	color:#DDD2D5;
 	text-align: left;
 }
+#chatBox .row:last-child {
+	margin-bottom: 40px;
+}
 
 /*#chatBox #messages div {
 	border-bottom: #FFFBFF 1px solid;
@@ -138,12 +141,16 @@ html, body {
 #index .btn-md {
 	padding: 15px;
 }
+#makeConnection {
+	margin-bottom: 100px;
+}
+
 #chatBox {
-	overflow-y:scroll;
-	margin-bottom: 25px;
+/*	overflow-y:scroll;*/
+	margin-bottom: 
+
 	background-color: transparent;
 
-	color: black;
 }
 #chatBox h3 {
 	margin-top: 0px;
