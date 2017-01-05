@@ -19,6 +19,11 @@ html, body {
 #login .text, #signUp .errorMsg , .text {
 	color:red;
 }
+
+.text {
+	margin-bottom: 20px;
+
+}
 .thanks, .incorrect  {
 	display: none;
 }
