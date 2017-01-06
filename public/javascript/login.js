@@ -30,6 +30,7 @@ $( document ).ready(function() {
     document.getElementById("demo").addEventListener("click", function(){
       document.getElementById("password").value ="demo";
       document.getElementById("email").value = "demoPerson@demo.com"
+      submitFunction()
     });
     document.getElementById("loginButton").addEventListener("click", submitFunction);
   $('#login').keypress(function (e) {
