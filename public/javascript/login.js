@@ -21,7 +21,7 @@ $( document ).ready(function() {
 		}
     if  (window.location.search == "?success") { $(".thanks").show();}
 		if (window.location.search == "?incorrect") { $(".incorrect").show();}
-    $("#loginButton" ).on("click", function(){ formCheck("/login");});
+    $(".loginButton" ).on("click", function(){ formCheck("/login");});
 		$( "#loginForm" ).submit(function( event ) {
       var form = formCheck(undefined, true)
       if (form == true) {return}
